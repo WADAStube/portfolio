@@ -64,6 +64,7 @@ export function ProjectShowcase({
   const [activeShot, setActiveShot] = useState(0);
 
   const shots = project.shots;
+  const isGrid = project.layout === "grid";
   const frameRatio = frameRatioFor(shots);
   const colWidth = columnWidthFor(frameRatio);
   const num = String(index + 1).padStart(2, "0");
@@ -278,19 +279,40 @@ export function ProjectShowcase({
             ref={shotsRef}
             className="lg:col-span-8 space-y-14 md:space-y-20 lg:space-y-28"
           >
-            {shots.map((shot, i) => (
-              <ShotFrame
-                key={shot.src}
-                shot={shot}
-                index={i}
-                total={shots.length}
-                frameRatio={frameRatio}
-                parallax={reduced ? 0 : i % 2 === 0 ? 44 : 66}
-                priority={index === 0 && i === 0}
-                className={cn(colWidth, i % 2 === 1 && "md:ml-auto")}
-                onClick={() => onOpenShot(project, i)}
-              />
-            ))}
+            {isGrid ? (
+              /* Raster — App-Screenshots sind klein und gleichfoermig.
+                 Untereinander gestapelt wirken sie neben den grossen
+                 Renders unruhig, im Raster dagegen ruhig und geordnet. */
+              <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+                {shots.map((shot, i) => (
+                  <ShotFrame
+                    key={shot.src}
+                    shot={shot}
+                    index={i}
+                    total={shots.length}
+                    frameRatio={frameRatio}
+                    parallax={0}
+                    priority={index === 0 && i === 0}
+                    className="w-full"
+                    onClick={() => onOpenShot(project, i)}
+                  />
+                ))}
+              </div>
+            ) : (
+              shots.map((shot, i) => (
+                <ShotFrame
+                  key={shot.src}
+                  shot={shot}
+                  index={i}
+                  total={shots.length}
+                  frameRatio={frameRatio}
+                  parallax={reduced ? 0 : i % 2 === 0 ? 44 : 66}
+                  priority={index === 0 && i === 0}
+                  className={cn(colWidth, i % 2 === 1 && "md:ml-auto")}
+                  onClick={() => onOpenShot(project, i)}
+                />
+              ))
+            )}
 
             {project.compare && (
               <CompareSlider
@@ -298,7 +320,10 @@ export function ProjectShowcase({
                 after={project.compare.after}
                 beforeLabel={project.compare.beforeLabel}
                 afterLabel={project.compare.afterLabel}
-                className="w-full"
+                note={project.compare.note}
+                className={columnWidthFor(
+                  project.compare.before.w / project.compare.before.h,
+                )}
               />
             )}
 

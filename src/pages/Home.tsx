@@ -19,6 +19,7 @@ import {
   SplitText,
   Parallax,
   EASE,
+  useIsSmallScreen,
 } from "@/components/motion-primitives";
 import { projectsData } from "@/data/projects";
 import type { Project } from "@/data/projects";
@@ -200,7 +201,12 @@ export default function Home() {
     target: heroRef,
     offset: ["start start", "end start"],
   });
-  const videoScale = useTransform(scrollYProgress, [0, 1], [1, 1.16]);
+  const smallScreen = useIsSmallScreen();
+  const videoScale = useTransform(
+    scrollYProgress,
+    [0, 1],
+    smallScreen ? [1, 1.05] : [1, 1.16],
+  );
   const videoY = useTransform(scrollYProgress, [0, 1], ["0%", "12%"]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
   const heroY = useTransform(scrollYProgress, [0, 1], [0, -110]);
@@ -222,16 +228,27 @@ export default function Home() {
       {/* ══════════════════ HERO ══════════════════ */}
       <section ref={heroRef} id="top" className="relative h-svh overflow-hidden">
         <div className="absolute inset-0">
-          <motion.video
-            ref={videoRef}
-            style={{ scale: reduced ? 1 : videoScale, y: reduced ? 0 : videoY }}
-            src="/videos/hero.mp4"
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="absolute inset-0 w-full h-full object-cover origin-center will-change-transform"
-          />
+          {/* Der Clip ist 1920x812 — sehr breit (2,36:1).
+              Formatfuellend auf einem Hochformat-Handy wuerde rund
+              80 % der Breite wegfallen und der Rest stark
+              hochskaliert: unscharf und schlecht ausgeschnitten.
+              Mobil laeuft er daher als 4:3-Band mit massvollem
+              Beschnitt — praktisch ohne Hochskalierung und damit
+              scharf. Ab md dann wie gehabt formatfuellend. */}
+          <div className="absolute inset-x-0 top-[17%] aspect-[4/3] overflow-hidden md:inset-0 md:top-0 md:aspect-auto">
+            <motion.video
+              ref={videoRef}
+              style={{ scale: reduced ? 1 : videoScale, y: reduced ? 0 : videoY }}
+              src="/videos/hero.mp4"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
+              className="w-full h-full object-cover origin-center will-change-transform"
+            />
+          </div>
+
           <motion.div
             className="absolute inset-0 bg-black"
             style={{ opacity: overlayOpacity }}
@@ -465,6 +482,8 @@ export default function Home() {
                 <motion.a
                   href={CV_FILE}
                   download
+                  target="_blank"
+                  rel="noopener noreferrer"
                   whileHover={{ y: -3 }}
                   whileTap={{ scale: 0.98 }}
                   transition={{ duration: 0.3, ease: EASE }}

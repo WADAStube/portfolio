@@ -26,7 +26,9 @@ interface AudioNodes {
  */
 export function useAmbientSound(
   videoRef: React.RefObject<HTMLVideoElement | null>,
-  transitionAt = 3
+  /* Sekunde, in der das Video vom Maya-Workflow auf den
+     gerenderten Wagen schneidet. Im aktuellen Clip: 2,0 s. */
+  transitionAt = 2
 ) {
   const [isMuted, setIsMuted] = useState(true);
   const nodesRef      = useRef<AudioNodes | null>(null);
@@ -182,14 +184,20 @@ export function useAmbientSound(
     const t      = videoRef.current?.currentTime ?? 0;
     const isMaya = t < transitionAt;
     const now    = ctx.currentTime;
-    const TC     = 0.55; // crossfade time constant (seconds)
+    /* setTargetAtTime naehert sich exponentiell an — die hoerbare
+       Dauer betraegt etwa das Dreifache der Zeitkonstante.
+       Der Motor kommt daher schnell (0,10 s), der Maya-Ton geht
+       etwas weicher raus (0,25 s). Vorher lagen beide bei 0,55 s,
+       was den Einsatz um rund 1,5 s verschleppt hat. */
+    const TC_IN  = 0.10;
+    const TC_OUT = 0.25;
 
     if (isMaya) {
       /* Maya: digital hum + clicks */
-      mayaGain.gain.setTargetAtTime(0.018, now, TC);
-      ueGain.gain.setTargetAtTime(0, now, TC);
-      rumbleGain.gain.setTargetAtTime(0, now, TC);
-      hissGain.gain.setTargetAtTime(0, now, TC);
+      mayaGain.gain.setTargetAtTime(0.018, now, TC_IN);
+      ueGain.gain.setTargetAtTime(0, now, TC_OUT);
+      rumbleGain.gain.setTargetAtTime(0, now, TC_OUT);
+      hissGain.gain.setTargetAtTime(0, now, TC_OUT);
 
       if (now > nextClickRef.current) {
         fireClick(nodes);
@@ -197,10 +205,10 @@ export function useAmbientSound(
       }
     } else {
       /* Unreal: engine drone — noticeably louder, clearly present */
-      mayaGain.gain.setTargetAtTime(0, now, TC);
-      ueGain.gain.setTargetAtTime(0.075, now, TC);  // oscillator mix
-      rumbleGain.gain.setTargetAtTime(0.048, now, TC); // mid-band rumble
-      hissGain.gain.setTargetAtTime(0.018, now, TC); // high grit
+      mayaGain.gain.setTargetAtTime(0, now, TC_OUT);
+      ueGain.gain.setTargetAtTime(0.075, now, TC_IN);  // oscillator mix
+      rumbleGain.gain.setTargetAtTime(0.048, now, TC_IN); // mid-band rumble
+      hissGain.gain.setTargetAtTime(0.018, now, TC_IN); // high grit
     }
 
     rafRef.current = requestAnimationFrame(tick);

@@ -19,12 +19,16 @@ export function CompareSlider({
   after,
   beforeLabel = "Shaded",
   afterLabel = "Wireframe",
+  note,
   className,
 }: {
   before: ProjectShot;
   after: ProjectShot;
   beforeLabel?: string;
   afterLabel?: string;
+  /** Kurze Erklaerung unter dem Regler — noetig, wenn der
+      Unterschied subtil ist (z.B. RGB gegen CMYK). */
+  note?: string;
   className?: string;
 }) {
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -128,14 +132,14 @@ export function CompareSlider({
 
           {/* Beschriftungen */}
           <span
-            className="absolute top-3 left-3 md:top-4 md:left-4 bg-black/60 backdrop-blur-sm px-2.5 py-1 text-[9px] uppercase tracking-[0.18em] text-white/75 transition-opacity duration-300"
-            style={{ opacity: pos > 14 ? 1 : 0 }}
+            className="absolute top-3 left-3 md:top-5 md:left-5 bg-black/70 backdrop-blur-sm px-3 py-1.5 md:px-4 md:py-2 text-[10px] md:text-[11px] uppercase tracking-[0.2em] font-medium text-white/90 transition-opacity duration-300"
+            style={{ opacity: pos > 16 ? 1 : 0 }}
           >
             {beforeLabel}
           </span>
           <span
-            className="absolute top-3 right-3 md:top-4 md:right-4 bg-black/60 backdrop-blur-sm px-2.5 py-1 text-[9px] uppercase tracking-[0.18em] text-white/75 transition-opacity duration-300"
-            style={{ opacity: pos < 86 ? 1 : 0 }}
+            className="absolute top-3 right-3 md:top-5 md:right-5 bg-black/70 backdrop-blur-sm px-3 py-1.5 md:px-4 md:py-2 text-[10px] md:text-[11px] uppercase tracking-[0.2em] font-medium text-white/90 transition-opacity duration-300"
+            style={{ opacity: pos < 84 ? 1 : 0 }}
           >
             {afterLabel}
           </span>
@@ -181,12 +185,19 @@ export function CompareSlider({
         </div>
       </motion.div>
 
-      <figcaption className="mt-3 flex items-baseline gap-3">
-        <span className="h-px w-5 bg-white/15 shrink-0 translate-y-[-3px]" />
-        <span className="text-[10px] text-white/32 uppercase tracking-[0.18em]">
-          {beforeLabel} / {afterLabel}
-          <span className="hidden md:inline"> — drag or use arrow keys</span>
+      <figcaption className="mt-3">
+        <span className="flex items-baseline gap-3">
+          <span className="h-px w-5 bg-white/15 shrink-0 translate-y-[-3px]" />
+          <span className="text-[10px] text-white/32 uppercase tracking-[0.18em]">
+            {beforeLabel} / {afterLabel}
+            <span className="hidden md:inline"> — drag or use arrow keys</span>
+          </span>
         </span>
+        {note && (
+          <span className="block mt-3 pl-8 text-xs font-light leading-relaxed text-white/40 max-w-xl">
+            {note}
+          </span>
+        )}
       </figcaption>
     </figure>
   );

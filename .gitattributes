@@ -1,0 +1,17 @@
+# Zeilenenden nur bei Textdateien normalisieren.
+* text=auto
+
+# Binaerdateien NIEMALS anfassen — sonst koennen Bilder, Video
+# und PDF beim Uebertragen zwischen Windows und Linux beschaedigt
+# werden.
+*.jpg  binary
+*.jpeg binary
+*.png  binary
+*.gif  binary
+*.webp binary
+*.mp4  binary
+*.webm binary
+*.pdf  binary
+*.ico  binary
+*.woff binary
+*.woff2 binary

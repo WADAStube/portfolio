@@ -8,14 +8,13 @@ import {
   useTransform,
   useSpring,
   useReducedMotion,
-  AnimatePresence,
 } from "framer-motion";
 import { Boxes, GraduationCap, Plane, Disc3, Activity, BookOpen, Anchor } from "lucide-react";
 import {
   Reveal,
+  SplitText,
   Stagger,
   StaggerItem,
-  SplitText,
   EASE,
   useIsSmallScreen,
 } from "@/components/motion-primitives";
@@ -30,50 +29,50 @@ const CHAPTERS = [
     id: "origin",
     icon: Boxes,
     kicker: "2007 — Tunisia",
-    title: "A cousin, a CD, and SolidWorks",
-    body: "My cousin was a mechanical engineer. One afternoon he installed SolidWorks on my computer and said: with this you can build objects that don't exist yet. I was a kid. I didn't understand half the interface, but I understood that sentence completely — and I've been chasing it ever since. Everything on this page started that day.",
+    title: "It started with one sentence",
+    body: "My cousin, a mechanical engineer, installed SolidWorks on my computer and said: with this you can build things that don't exist yet. I was a kid. I didn't understand half the interface — but I understood that sentence, and I've been building ever since. Everything on this page traces back to that afternoon.",
   },
   {
     id: "start",
     icon: GraduationCap,
     kicker: "2015 — Tunisia",
-    title: "Abitur, and then a decision",
-    body: "I finished school and everyone assumed university would start the following autumn. I didn't want to walk out of one classroom straight into the next without having seen anything of the world first. So I decided to wait — not for a summer, but for as long as it took.",
+    title: "I chose the long way on purpose",
+    body: "Abitur done, university waiting. I decided the world came first. Not a gap year — a proper look at how people live, think and build in places that aren't yours. Best decision I've made.",
   },
   {
     id: "berlin",
     icon: Disc3,
     kicker: "2016 — Berlin, age 19",
-    title: "Germany, starting with the language",
-    body: "I came for three reasons: to study, to grow up a bit, and — the strongest pull of the three — for techno. Berlin was where that music came from. The first job was learning German properly. In 2017 I played my first set. I've kept it a hobby on purpose; it's the thing I do because I want to, not because it has to pay.",
+    title: "Techno got me to Germany",
+    body: "Three reasons brought me here: study, independence, and above all the music. Berlin was where techno came from, so Berlin is where I went. I learned the language, and in 2017 I played my first set. It stays a hobby by choice — the thing I do purely because I want to.",
   },
   {
     id: "road",
     icon: Plane,
     kicker: "2017 – 2022",
     title: "Four continents, eighteen countries",
-    body: "Five years mostly on the move. Covid was supposed to end that, and for most people it did — I just kept finding a way. A flight that still ran, a car, a border that happened to be open that week. Languages, kitchens, night buses, people who see the world at a completely different angle than you do. I wasn't collecting stamps. I was collecting perspectives, and that's the part you can't learn from a screen.",
+    body: "Five years on the move, and I kept moving when most people stopped. Languages, kitchens, night buses, borders that opened for a week. What you bring back isn't photographs — it's the ability to read a room anywhere and start from scratch without flinching.",
   },
   {
     id: "body",
     icon: Activity,
     kicker: "Ten years and counting",
-    title: "Sport kept the structure",
-    body: "Ten years of Taekwondo, four years as captain of my school's basketball team, three half marathons so far. Camping and hiking whenever the weather allows. All of it teaches the same lesson: show up, repeat the boring part, and one day the hard thing is easy. That transfers straight into modelling and retopology.",
+    title: "Discipline I can point to",
+    body: "Ten years of Taekwondo. Four years as captain of my school's basketball team. Three half marathons. Camping and hiking whenever the weather allows. Show up, repeat the boring part, and one day the hard thing is easy — which is exactly how modelling and retopology work.",
   },
   {
     id: "study",
     icon: BookOpen,
     kicker: "2022 — Emden",
-    title: "Media Technology, finally",
-    body: "When the pandemic finally loosened its grip, something had settled. I'd seen what I wanted to see and I was ready to sit still and get good at something. Medientechnik in Emden was the answer — the degree where 3D, game design, code and image all live in the same room. Fifteen years after SolidWorks, I was finally studying the thing properly.",
+    title: "Media Technology, on my terms",
+    body: "I started my Medientechnik degree when I was ready for it, not when it was expected. It's the field where 3D, game design, code and image share one room. Fifteen years after SolidWorks, I was finally studying the thing properly — and I knew exactly why I was there.",
   },
   {
     id: "hamburg",
     icon: Anchor,
     kicker: "Hamburg — today",
-    title: "The city I'm staying in",
-    body: "Four months ago I moved to Hamburg. Partly for the city — red brick, water running through the middle of it, harbour light, and a warmth Berlin never quite had. Partly because most of what's left of my degree is project work I can do from anywhere. And partly because I started here as a Werkstudent in media technology: I wanted to find out what the job actually feels like from the inside, not just from a syllabus. I've grown calmer over the years, and this is where I'd like to stay.",
+    title: "This is where I build",
+    body: "Hamburg has red brick, water through the middle of it, harbour light, and a warmth Berlin never had. I moved here for the city and for a Werkstudent role in media technology, to learn the work from the inside. The travelling gave me everything I needed. Now I'm here, and I'm building.",
   },
 ];
 
@@ -119,9 +118,77 @@ function CountUp({ value }: { value: string }) {
   return <span ref={ref}>{numeric ? shown : value}</span>;
 }
 
+/* ────────────────────────────────────────────────────────────
+   ChapterBlock — ein Abschnitt des Zeitstrahls.
+   Erscheint beim Scrollen von selbst, nichts zum Anklicken.
+   ──────────────────────────────────────────────────────────── */
+function ChapterBlock({
+  chapter,
+  index,
+}: {
+  chapter: (typeof CHAPTERS)[number];
+  index: number;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, amount: 0.45 });
+  const reduced = useReducedMotion();
+  const Icon = chapter.icon;
+
+  return (
+    <div
+      ref={ref}
+      className="relative grid grid-cols-1 md:grid-cols-12 gap-x-10 gap-y-3 pl-9 md:pl-14 py-8 md:py-12"
+    >
+      {/* Punkt auf der Linie */}
+      <motion.span
+        initial={{ scale: reduced ? 1 : 0.4, opacity: 0 }}
+        animate={inView ? { scale: 1, opacity: 1 } : {}}
+        transition={{ duration: reduced ? 0.2 : 0.6, ease: EASE }}
+        className="absolute left-0 top-9 md:top-[3.4rem] z-10 flex items-center justify-center h-[15px] w-[15px] md:h-[19px] md:w-[19px] rounded-full bg-white text-black"
+      >
+        <Icon size={9} />
+      </motion.span>
+
+      {/* Zeit + Titel */}
+      <motion.div
+        initial={{ opacity: 0, y: reduced ? 0 : 26 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: reduced ? 0.2 : 0.85, ease: EASE }}
+        className="md:col-span-5"
+      >
+        <p className="text-[8px] uppercase tracking-[0.24em] text-white/30 mb-2">
+          {chapter.kicker}
+        </p>
+        <h3
+          className="font-display font-medium text-white leading-snug"
+          style={{ fontSize: "clamp(1.15rem, 2vw, 1.6rem)" }}
+        >
+          {chapter.title}
+        </h3>
+      </motion.div>
+
+      {/* Text */}
+      <motion.div
+        initial={{ opacity: 0, y: reduced ? 0 : 26 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={{
+          duration: reduced ? 0.2 : 0.85,
+          ease: EASE,
+          delay: reduced ? 0 : 0.14,
+        }}
+        className="md:col-span-7"
+      >
+        <p className="text-sm md:text-[0.95rem] font-light leading-[1.95] text-white/50">
+          {chapter.body}
+        </p>
+      </motion.div>
+    </div>
+  );
+}
+
 export function AboutSection() {
-  const [active, setActive] = useState<string>(CHAPTERS[0].id);
   const portraitRef = useRef<HTMLDivElement>(null);
+  const timelineRef = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
   const small = useIsSmallScreen();
 
@@ -136,7 +203,16 @@ export function AboutSection() {
   );
   const py = useSpring(rawY, { stiffness: 100, damping: 30, mass: 0.5 });
 
-  const current = CHAPTERS.find((c) => c.id === active) ?? CHAPTERS[0];
+  /* Fortschritt der Zeitstrahl-Linie */
+  const { scrollYProgress: tlProgress } = useScroll({
+    target: timelineRef,
+    offset: ["start 65%", "end 65%"],
+  });
+  const lineProgress = useSpring(tlProgress, {
+    stiffness: 120,
+    damping: 30,
+    mass: 0.35,
+  });
 
   return (
     <section
@@ -198,22 +274,22 @@ export function AboutSection() {
                 letterSpacing: "-0.015em",
               }}
             >
-              <SplitText text="Some people say I lost those years." />
+              <SplitText text="I took the long way here." />
               <br />
               <span className="text-white/35">
-                <SplitText text="I think I gained a life." delay={0.22} />
+                <SplitText text="It's exactly why I'm good at this." delay={0.22} />
               </span>
             </blockquote>
 
             <Reveal direction="up" delay={0.1}>
               <p className="text-sm font-light leading-[1.95] text-white/45 max-w-xl">
-                29, Tunisian, in Germany since 2016 — Berlin first, Hamburg
-                now. I build things in 3D: environments, characters, game
-                assets, and the textures and layouts that make them read.
-                It started with a piece of CAD software in 2007 and it has
-                never really let go. Everything else — the travelling, the
-                martial arts, the records — is what I brought back to it.
-                I work in four languages: Arabic, German, English, French.
+                29, Tunisian, based in Hamburg. I build in 3D — environments,
+                characters, game assets, and the textures and layouts that
+                make them read. It started with a piece of CAD software in
+                2007 and never let go. Eighteen countries, ten years of
+                martial arts and a decade behind the decks all feed the same
+                work. I speak Arabic, German, English and French, and I'm
+                at my best on projects that need all of it at once.
               </p>
             </Reveal>
 
@@ -239,78 +315,30 @@ export function AboutSection() {
           </div>
         </div>
 
-        {/* ── Kapitel ── */}
+        {/* ── Zeitstrahl ── beim Scrollen, ohne Klick ── */}
         <Reveal direction="up">
-          <p className="text-[8px] text-white/22 uppercase tracking-[0.28em] mb-8">
+          <p className="text-[8px] text-white/22 uppercase tracking-[0.28em] mb-12">
             The long version
           </p>
         </Reveal>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14">
-          {/* Auswahl */}
-          <div className="lg:col-span-5">
-            <Stagger className="relative flex flex-col" gap={0.06}>
-              {/* Zeitstrahl */}
-              <span
-                aria-hidden="true"
-                className="absolute left-[7px] top-3 bottom-3 w-px bg-white/[0.09]"
-              />
-              {CHAPTERS.map((c) => {
-                const on = c.id === active;
-                const Icon = c.icon;
-                return (
-                  <StaggerItem key={c.id}>
-                    <button
-                      onClick={() => setActive(c.id)}
-                      className={cn(
-                        "group relative w-full flex items-center gap-5 py-5 pl-0 text-left transition-colors duration-300",
-                        on ? "text-white" : "text-white/40 hover:text-white/75",
-                      )}
-                    >
-                      <span
-                        className={cn(
-                          "relative z-10 shrink-0 flex items-center justify-center",
-                          "h-[15px] w-[15px] rounded-full transition-all duration-400",
-                          on
-                            ? "bg-white text-black scale-[1.5]"
-                            : "bg-[#0d0d0d] ring-1 ring-white/15 text-white/35",
-                        )}
-                      >
-                        <Icon size={on ? 8 : 9} />
-                      </span>
-                      <span className="min-w-0 pl-1">
-                        <span className="block text-[8px] uppercase tracking-[0.22em] text-white/25 mb-1.5">
-                          {c.kicker}
-                        </span>
-                        <span className="block font-display font-medium text-base md:text-lg leading-snug">
-                          {c.title}
-                        </span>
-                      </span>
-                    </button>
-                  </StaggerItem>
-                );
-              })}
-            </Stagger>
-          </div>
+        <div ref={timelineRef} className="relative">
+          {/* Ruhende Linie */}
+          <span
+            aria-hidden="true"
+            className="absolute left-[7px] md:left-[9px] top-2 bottom-2 w-px bg-white/[0.08]"
+          />
+          {/* Linie faellt mit dem Scrollen */}
+          <motion.span
+            aria-hidden="true"
+            style={{ scaleY: lineProgress }}
+            className="absolute left-[7px] md:left-[9px] top-2 bottom-2 w-px bg-white/45 origin-top"
+          />
 
-          {/* Inhalt */}
-          <div className="lg:col-span-7 lg:pt-5">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={current.id}
-                initial={{ opacity: 0, y: reduced ? 0 : 18 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: reduced ? 0 : -12 }}
-                transition={{ duration: reduced ? 0.15 : 0.5, ease: EASE }}
-              >
-                <p
-                  className="font-light text-white/55 leading-[1.95]"
-                  style={{ fontSize: "clamp(0.95rem, 1.3vw, 1.1rem)" }}
-                >
-                  {current.body}
-                </p>
-              </motion.div>
-            </AnimatePresence>
+          <div className="flex flex-col">
+            {CHAPTERS.map((c, i) => (
+              <ChapterBlock key={c.id} chapter={c} index={i} />
+            ))}
           </div>
         </div>
       </div>

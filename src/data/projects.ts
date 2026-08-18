@@ -46,7 +46,13 @@ export interface Project {
     after: ProjectShot;
     beforeLabel?: string;
     afterLabel?: string;
+    /** Erklaerung unter dem Regler, wenn der Unterschied subtil ist */
+    note?: string;
   };
+  /** "stack" (Standard) = grosse Bilder untereinander.
+      "grid" = kompaktes Raster — passend fuer App-Screenshots,
+      die sonst neben den grossen Renders unruhig wirken. */
+  layout?: "stack" | "grid";
 }
 
 export const coverOf = (p: Project): string | null => p.shots[0]?.src ?? null;
@@ -176,10 +182,14 @@ export const projectsData: Project[] = [
       "A film poster built to carry a single emotion — lostness — through composition, colour and type.",
     longDescription:
       "A course project at Hochschule Emden/Leer with one brief: trigger a specific emotion using a single static image. The chosen emotion was lostness, and the poster answers it with a lone astronaut adrift against the curve of Earth. The composite layers a desaturated, blue-shifted Milky Way base, a masked and colour-graded Earth, an astronaut extracted with luminance masks, and debris pulled from an explosion plate using a lighten blend. The title plays on both readings of the phrase — physical space, and the need for distance.",
-    shots: [
-      { src: "/images/projects/i-need-space/01.jpg", caption: "Final poster — RGB (screen)", w: 1559, h: 2200 },
-      { src: "/images/projects/i-need-space/02.jpg", caption: "Final poster — CMYK (print)", w: 1559, h: 2200 },
-    ],
+    shots: [],
+    compare: {
+      before: { src: "/images/projects/i-need-space/01.jpg", caption: "RGB", w: 1559, h: 2200 },
+      after: { src: "/images/projects/i-need-space/02.jpg", caption: "CMYK", w: 1559, h: 2200 },
+      beforeLabel: "RGB — screen",
+      afterLabel: "CMYK — print",
+      note: "Same artwork, two colour spaces. RGB is made of light and reaches a wider gamut — that is what a screen shows you. CMYK is made of ink and cannot get there, so the deep blues and the glow around the Earth sit back a little and the blacks warm up. Converting and correcting before print is what stops a poster from arriving duller than it was designed to be.",
+    },
     sources: [
       { src: "/images/projects/i-need-space/source/01.jpg", caption: "Milky Way — base plate", w: 624, h: 416 },
       { src: "/images/projects/i-need-space/source/02.jpg", caption: "Earth", w: 624, h: 352 },
@@ -214,6 +224,7 @@ export const projectsData: Project[] = [
     filterCategory: "Development",
     role: "Solo Developer & Designer",
     year: "2026",
+    layout: "grid",
     featured: true,
     tools: [
       "React",
@@ -245,6 +256,7 @@ export const projectsData: Project[] = [
     filterCategory: "Development",
     role: "Designer & Developer",
     year: "2026",
+    layout: "grid",
     tools: ["Flutter", "Dart", "Firebase"],
     description:
       "A Tunisian services marketplace that connects people to local providers — plus a campus mode for students.",
