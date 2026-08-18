@@ -1,0 +1,14 @@
+# Abhaengigkeiten
+node_modules/
+
+# Build-Ergebnis (wird von Netlify selbst erzeugt)
+dist/
+
+# Editor / System
+.DS_Store
+.vscode/
+*.local
+
+# Umgebungsvariablen
+.env
+.env.*

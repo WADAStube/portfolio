@@ -1,0 +1,20 @@
+Portfolio — Version 10  (18.08.2026)
+
+Neu gegenueber Version 9:
+- GITHUB.md  — Anleitung fuer Updates ueber GitHub
+- .gitignore — haelt node_modules und dist aus dem Repository
+- netlify.toml — Build-Einstellungen, damit im Netlify-Dashboard
+  nichts von Hand eingetragen werden muss. Enthaelt ausserdem:
+    * Weiterleitung aller Pfade auf index.html, damit die eigene
+      404-Seite greift statt der von Netlify
+    * Cache-Regeln: Bilder und Video lange cachen,
+      index.html nie — sonst sehen Besucher alte Staende
+
+WICHTIG: In Netlify KEINE neue Seite anlegen. Die bestehende
+Seite mit dem Repository verbinden, sonst muss die Domain
+issamselmi.de umgezogen werden. Details in GITHUB.md, Schritt 4.
+
+Ab dann genuegt fuer jedes Update:
+    git add .
+    git commit -m "beschreibung"
+    git push
