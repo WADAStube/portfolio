@@ -14,6 +14,7 @@ import {
   StaggerItem,
   SplitText,
   EASE,
+  useIsSmallScreen,
 } from "@/components/motion-primitives";
 import { ShotFrame } from "@/components/shot-frame";
 import { SourceStrip } from "@/components/source-strip";
@@ -60,10 +61,12 @@ export function ProjectShowcase({
 }) {
   const sectionRef = useRef<HTMLElement>(null);
   const shotsRef = useRef<HTMLDivElement>(null);
+  const carouselRef = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
   const [activeShot, setActiveShot] = useState(0);
 
   const shots = project.shots;
+  const small = useIsSmallScreen();
   const isGrid = project.layout === "grid";
   const frameRatio = frameRatioFor(shots);
   const colWidth = columnWidthFor(frameRatio);
@@ -84,21 +87,31 @@ export function ProjectShowcase({
   /* Aktives Bild: das, welches der Mitte des Viewports am naechsten ist.
      Deutlich genauer als eine Rechnung aus dem Scroll-Fortschritt. */
   useEffect(() => {
-    const root = shotsRef.current;
+    const carousel = carouselRef.current;
+    const root = carousel ?? shotsRef.current;
     if (!root || shots.length < 2) return;
 
     const figures = Array.from(root.querySelectorAll("figure"));
     if (!figures.length) return;
 
+    const horizontal = !!carousel;
     let raf = 0;
+
     const measure = () => {
       raf = 0;
-      const mid = window.innerHeight / 2;
+      /* Waagerecht wird gegen die Mitte des Wischfelds gemessen,
+         senkrecht gegen die Mitte des Bildschirms. */
+      const mid = horizontal
+        ? carousel!.getBoundingClientRect().left +
+          carousel!.getBoundingClientRect().width / 2
+        : window.innerHeight / 2;
+
       let best = 0;
       let bestDist = Infinity;
       figures.forEach((el, i) => {
         const r = el.getBoundingClientRect();
-        const dist = Math.abs(r.top + r.height / 2 - mid);
+        const center = horizontal ? r.left + r.width / 2 : r.top + r.height / 2;
+        const dist = Math.abs(center - mid);
         if (dist < bestDist) {
           bestDist = dist;
           best = i;
@@ -112,14 +125,21 @@ export function ProjectShowcase({
     };
 
     measure();
-    window.addEventListener("scroll", onScroll, { passive: true });
+    const target: (Window | HTMLDivElement)[] = horizontal
+      ? [carousel!]
+      : [window];
+    target.forEach((t) =>
+      t.addEventListener("scroll", onScroll as EventListener, { passive: true }),
+    );
     window.addEventListener("resize", onScroll);
     return () => {
       if (raf) cancelAnimationFrame(raf);
-      window.removeEventListener("scroll", onScroll);
+      target.forEach((t) =>
+        t.removeEventListener("scroll", onScroll as EventListener),
+      );
       window.removeEventListener("resize", onScroll);
     };
-  }, [shots.length]);
+  }, [shots.length, small, isGrid]);
 
   /* Grosse Ordnungszahl driftet leicht mit */
   const { scrollYProgress: sectionProgress } = useScroll({
@@ -148,6 +168,15 @@ export function ProjectShowcase({
           {/* ─────────── Sticky Info-Spalte ─────────── */}
           <div className="lg:col-span-4">
             <div className="lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:overflow-hidden">
+              {/* Der ganze Textblock kommt von links herein.
+                  Das x liegt auf dem INHALT, nicht auf dem
+                  sticky-Element selbst — sonst bricht das Kleben. */}
+              <motion.div
+                initial={{ opacity: 0, x: reduced ? 0 : -46 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.15 }}
+                transition={{ duration: reduced ? 0.2 : 1.05, ease: EASE }}
+              >
               {/* Kopfzeile: Nummer + Kategorie */}
               <Reveal direction="up" duration={0.8}>
                 <div className="flex items-center gap-4 mb-5">
@@ -183,7 +212,34 @@ export function ProjectShowcase({
 
               {/* Bildfortschritt — steht bewusst weit oben, damit er
                   auch auf niedrigen Bildschirmen immer sichtbar ist. */}
-              {shots.length > 1 && (
+              {shots.length > 1 && small && !isGrid && (
+                <div className="flex items-center gap-3 mb-7">
+                  <span className="text-[8px] uppercase tracking-[0.2em] text-white/30 shrink-0">
+                    Swipe
+                  </span>
+                  <div className="flex items-center gap-1.5">
+                    {shots.map((sh, i) => (
+                      <motion.span
+                        key={sh.src}
+                        animate={{
+                          width: i === activeShot ? 18 : 6,
+                          opacity: i === activeShot ? 0.9 : 0.25,
+                        }}
+                        transition={{ duration: 0.35, ease: EASE }}
+                        className="h-[3px] rounded-full bg-white block"
+                      />
+                    ))}
+                  </div>
+                  <span className="ml-auto font-mono text-[10px] text-white/45 tabular-nums">
+                    {String(activeShot + 1).padStart(2, "0")}
+                    <span className="text-white/20">
+                      /{String(shots.length).padStart(2, "0")}
+                    </span>
+                  </span>
+                </div>
+              )}
+
+              {shots.length > 1 && !(small && !isGrid) && (
                 <div className="flex items-center gap-4 mb-7">
                   <div className="relative h-[2px] flex-1 bg-white/[0.08] overflow-hidden rounded-full">
                     <motion.div
@@ -271,15 +327,46 @@ export function ProjectShowcase({
                   {project.longDescription || project.description}
                 </p>
               </Reveal>
+              </motion.div>
             </div>
           </div>
 
           {/* ─────────── Bildspalte ─────────── */}
-          <div
+          <motion.div
             ref={shotsRef}
+            initial={{ opacity: 0, x: reduced ? 0 : 46 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.12 }}
+            transition={{ duration: reduced ? 0.2 : 1.05, ease: EASE }}
             className="lg:col-span-8 space-y-14 md:space-y-20 lg:space-y-28"
           >
-            {isGrid ? (
+            {small && !isGrid ? (
+              /* Handy: waagerecht wischbare Galerie mit Einrasten.
+                 Statt eines langen Stapels, durch den man nur
+                 scrollt, laesst sich hier Bild fuer Bild wischen —
+                 kuerzere Seite und echte Interaktion. */
+              <div
+                ref={carouselRef}
+                className="-mx-6 px-6 flex gap-4 overflow-x-auto snap-x snap-mandatory no-scroll pb-1"
+              >
+                {shots.map((shot, i) => (
+                  <div key={shot.src} className="w-[86%] shrink-0 snap-center">
+                    <ShotFrame
+                      shot={shot}
+                      index={i}
+                      total={shots.length}
+                      frameRatio={frameRatio}
+                      parallax={0}
+                      priority={index === 0 && i === 0}
+                      className="w-full"
+                      onClick={() => onOpenShot(project, i)}
+                    />
+                  </div>
+                ))}
+                {/* Luft am Ende, damit das letzte Bild mittig einrastet */}
+                <div className="shrink-0 w-2" aria-hidden="true" />
+              </div>
+            ) : isGrid ? (
               /* Raster — App-Screenshots sind klein und gleichfoermig.
                  Untereinander gestapelt wirken sie neben den grossen
                  Renders unruhig, im Raster dagegen ruhig und geordnet. */
@@ -330,7 +417,7 @@ export function ProjectShowcase({
             {project.sources?.length ? (
               <SourceStrip sources={project.sources} />
             ) : null}
-          </div>
+          </motion.div>
         </div>
       </div>
 

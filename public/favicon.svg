@@ -1,8 +1,8 @@
 <svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="180" height="180" rx="34" fill="#0A0A0A"/>
-  <rect x="10.5" y="10.5" width="159" height="159" rx="25" stroke="#FFFFFF" stroke-opacity="0.22" stroke-width="3"/>
-  <path d="M36 56 L57 124 L78 76 L99 124 L120 56"
-        stroke="#FFFFFF" stroke-width="13"
-        stroke-linecap="square" stroke-linejoin="miter" fill="none"/>
-  <circle cx="140" cy="120" r="7" fill="#FFFFFF" fill-opacity="0.55"/>
+  <!-- Wie das Monogramm in der Kopfzeile: Kasten mit Rahmen + Buchstabe W -->
+  <rect width="180" height="180" rx="30" fill="#0A0A0A"/>
+  <rect x="26" y="26" width="128" height="128" stroke="#FFFFFF" stroke-opacity="0.85" stroke-width="6"/>
+  <path d="M52 62 L68 118 L82 82 L90 82 L104 118 L120 62
+           L134 62 L112 128 L98 128 L86 96 L74 128 L60 128 L38 62 Z"
+        fill="#FFFFFF"/>
 </svg>

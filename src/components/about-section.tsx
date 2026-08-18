@@ -9,7 +9,7 @@ import {
   useSpring,
   useReducedMotion,
 } from "framer-motion";
-import { Boxes, GraduationCap, Plane, Disc3, Activity, BookOpen, Anchor } from "lucide-react";
+import { Boxes, Trophy, GraduationCap, Plane, Disc3, Activity, BookOpen, Anchor } from "lucide-react";
 import {
   Reveal,
   SplitText,
@@ -31,6 +31,13 @@ const CHAPTERS = [
     kicker: "2007 — Tunisia",
     title: "It started with one sentence",
     body: "My cousin, a mechanical engineer, installed SolidWorks on my computer and said: with this you can build things that don't exist yet. I was a kid. I didn't understand half the interface — but I understood that sentence, and I've been building ever since. Everything on this page traces back to that afternoon.",
+  },
+  {
+    id: "photoshop",
+    icon: Trophy,
+    kicker: "2011 — first competition",
+    title: "Photoshop, and my first taste of shipping",
+    body: "Four years after SolidWorks I entered my first design competition, working in Photoshop CS5. It was the first time I made something to a brief, against a deadline, to be judged by other people — and I was hooked. Building for yourself is fun. Building for someone who will look closely is the part that makes you better.",
   },
   {
     id: "start",
@@ -151,9 +158,9 @@ function ChapterBlock({
 
       {/* Zeit + Titel */}
       <motion.div
-        initial={{ opacity: 0, y: reduced ? 0 : 26 }}
-        animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: reduced ? 0.2 : 0.85, ease: EASE }}
+        initial={{ opacity: 0, x: reduced ? 0 : -34, y: reduced ? 0 : 14 }}
+        animate={inView ? { opacity: 1, x: 0, y: 0 } : {}}
+        transition={{ duration: reduced ? 0.2 : 0.9, ease: EASE }}
         className="md:col-span-5"
       >
         <p className="text-[8px] uppercase tracking-[0.24em] text-white/30 mb-2">
@@ -169,18 +176,29 @@ function ChapterBlock({
 
       {/* Text */}
       <motion.div
-        initial={{ opacity: 0, y: reduced ? 0 : 26 }}
-        animate={inView ? { opacity: 1, y: 0 } : {}}
+        initial={{ opacity: 0, x: reduced ? 0 : 40, y: reduced ? 0 : 14 }}
+        animate={inView ? { opacity: 1, x: 0, y: 0 } : {}}
         transition={{
-          duration: reduced ? 0.2 : 0.85,
+          duration: reduced ? 0.2 : 0.9,
           ease: EASE,
-          delay: reduced ? 0 : 0.14,
+          delay: reduced ? 0 : 0.12,
         }}
         className="md:col-span-7"
       >
         <p className="text-sm md:text-[0.95rem] font-light leading-[1.95] text-white/50">
           {chapter.body}
         </p>
+        {/* Feine Linie, die unter dem Text aufzieht */}
+        <motion.span
+          initial={{ scaleX: 0 }}
+          animate={inView ? { scaleX: 1 } : {}}
+          transition={{
+            duration: reduced ? 0.2 : 1.1,
+            ease: EASE,
+            delay: reduced ? 0 : 0.3,
+          }}
+          className="mt-6 block h-px w-full max-w-md origin-left bg-white/[0.08]"
+        />
       </motion.div>
     </div>
   );

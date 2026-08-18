@@ -1,38 +1,43 @@
-Portfolio — Version 14  (18.08.2026)
-Politur vor dem Bewerben.
-
-TEILEN-VORSCHAU (wichtigste Aenderung)
-public/opengraph.jpg war noch das Bild der urspruenglichen
-Vorlage — mit "Technical 3D Artist" und erfundenen Zahlen
-(6+ Jahre, 3 Branchen, 30+ Assets). Genau dieses Bild sahen
-alle, denen du den Link auf LinkedIn oder WhatsApp geschickt
-hast. Jetzt neu gebaut: Bunker-Render als Hintergrund,
-WADAS-Monogramm, Name, Rolle, Standort, Domain. 1200x630.
-Die og:image-Pfade sind jetzt absolut — relative Pfade werden
-von LinkedIn und WhatsApp ignoriert.
+Portfolio — Version 16  (18.08.2026)
 
 FAVICON
-Statt des orangen Standardquadrats jetzt das WADAS-W.
+Identisch zum Monogramm in der Kopfzeile: Kasten mit Rahmen
+und dem Buchstaben W.
 
-SUCHMASCHINEN
-- robots.txt und sitemap.xml
-- canonical-Link
-- strukturierte Daten (schema.org Person): Name, Kuenstlername
-  WADAS, Rolle, Standort, Sprachen, LinkedIn, GitHub.
-  Damit erkennt Google dich als Person, nicht nur als Textseite.
+PROJEKTE — Auftritt beim Scrollen
+Jedes Projekt baut sich auf: Textblock von links, Bildspalte
+gleichzeitig von rechts. Das x liegt bewusst auf dem INHALT der
+Infospalte, nicht auf dem sticky-Element — sonst bricht das
+Kleben beim Scrollen.
 
-TEMPO
-Die Schriften wurden doppelt geladen — einmal in index.html,
-einmal in src/index.css. Der doppelte Aufruf ist entfernt.
+HANDY — wischbare Galerie statt Stapel
+Bilder eines Projekts liegen auf dem Handy in einer waagerechten
+Galerie mit Einrasten. Wischen statt endlos scrollen, dazu
+mitwandernde Punkte und ein Zaehler. Antippen oeffnet weiter
+das Vollbild. Die Seite ist auf dem Handy dadurch von 23.400
+auf 17.700 Pixel Laenge geschrumpft. Ab 768 px unveraendert.
+
+ABOUT — neues Kapitel 2011
+"Photoshop, and my first taste of shipping" — erster
+Design-Wettbewerb, vier Jahre nach SolidWorks.
+HINWEIS: Eingetragen ist Photoshop CS5. 2011 gab es CC noch
+nicht (kam erst 2013), damals hiess es CS5 bzw. CS5.5.
+Falls es CS6 war, in CHAPTERS korrigieren.
+
+ABOUT — mehr Bewegung
+Kapiteltitel von links, Textspalte von rechts, darunter zieht
+eine feine Linie auf. Zeitstrahl-Linie bleibt wie bisher.
+
+FEHLER BEHOBEN — seitliches Verrutschen auf dem Handy
+Das Film-Korn-Overlay war 200 % breit und ragte ueber den
+Bildschirm hinaus, wodurch sich die Seite seitlich verschieben
+liess. Jetzt genau bildschirmgross; bewegt wird das
+Hintergrundmuster statt des Elements. Stammte noch aus der
+urspruenglichen Vorlage.
 
 GEPRUEFT
-- Build ohne Fehler, TypeScript sauber
-- Alle Dateien erreichbar: Seite, CV, opengraph, favicon,
-  robots, sitemap
-- Ganze Seite durchgescrollt bei 1440x900, 1366x768 und
-  390x844 — keine Konsolenfehler
-- Lightbox, Vergleichsregler und Zeitstrahl funktionieren
-
-NOCH OFFEN
-- Instagram und ArtStation fehlen (nur LinkedIn und GitHub)
-- 360-Grad-Turntables, falls du sie noch renderst
+- Build und TypeScript fehlerfrei
+- Kein waagerechter Ueberlauf bei 1440, 1366, 390 und 360 px
+- Sticky-Verhalten nachgemessen und intakt
+- Wischgalerie mit Touch getestet
+- Keine Konsolenfehler
