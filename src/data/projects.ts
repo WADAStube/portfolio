@@ -91,19 +91,14 @@ export const projectsData: Project[] = [
     featured: true,
     tools: ["Autodesk Maya", "Substance Painter", "Arnold"],
     description:
-      "A stylised robot character built as a personal fan study, from blockout to shaded turntable.",
+      "A stylised robot character built as a personal fan study — modelled, textured and kept game-ready.",
     longDescription:
-      "A personal fan study of a stylised robot character, inspired by the anthology series Love, Death & Robots. Modelled from scratch in Maya — helmet, articulated limbs and the small mechanical joints that let a chunky silhouette still read as posable. The mesh lands at roughly 7,900 vertices and 15,000 triangles, kept deliberately light so it stays game-ready. Shown here as a shaded turntable alongside the underlying wireframe.",
-    shots: [
-      {
-        src: "/videos/robot-turntable.mp4",
-        poster: "/images/projects/robot-study/poster.jpg",
-        caption: "Shaded turntable",
-        video: true,
-        w: 1094,
-        h: 684,
-      },
-    ],
+      "A personal fan study of a stylised robot character, inspired by the anthology series Love, Death & Robots. Modelled from scratch in Maya — helmet, articulated limbs and the small mechanical joints that let a chunky silhouette still read as posable. The mesh lands at roughly 7,900 vertices and 15,000 triangles, kept deliberately light so it stays game-ready. Drag the slider to see the topology underneath.",
+    /* Turntable-Video folgt, sobald der Final Render fertig ist.
+       Dann hier eintragen:
+       { src: "/videos/xxx.mp4", poster: "...jpg",
+         caption: "Turntable", video: true, w: 1920, h: 1080 } */
+    shots: [],
     compare: {
       before: { src: "/images/projects/robot-study/01.jpg", caption: "Shaded", w: 1094, h: 681 },
       after: { src: "/images/projects/robot-study/02.jpg", caption: "Wireframe", w: 1096, h: 680 },
@@ -283,7 +278,7 @@ export const projectsData: Project[] = [
   },
   {
     id: "qrib",
-    title: "Qrib",
+    title: "Qrib — App",
     category: "Mobile App / Marketplace",
     filterCategory: "Development",
     role: "Designer & Developer",
@@ -298,6 +293,27 @@ export const projectsData: Project[] = [
       { src: "/images/projects/qrib/01.jpg", caption: "Home — describe your problem", w: 474, h: 938 },
       { src: "/images/projects/qrib/02.jpg", caption: "Campus — courses & feed", w: 468, h: 936 },
       { src: "/images/projects/qrib/03.jpg", caption: "Provider — open requests", w: 470, h: 946 },
+    ],
+  },
+  {
+    id: "qrib-web",
+    title: "Qrib — Website",
+    category: "Product Site / Front-End",
+    filterCategory: "Development",
+    role: "Design & Front-End",
+    year: "2026",
+    layout: "grid",
+    tools: ["HTML", "CSS", "JavaScript", "Firebase Hosting"],
+    description:
+      "The public site for Qrib — nineteen pages in French and Arabic, built and deployed solo.",
+    longDescription:
+      "The marketing and legal site that sits in front of the Qrib app: nineteen pages covering the product story, the Qrib Score, provider onboarding, verification, community rules, and full terms and privacy in French, English and Arabic. Written and built from scratch in plain HTML, CSS and JavaScript — no framework — so it stays fast and needs nothing to keep running. The layout is responsive down to phone width, and the warm terracotta palette carries over from the app so both feel like one product.",
+    shots: [
+      { src: "/images/projects/qrib-web/01.jpg", caption: "Landing", w: 2000, h: 1250 },
+      { src: "/images/projects/qrib-web/02.jpg", caption: "The profile as the product", w: 2000, h: 1250 },
+      { src: "/images/projects/qrib-web/03.jpg", caption: "One account, two sides", w: 2000, h: 1250 },
+      { src: "/images/projects/qrib-web/04.jpg", caption: "Qrib Score — the trust model", w: 2000, h: 1250 },
+      { src: "/images/projects/qrib-web/05.jpg", caption: "Responsive layout", w: 840, h: 1720 },
     ],
   },
 ];

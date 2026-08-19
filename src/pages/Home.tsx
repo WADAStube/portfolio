@@ -519,8 +519,12 @@ export default function Home() {
             <div className="flex flex-wrap items-center gap-10">
               {[
                 {
+                  label: "Instagram",
+                  href: "https://www.instagram.com/issam_selmy",
+                },
+                {
                   label: "LinkedIn",
-                  href: "https://www.linkedin.com/in/issam-selmi-6253241b9/",
+                  href: "https://www.linkedin.com/in/issam-selmi-6253241b9",
                 },
                 { label: "GitHub", href: "https://github.com/WADAStube" },
               ].map(({ label, href }) => (

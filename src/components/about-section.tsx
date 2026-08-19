@@ -28,58 +28,51 @@ const CHAPTERS = [
   {
     id: "origin",
     icon: Boxes,
-    kicker: "2007 — Tunisia",
+    kicker: "2007",
     title: "It started with one sentence",
-    body: "My cousin, a mechanical engineer, installed SolidWorks on my computer and said: with this you can build things that don't exist yet. I was ten. I didn't understand half the interface, but I understood that sentence — and I've been making things ever since.",
+    body: "My cousin, a mechanical engineer, installed SolidWorks on my computer and said: with this you can build things that don't exist yet. I was ten. I didn't understand half the interface, but I understood that sentence.",
   },
   {
     id: "photoshop",
     icon: Trophy,
-    kicker: "2011 — first competition",
+    kicker: "2011",
     title: "Second out of fourteen",
-    body: "My first design competition, working in Photoshop CS5. Fourteen entries, second place, and the prize was a Sony Alpha NEX-3. That camera turned out to matter more than the placing — it came with me for the next decade, and it's why the years that followed were never empty ones.",
+    body: "My first design competition, working in Photoshop CS5. Fourteen entries, second place, and a Sony Alpha NEX-3 as the prize. That camera is still the reason I think about framing before I think about geometry.",
   },
   {
     id: "body",
     icon: Activity,
-    kicker: "School years — Tunisia",
+    kicker: "Discipline",
     title: "Ten years of showing up",
-    body: "Taekwondo from childhood into my late teens, ten years of it. Four years as captain of my school's basketball team. Later, three half marathons. The lesson is always the same: turn up, repeat the boring part, and one day the hard thing is easy. Retopology works exactly like that.",
-  },
-  {
-    id: "start",
-    icon: GraduationCap,
-    kicker: "2015 — Tunisia",
-    title: "I chose the long way on purpose",
-    body: "Abitur finished, university waiting. I decided the world came first — and I meant it as a plan, not a pause.",
+    body: "Taekwondo from childhood into my late teens, ten years of it. Four years as captain of my school's basketball team, and three half marathons since. Turn up, repeat the boring part, and one day the hard thing is easy. Retopology works exactly like that.",
   },
   {
     id: "berlin",
     icon: Disc3,
-    kicker: "2016 — Berlin, age 19",
+    kicker: "Berlin",
     title: "Techno got me to Germany",
-    body: "Three reasons brought me here: study, independence, and above all the music. Berlin was where techno came from, so Berlin is where I went. I learned the language, and in 2017 I played my first set. It stays a hobby by choice — the one thing I do purely because I want to.",
+    body: "I moved from Tunisia at nineteen, learned the language, and played my first set in 2017. Producing and DJing stay a hobby by choice — the one thing I do purely because I want to.",
   },
   {
     id: "road",
     icon: Plane,
-    kicker: "2017 – 2022",
-    title: "Four continents, eighteen countries",
-    body: "Five years mostly on the move, and I kept moving when most people stopped. The camera from 2011 came along for all of it. Composition, light, when to press and when to wait — I learned that on the road, not in a classroom, and it's the same eye I now use to frame a render.",
+    kicker: "Four continents",
+    title: "Eighteen countries, one camera",
+    body: "I travel, hike and camp whenever I can, and the camera always comes along. Composition, light, knowing when to press and when to wait — I picked that up on the road, and it's the same eye I use to frame a render.",
   },
   {
     id: "study",
     icon: BookOpen,
-    kicker: "2022 — Emden",
-    title: "Media Technology, on my terms",
-    body: "Fifteen years after SolidWorks I finally studied the thing properly — and I arrived knowing exactly why I was there. Medientechnik is the field where 3D, game design, code and image share one room. Everything I'd picked up separately suddenly had somewhere to go.",
+    kicker: "Emden",
+    title: "Media Technology",
+    body: "Medientechnik at Hochschule Emden/Leer is where 3D, game design, code and image share one room. Environments, characters, texturing and pipeline thinking — the degree gave the thing I'd been doing since 2007 a proper structure.",
   },
   {
     id: "hamburg",
     icon: Anchor,
-    kicker: "Hamburg — today",
-    title: "All of it, pointed at one thing",
-    body: "I live in Hamburg and work here as a Werkstudent in media technology, learning the job from the inside. The travelling, the training, the records, the camera — none of it was a detour. It's why I see a scene before I model it, and why I finish what I start. The work on this page is where it all lands.",
+    kicker: "Hamburg",
+    title: "Where I work now",
+    body: "I live in Hamburg and work here as a Werkstudent in media technology — planning and producing photo, video and audio content, and keeping the technical side running. Red brick, water through the middle of the city, harbour light. Good place to build things.",
   },
 ];
 
@@ -293,10 +286,10 @@ export function AboutSection() {
                 letterSpacing: "-0.015em",
               }}
             >
-              <SplitText text="I took the long way here." />
+              <SplitText text="I make things that" />
               <br />
               <span className="text-white/35">
-                <SplitText text="It's exactly why I'm good at this." delay={0.22} />
+                <SplitText text="didn't exist yesterday." delay={0.22} />
               </span>
             </blockquote>
 
@@ -304,11 +297,10 @@ export function AboutSection() {
               <p className="text-sm font-light leading-[1.95] text-white/45 max-w-xl">
                 29, Tunisian, based in Hamburg. I build in 3D — environments,
                 characters, game assets, and the textures and layouts that
-                make them read. It started with a piece of CAD software in
-                2007 and never let go. Eighteen countries, ten years of
-                martial arts and a decade behind the decks all feed the same
-                work. I speak Arabic, German, English and French, and I'm
-                at my best on projects that need all of it at once.
+                make them read. Alongside that: graphic design, and apps I
+                design and code myself. I speak Arabic, German, English and
+                French, and I'm at my best on projects that need more than
+                one of those skills at once.
               </p>
             </Reveal>
 
