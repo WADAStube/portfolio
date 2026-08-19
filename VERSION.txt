@@ -1,43 +1,35 @@
-Portfolio — Version 16  (18.08.2026)
+Portfolio — Version 17  (19.08.2026)
 
-FAVICON
-Identisch zum Monogramm in der Kopfzeile: Kasten mit Rahmen
-und dem Buchstaben W.
+NEUES PROJEKT: ROBOT STUDY (Platz 2, direkt nach dem Bunker)
+- Shaded-Turntable als Video, dazu der Vergleichsregler
+  Shaded/Wireframe aus deinen beiden Screenshots
+- Videos werden jetzt ueberall unterstuetzt: im Rahmen, im
+  Vollbild und als Vorschaubild. Feld video: true plus poster.
 
-PROJEKTE — Auftritt beim Scrollen
-Jedes Projekt baut sich auf: Textblock von links, Bildspalte
-gleichzeitig von rechts. Das x liegt bewusst auf dem INHALT der
-Infospalte, nicht auf dem sticky-Element — sonst bricht das
-Kleben beim Scrollen.
+ZUM VIDEO
+Dein Clip war 1,77 s lang und endete in einer anderen Drehung
+als er begann — als Endlosschleife haette er sichtbar
+gesprungen. Daraus ist eine Hin-und-zurueck-Schleife geworden,
+leicht verlangsamt: 4,6 s, nahtlos, ohne Ton, nur 208 KB.
 
-HANDY — wischbare Galerie statt Stapel
-Bilder eines Projekts liegen auf dem Handy in einer waagerechten
-Galerie mit Einrasten. Wischen statt endlos scrollen, dazu
-mitwandernde Punkte und ein Zaehler. Antippen oeffnet weiter
-das Vollbild. Die Seite ist auf dem Handy dadurch von 23.400
-auf 17.700 Pixel Laenge geschrumpft. Ab 768 px unveraendert.
+BLOOMEST
+Das vierte Motiv ist entfernt.
 
-ABOUT — neues Kapitel 2011
-"Photoshop, and my first taste of shipping" — erster
-Design-Wettbewerb, vier Jahre nach SolidWorks.
-HINWEIS: Eingetragen ist Photoshop CS5. 2011 gab es CC noch
-nicht (kam erst 2013), damals hiess es CS5 bzw. CS5.5.
-Falls es CS6 war, in CHAPTERS korrigieren.
+ABOUT — Erzaehlung ueberarbeitet
+Neue Reihenfolge, 2011-Wettbewerb ergaenzt (2. von 14,
+Sony Alpha NEX-3).
 
-ABOUT — mehr Bewegung
-Kapiteltitel von links, Textspalte von rechts, darunter zieht
-eine feine Linie auf. Zeitstrahl-Linie bleibt wie bisher.
-
-FEHLER BEHOBEN — seitliches Verrutschen auf dem Handy
-Das Film-Korn-Overlay war 200 % breit und ragte ueber den
-Bildschirm hinaus, wodurch sich die Seite seitlich verschieben
-liess. Jetzt genau bildschirmgross; bewegt wird das
-Hintergrundmuster statt des Elements. Stammte noch aus der
-urspruenglichen Vorlage.
+FEHLER BEHOBEN
+Die neue seitliche Einblendung schob noch nicht sichtbare
+Abschnitte 46 px nach rechts, wodurch sich die Seite auf dem
+Handy seitlich verschieben liess. Geloest mit overflow-x: clip
+auf den Abschnitten — begrenzt seitlich, erzeugt aber KEINEN
+Scroll-Container, sodass position: sticky weiter funktioniert.
+(overflow-x: hidden haette das Kleben zerstoert.)
 
 GEPRUEFT
 - Build und TypeScript fehlerfrei
-- Kein waagerechter Ueberlauf bei 1440, 1366, 390 und 360 px
-- Sticky-Verhalten nachgemessen und intakt
-- Wischgalerie mit Touch getestet
+- Kein Ueberlauf bei 1440, 1366, 390 und 360 px, waehrend des
+  gesamten Durchscrollens gemessen
+- Sticky nachgemessen: haelt weiterhin
 - Keine Konsolenfehler

@@ -20,6 +20,8 @@ export interface ProjectShot {
   h: number;
   /** Video statt Bild */
   video?: boolean;
+  /** Standbild fuer Videos (erstes Bild, waehrend es laedt) */
+  poster?: string;
 }
 
 export interface Project {
@@ -78,6 +80,37 @@ export const projectsData: Project[] = [
       { src: "/images/projects/futuristic-bunker/04.jpg", caption: "Maya viewport", w: 1272, h: 685 },
       { src: "/images/projects/futuristic-bunker/05.jpg", caption: "Wireframe", w: 1270, h: 679 },
     ],
+  },
+  {
+    id: "robot-study",
+    title: "Robot Study",
+    category: "Character Art / Fan Study",
+    filterCategory: "Character Art",
+    role: "3D Character Artist",
+    year: "2026",
+    featured: true,
+    tools: ["Autodesk Maya", "Substance Painter", "Arnold"],
+    description:
+      "A stylised robot character built as a personal fan study, from blockout to shaded turntable.",
+    longDescription:
+      "A personal fan study of a stylised robot character, inspired by the anthology series Love, Death & Robots. Modelled from scratch in Maya — helmet, articulated limbs and the small mechanical joints that let a chunky silhouette still read as posable. The mesh lands at roughly 7,900 vertices and 15,000 triangles, kept deliberately light so it stays game-ready. Shown here as a shaded turntable alongside the underlying wireframe.",
+    shots: [
+      {
+        src: "/videos/robot-turntable.mp4",
+        poster: "/images/projects/robot-study/poster.jpg",
+        caption: "Shaded turntable",
+        video: true,
+        w: 1094,
+        h: 684,
+      },
+    ],
+    compare: {
+      before: { src: "/images/projects/robot-study/01.jpg", caption: "Shaded", w: 1094, h: 681 },
+      after: { src: "/images/projects/robot-study/02.jpg", caption: "Wireframe", w: 1096, h: 680 },
+      beforeLabel: "Shaded",
+      afterLabel: "Wireframe",
+      note: "7,852 verts · 12,235 faces · 15,029 tris. The wireframe shows where that budget went: dense enough around the joints and helmet curve to deform and catch light cleanly, sparse everywhere it would not be noticed.",
+    },
   },
   {
     id: "apocalypse",
@@ -214,7 +247,6 @@ export const projectsData: Project[] = [
       { src: "/images/projects/bloomest/01.jpg", caption: "A1 window — 48 Minuten", w: 1554, h: 2200 },
       { src: "/images/projects/bloomest/02.jpg", caption: "A1 window — Beste Bewertung", w: 1554, h: 2200 },
       { src: "/images/projects/bloomest/03.jpg", caption: "A2 poster — Hygiene", w: 1556, h: 2200 },
-      { src: "/images/projects/bloomest/04.jpg", caption: "In-store series — A5", w: 1654, h: 1166 },
     ],
   },
   {

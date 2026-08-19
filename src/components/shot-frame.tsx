@@ -81,7 +81,7 @@ export function ShotFrame({
           {!fits && (
             <div aria-hidden="true" className="absolute inset-0 overflow-hidden">
               <img
-                src={shot.src}
+                src={shot.video ? (shot.poster ?? shot.src) : shot.src}
                 alt=""
                 aria-hidden="true"
                 loading={priority ? "eager" : "lazy"}
@@ -91,18 +91,41 @@ export function ShotFrame({
             </div>
           )}
 
-          {/* Das eigentliche Bild — vollstaendig, nie beschnitten */}
-          <motion.img
-            src={shot.src}
-            alt={shot.caption ?? ""}
-            width={shot.w}
-            height={shot.h}
-            loading={priority ? "eager" : "lazy"}
-            decoding="async"
-            animate={reduced ? undefined : { scale: hover ? 1.018 : 1 }}
-            transition={{ duration: 0.8, ease: EASE }}
-            className="relative w-full h-full object-contain select-none"
-          />
+          {/* Video oder Bild — beides vollstaendig, nie beschnitten */}
+          {shot.video ? (
+            <motion.video
+              src={shot.src}
+              poster={shot.poster}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload={priority ? "auto" : "metadata"}
+              animate={reduced ? undefined : { scale: hover ? 1.018 : 1 }}
+              transition={{ duration: 0.8, ease: EASE }}
+              className="relative w-full h-full object-contain select-none"
+            />
+          ) : (
+            <motion.img
+              src={shot.src}
+              alt={shot.caption ?? ""}
+              width={shot.w}
+              height={shot.h}
+              loading={priority ? "eager" : "lazy"}
+              decoding="async"
+              animate={reduced ? undefined : { scale: hover ? 1.018 : 1 }}
+              transition={{ duration: 0.8, ease: EASE }}
+              className="relative w-full h-full object-contain select-none"
+            />
+          )}
+
+          {/* Video-Kennzeichen */}
+          {shot.video && (
+            <span className="pointer-events-none absolute top-3 right-3 md:top-4 md:right-4 z-10 inline-flex items-center gap-1.5 bg-black/60 backdrop-blur-sm px-2.5 py-1 text-[9px] uppercase tracking-[0.18em] text-white/75">
+              <span className="h-1.5 w-1.5 rounded-full bg-red-500 animate-pulse" />
+              Turntable
+            </span>
+          )}
 
           {/* Zaehler oben links */}
           <div className="pointer-events-none absolute top-0 left-0 p-3 md:p-4">

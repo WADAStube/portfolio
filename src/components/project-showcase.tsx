@@ -161,7 +161,11 @@ export function ProjectShowcase({
     <section
       ref={sectionRef}
       id={project.id}
-      className="relative scroll-mt-24 border-t border-white/[0.05] py-20 md:py-32 lg:py-40"
+      /* overflow-x-clip statt -hidden: begrenzt seitlich, erzeugt aber
+         KEINEN Scroll-Container — position: sticky bleibt dadurch
+         funktionsfaehig. Noetig, weil die Bildspalte beim Einblenden
+         46 px versetzt startet. */
+      className="relative overflow-x-clip scroll-mt-24 border-t border-white/[0.05] py-20 md:py-32 lg:py-40"
     >
       <div className="max-w-[1600px] mx-auto px-6 md:px-10 lg:px-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-10 gap-x-10 lg:gap-x-16">
@@ -172,8 +176,15 @@ export function ProjectShowcase({
                   Das x liegt auf dem INHALT, nicht auf dem
                   sticky-Element selbst — sonst bricht das Kleben. */}
               <motion.div
-                initial={{ opacity: 0, x: reduced ? 0 : -46 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                /* Seitlich nur ab Tablet. Auf dem Handy wuerde der
+                   Versatz die Seite waagerecht verschiebbar machen,
+                   solange die Section noch nicht sichtbar ist. */
+                initial={{
+                  opacity: 0,
+                  x: reduced || small ? 0 : -46,
+                  y: reduced ? 0 : small ? 26 : 0,
+                }}
+                whileInView={{ opacity: 1, x: 0, y: 0 }}
                 viewport={{ once: true, amount: 0.15 }}
                 transition={{ duration: reduced ? 0.2 : 1.05, ease: EASE }}
               >
@@ -334,8 +345,12 @@ export function ProjectShowcase({
           {/* ─────────── Bildspalte ─────────── */}
           <motion.div
             ref={shotsRef}
-            initial={{ opacity: 0, x: reduced ? 0 : 46 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{
+              opacity: 0,
+              x: reduced || small ? 0 : 46,
+              y: reduced ? 0 : small ? 26 : 0,
+            }}
+            whileInView={{ opacity: 1, x: 0, y: 0 }}
             viewport={{ once: true, amount: 0.12 }}
             transition={{ duration: reduced ? 0.2 : 1.05, ease: EASE }}
             className="lg:col-span-8 space-y-14 md:space-y-20 lg:space-y-28"

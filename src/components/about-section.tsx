@@ -30,56 +30,56 @@ const CHAPTERS = [
     icon: Boxes,
     kicker: "2007 — Tunisia",
     title: "It started with one sentence",
-    body: "My cousin, a mechanical engineer, installed SolidWorks on my computer and said: with this you can build things that don't exist yet. I was a kid. I didn't understand half the interface — but I understood that sentence, and I've been building ever since. Everything on this page traces back to that afternoon.",
+    body: "My cousin, a mechanical engineer, installed SolidWorks on my computer and said: with this you can build things that don't exist yet. I was ten. I didn't understand half the interface, but I understood that sentence — and I've been making things ever since.",
   },
   {
     id: "photoshop",
     icon: Trophy,
     kicker: "2011 — first competition",
-    title: "Photoshop, and my first taste of shipping",
-    body: "Four years after SolidWorks I entered my first design competition, working in Photoshop CS5. It was the first time I made something to a brief, against a deadline, to be judged by other people — and I was hooked. Building for yourself is fun. Building for someone who will look closely is the part that makes you better.",
+    title: "Second out of fourteen",
+    body: "My first design competition, working in Photoshop CS5. Fourteen entries, second place, and the prize was a Sony Alpha NEX-3. That camera turned out to matter more than the placing — it came with me for the next decade, and it's why the years that followed were never empty ones.",
+  },
+  {
+    id: "body",
+    icon: Activity,
+    kicker: "School years — Tunisia",
+    title: "Ten years of showing up",
+    body: "Taekwondo from childhood into my late teens, ten years of it. Four years as captain of my school's basketball team. Later, three half marathons. The lesson is always the same: turn up, repeat the boring part, and one day the hard thing is easy. Retopology works exactly like that.",
   },
   {
     id: "start",
     icon: GraduationCap,
     kicker: "2015 — Tunisia",
     title: "I chose the long way on purpose",
-    body: "Abitur done, university waiting. I decided the world came first. Not a gap year — a proper look at how people live, think and build in places that aren't yours. Best decision I've made.",
+    body: "Abitur finished, university waiting. I decided the world came first — and I meant it as a plan, not a pause.",
   },
   {
     id: "berlin",
     icon: Disc3,
     kicker: "2016 — Berlin, age 19",
     title: "Techno got me to Germany",
-    body: "Three reasons brought me here: study, independence, and above all the music. Berlin was where techno came from, so Berlin is where I went. I learned the language, and in 2017 I played my first set. It stays a hobby by choice — the thing I do purely because I want to.",
+    body: "Three reasons brought me here: study, independence, and above all the music. Berlin was where techno came from, so Berlin is where I went. I learned the language, and in 2017 I played my first set. It stays a hobby by choice — the one thing I do purely because I want to.",
   },
   {
     id: "road",
     icon: Plane,
     kicker: "2017 – 2022",
     title: "Four continents, eighteen countries",
-    body: "Five years on the move, and I kept moving when most people stopped. Languages, kitchens, night buses, borders that opened for a week. What you bring back isn't photographs — it's the ability to read a room anywhere and start from scratch without flinching.",
-  },
-  {
-    id: "body",
-    icon: Activity,
-    kicker: "Ten years and counting",
-    title: "Discipline I can point to",
-    body: "Ten years of Taekwondo. Four years as captain of my school's basketball team. Three half marathons. Camping and hiking whenever the weather allows. Show up, repeat the boring part, and one day the hard thing is easy — which is exactly how modelling and retopology work.",
+    body: "Five years mostly on the move, and I kept moving when most people stopped. The camera from 2011 came along for all of it. Composition, light, when to press and when to wait — I learned that on the road, not in a classroom, and it's the same eye I now use to frame a render.",
   },
   {
     id: "study",
     icon: BookOpen,
     kicker: "2022 — Emden",
     title: "Media Technology, on my terms",
-    body: "I started my Medientechnik degree when I was ready for it, not when it was expected. It's the field where 3D, game design, code and image share one room. Fifteen years after SolidWorks, I was finally studying the thing properly — and I knew exactly why I was there.",
+    body: "Fifteen years after SolidWorks I finally studied the thing properly — and I arrived knowing exactly why I was there. Medientechnik is the field where 3D, game design, code and image share one room. Everything I'd picked up separately suddenly had somewhere to go.",
   },
   {
     id: "hamburg",
     icon: Anchor,
     kicker: "Hamburg — today",
-    title: "This is where I build",
-    body: "Hamburg has red brick, water through the middle of it, harbour light, and a warmth Berlin never had. I moved here for the city and for a Werkstudent role in media technology, to learn the work from the inside. The travelling gave me everything I needed. Now I'm here, and I'm building.",
+    title: "All of it, pointed at one thing",
+    body: "I live in Hamburg and work here as a Werkstudent in media technology, learning the job from the inside. The travelling, the training, the records, the camera — none of it was a detour. It's why I see a scene before I model it, and why I finish what I start. The work on this page is where it all lands.",
   },
 ];
 
@@ -139,6 +139,7 @@ function ChapterBlock({
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.45 });
   const reduced = useReducedMotion();
+  const small = useIsSmallScreen();
   const Icon = chapter.icon;
 
   return (
@@ -158,7 +159,7 @@ function ChapterBlock({
 
       {/* Zeit + Titel */}
       <motion.div
-        initial={{ opacity: 0, x: reduced ? 0 : -34, y: reduced ? 0 : 14 }}
+        initial={{ opacity: 0, x: reduced || small ? 0 : -34, y: reduced ? 0 : 18 }}
         animate={inView ? { opacity: 1, x: 0, y: 0 } : {}}
         transition={{ duration: reduced ? 0.2 : 0.9, ease: EASE }}
         className="md:col-span-5"
@@ -176,7 +177,7 @@ function ChapterBlock({
 
       {/* Text */}
       <motion.div
-        initial={{ opacity: 0, x: reduced ? 0 : 40, y: reduced ? 0 : 14 }}
+        initial={{ opacity: 0, x: reduced || small ? 0 : 40, y: reduced ? 0 : 18 }}
         animate={inView ? { opacity: 1, x: 0, y: 0 } : {}}
         transition={{
           duration: reduced ? 0.2 : 0.9,
@@ -235,7 +236,7 @@ export function AboutSection() {
   return (
     <section
       id="about"
-      className="relative py-24 md:py-40 bg-[#050505] border-t border-white/[0.05]"
+      className="relative overflow-x-clip py-24 md:py-40 bg-[#050505] border-t border-white/[0.05]"
     >
       <div className="max-w-[1600px] mx-auto px-6 md:px-10 lg:px-16">
         <Reveal direction="up">

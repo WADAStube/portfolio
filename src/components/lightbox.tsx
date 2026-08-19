@@ -105,24 +105,49 @@ export function Lightbox({ project, startIndex, onClose }: LightboxProps) {
           {/* Bildbühne */}
           <div className="relative flex-1 min-h-0 flex items-center justify-center px-4 md:px-16 pb-4">
             <AnimatePresence initial={false} custom={dir} mode="wait">
-              <motion.img
-                key={idx}
-                src={shots[idx]?.src}
-                alt={`${project.title} — ${shots[idx]?.caption ?? idx + 1}`}
-                custom={dir}
-                variants={variants}
-                initial="enter"
-                animate="center"
-                exit="exit"
-                drag={count > 1 ? "x" : false}
-                dragConstraints={{ left: 0, right: 0 }}
-                dragElastic={0.14}
-                onDragEnd={(_, info) => {
-                  if (info.offset.x < -70) go(1);
-                  else if (info.offset.x > 70) go(-1);
-                }}
-                className="max-h-full max-w-full object-contain select-none cursor-grab active:cursor-grabbing"
-              />
+              {shots[idx]?.video ? (
+                <motion.video
+                  key={`v${idx}`}
+                  src={shots[idx]?.src}
+                  poster={shots[idx]?.poster}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  custom={dir}
+                  variants={variants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  drag={count > 1 ? "x" : false}
+                  dragConstraints={{ left: 0, right: 0 }}
+                  dragElastic={0.14}
+                  onDragEnd={(_, info) => {
+                    if (info.offset.x < -70) go(1);
+                    else if (info.offset.x > 70) go(-1);
+                  }}
+                  className="max-h-full max-w-full object-contain select-none cursor-grab active:cursor-grabbing"
+                />
+              ) : (
+                <motion.img
+                  key={`i${idx}`}
+                  src={shots[idx]?.src}
+                  alt={`${project.title} — ${shots[idx]?.caption ?? idx + 1}`}
+                  custom={dir}
+                  variants={variants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  drag={count > 1 ? "x" : false}
+                  dragConstraints={{ left: 0, right: 0 }}
+                  dragElastic={0.14}
+                  onDragEnd={(_, info) => {
+                    if (info.offset.x < -70) go(1);
+                    else if (info.offset.x > 70) go(-1);
+                  }}
+                  className="max-h-full max-w-full object-contain select-none cursor-grab active:cursor-grabbing"
+                />
+              )}
             </AnimatePresence>
 
             {count > 1 && (
@@ -168,7 +193,7 @@ export function Lightbox({ project, startIndex, onClose }: LightboxProps) {
                   )}
                 >
                   <img
-                    src={s.src}
+                    src={s.video ? (s.poster ?? s.src) : s.src}
                     alt=""
                     className="w-full h-full object-cover"
                   />
