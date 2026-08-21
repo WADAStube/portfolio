@@ -19,6 +19,7 @@ import {
 import { ShotFrame } from "@/components/shot-frame";
 import { SourceStrip } from "@/components/source-strip";
 import { CompareSlider } from "@/components/compare-slider";
+import { ScrollSequence } from "@/components/scroll-sequence";
 import { cn } from "@/lib/utils";
 
 /* ────────────────────────────────────────────────────────────
@@ -414,6 +415,15 @@ export function ProjectShowcase({
                   onClick={() => onOpenShot(project, i)}
                 />
               ))
+            )}
+
+            {project.sequence && (
+              <ScrollSequence
+                frames={project.sequence.frames}
+                ratio={project.sequence.ratio}
+                caption={project.sequence.caption}
+                className={columnWidthFor(project.sequence.ratio)}
+              />
             )}
 
             {project.compare && (

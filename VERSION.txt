@@ -1,19 +1,36 @@
-Portfolio — Version 19  (19.08.2026)
+Portfolio — Version 20  (19.08.2026)
 
-NEUES PROJEKT: QRIB — WEBSITE
-Die 19-seitige Produktseite aus deinem ZIP, als eigenes
-Projekt neben der App. Fuenf Aufnahmen: Landing, Profil-Story,
-"Un seul compte, deux cotes", Qrib Score und die mobile
-Ansicht als Beleg fuer das responsive Layout.
-Das App-Projekt heisst jetzt "Qrib — App", damit beide klar
-auseinandergehalten werden.
+DAS VIDEO — jetzt scrollgesteuerte Drehung
+Kein eingebettetes Video mehr. Aus dem Clip sind 33 Einzelbilder
+geworden (zusammen 540 KB), gekoppelt an den Scrollfortschritt:
+Der Betrachter dreht das Modell selbst. Das Bild bleibt stehen,
+waehrend man an einer hohen Spur vorbeiscrollt.
 
-Ich habe die Seite lokal ausgefuehrt und selbst aufgenommen,
-in 1,5-facher Aufloesung fuer scharfe Schrift. Zwei Seiten
-(Provider, Community) habe ich weggelassen: die eine zeigte
-einen Ladezustand, die andere ist reiner Regeltext ohne Bild.
+Warum so: Deine Aufnahme ist eine Viewport-Drehung von Hand —
+sie geht hin und her und laeuft nicht rund. Als Endlosschleife
+faellt das sofort auf, egal wie man schneidet. Am Scroll
+gekoppelt gibt es keinen Loop mehr, und die Bewegung folgt dem
+Tempo des Betrachters.
+Datei: src/components/scroll-sequence.tsx
+Scrollweg einstellbar in src/index.css (--seq-track).
+
+FAVICON
+Exakt wie das Logo oben: Kasten mit Rahmen, fettes W,
+als PNG in 256 px.
+
+STRUKTUR — 3D steht im Vordergrund
+- Qrib-App (Handy-Screenshots) entfernt
+- KI Lesebuch und Qrib-Website zu einem Projekt
+  "Web Products" zusammengefasst
+Ergebnis: 9 Projekte — 6x 3D, 2x Design, 1x Development.
+
+ABOUT
+"18 Laender" und "4 Kontinente" entfernt, auch aus dem
+Kapiteltext. Zahlen jetzt: 2007 (erste 3D-Software),
+10 (Jahre Taekwondo), 4 (Sprachen).
 
 GEPRUEFT
 - Build und TypeScript fehlerfrei
-- 11 Projekte, kein Ueberlauf bei 1440 und 390 px
+- Kein Ueberlauf bei 1440, 1366, 390 und 360 px
 - Keine 404, keine Konsolenfehler
+- Drehung ueber den gesamten Scrollweg nachgemessen

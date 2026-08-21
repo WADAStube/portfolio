@@ -51,6 +51,8 @@ export interface Project {
     /** Erklaerung unter dem Regler, wenn der Unterschied subtil ist */
     note?: string;
   };
+  /** Optional: scrollgesteuerte Bildfolge (Drehung) */
+  sequence?: { frames: string[]; ratio: number; caption?: string };
   /** "stack" (Standard) = grosse Bilder untereinander.
       "grid" = kompaktes Raster — passend fuer App-Screenshots,
       die sonst neben den grossen Renders unruhig wirken. */
@@ -94,11 +96,47 @@ export const projectsData: Project[] = [
       "A stylised robot character built as a personal fan study — modelled, textured and kept game-ready.",
     longDescription:
       "A personal fan study of a stylised robot character, inspired by the anthology series Love, Death & Robots. Modelled from scratch in Maya — helmet, articulated limbs and the small mechanical joints that let a chunky silhouette still read as posable. The mesh lands at roughly 7,900 vertices and 15,000 triangles, kept deliberately light so it stays game-ready. Drag the slider to see the topology underneath.",
-    /* Turntable-Video folgt, sobald der Final Render fertig ist.
-       Dann hier eintragen:
-       { src: "/videos/xxx.mp4", poster: "...jpg",
-         caption: "Turntable", video: true, w: 1920, h: 1080 } */
     shots: [],
+    /* Scrollgesteuerte Drehung — siehe scroll-sequence.tsx */
+    sequence: {
+      frames: [
+        "/images/projects/robot-study/seq/f001.jpg",
+        "/images/projects/robot-study/seq/f002.jpg",
+        "/images/projects/robot-study/seq/f003.jpg",
+        "/images/projects/robot-study/seq/f004.jpg",
+        "/images/projects/robot-study/seq/f005.jpg",
+        "/images/projects/robot-study/seq/f006.jpg",
+        "/images/projects/robot-study/seq/f007.jpg",
+        "/images/projects/robot-study/seq/f008.jpg",
+        "/images/projects/robot-study/seq/f009.jpg",
+        "/images/projects/robot-study/seq/f010.jpg",
+        "/images/projects/robot-study/seq/f011.jpg",
+        "/images/projects/robot-study/seq/f012.jpg",
+        "/images/projects/robot-study/seq/f013.jpg",
+        "/images/projects/robot-study/seq/f014.jpg",
+        "/images/projects/robot-study/seq/f015.jpg",
+        "/images/projects/robot-study/seq/f016.jpg",
+        "/images/projects/robot-study/seq/f017.jpg",
+        "/images/projects/robot-study/seq/f018.jpg",
+        "/images/projects/robot-study/seq/f019.jpg",
+        "/images/projects/robot-study/seq/f020.jpg",
+        "/images/projects/robot-study/seq/f021.jpg",
+        "/images/projects/robot-study/seq/f022.jpg",
+        "/images/projects/robot-study/seq/f023.jpg",
+        "/images/projects/robot-study/seq/f024.jpg",
+        "/images/projects/robot-study/seq/f025.jpg",
+        "/images/projects/robot-study/seq/f026.jpg",
+        "/images/projects/robot-study/seq/f027.jpg",
+        "/images/projects/robot-study/seq/f028.jpg",
+        "/images/projects/robot-study/seq/f029.jpg",
+        "/images/projects/robot-study/seq/f030.jpg",
+        "/images/projects/robot-study/seq/f031.jpg",
+        "/images/projects/robot-study/seq/f032.jpg",
+        "/images/projects/robot-study/seq/f033.jpg",
+      ],
+      ratio: 560 / 629,
+      caption: "Shaded — scroll to rotate",
+    },
     compare: {
       before: { src: "/images/projects/robot-study/01.jpg", caption: "Shaded", w: 1094, h: 681 },
       after: { src: "/images/projects/robot-study/02.jpg", caption: "Wireframe", w: 1096, h: 680 },
@@ -244,76 +282,37 @@ export const projectsData: Project[] = [
       { src: "/images/projects/bloomest/03.jpg", caption: "A2 poster — Hygiene", w: 1556, h: 2200 },
     ],
   },
+
   {
-    id: "ki-lesebuch",
-    title: "KI Lesebuch",
-    category: "Web App / Product",
+    id: "web-products",
+    title: "Web Products",
+    category: "Full-Stack / Front-End",
     filterCategory: "Development",
-    role: "Solo Developer & Designer",
+    role: "Solo Designer & Developer",
     year: "2026",
     layout: "grid",
-    featured: true,
     tools: [
       "React",
       "TypeScript",
-      "Vite",
       "Tailwind CSS",
-      "Framer Motion",
       "Express.js",
-      "Drizzle ORM",
+      "HTML",
+      "CSS",
+      "JavaScript",
     ],
     description:
-      "A language-learning app built around short stories, where every sentence opens up translation, grammar and vocabulary.",
+      "Two products designed, built and shipped solo — a language-learning app and a marketplace site.",
     longDescription:
-      "A full-stack web app built solo, from concept through to deployment. The premise: language learning works better with context, so the app teaches through short stories rather than word lists. Every sentence is tappable and reveals its translation; a grammar panel breaks down word function, tense and usage notes; individual words open a bottom sheet with synonyms and an example sentence. Content is generated across multiple languages and CEFR levels from A1 to C2, with the story tone selectable. Auth, session handling and plan tiers run on Express with Drizzle and PostgreSQL.",
+      "Two self-built products. KI Lesebuch is a full-stack language-learning web app: short stories where every sentence opens its translation, a grammar panel breaks down word function and tense, and individual words reveal synonyms and examples — generated across several languages and CEFR levels. Qrib is a Tunisian services marketplace; I built its nineteen-page public site in plain HTML, CSS and JavaScript, in French, English and Arabic, responsive down to phone width. Design, front-end and back-end on both.",
     shots: [
-      { src: "/images/projects/ki-lesebuch/01.jpg", caption: "Splash screen", w: 918, h: 857 },
-      { src: "/images/projects/ki-lesebuch/02.jpg", caption: "Login & registration", w: 913, h: 857 },
-      { src: "/images/projects/ki-lesebuch/03.jpg", caption: "Preferences — language & level", w: 603, h: 645 },
-      { src: "/images/projects/ki-lesebuch/04.jpg", caption: "Story reader", w: 808, h: 864 },
-      { src: "/images/projects/ki-lesebuch/05.jpg", caption: "Sentence translation", w: 1069, h: 586 },
-      { src: "/images/projects/ki-lesebuch/06.jpg", caption: "Grammar breakdown", w: 929, h: 855 },
-      { src: "/images/projects/ki-lesebuch/07.jpg", caption: "Word detail & synonyms", w: 878, h: 851 },
-    ],
-  },
-  {
-    id: "qrib",
-    title: "Qrib — App",
-    category: "Mobile App / Marketplace",
-    filterCategory: "Development",
-    role: "Designer & Developer",
-    year: "2026",
-    layout: "grid",
-    tools: ["Flutter", "Dart", "Firebase"],
-    description:
-      "A Tunisian services marketplace that connects people to local providers — plus a campus mode for students.",
-    longDescription:
-      "A cross-platform mobile marketplace connecting people in Tunisia with local service providers. Instead of browsing listings, users describe the problem and providers come to them with a price — a reversal that suits a market where informal word-of-mouth already dominates. A provider view handles incoming requests, and a separate campus mode gives students their courses, library and study feed in the same app.",
-    shots: [
-      { src: "/images/projects/qrib/01.jpg", caption: "Home — describe your problem", w: 474, h: 938 },
-      { src: "/images/projects/qrib/02.jpg", caption: "Campus — courses & feed", w: 468, h: 936 },
-      { src: "/images/projects/qrib/03.jpg", caption: "Provider — open requests", w: 470, h: 946 },
-    ],
-  },
-  {
-    id: "qrib-web",
-    title: "Qrib — Website",
-    category: "Product Site / Front-End",
-    filterCategory: "Development",
-    role: "Design & Front-End",
-    year: "2026",
-    layout: "grid",
-    tools: ["HTML", "CSS", "JavaScript", "Firebase Hosting"],
-    description:
-      "The public site for Qrib — nineteen pages in French and Arabic, built and deployed solo.",
-    longDescription:
-      "The marketing and legal site that sits in front of the Qrib app: nineteen pages covering the product story, the Qrib Score, provider onboarding, verification, community rules, and full terms and privacy in French, English and Arabic. Written and built from scratch in plain HTML, CSS and JavaScript — no framework — so it stays fast and needs nothing to keep running. The layout is responsive down to phone width, and the warm terracotta palette carries over from the app so both feel like one product.",
-    shots: [
-      { src: "/images/projects/qrib-web/01.jpg", caption: "Landing", w: 2000, h: 1250 },
-      { src: "/images/projects/qrib-web/02.jpg", caption: "The profile as the product", w: 2000, h: 1250 },
-      { src: "/images/projects/qrib-web/03.jpg", caption: "One account, two sides", w: 2000, h: 1250 },
-      { src: "/images/projects/qrib-web/04.jpg", caption: "Qrib Score — the trust model", w: 2000, h: 1250 },
-      { src: "/images/projects/qrib-web/05.jpg", caption: "Responsive layout", w: 840, h: 1720 },
+      { src: "/images/projects/ki-lesebuch/04.jpg", caption: "KI Lesebuch — story reader", w: 808, h: 864 },
+      { src: "/images/projects/ki-lesebuch/06.jpg", caption: "KI Lesebuch — grammar breakdown", w: 929, h: 855 },
+      { src: "/images/projects/ki-lesebuch/07.jpg", caption: "KI Lesebuch — word detail", w: 878, h: 851 },
+      { src: "/images/projects/ki-lesebuch/03.jpg", caption: "KI Lesebuch — language & level", w: 603, h: 645 },
+      { src: "/images/projects/qrib-web/01.jpg", caption: "Qrib — landing", w: 2000, h: 1250 },
+      { src: "/images/projects/qrib-web/02.jpg", caption: "Qrib — the profile as product", w: 2000, h: 1250 },
+      { src: "/images/projects/qrib-web/04.jpg", caption: "Qrib — trust model", w: 2000, h: 1250 },
+      { src: "/images/projects/qrib-web/05.jpg", caption: "Qrib — responsive", w: 840, h: 1720 },
     ],
   },
 ];

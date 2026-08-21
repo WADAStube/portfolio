@@ -56,9 +56,9 @@ const CHAPTERS = [
   {
     id: "road",
     icon: Plane,
-    kicker: "Four continents",
-    title: "Eighteen countries, one camera",
-    body: "I travel, hike and camp whenever I can, and the camera always comes along. Composition, light, knowing when to press and when to wait — I picked that up on the road, and it's the same eye I use to frame a render.",
+    kicker: "Outdoors",
+    title: "The camera comes along",
+    body: "I travel, hike and camp whenever I can, and the camera is always in the bag. Composition, light, knowing when to press and when to wait — I picked that up outside, and it's the same eye I use to frame a render.",
   },
   {
     id: "study",
@@ -78,9 +78,8 @@ const CHAPTERS = [
 
 const STATS = [
   { value: "2007", label: "First 3D software" },
-  { value: "18", label: "Countries" },
-  { value: "4", label: "Continents" },
   { value: "10", label: "Years Taekwondo" },
+  { value: "4", label: "Languages" },
 ];
 
 /* ────────────────────────────────────────────────────────────
@@ -306,7 +305,7 @@ export function AboutSection() {
 
             {/* Zahlen */}
             <Stagger
-              className="grid grid-cols-2 sm:grid-cols-4 gap-6 mt-12 pt-10 border-t border-white/[0.07]"
+              className="grid grid-cols-3 gap-6 mt-12 pt-10 border-t border-white/[0.07]"
               gap={0.08}
             >
               {STATS.map((s) => (
