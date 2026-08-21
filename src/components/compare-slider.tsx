@@ -20,6 +20,7 @@ export function CompareSlider({
   beforeLabel = "Shaded",
   afterLabel = "Wireframe",
   note,
+  invert = false,
   className,
 }: {
   before: ProjectShot;
@@ -29,6 +30,8 @@ export function CompareSlider({
   /** Kurze Erklaerung unter dem Regler — noetig, wenn der
       Unterschied subtil ist (z.B. RGB gegen CMYK). */
   note?: string;
+  /** Helle Sektion — Beschriftungen umfaerben */
+  invert?: boolean;
   className?: string;
 }) {
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -187,14 +190,14 @@ export function CompareSlider({
 
       <figcaption className="mt-3">
         <span className="flex items-baseline gap-3">
-          <span className="h-px w-5 bg-white/15 shrink-0 translate-y-[-3px]" />
-          <span className="text-[10px] text-white/32 uppercase tracking-[0.18em]">
+          <span className={cn("h-px w-5 shrink-0 translate-y-[-3px]", invert ? "bg-black/20" : "bg-white/15")} />
+          <span className={cn("text-[10px] uppercase tracking-[0.18em]", invert ? "text-black/45" : "text-white/32")}>
             {beforeLabel} / {afterLabel}
             <span className="hidden md:inline"> — drag or use arrow keys</span>
           </span>
         </span>
         {note && (
-          <span className="block mt-3 pl-8 text-xs font-light leading-relaxed text-white/40 max-w-xl">
+          <span className={cn("block mt-3 pl-8 text-xs font-light leading-relaxed max-w-xl", invert ? "text-black/55" : "text-white/40")}>
             {note}
           </span>
         )}

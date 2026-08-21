@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
 import { EASE } from "@/components/motion-primitives";
+import { cn } from "@/lib/utils";
 import type { ProjectShot } from "@/data/projects";
 
 /* ────────────────────────────────────────────────────────────
@@ -16,9 +17,11 @@ import type { ProjectShot } from "@/data/projects";
 export function SourceStrip({
   sources,
   label = "Source material",
+  invert = false,
 }: {
   sources: ProjectShot[];
   label?: string;
+  invert?: boolean;
 }) {
   const [open, setOpen] = useState(false);
   const reduced = useReducedMotion();
@@ -29,19 +32,19 @@ export function SourceStrip({
     <div className="mt-10 md:mt-14">
       <button
         onClick={() => setOpen((o) => !o)}
-        className="group flex items-center gap-3 w-full border-t border-white/[0.08] pt-5 text-left"
+        className={cn("group flex items-center gap-3 w-full border-t pt-5 text-left", invert ? "border-black/12" : "border-white/[0.08]")}
       >
         <motion.span
           animate={{ rotate: open ? 90 : 0 }}
           transition={{ duration: 0.4, ease: EASE }}
-          className="text-white/35 group-hover:text-white/70 transition-colors duration-300"
+          className={cn("transition-colors duration-300", invert ? "text-black/45 group-hover:text-black" : "text-white/35 group-hover:text-white/70")}
         >
           {open ? <Minus size={13} /> : <Plus size={13} />}
         </motion.span>
-        <span className="text-[10px] uppercase tracking-[0.22em] text-white/40 group-hover:text-white/75 transition-colors duration-300">
+        <span className={cn("text-[10px] uppercase tracking-[0.22em] transition-colors duration-300", invert ? "text-black/50 group-hover:text-black" : "text-white/40 group-hover:text-white/75")}>
           {label}
         </span>
-        <span className="ml-auto font-mono text-[9px] text-white/25 tabular-nums">
+        <span className={cn("ml-auto font-mono text-[9px] tabular-nums", invert ? "text-black/35" : "text-white/25")}>
           {String(sources.length).padStart(2, "0")}
         </span>
       </button>
@@ -55,7 +58,7 @@ export function SourceStrip({
             transition={{ duration: reduced ? 0.15 : 0.6, ease: EASE }}
             className="overflow-hidden"
           >
-            <p className="pt-6 pb-5 text-xs font-light leading-relaxed text-white/40 max-w-xl">
+            <p className={cn("pt-6 pb-5 text-xs font-light leading-relaxed max-w-xl", invert ? "text-black/55" : "text-white/40")}>
               The finished poster is a composite. These are the individual
               plates it was built from — each masked, graded and blended
               separately before being combined.
@@ -86,7 +89,7 @@ export function SourceStrip({
                       {String(i + 1).padStart(2, "0")}
                     </span>
                   </div>
-                  <figcaption className="mt-2 text-[9px] uppercase tracking-[0.14em] text-white/28">
+                  <figcaption className={cn("mt-2 text-[9px] uppercase tracking-[0.14em]", invert ? "text-black/45" : "text-white/28")}>
                     {s.caption}
                   </figcaption>
                 </motion.figure>

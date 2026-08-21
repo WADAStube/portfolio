@@ -51,6 +51,10 @@ export interface Project {
     /** Erklaerung unter dem Regler, wenn der Unterschied subtil ist */
     note?: string;
   };
+  /** Polygonzahlen aus dem Maya-HUD — werden hochgezaehlt */
+  stats?: { verts: number; tris: number };
+  /** Kehrt die Sektion auf hellen Grund um (Kontrastbruch) */
+  invert?: boolean;
   /** Optional: scrollgesteuerte Bildfolge (Drehung) */
   sequence?: { frames: string[]; ratio: number; caption?: string };
   /** "stack" (Standard) = grosse Bilder untereinander.
@@ -64,6 +68,7 @@ export const coverOf = (p: Project): string | null => p.shots[0]?.src ?? null;
 export const projectsData: Project[] = [
   {
     id: "futuristic-bunker",
+    stats: { verts: 742687, tris: 1447482 },
     title: "Futuristic Bunker",
     category: "Sci-Fi Environment",
     filterCategory: "3D Modeling",
@@ -85,6 +90,7 @@ export const projectsData: Project[] = [
   },
   {
     id: "robot-study",
+    stats: { verts: 7852, tris: 15029 },
     title: "Robot Study",
     category: "Character Art / Fan Study",
     filterCategory: "Character Art",
@@ -147,6 +153,7 @@ export const projectsData: Project[] = [
   },
   {
     id: "apocalypse",
+    stats: { verts: 5118889, tris: 6799929 },
     title: "Apocalypse",
     category: "Environment Art",
     filterCategory: "3D Modeling",
@@ -168,6 +175,7 @@ export const projectsData: Project[] = [
   },
   {
     id: "character-studies",
+    stats: { verts: 236039, tris: 467765 },
     title: "Character Studies",
     category: "Character Modeling & Grooming",
     filterCategory: "Character Art",
@@ -189,6 +197,7 @@ export const projectsData: Project[] = [
   },
   {
     id: "isometric-room",
+    stats: { verts: 186633, tris: 261318 },
     title: "Isometric Room",
     category: "Interior / Prop Set",
     filterCategory: "3D Modeling",
@@ -211,6 +220,7 @@ export const projectsData: Project[] = [
   },
   {
     id: "asset-studies",
+    stats: { verts: 10145, tris: 20000 },
     title: "Asset & Texturing Studies",
     category: "Hard Surface / UV & PBR",
     filterCategory: "Texturing",
@@ -237,6 +247,7 @@ export const projectsData: Project[] = [
   },
   {
     id: "i-need-space",
+    invert: true,
     title: "I Need Space",
     category: "Film Poster / Compositing",
     filterCategory: "Graphic Design",
@@ -312,7 +323,6 @@ export const projectsData: Project[] = [
       { src: "/images/projects/qrib-web/01.jpg", caption: "Qrib — landing", w: 2000, h: 1250 },
       { src: "/images/projects/qrib-web/02.jpg", caption: "Qrib — the profile as product", w: 2000, h: 1250 },
       { src: "/images/projects/qrib-web/04.jpg", caption: "Qrib — trust model", w: 2000, h: 1250 },
-      { src: "/images/projects/qrib-web/05.jpg", caption: "Qrib — responsive", w: 840, h: 1720 },
     ],
   },
 ];

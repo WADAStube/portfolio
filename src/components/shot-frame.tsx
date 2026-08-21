@@ -25,6 +25,7 @@ export function ShotFrame({
   className,
   parallax = 48,
   priority = false,
+  invert = false,
   onClick,
 }: {
   shot: ProjectShot;
@@ -35,6 +36,7 @@ export function ShotFrame({
   className?: string;
   parallax?: number;
   priority?: boolean;
+  invert?: boolean;
   onClick?: () => void;
 }) {
   const ref = useRef<HTMLElement>(null);
@@ -159,8 +161,8 @@ export function ShotFrame({
 
         {shot.caption && (
           <figcaption className="mt-3 flex items-baseline gap-3">
-            <span className="h-px w-5 bg-white/15 shrink-0 translate-y-[-3px]" />
-            <span className="text-[10px] text-white/32 uppercase tracking-[0.18em]">
+            <span className={cn("h-px w-5 shrink-0 translate-y-[-3px]", invert ? "bg-black/20" : "bg-white/15")} />
+            <span className={cn("text-[10px] uppercase tracking-[0.18em]", invert ? "text-black/45" : "text-white/32")}>
               {shot.caption}
             </span>
           </figcaption>

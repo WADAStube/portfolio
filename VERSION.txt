@@ -1,36 +1,45 @@
-Portfolio — Version 20  (19.08.2026)
+Portfolio — Version 22  (19.08.2026)
+Alle sieben vorgeschlagenen Effekte umgesetzt.
 
-DAS VIDEO — jetzt scrollgesteuerte Drehung
-Kein eingebettetes Video mehr. Aus dem Clip sind 33 Einzelbilder
-geworden (zusammen 540 KB), gekoppelt an den Scrollfortschritt:
-Der Betrachter dreht das Modell selbst. Das Bild bleibt stehen,
-waehrend man an einer hohen Spur vorbeiscrollt.
+1. LADEBILDSCHIRM
+Schwarz, WADAS-Monogramm, Zaehler bis 100, dann faehrt der
+Vorhang nach oben weg. Dauer 0,9 s. Der Hero-Text startet erst
+danach. Bei "reduzierte Bewegung" wird er uebersprungen.
 
-Warum so: Deine Aufnahme ist eine Viewport-Drehung von Hand —
-sie geht hin und her und laeuft nicht rund. Als Endlosschleife
-faellt das sofort auf, egal wie man schneidet. Am Scroll
-gekoppelt gibt es keinen Loop mehr, und die Bewegung folgt dem
-Tempo des Betrachters.
-Datei: src/components/scroll-sequence.tsx
-Scrollweg einstellbar in src/index.css (--seq-track).
+2. CURSOR REAGIERT AUF BILDER
+Ueber jedem Projektbild wird aus dem Ring eine weisse Scheibe
+mit "View". Der mix-blend-mode wird dabei abgeschaltet, sonst
+waere die Schrift auf hellen Bildern unlesbar.
 
-FAVICON
-Exakt wie das Logo oben: Kasten mit Rahmen, fettes W,
-als PNG in 256 px.
+3. VORSCHAU IM PROJEKT-INDEX
+Beim Ueberfahren eines Titels erscheint das Coverbild leicht
+gekippt und folgt dem Zeiger. Nur bei echter Maus.
 
-STRUKTUR — 3D steht im Vordergrund
-- Qrib-App (Handy-Screenshots) entfernt
-- KI Lesebuch und Qrib-Website zu einem Projekt
-  "Web Products" zusammengefasst
-Ergebnis: 9 Projekte — 6x 3D, 2x Design, 1x Development.
+4. MAGNETISCHE ELEMENTE
+CV-Knopf und die Zeilen im Projekt-Index ziehen den Cursor
+leicht an. Komponente Magnetic in motion-primitives.tsx,
+Staerke und Wirkbereich einstellbar.
 
-ABOUT
-"18 Laender" und "4 Kontinente" entfernt, auch aus dem
-Kapiteltext. Zahlen jetzt: 2007 (erste 3D-Software),
-10 (Jahre Taekwondo), 4 (Sprachen).
+5. POLYGONZAHLEN, DIE HOCHZAEHLEN
+Aus den Maya-HUDs deiner Wireframe-Screenshots ausgelesen:
+  Bunker      742.687 Verts / 1.447.482 Tris
+  Roboter       7.852 / 15.029
+  Apocalypse 5.118.889 / 6.799.929
+  Character    236.039 / 467.765
+  Isometric    186.633 / 261.318
+  Assets        10.145 / 20.000
+Bitte gegenpruefen — abgelesen, nicht gemessen.
+
+6. KONTRASTBRUCH
+"I Need Space" kippt auf hellen Grund. Alle Beschriftungen,
+Rahmen und der Erklaertext schalten mit um.
+
+7. UEBERSCHRIFTEN ZIEHEN SICH IN FORM
+"Portfolio" und "Let's work together" starten auf 90 % Breite
+und ziehen sich beim Scrollen auf 100 %.
 
 GEPRUEFT
 - Build und TypeScript fehlerfrei
 - Kein Ueberlauf bei 1440, 1366, 390 und 360 px
 - Keine 404, keine Konsolenfehler
-- Drehung ueber den gesamten Scrollweg nachgemessen
+- Roboter-Drehung und freies Scrollen weiterhin in Ordnung

@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import {
+  AnimatePresence,
   motion,
   useScroll,
   useTransform,
@@ -20,6 +21,7 @@ import {
   Parallax,
   EASE,
   useIsSmallScreen,
+  Magnetic,
 } from "@/components/motion-primitives";
 import { projectsData } from "@/data/projects";
 import type { Project } from "@/data/projects";
@@ -53,6 +55,93 @@ const MARQUEE = [
   "TypeScript",
 ];
 
+/* ──────── Ueberschrift zieht sich beim Scrollen in Form ────── */
+function StretchOnScroll({ children }: { children: React.ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const reduced = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start 95%", "start 45%"],
+  });
+  const raw = useTransform(scrollYProgress, [0, 1], [0.9, 1]);
+  const scaleX = useSpring(raw, { stiffness: 140, damping: 26, mass: 0.4 });
+
+  return (
+    <div ref={ref}>
+      <motion.div
+        style={{ scaleX: reduced ? 1 : scaleX, originX: 0 }}
+        className="will-change-transform"
+      >
+        {children}
+      </motion.div>
+    </div>
+  );
+}
+
+/* ─────────────────────── Loader ─────────────────────────────── */
+function Loader({ onDone }: { onDone: () => void }) {
+  const [pct, setPct] = useState(0);
+  const [gone, setGone] = useState(false);
+  const reduced = useReducedMotion();
+
+  useEffect(() => {
+    if (reduced) {
+      setGone(true);
+      onDone();
+      return;
+    }
+    const start = performance.now();
+    const DUR = 900;
+    let raf = 0;
+    const tick = (t: number) => {
+      const p = Math.min(1, (t - start) / DUR);
+      setPct(Math.round(p * 100));
+      if (p < 1) raf = requestAnimationFrame(tick);
+      else {
+        setTimeout(() => {
+          setGone(true);
+          onDone();
+        }, 180);
+      }
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [onDone, reduced]);
+
+  return (
+    <AnimatePresence>
+      {!gone && (
+        <motion.div
+          exit={{ y: "-100%" }}
+          transition={{ duration: 0.9, ease: EASE }}
+          className="fixed inset-0 z-[99998] bg-[#080808] flex flex-col items-center justify-center"
+        >
+          <div className="flex items-center gap-3 mb-6">
+            <span className="inline-flex items-center justify-center h-8 w-8 border border-white/30">
+              <span className="font-display font-bold text-[13px] text-white/80">
+                W
+              </span>
+            </span>
+            <span className="font-display font-bold text-lg tracking-tight text-white">
+              WADAS
+            </span>
+          </div>
+
+          <div className="relative h-px w-40 bg-white/12 overflow-hidden">
+            <motion.div
+              className="absolute inset-y-0 left-0 bg-white/70"
+              style={{ width: `${pct}%` }}
+            />
+          </div>
+          <p className="mt-4 font-mono text-[10px] tabular-nums text-white/35">
+            {String(pct).padStart(3, "0")}
+          </p>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
+
 /* ─────────────────────── Grain overlay ─────────────────────── */
 const Grain = () => <div aria-hidden="true" className="grain" />;
 
@@ -65,6 +154,7 @@ function Cursor() {
   const sx = useSpring(rx, { stiffness: 200, damping: 22 });
   const sy = useSpring(ry, { stiffness: 200, damping: 22 });
   const [expanded, setExpanded] = useState(false);
+  const [media, setMedia] = useState(false);
   const [ready, setReady] = useState(false);
 
   /* Auf Touch-Geräten komplett deaktiviert */
@@ -83,8 +173,11 @@ function Cursor() {
       setReady(true);
     };
     const mo = (e: MouseEvent) => {
+      const t = e.target as HTMLElement;
+      const onMedia = !!t.closest("figure");
+      setMedia(onMedia);
       setExpanded(
-        !!(e.target as HTMLElement).closest("a,button,[role='button'],figure"),
+        onMedia || !!t.closest("a,button,[role='button']"),
       );
     };
     window.addEventListener("mousemove", mv);
@@ -98,11 +191,28 @@ function Cursor() {
   if (!fine || !ready) return null;
   return (
     <>
-      <motion.div className="cur-dot" style={{ x: dx, y: dy }} />
       <motion.div
-        className={cn("cur-ring", expanded && "expanded")}
-        style={{ x: sx, y: sy }}
+        className="cur-dot"
+        style={{ x: dx, y: dy, opacity: media ? 0 : 1 }}
       />
+      <motion.div
+        className={cn("cur-ring", expanded && "expanded", media && "media")}
+        style={{ x: sx, y: sy }}
+      >
+        <AnimatePresence>
+          {media && (
+            <motion.span
+              initial={{ opacity: 0, scale: 0.7 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.7 }}
+              transition={{ duration: 0.22, ease: EASE }}
+              className="text-[8px] uppercase tracking-[0.16em] font-medium text-black"
+            >
+              View
+            </motion.span>
+          )}
+        </AnimatePresence>
+      </motion.div>
     </>
   );
 }
@@ -145,44 +255,95 @@ function MuteBtn({ muted, onToggle }: { muted: boolean; onToggle: () => void }) 
   );
 }
 
-/* ─────────────── Projekt-Index (springt zu den Sections) ────── */
+/* ─────────────── Projekt-Index mit Cursor-Vorschau ────────── */
 function ProjectIndex({ projects }: { projects: Project[] }) {
+  const [hover, setHover] = useState<number | null>(null);
+  const reduced = useReducedMotion();
+  const px = useMotionValue(0);
+  const py = useMotionValue(0);
+  const sx = useSpring(px, { stiffness: 260, damping: 26, mass: 0.4 });
+  const sy = useSpring(py, { stiffness: 260, damping: 26, mass: 0.4 });
+  const [fine, setFine] = useState(false);
+
+  useEffect(() => {
+    setFine(window.matchMedia("(pointer: fine)").matches);
+  }, []);
+
   const jump = (id: string) =>
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 
+  const cover = (p: Project) =>
+    p.shots[0]?.src ?? p.compare?.before.src ?? p.sequence?.frames[0] ?? null;
+
   return (
-    <Stagger className="border-t border-white/[0.06]" gap={0.05}>
-      {projects.map((p, i) => (
-        <StaggerItem key={p.id} distance={16}>
-          <button
-            onClick={() => jump(p.id)}
-            className="group w-full flex items-baseline gap-5 md:gap-8 py-5 border-b border-white/[0.06] text-left transition-colors duration-300 hover:bg-white/[0.015]"
-          >
-            <span className="font-mono text-[10px] text-white/25 tabular-nums shrink-0">
-              {String(i + 1).padStart(2, "0")}
-            </span>
-            <span className="font-display font-medium text-lg md:text-2xl text-white/65 group-hover:text-white transition-colors duration-300 flex-1 min-w-0 truncate">
-              {p.title}
-            </span>
-            <span className="hidden md:block text-[9px] uppercase tracking-[0.2em] text-white/25 shrink-0">
-              {p.tools.slice(0, 2).join(" · ")}
-            </span>
-            <motion.span
-              className="text-white/25 group-hover:text-white/70 transition-colors duration-300 shrink-0"
-              initial={false}
-            >
-              <svg width="11" height="11" viewBox="0 0 10 10" fill="none">
-                <path
-                  d="M1 9L9 1M9 1H3M9 1V7"
-                  stroke="currentColor"
-                  strokeWidth="1.2"
+    <div
+      className="relative"
+      onPointerMove={(e) => {
+        px.set(e.clientX + 24);
+        py.set(e.clientY - 90);
+      }}
+      onPointerLeave={() => setHover(null)}
+    >
+      <Stagger className="border-t border-white/[0.06]" gap={0.05}>
+        {projects.map((p, i) => (
+          <StaggerItem key={p.id} distance={16}>
+            <Magnetic strength={0.06} radius={40}>
+              <button
+                onClick={() => jump(p.id)}
+                onPointerEnter={() => setHover(i)}
+                className="group w-full flex items-baseline gap-5 md:gap-8 py-5 border-b border-white/[0.06] text-left transition-colors duration-300 hover:bg-white/[0.015]"
+              >
+                <span className="font-mono text-[10px] text-white/25 tabular-nums shrink-0">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span className="font-display font-medium text-lg md:text-2xl text-white/65 group-hover:text-white transition-colors duration-300 flex-1 min-w-0 truncate">
+                  {p.title}
+                </span>
+                <span className="hidden md:block text-[9px] uppercase tracking-[0.2em] text-white/25 shrink-0">
+                  {p.tools.slice(0, 2).join(" · ")}
+                </span>
+                <span className="text-white/25 group-hover:text-white/70 transition-colors duration-300 shrink-0">
+                  <svg width="11" height="11" viewBox="0 0 10 10" fill="none">
+                    <path
+                      d="M1 9L9 1M9 1H3M9 1V7"
+                      stroke="currentColor"
+                      strokeWidth="1.2"
+                    />
+                  </svg>
+                </span>
+              </button>
+            </Magnetic>
+          </StaggerItem>
+        ))}
+      </Stagger>
+
+      {/* Vorschaubild folgt dem Zeiger */}
+      {fine && !reduced && (
+        <motion.div
+          style={{ x: sx, y: sy }}
+          className="pointer-events-none fixed top-0 left-0 z-[60] hidden lg:block"
+        >
+          <AnimatePresence>
+            {hover !== null && cover(projects[hover]) && (
+              <motion.div
+                key={projects[hover].id}
+                initial={{ opacity: 0, scale: 0.9, rotate: -3 }}
+                animate={{ opacity: 1, scale: 1, rotate: -1.5 }}
+                exit={{ opacity: 0, scale: 0.92, rotate: 2 }}
+                transition={{ duration: 0.32, ease: EASE }}
+                className="w-[240px] h-[150px] overflow-hidden bg-[#080808] ring-1 ring-white/15 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.9)]"
+              >
+                <img
+                  src={cover(projects[hover]) as string}
+                  alt=""
+                  className="w-full h-full object-cover"
                 />
-              </svg>
-            </motion.span>
-          </button>
-        </StaggerItem>
-      ))}
-    </Stagger>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
+      )}
+    </div>
   );
 }
 
@@ -217,9 +378,11 @@ export default function Home() {
   );
 
   const projects = projectsData;
+  const [loaded, setLoaded] = useState(false);
 
   return (
     <div className="bg-background min-h-screen text-foreground selection:bg-white/20">
+      <Loader onDone={() => setLoaded(true)} />
       <Grain />
       <Cursor />
       <Navbar />
@@ -267,7 +430,7 @@ export default function Home() {
               <motion.p
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, ease: EASE, delay: 0.3 }}
+                transition={{ duration: 1, ease: EASE, delay: loaded ? 0.1 : 1.2 }}
                 className="text-[9px] text-white/35 uppercase tracking-[0.28em] mb-4"
               >
                 Portfolio 2026
@@ -284,7 +447,7 @@ export default function Home() {
                     className="inline-block"
                     initial={{ y: "105%" }}
                     animate={{ y: 0 }}
-                    transition={{ duration: 1.2, ease: EASE, delay: 0.45 }}
+                    transition={{ duration: 1.2, ease: EASE, delay: loaded ? 0.2 : 1.3 }}
                   >
                     Issam
                   </motion.span>
@@ -294,7 +457,7 @@ export default function Home() {
                     className="inline-block"
                     initial={{ y: "105%" }}
                     animate={{ y: 0 }}
-                    transition={{ duration: 1.2, ease: EASE, delay: 0.56 }}
+                    transition={{ duration: 1.2, ease: EASE, delay: loaded ? 0.3 : 1.4 }}
                   >
                     Selmi
                   </motion.span>
@@ -305,7 +468,7 @@ export default function Home() {
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, ease: EASE, delay: 0.75 }}
+              transition={{ duration: 1, ease: EASE, delay: loaded ? 0.45 : 1.55 }}
               className="flex flex-col items-start md:items-end gap-4 md:pb-2"
             >
               <p className="text-sm md:text-base font-light text-white/50 uppercase tracking-[0.22em]">
@@ -378,15 +541,17 @@ export default function Home() {
                   Selected Work
                 </p>
               </Reveal>
-              <h2
-                className="font-display font-bold leading-none"
-                style={{
-                  fontSize: "clamp(2rem, 6vw, 5rem)",
-                  letterSpacing: "-0.02em",
-                }}
-              >
-                <SplitText text="Portfolio" />
-              </h2>
+              <StretchOnScroll>
+                <h2
+                  className="font-display font-bold leading-none"
+                  style={{
+                    fontSize: "clamp(2rem, 6vw, 5rem)",
+                    letterSpacing: "-0.02em",
+                  }}
+                >
+                  <SplitText text="Portfolio" />
+                </h2>
+              </StretchOnScroll>
             </div>
             <Reveal direction="up" delay={0.15}>
               <p className="text-[9px] text-white/22 uppercase tracking-[0.22em] hidden md:block text-right">
@@ -439,16 +604,18 @@ export default function Home() {
             </p>
           </Reveal>
 
-          <h2
-            className="font-display font-bold text-white leading-[0.9] mb-16"
-            style={{ fontSize: "clamp(3rem, 10vw, 11rem)", letterSpacing: "-0.02em" }}
-          >
-            <SplitText text="Let's work" />
-            <br />
-            <span className="text-white/22">
-              <SplitText text="together." delay={0.15} />
-            </span>
-          </h2>
+          <StretchOnScroll>
+            <h2
+              className="font-display font-bold text-white leading-[0.9] mb-16"
+              style={{ fontSize: "clamp(3rem, 10vw, 11rem)", letterSpacing: "-0.02em" }}
+            >
+              <SplitText text="Let's work" />
+              <br />
+              <span className="text-white/22">
+                <SplitText text="together." delay={0.15} />
+              </span>
+            </h2>
+          </StretchOnScroll>
 
           <Reveal direction="up" delay={0.1}>
             <a
@@ -479,6 +646,7 @@ export default function Home() {
 
             {CV_FILE && (
               <div className="flex justify-center mb-20 md:mb-28">
+                <Magnetic strength={0.3} radius={110}>
                 <motion.a
                   href={CV_FILE}
                   download
@@ -511,6 +679,7 @@ export default function Home() {
                     Download CV
                   </span>
                 </motion.a>
+                </Magnetic>
               </div>
             )}
 

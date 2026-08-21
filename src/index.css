@@ -50,14 +50,6 @@
 @layer base {
   * { @apply border-border box-border; }
   html { scroll-behavior: smooth; }
-  :root {
-    /* Scrollweg fuer die gedrehte Bildfolge */
-    --seq-track: 170vh;
-  }
-  @media (min-width: 768px) {
-    :root { --seq-track: 230vh; }
-  }
-
   body {
     @apply font-sans antialiased bg-background text-foreground;
     overflow-x: hidden;
@@ -122,9 +114,25 @@
   width: 36px; height: 36px; border-radius: 50%;
   border: 1px solid rgba(255,255,255,0.32);
   mix-blend-mode: difference;
-  transition: width .22s ease, height .22s ease, border-color .22s ease;
+  display: flex; align-items: center; justify-content: center;
+  transition: width .26s cubic-bezier(0.16,1,0.3,1),
+              height .26s cubic-bezier(0.16,1,0.3,1),
+              border-color .22s ease,
+              background-color .22s ease,
+              margin .26s cubic-bezier(0.16,1,0.3,1);
 }
 .cur-ring.expanded { width: 52px; height: 52px; border-color: rgba(255,255,255,0.65); }
+
+/* Ueber Bildern wird aus dem Ring eine gefuellte "View"-Scheibe.
+   mix-blend-mode wird dabei abgeschaltet, sonst waere die
+   Schrift auf hellen Bildern unlesbar. */
+.cur-ring.media {
+  width: 76px; height: 76px;
+  margin: -20px 0 0 -20px;
+  background: #ffffff;
+  border-color: transparent;
+  mix-blend-mode: normal;
+}
 
 /* ── Marquee ───────────────────────────────────────────────── */
 .mq-wrap { overflow: hidden; white-space: nowrap; }

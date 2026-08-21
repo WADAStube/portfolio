@@ -15,6 +15,7 @@ import {
   SplitText,
   EASE,
   useIsSmallScreen,
+  CountUpNumber,
 } from "@/components/motion-primitives";
 import { ShotFrame } from "@/components/shot-frame";
 import { SourceStrip } from "@/components/source-strip";
@@ -69,6 +70,7 @@ export function ProjectShowcase({
   const shots = project.shots;
   const small = useIsSmallScreen();
   const isGrid = project.layout === "grid";
+  const invert = !!project.invert;
   const frameRatio = frameRatioFor(shots);
   const colWidth = columnWidthFor(frameRatio);
   const num = String(index + 1).padStart(2, "0");
@@ -166,7 +168,13 @@ export function ProjectShowcase({
          KEINEN Scroll-Container — position: sticky bleibt dadurch
          funktionsfaehig. Noetig, weil die Bildspalte beim Einblenden
          46 px versetzt startet. */
-      className="relative overflow-x-clip scroll-mt-24 border-t border-white/[0.05] py-20 md:py-32 lg:py-40"
+      className={cn(
+        "relative overflow-x-clip scroll-mt-24 border-t py-20 md:py-32 lg:py-40",
+        "transition-colors duration-700",
+        invert
+          ? "bg-[#f4f2ee] text-[#0a0a0a] border-black/10"
+          : "border-white/[0.05]",
+      )}
     >
       <div className="max-w-[1600px] mx-auto px-6 md:px-10 lg:px-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-10 gap-x-10 lg:gap-x-16">
@@ -192,13 +200,13 @@ export function ProjectShowcase({
               {/* Kopfzeile: Nummer + Kategorie */}
               <Reveal direction="up" duration={0.8}>
                 <div className="flex items-center gap-4 mb-5">
-                  <span className="font-mono text-[10px] text-white/30 tabular-nums">
+                  <span className={cn("font-mono text-[10px] tabular-nums", invert ? "text-black/45" : "text-white/30")}>
                     {num}
-                    <span className="text-white/15"> / {totalLabel}</span>
+                    <span className={invert ? "text-black/25" : "text-white/15"}> / {totalLabel}</span>
                   </span>
-                  <span className="h-px flex-1 bg-white/[0.08]" />
+                  <span className={cn("h-px flex-1", invert ? "bg-black/10" : "bg-white/[0.08]")} />
                   {project.featured && (
-                    <span className="text-[8px] uppercase tracking-[0.24em] text-white/35">
+                    <span className={cn("text-[8px] uppercase tracking-[0.24em]", invert ? "text-black/45" : "text-white/35")}>
                       Featured
                     </span>
                   )}
@@ -207,7 +215,10 @@ export function ProjectShowcase({
 
               {/* Titel */}
               <h2
-                className="font-display font-bold text-white leading-[1.02] mb-3"
+                className={cn(
+                  "font-display font-bold leading-[1.02] mb-3",
+                  invert ? "text-[#0a0a0a]" : "text-white",
+                )}
                 style={{
                   fontSize: "clamp(1.9rem, 3.4vw, 3rem)",
                   letterSpacing: "-0.02em",
@@ -217,7 +228,7 @@ export function ProjectShowcase({
               </h2>
 
               <Reveal direction="up" delay={0.1} duration={0.9}>
-                <p className="text-[10px] uppercase tracking-[0.24em] text-white/35 mb-6">
+                <p className={cn("text-[10px] uppercase tracking-[0.24em] mb-6", invert ? "text-black/45" : "text-white/35")}>
                   {project.category}
                 </p>
               </Reveal>
@@ -281,7 +292,7 @@ export function ProjectShowcase({
 
               {/* Software — ebenfalls oberhalb des Beschreibungstexts */}
               <div className="mb-7">
-                <p className="text-[8px] uppercase tracking-[0.24em] text-white/22 mb-3">
+                <p className={cn("text-[8px] uppercase tracking-[0.24em] mb-3", invert ? "text-black/40" : "text-white/22")}>
                   Software
                 </p>
                 <Stagger className="flex flex-wrap gap-2" gap={0.05}>
@@ -290,7 +301,12 @@ export function ProjectShowcase({
                       <motion.span
                         whileHover={reduced ? undefined : { y: -2 }}
                         transition={{ duration: 0.3, ease: EASE }}
-                        className="inline-block px-3 py-1.5 text-[10px] tracking-wide text-white/55 bg-white/[0.03] border border-white/[0.07] hover:border-white/20 hover:text-white/80 transition-colors duration-300"
+                        className={cn(
+                          "inline-block px-3 py-1.5 text-[10px] tracking-wide border transition-colors duration-300",
+                          invert
+                            ? "text-black/65 bg-black/[0.03] border-black/10 hover:border-black/35 hover:text-black"
+                            : "text-white/55 bg-white/[0.03] border-white/[0.07] hover:border-white/20 hover:text-white/80",
+                        )}
                       >
                         {tool}
                       </motion.span>
@@ -299,27 +315,76 @@ export function ProjectShowcase({
                 </Stagger>
               </div>
 
+              {/* Polygonzahlen — zaehlen beim Erscheinen hoch */}
+              {project.stats && (
+                <div
+                  className={cn(
+                    "grid grid-cols-2 gap-6 mb-7 pt-6 border-t",
+                    invert ? "border-black/10" : "border-white/[0.06]",
+                  )}
+                >
+                  <div>
+                    <p
+                      className={cn(
+                        "text-[8px] uppercase tracking-[0.24em] mb-1.5",
+                        invert ? "text-black/40" : "text-white/22",
+                      )}
+                    >
+                      Vertices
+                    </p>
+                    <p
+                      className={cn(
+                        "font-display font-medium tabular-nums",
+                        invert ? "text-black/80" : "text-white/80",
+                      )}
+                      style={{ fontSize: "clamp(1rem, 1.5vw, 1.25rem)" }}
+                    >
+                      <CountUpNumber value={project.stats.verts} />
+                    </p>
+                  </div>
+                  <div>
+                    <p
+                      className={cn(
+                        "text-[8px] uppercase tracking-[0.24em] mb-1.5",
+                        invert ? "text-black/40" : "text-white/22",
+                      )}
+                    >
+                      Triangles
+                    </p>
+                    <p
+                      className={cn(
+                        "font-display font-medium tabular-nums",
+                        invert ? "text-black/80" : "text-white/80",
+                      )}
+                      style={{ fontSize: "clamp(1rem, 1.5vw, 1.25rem)" }}
+                    >
+                      <CountUpNumber value={project.stats.tris} duration={1.9} />
+                    </p>
+                  </div>
+                </div>
+              )}
+
               {/* Meta */}
               <Stagger
-                className="grid grid-cols-2 gap-6 mb-7 pt-6 border-t border-white/[0.06]"
+                className={cn("grid grid-cols-2 gap-6 mb-7 pt-6 border-t", invert ? "border-black/10" : "border-white/[0.06]")}
                 gap={0.06}
               >
                 {project.role && (
                   <StaggerItem>
-                    <p className="text-[8px] uppercase tracking-[0.24em] text-white/22 mb-1.5">
+                    <p className={cn("text-[8px] uppercase tracking-[0.24em] mb-1.5", invert ? "text-black/40" : "text-white/22")}>
                       Role
                     </p>
-                    <p className="text-sm font-light text-white/65">
+                    <p className={cn("text-sm font-light", invert ? "text-black/70" : "text-white/65")}>
                       {project.role}
                     </p>
                   </StaggerItem>
                 )}
                 {project.year && (
                   <StaggerItem>
-                    <p className="text-[8px] uppercase tracking-[0.24em] text-white/22 mb-1.5">
+                    <p className={cn("text-[8px] uppercase tracking-[0.24em] mb-1.5", invert ? "text-black/40" : "text-white/22")}>
                       Year
                     </p>
-                    <p className="text-sm font-light text-white/65 tabular-nums">
+                    <p className={cn("text-sm font-light tabular-nums", invert ? "text-black/70" : "text-white/65")}>
                       {project.year}
                     </p>
                   </StaggerItem>
@@ -331,7 +396,8 @@ export function ProjectShowcase({
               <Reveal direction="up" delay={0.14} duration={0.9}>
                 <p
                   className={cn(
-                    "text-sm font-light leading-[1.85] text-white/48 max-w-md",
+                    "text-sm font-light leading-[1.85] max-w-md",
+                    invert ? "text-black/60" : "text-white/48",
                     "lg:[@media(max-height:900px)]:line-clamp-6",
                     "lg:[@media(max-height:780px)]:line-clamp-4",
                   )}
@@ -397,6 +463,7 @@ export function ProjectShowcase({
                     parallax={0}
                     priority={index === 0 && i === 0}
                     className="w-full"
+                    invert={invert}
                     onClick={() => onOpenShot(project, i)}
                   />
                 ))}
@@ -412,6 +479,7 @@ export function ProjectShowcase({
                   parallax={reduced ? 0 : i % 2 === 0 ? 44 : 66}
                   priority={index === 0 && i === 0}
                   className={cn(colWidth, i % 2 === 1 && "md:ml-auto")}
+                  invert={invert}
                   onClick={() => onOpenShot(project, i)}
                 />
               ))
@@ -433,6 +501,7 @@ export function ProjectShowcase({
                 beforeLabel={project.compare.beforeLabel}
                 afterLabel={project.compare.afterLabel}
                 note={project.compare.note}
+                invert={invert}
                 className={columnWidthFor(
                   project.compare.before.w / project.compare.before.h,
                 )}
@@ -440,7 +509,7 @@ export function ProjectShowcase({
             )}
 
             {project.sources?.length ? (
-              <SourceStrip sources={project.sources} />
+              <SourceStrip sources={project.sources} invert={invert} />
             ) : null}
           </motion.div>
         </div>

@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import {
   motion,
+  animate,
+  useInView,
+  useMotionValue,
   useScroll,
   useTransform,
   useSpring,
@@ -327,5 +330,100 @@ export function SplitText({
         </span>
       ))}
     </motion.span>
+  );
+}
+
+/* ────────────────────────────────────────────────────────────
+   Magnetic — zieht das Element leicht zum Zeiger.
+   Nur bei echter Maus; auf Touch passiert nichts.
+   ──────────────────────────────────────────────────────────── */
+export function Magnetic({
+  children,
+  className,
+  strength = 0.28,
+  radius = 90,
+}: {
+  children: ReactNode;
+  className?: string;
+  /** 0 = starr, 1 = folgt dem Zeiger vollstaendig */
+  strength?: number;
+  /** Wirkbereich in Pixeln um das Element herum */
+  radius?: number;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const reduced = useReducedMotion();
+  const mx = useMotionValue(0);
+  const my = useMotionValue(0);
+  const x = useSpring(mx, { stiffness: 220, damping: 18, mass: 0.35 });
+  const y = useSpring(my, { stiffness: 220, damping: 18, mass: 0.35 });
+
+  useEffect(() => {
+    if (reduced) return;
+    if (!window.matchMedia("(pointer: fine)").matches) return;
+
+    const onMove = (e: PointerEvent) => {
+      const el = ref.current;
+      if (!el) return;
+      const r = el.getBoundingClientRect();
+      const cx = r.left + r.width / 2;
+      const cy = r.top + r.height / 2;
+      const dx = e.clientX - cx;
+      const dy = e.clientY - cy;
+      const dist = Math.hypot(dx, dy);
+      const reach = Math.max(r.width, r.height) / 2 + radius;
+      if (dist < reach) {
+        mx.set(dx * strength);
+        my.set(dy * strength);
+      } else {
+        mx.set(0);
+        my.set(0);
+      }
+    };
+    window.addEventListener("pointermove", onMove, { passive: true });
+    return () => window.removeEventListener("pointermove", onMove);
+  }, [mx, my, strength, radius, reduced]);
+
+  return (
+    <motion.div ref={ref} style={{ x, y }} className={className}>
+      {children}
+    </motion.div>
+  );
+}
+
+/* ────────────────────────────────────────────────────────────
+   CountUp — zaehlt beim Sichtbarwerden hoch.
+   ──────────────────────────────────────────────────────────── */
+export function CountUpNumber({
+  value,
+  duration = 1.6,
+  className,
+}: {
+  value: number;
+  duration?: number;
+  className?: string;
+}) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, amount: 0.6 });
+  const reduced = useReducedMotion();
+  const [shown, setShown] = useState(0);
+
+  useEffect(() => {
+    if (!inView) return;
+    if (reduced) {
+      setShown(value);
+      return;
+    }
+    const controls = animate(0, value, {
+      duration,
+      ease: EASE,
+      onUpdate: (v) => setShown(Math.round(v)),
+    });
+    return () => controls.stop();
+  }, [inView, value, duration, reduced]);
+
+  return (
+    <span ref={ref} className={className}>
+      {shown.toLocaleString("en-US")}
+    </span>
   );
 }

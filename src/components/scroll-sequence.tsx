@@ -1,10 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import {
-  motion,
-  useScroll,
-  useMotionValueEvent,
-  useReducedMotion,
-} from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { EASE } from "@/components/motion-primitives";
 import { cn } from "@/lib/utils";
 
@@ -36,27 +31,27 @@ export function ScrollSequence({
   className?: string;
 }) {
   const ref = useRef<HTMLElement>(null);
+  const boxRef = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
   const [index, setIndex] = useState(0);
   const [ready, setReady] = useState(false);
   const [touched, setTouched] = useState(false);
 
-  /* Die Drehung braucht Scrollweg. Deshalb sitzt das Bild in
-     einer hohen Spur und bleibt darin kleben — waehrend man an
-     der Spur vorbeiscrollt, dreht sich das Modell. */
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start 15%", "end 85%"],
-  });
-
-  useMotionValueEvent(scrollYProgress, "change", (v) => {
+  /* Die Drehung haengt an der Zeigerposition ueber dem Bild,
+     NICHT am Scroll. So blockiert das Modell die Seite nicht:
+     wer weiterscrollen will, scrollt einfach weiter. Nur wer
+     mit der Maus darueber faehrt (oder mit dem Finger quer
+     wischt), dreht es. */
+  const setFromPointer = (clientX: number) => {
+    const el = boxRef.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    const t = (clientX - r.left) / r.width;
     const last = frames.length - 1;
-    const next = Math.max(0, Math.min(last, Math.round(v * last)));
-    setIndex((prev) => {
-      if (prev !== next && !touched) setTouched(true);
-      return prev === next ? prev : next;
-    });
-  });
+    const next = Math.max(0, Math.min(last, Math.round(t * last)));
+    setIndex((prev) => (prev === next ? prev : next));
+    if (!touched) setTouched(true);
+  };
 
   /* Alle Bilder vorab laden, sonst flackert es beim Scrollen. */
   useEffect(() => {
@@ -76,19 +71,19 @@ export function ScrollSequence({
   }, [frames]);
 
   return (
-    <figure
-      ref={ref}
-      className={cn("group relative", className)}
-      style={{ height: "var(--seq-track)" }}
-    >
-      <div className="sticky top-[16vh] md:top-[18vh]">
+    <figure ref={ref} className={cn("group relative", className)}>
       <motion.div
         initial={{ opacity: 0, y: reduced ? 0 : 34 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: reduced ? 0.2 : 1, ease: EASE }}
-        className="relative overflow-hidden bg-[#080808] ring-1 ring-white/[0.07]"
-        style={{ aspectRatio: `${ratio}` }}
+        ref={boxRef}
+        onPointerMove={(e) => setFromPointer(e.clientX)}
+        onPointerDown={(e) => setFromPointer(e.clientX)}
+        className="relative overflow-hidden bg-[#080808] ring-1 ring-white/[0.07] cursor-ew-resize"
+        /* pan-y: senkrechtes Wischen scrollt weiterhin die Seite,
+           waagerechtes Wischen dreht das Modell. */
+        style={{ aspectRatio: `${ratio}`, touchAction: "pan-y" }}
       >
         {/* Weichgezeichneter Fuellhintergrund */}
         <div aria-hidden="true" className="absolute inset-0 overflow-hidden">
@@ -144,18 +139,18 @@ export function ScrollSequence({
               height="10"
               viewBox="0 0 10 10"
               fill="none"
-              animate={reduced ? undefined : { y: [0, 3, 0] }}
+              animate={reduced ? undefined : { x: [-2, 2, -2] }}
               transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
             >
               <path
-                d="M5 1v7m0 0L2 5m3 3l3-3"
+                d="M1 5h8m0 0L6 2m3 3L6 8"
                 stroke="currentColor"
                 strokeWidth="1.4"
                 strokeLinecap="round"
                 strokeLinejoin="round"
               />
             </motion.svg>
-            Scroll to rotate
+            Hover to rotate
           </span>
         </motion.div>
       </motion.div>
@@ -168,7 +163,6 @@ export function ScrollSequence({
           </span>
         </figcaption>
       )}
-      </div>
     </figure>
   );
 }
