@@ -123,16 +123,7 @@
 }
 .cur-ring.expanded { width: 52px; height: 52px; border-color: rgba(255,255,255,0.65); }
 
-/* Ueber Bildern wird aus dem Ring eine gefuellte "View"-Scheibe.
-   mix-blend-mode wird dabei abgeschaltet, sonst waere die
-   Schrift auf hellen Bildern unlesbar. */
-.cur-ring.media {
-  width: 76px; height: 76px;
-  margin: -20px 0 0 -20px;
-  background: #ffffff;
-  border-color: transparent;
-  mix-blend-mode: normal;
-}
+
 
 /* ── Marquee ───────────────────────────────────────────────── */
 .mq-wrap { overflow: hidden; white-space: nowrap; }

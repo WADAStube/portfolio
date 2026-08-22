@@ -154,7 +154,6 @@ function Cursor() {
   const sx = useSpring(rx, { stiffness: 200, damping: 22 });
   const sy = useSpring(ry, { stiffness: 200, damping: 22 });
   const [expanded, setExpanded] = useState(false);
-  const [media, setMedia] = useState(false);
   const [ready, setReady] = useState(false);
 
   /* Auf Touch-Geräten komplett deaktiviert */
@@ -173,11 +172,8 @@ function Cursor() {
       setReady(true);
     };
     const mo = (e: MouseEvent) => {
-      const t = e.target as HTMLElement;
-      const onMedia = !!t.closest("figure");
-      setMedia(onMedia);
       setExpanded(
-        onMedia || !!t.closest("a,button,[role='button']"),
+        !!(e.target as HTMLElement).closest("a,button,[role='button'],figure"),
       );
     };
     window.addEventListener("mousemove", mv);
@@ -191,28 +187,11 @@ function Cursor() {
   if (!fine || !ready) return null;
   return (
     <>
+      <motion.div className="cur-dot" style={{ x: dx, y: dy }} />
       <motion.div
-        className="cur-dot"
-        style={{ x: dx, y: dy, opacity: media ? 0 : 1 }}
-      />
-      <motion.div
-        className={cn("cur-ring", expanded && "expanded", media && "media")}
+        className={cn("cur-ring", expanded && "expanded")}
         style={{ x: sx, y: sy }}
-      >
-        <AnimatePresence>
-          {media && (
-            <motion.span
-              initial={{ opacity: 0, scale: 0.7 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.7 }}
-              transition={{ duration: 0.22, ease: EASE }}
-              className="text-[8px] uppercase tracking-[0.16em] font-medium text-black"
-            >
-              View
-            </motion.span>
-          )}
-        </AnimatePresence>
-      </motion.div>
+      />
     </>
   );
 }
@@ -255,95 +234,41 @@ function MuteBtn({ muted, onToggle }: { muted: boolean; onToggle: () => void }) 
   );
 }
 
-/* ─────────────── Projekt-Index mit Cursor-Vorschau ────────── */
+/* ─────────────── Projekt-Index ────────────────────────────── */
 function ProjectIndex({ projects }: { projects: Project[] }) {
-  const [hover, setHover] = useState<number | null>(null);
-  const reduced = useReducedMotion();
-  const px = useMotionValue(0);
-  const py = useMotionValue(0);
-  const sx = useSpring(px, { stiffness: 260, damping: 26, mass: 0.4 });
-  const sy = useSpring(py, { stiffness: 260, damping: 26, mass: 0.4 });
-  const [fine, setFine] = useState(false);
-
-  useEffect(() => {
-    setFine(window.matchMedia("(pointer: fine)").matches);
-  }, []);
-
   const jump = (id: string) =>
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 
-  const cover = (p: Project) =>
-    p.shots[0]?.src ?? p.compare?.before.src ?? p.sequence?.frames[0] ?? null;
-
   return (
-    <div
-      className="relative"
-      onPointerMove={(e) => {
-        px.set(e.clientX + 24);
-        py.set(e.clientY - 90);
-      }}
-      onPointerLeave={() => setHover(null)}
-    >
-      <Stagger className="border-t border-white/[0.06]" gap={0.05}>
-        {projects.map((p, i) => (
-          <StaggerItem key={p.id} distance={16}>
-            <Magnetic strength={0.06} radius={40}>
-              <button
-                onClick={() => jump(p.id)}
-                onPointerEnter={() => setHover(i)}
-                className="group w-full flex items-baseline gap-5 md:gap-8 py-5 border-b border-white/[0.06] text-left transition-colors duration-300 hover:bg-white/[0.015]"
-              >
-                <span className="font-mono text-[10px] text-white/25 tabular-nums shrink-0">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <span className="font-display font-medium text-lg md:text-2xl text-white/65 group-hover:text-white transition-colors duration-300 flex-1 min-w-0 truncate">
-                  {p.title}
-                </span>
-                <span className="hidden md:block text-[9px] uppercase tracking-[0.2em] text-white/25 shrink-0">
-                  {p.tools.slice(0, 2).join(" · ")}
-                </span>
-                <span className="text-white/25 group-hover:text-white/70 transition-colors duration-300 shrink-0">
-                  <svg width="11" height="11" viewBox="0 0 10 10" fill="none">
-                    <path
-                      d="M1 9L9 1M9 1H3M9 1V7"
-                      stroke="currentColor"
-                      strokeWidth="1.2"
-                    />
-                  </svg>
-                </span>
-              </button>
-            </Magnetic>
-          </StaggerItem>
-        ))}
-      </Stagger>
-
-      {/* Vorschaubild folgt dem Zeiger */}
-      {fine && !reduced && (
-        <motion.div
-          style={{ x: sx, y: sy }}
-          className="pointer-events-none fixed top-0 left-0 z-[60] hidden lg:block"
-        >
-          <AnimatePresence>
-            {hover !== null && cover(projects[hover]) && (
-              <motion.div
-                key={projects[hover].id}
-                initial={{ opacity: 0, scale: 0.9, rotate: -3 }}
-                animate={{ opacity: 1, scale: 1, rotate: -1.5 }}
-                exit={{ opacity: 0, scale: 0.92, rotate: 2 }}
-                transition={{ duration: 0.32, ease: EASE }}
-                className="w-[240px] h-[150px] overflow-hidden bg-[#080808] ring-1 ring-white/15 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.9)]"
-              >
-                <img
-                  src={cover(projects[hover]) as string}
-                  alt=""
-                  className="w-full h-full object-cover"
+    <Stagger className="border-t border-white/[0.06]" gap={0.05}>
+      {projects.map((p, i) => (
+        <StaggerItem key={p.id} distance={16}>
+          <button
+            onClick={() => jump(p.id)}
+            className="group w-full flex items-baseline gap-5 md:gap-8 py-5 border-b border-white/[0.06] text-left transition-colors duration-300 hover:bg-white/[0.015]"
+          >
+            <span className="font-mono text-[10px] text-white/25 tabular-nums shrink-0">
+              {String(i + 1).padStart(2, "0")}
+            </span>
+            <span className="font-display font-medium text-lg md:text-2xl text-white/65 group-hover:text-white transition-colors duration-300 flex-1 min-w-0 truncate">
+              {p.title}
+            </span>
+            <span className="hidden md:block text-[9px] uppercase tracking-[0.2em] text-white/25 shrink-0">
+              {p.tools.slice(0, 2).join(" · ")}
+            </span>
+            <span className="text-white/25 group-hover:text-white/70 transition-colors duration-300 shrink-0">
+              <svg width="11" height="11" viewBox="0 0 10 10" fill="none">
+                <path
+                  d="M1 9L9 1M9 1H3M9 1V7"
+                  stroke="currentColor"
+                  strokeWidth="1.2"
                 />
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </motion.div>
-      )}
-    </div>
+              </svg>
+            </span>
+          </button>
+        </StaggerItem>
+      ))}
+    </Stagger>
   );
 }
 
