@@ -21,6 +21,8 @@ import { ShotFrame } from "@/components/shot-frame";
 import { SourceStrip } from "@/components/source-strip";
 import { CompareSlider } from "@/components/compare-slider";
 import { ScrollSequence } from "@/components/scroll-sequence";
+import { ShowpieceHero, ShowpieceTurntable } from "@/components/showpiece";
+import { LayerBreakdown, BreakdownIntro } from "@/components/layer-breakdown";
 import { cn } from "@/lib/utils";
 
 /* ────────────────────────────────────────────────────────────
@@ -169,13 +171,27 @@ export function ProjectShowcase({
          funktionsfaehig. Noetig, weil die Bildspalte beim Einblenden
          46 px versetzt startet. */
       className={cn(
-        "relative overflow-x-clip scroll-mt-24 border-t py-20 md:py-32 lg:py-40",
+        "relative overflow-x-clip scroll-mt-24 border-t",
+        project.showpiece ? "pt-0 pb-20 md:pb-32" : "py-20 md:py-32 lg:py-40",
         "transition-colors duration-700",
         invert
           ? "bg-[#f4f2ee] text-[#0a0a0a] border-black/10"
           : "border-white/[0.05]",
       )}
     >
+      {project.showpiece && (
+        <div className="mb-16 md:mb-24">
+          <ShowpieceHero
+            title={project.title}
+            kicker={project.category}
+            before={project.showpiece.before}
+            after={project.showpiece.after}
+            beforeLabel={project.showpiece.beforeLabel}
+            afterLabel={project.showpiece.afterLabel}
+          />
+        </div>
+      )}
+
       <div className="max-w-[1600px] mx-auto px-6 md:px-10 lg:px-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-10 gap-x-10 lg:gap-x-16">
           {/* ─────────── Sticky Info-Spalte ─────────── */}
@@ -218,6 +234,7 @@ export function ProjectShowcase({
                 className={cn(
                   "font-display font-bold leading-[1.02] mb-3",
                   invert ? "text-[#0a0a0a]" : "text-white",
+                  project.showpiece && "sr-only",
                 )}
                 style={{
                   fontSize: "clamp(1.9rem, 3.4vw, 3rem)",
@@ -514,6 +531,23 @@ export function ProjectShowcase({
           </motion.div>
         </div>
       </div>
+
+      {project.layers?.length ? (
+        <>
+          <BreakdownIntro className="mt-24 md:mt-36 mb-6 md:mb-10" />
+          <LayerBreakdown layers={project.layers} />
+        </>
+      ) : null}
+
+      {project.showpiece?.frames?.length ? (
+        <div className="mt-16 md:mt-28">
+          <ShowpieceTurntable
+            frames={project.showpiece.frames}
+            frameRatio={project.showpiece.frameRatio}
+            caption={project.showpiece.caption}
+          />
+        </div>
+      ) : null}
 
       {/* Grosse Ordnungszahl im Hintergrund.
           Eigener geclippter Wrapper — kein overflow-hidden auf der Section,

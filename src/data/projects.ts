@@ -55,6 +55,25 @@ export interface Project {
   stats?: { verts: number; tris: number };
   /** Kehrt die Sektion auf hellen Grund um (Kontrastbruch) */
   invert?: boolean;
+  /** Scrollgesteuerter Aufbau in Ebenen (gleiche Kamera) */
+  layers?: {
+    src: string;
+    label: string;
+    title: string;
+    body: string;
+    tech: string[];
+  }[];
+  /** Grosser Auftritt ueber die volle Seitenbreite:
+      Vergleichsbild + scrollgesteuertes Turntable */
+  showpiece?: {
+    before: string;
+    after: string;
+    beforeLabel?: string;
+    afterLabel?: string;
+    frames: string[];
+    frameRatio: number;
+    caption?: string;
+  };
   /** Optional: scrollgesteuerte Bildfolge (Drehung) */
   sequence?: { frames: string[]; ratio: number; caption?: string };
   /** "stack" (Standard) = grosse Bilder untereinander.
@@ -66,6 +85,158 @@ export interface Project {
 export const coverOf = (p: Project): string | null => p.shots[0]?.src ?? null;
 
 export const projectsData: Project[] = [
+  {
+    id: "poor-house",
+    title: "Lantern Island",
+    category: "Stylised Environment",
+    filterCategory: "3D Modeling",
+    role: "3D Environment Artist",
+    year: "2026",
+    featured: true,
+    tools: ["Autodesk Maya", "Substance Painter", "Arnold"],
+    description:
+      "A cel-shaded diorama — a leaning cottage on a rock island, lit by two lanterns.",
+    longDescription:
+      "A stylised environment built as a self-contained diorama: a leaning timber cottage on a rock island, a stone path leading up to it, a red bridge at the front and a tree breaking the silhouette. The whole scene is cel-shaded — flat colour blocks with hard outlines instead of photoreal shading — which puts all the weight on shape, contrast and lighting. Two lanterns carry the entire mood; everything outside their reach falls into darkness on purpose.",
+    layers: [
+      {
+        src: "/images/projects/poor-house/layers/01.jpg",
+        label: "Ground",
+        title: "The base",
+        body: "One plane, shaped with soft select and kept deliberately uneven. The silhouette already decides where the path will run and where growth will gather.",
+        tech: [
+          "Polygon plane, subdivided and soft-select sculpted",
+          "Asymmetric outline — no flat ground",
+          "aiToon with two tone steps, outlines pulled back",
+        ],
+      },
+      {
+        src: "/images/projects/poor-house/layers/02.jpg",
+        label: "Stones",
+        title: "The edge",
+        body: "Three base rocks, scattered through MASH. Density rises where the eye should read a boundary rather than spreading evenly.",
+        tech: [
+          "MASH distribute in mesh mode on the terrain",
+          "Random node for rotation and scale, ID node to mix variants",
+          "Repro node to output renderable geometry",
+        ],
+      },
+      {
+        src: "/images/projects/poor-house/layers/03.jpg",
+        label: "House",
+        title: "The centre",
+        body: "Modelled entirely by hand and deliberately crooked. Straight angles would fight the drawn look the whole scene is built on.",
+        tech: [
+          "Box modelling, base form to detail",
+          "Support loops on every edge that stays sharp",
+          "Low angle threshold so interior edges still catch an outline",
+        ],
+      },
+      {
+        src: "/images/projects/poor-house/layers/04.jpg",
+        label: "Bridge",
+        title: "The way in",
+        body: "Modular build — one element duplicated with kept transform. It says the place is reachable and lived in, and it walks the eye into the frame.",
+        tech: [
+          "Repeated elements, duplicated with transform preserved",
+          "Own group, positioned independently",
+          "Strong red as a deliberate accent against the green",
+        ],
+      },
+      {
+        src: "/images/projects/poor-house/layers/05.jpg",
+        label: "Trees",
+        title: "Height and frame",
+        body: "Licensed base models, fully re-shaded — the original photoreal materials broke the cel look. Leaves are opacity masks rather than geometry.",
+        tech: [
+          "Complete re-shade for style consistency",
+          "Two-sided material so leaf faces read differently",
+          "Higher angle threshold so foliage doesn't drown in lines",
+        ],
+      },
+      {
+        src: "/images/projects/poor-house/layers/06.jpg",
+        label: "Grass",
+        title: "The ground comes alive",
+        body: "Several hundred thousand instances, with density painted in by hand. Growth collects at edges and in hollows — an even scatter always reads as fake.",
+        tech: [
+          "MASH distribute on the terrain mesh",
+          "Placer tool and influence locator for local density",
+          "Outlines heavily reduced, otherwise the frame turns noisy",
+        ],
+      },
+      {
+        src: "/images/projects/poor-house/layers/07.jpg",
+        label: "Details",
+        title: "Ground detail",
+        body: "Stepping stones follow the walking line from bridge to door. Fallen leaves sit on the rocks too, not only on the floor.",
+        tech: [
+          "Separate MASH networks for path, plants and leaves",
+          "Stones placed along intent, not randomly",
+          "Colour variation from green through to brown",
+        ],
+      },
+      {
+        src: "/images/projects/poor-house/layers/08.jpg",
+        label: "Props",
+        title: "Signs of living",
+        body: "Fire pit, kettle, tools, ladder, mailbox — modelled individually and placed by hand. The kettle sits where someone cooked.",
+        tech: [
+          "Individually modelled assets with their own pivots",
+          "Manual placement instead of scattering",
+          "Slight tilts working against the tidy look",
+        ],
+      },
+      {
+        src: "/images/projects/poor-house/layers/09.jpg",
+        label: "Light",
+        title: "The turn",
+        body: "Up to here the scene was neutrally lit. The final setup tips it into night — and the whole look depends on one decision: a directional key. Ambient light alone would soften the ramps and the cel shading would collapse.",
+        tech: [
+          "Key / fill / rim with a directional key for hard shadow edges",
+          "Lanterns and fire as practicals — emissive geometry plus a real light",
+          "Warm 2200 K against a cool ambient, shadows pushed slightly blue",
+        ],
+      },
+    ],
+    showpiece: {
+      before: "/images/projects/poor-house/hero-shaded.jpg",
+      after: "/images/projects/poor-house/hero-wireframe.jpg",
+      beforeLabel: "Cel-shaded",
+      afterLabel: "Wireframe",
+      frames: [
+        "/images/projects/poor-house/seq/f001.jpg",
+        "/images/projects/poor-house/seq/f002.jpg",
+        "/images/projects/poor-house/seq/f003.jpg",
+        "/images/projects/poor-house/seq/f004.jpg",
+        "/images/projects/poor-house/seq/f005.jpg",
+        "/images/projects/poor-house/seq/f006.jpg",
+        "/images/projects/poor-house/seq/f007.jpg",
+        "/images/projects/poor-house/seq/f008.jpg",
+        "/images/projects/poor-house/seq/f009.jpg",
+        "/images/projects/poor-house/seq/f010.jpg",
+        "/images/projects/poor-house/seq/f011.jpg",
+        "/images/projects/poor-house/seq/f012.jpg",
+        "/images/projects/poor-house/seq/f013.jpg",
+        "/images/projects/poor-house/seq/f014.jpg",
+        "/images/projects/poor-house/seq/f015.jpg",
+        "/images/projects/poor-house/seq/f016.jpg",
+        "/images/projects/poor-house/seq/f017.jpg",
+        "/images/projects/poor-house/seq/f018.jpg",
+        "/images/projects/poor-house/seq/f019.jpg",
+        "/images/projects/poor-house/seq/f020.jpg",
+        "/images/projects/poor-house/seq/f021.jpg",
+        "/images/projects/poor-house/seq/f022.jpg",
+        "/images/projects/poor-house/seq/f023.jpg",
+        "/images/projects/poor-house/seq/f024.jpg",
+        "/images/projects/poor-house/seq/f025.jpg",
+        "/images/projects/poor-house/seq/f026.jpg",
+      ],
+      frameRatio: 16 / 9,
+      caption: "Turntable — scroll to rotate",
+    },
+    shots: [],
+  },
   {
     id: "futuristic-bunker",
     stats: { verts: 742687, tris: 1447482 },

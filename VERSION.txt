@@ -1,27 +1,24 @@
-Portfolio — Version 23  (19.08.2026)
+Portfolio — Version 27  (19.08.2026)
 
-ENTFERNT
-- Vorschaubild, das im Projekt-Index dem Cursor folgte
-- Magnetische Bewegung der Projektnamen
-- Weisser "View"-Kreis am Cursor ueber Bildern
-  (inkl. zugehoerigem CSS)
+BREAKDOWN — Magnetgefuehl, eigene Seite pro Ebene
+- Jede Ebene bekommt eine volle Bildschirmhoehe
+- Sanftes Einrasten ueber CSS scroll-snap im Modus
+  "proximity": zieht nur an, wenn man ohnehin in der Naehe
+  stoppt, blockiert das Durchscrollen nie
+  (nachgemessen: Mausrad scrollt 1500 px frei durch)
+- Bild und Text wechseln die Seite: Ebene 1 Bild rechts,
+  Ebene 2 Bild links, und so weiter
+- Beide fahren von entgegengesetzten Seiten ein, das Bild
+  zusaetzlich mit langsamem Heranzoomen und Parallax
+- Bilder deutlich groesser: auf breiten Bildschirmen 9 von 12
+  Spalten, Container auf 1760 px erweitert
 
-Der Projekt-Index ist wieder eine ruhige Liste: beim Hover
-hellen sich nur Titel und Pfeil auf.
-
-WEITERHIN DRIN (falls auch raus, sag Bescheid)
-- Ladebildschirm mit Zaehler
-- Polygonzahlen, die hochzaehlen
-- Kontrastbruch bei "I Need Space"
-- Ueberschriften, die sich beim Scrollen in Form ziehen
-- Magnetischer CV-Knopf im Kontaktbereich
-- Roboter-Drehung per Maus
-
-Jedes davon laesst sich einzeln entfernen, ohne den Rest
-anzufassen.
+Die Snap-Einstellung steht in src/index.css beim html-Element.
+Falls es sich zu sehr "zieht": scroll-snap-type entfernen,
+alles andere bleibt unveraendert.
 
 GEPRUEFT
 - Build und TypeScript fehlerfrei
-- Kein Ueberlauf bei 1440 und 390 px
+- Kein Ueberlauf bei 1920, 1440, 390 und 360 px
+- Scrollen bleibt frei, Einrasten blockiert nicht
 - Keine 404, keine Konsolenfehler
-- Gegengeprueft: kein Vorschaubild, kein View-Kreis mehr
