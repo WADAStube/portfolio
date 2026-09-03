@@ -1,24 +1,30 @@
-Portfolio — Version 27  (19.08.2026)
+Portfolio — Version 28  (19.08.2026)
 
-BREAKDOWN — Magnetgefuehl, eigene Seite pro Ebene
-- Jede Ebene bekommt eine volle Bildschirmhoehe
-- Sanftes Einrasten ueber CSS scroll-snap im Modus
-  "proximity": zieht nur an, wenn man ohnehin in der Naehe
-  stoppt, blockiert das Durchscrollen nie
-  (nachgemessen: Mausrad scrollt 1500 px frei durch)
-- Bild und Text wechseln die Seite: Ebene 1 Bild rechts,
-  Ebene 2 Bild links, und so weiter
-- Beide fahren von entgegengesetzten Seiten ein, das Bild
-  zusaetzlich mit langsamem Heranzoomen und Parallax
-- Bilder deutlich groesser: auf breiten Bildschirmen 9 von 12
-  Spalten, Container auf 1760 px erweitert
+BREAKDOWN — smoother Abgang wie beim Turntable
+Jeder Abschnitt zieht beim Verlassen weg: er steigt 150 px
+nach oben, wird auf 93 % verkleinert, bekommt 9 px Unschaerfe
+und blendet aus. Bild und Text bewegen sich als Einheit, damit
+der ganze Abschnitt wie eine Karte wegzieht.
 
-Die Snap-Einstellung steht in src/index.css beim html-Element.
-Falls es sich zu sehr "zieht": scroll-snap-type entfernen,
-alles andere bleibt unveraendert.
+Ausserdem umgebaut: Auftritt UND Abgang haengen jetzt an EINEM
+Scrollwert. Vorher lief der Auftritt ueber einen
+Sichtbarkeits-Schalter, der beim schnellen Scrollen springt.
+Am Scroll gekoppelt laeuft die Bewegung durchgehend, und alle
+Werte laufen ueber Federn statt harter Kurven — daher das
+weiche Nachziehen.
+
+Zeitpunkte (Anteil am Scrollweg des Abschnitts):
+  0,05 - 0,36  Auftritt von der Seite
+  0,68 - 0,98  Aufsteigen, Verkleinern, Unschaerfe
+  0,72 - 0,99  Ausblenden
+Aenderbar in src/components/layer-breakdown.tsx.
+
+Auf dem Handy laeuft der Abgang ohne Unschaerfe — spart
+Rechenleistung und faellt dort kaum auf.
 
 GEPRUEFT
 - Build und TypeScript fehlerfrei
+- Deckkraft pro Block nachgemessen:
+  1 -> 0,9 -> 0,72 -> 0,26 -> 0,05 -> 0, ohne Sprung
 - Kein Ueberlauf bei 1920, 1440, 390 und 360 px
-- Scrollen bleibt frei, Einrasten blockiert nicht
 - Keine 404, keine Konsolenfehler
