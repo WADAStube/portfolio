@@ -1,34 +1,38 @@
-Portfolio — Version 29  (19.08.2026)
+Portfolio — Version 30  (19.08.2026)
 
-SNAP — Ursache gefunden und behoben
-Die Bloecke waren hoeher als der Bildschirm: eine volle
-Bildschirmhoehe PLUS Innenabstand oben und unten. Beim
-mittigen Einrasten blieb dadurch oben und unten je ein Stueck
-verdeckt — und beim Weiterscrollen sprang es weiter als
-erwartet.
-Jetzt sind die Bloecke ab Tablet exakt eine Bildschirmhoehe
-hoch (nachgemessen: 900 px bei 900 px Fenster) und rasten
-genau auf Position 0 ein.
-Auf dem Handy ist das Einrasten ganz aus — dort ist der Inhalt
-zwangslaeufig hoeher als der Bildschirm und wuerde immer
-mitten im Text stoppen.
+BREAKDOWN — Ebenen bauen jetzt aufeinander auf
+Das Bild bleibt an EINER Stelle stehen. Jede neue Ebene
+blendet darueber ein, statt daneben zu erscheinen — dadurch
+sieht man genau, was hinzugekommen ist: erst der Boden, dann
+die Steine darauf, dann das Haus, und so weiter.
 
-BEWEGUNG — deutlich smoother
-Vorher lief jede Eigenschaft (Verschiebung, Groesse,
-Deckkraft, Unschaerfe) ueber eine eigene Feder. Vier Federn
-ziehen minimal unterschiedlich nach, dadurch verhaken sich die
-Werte gegenseitig — das war das Unruhige.
-Jetzt glaettet EINE Feder den Scrollfortschritt, alle Werte
-werden daraus abgeleitet und laufen exakt synchron.
-Zusaetzlich weicher eingestellt (stiffness 90 statt 120) und
-der konkurrierende Parallax am Bild entfernt.
+Ein Detail, das den Unterschied macht: Weil jede Ebene alles
+Vorherige enthaelt, wird die alte NICHT ausgeblendet. Die neue
+legt sich einfach darueber. Bei einer normalen Blende waere in
+der Mitte beides halbdurchsichtig — es wuerde flackern. So
+wachsen die Ebenen sauber auf.
+Nachgemessen ueber den Verlauf:
+  100 57  0  0  0 ...
+  100 100 100 23  0 ...
+  100 100 100 100 100 ...
 
-NEU
-Das Bild faehrt langsam heran, solange der Abschnitt sichtbar
-ist (106 % auf 100 %), aus derselben geglaetteten Quelle.
+Der Text scrollt daneben durch: er kommt von links herein,
+steht waehrend seiner Ebene und zieht dann nach oben weg.
+
+Am Ende zieht das ganze Bild weg — aufsteigen, kleiner werden,
+Unschaerfe, ausblenden. Wie beim Turntable.
+
+Alle Bewegungen kommen aus EINER geglaetteten Quelle, dadurch
+laufen Blende, Text und Abgang exakt synchron.
+
+HANDY
+Dort ist das Kleben aus: die Ebenen stehen einfach
+untereinander, Bild und Text im Wechsel. Ein feststehendes
+Bild mit Blende funktioniert auf kleinen Bildschirmen nicht,
+weil daneben kein Platz fuer den Text ist.
 
 GEPRUEFT
-- Blockhoehe exakt Bildschirmhoehe, Einrasten auf Position 0
-- Snap aktiv ab Tablet, auf dem Handy aus
+- Build und TypeScript fehlerfrei
+- Deckkraft-Stapelung nachgemessen, kein Flackern
 - Kein Ueberlauf bei 1920, 1440, 390 und 360 px
-- Build, TypeScript, keine 404, keine Konsolenfehler
+- Keine 404, keine Konsolenfehler
