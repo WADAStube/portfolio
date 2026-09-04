@@ -69,7 +69,7 @@ function LayerText({
   return (
     <motion.div
       style={{ opacity, x, y, willChange: "transform, opacity" }}
-      className="lg:absolute lg:inset-x-0 lg:top-1/2 lg:-translate-y-1/2"
+      className="absolute inset-x-0 top-0 lg:top-1/2 lg:-translate-y-1/2"
     >
       <p className="text-[8px] uppercase tracking-[0.3em] text-white/28 mb-4">
         {layer.label}
@@ -127,41 +127,8 @@ export function LayerBreakdown({ layers }: { layers: BreakdownLayer[] }) {
   /* Sehr langsames Heranfahren ueber den gesamten Aufbau */
   const imgScale = useTransform(p, [0, build], [reduced ? 1 : 1.05, 1]);
 
-  /* ── Handy: einfache Abfolge, kein Kleben ── */
-  if (small) {
-    return (
-      <div className="max-w-[1760px] mx-auto px-6">
-        {layers.map((l) => (
-          <div key={l.src} className="py-10">
-            <div className="relative overflow-hidden bg-[#050505] ring-1 ring-white/[0.06] aspect-[16/9]">
-              <img
-                src={l.src}
-                alt={`${l.label} — ${l.title}`}
-                loading="lazy"
-                decoding="async"
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <p className="mt-5 text-[8px] uppercase tracking-[0.3em] text-white/28 mb-3">
-              {l.label}
-            </p>
-            <h3 className="font-display font-medium text-white text-xl leading-snug mb-4">
-              {l.title}
-            </h3>
-            <p className="text-sm font-light leading-[1.95] text-white/50">
-              {l.body}
-            </p>
-            <p className="mt-5 pt-4 border-t border-white/[0.07] text-[10px] leading-relaxed text-white/25">
-              {l.tech.join("  ·  ")}
-            </p>
-          </div>
-        ))}
-      </div>
-    );
-  }
-
   return (
-    <div ref={trackRef} className="relative" style={{ height: `${n * 85}vh` }}>
+    <div ref={trackRef} className="relative" style={{ height: `${n * (small ? 70 : 85)}vh` }}>
       <div className="sticky top-0 h-svh flex items-center overflow-hidden">
         <motion.div
           style={{
@@ -173,9 +140,9 @@ export function LayerBreakdown({ layers }: { layers: BreakdownLayer[] }) {
           }}
           className="w-full max-w-[1760px] mx-auto px-6 md:px-10 lg:px-12"
         >
-          <div className="grid grid-cols-12 gap-x-10 xl:gap-x-14 items-center">
-            {/* Text — scrollt daneben durch */}
-            <div className="col-span-4 xl:col-span-3 relative h-[62vh]">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-6 gap-x-10 xl:gap-x-14 items-center">
+            {/* Text — auf dem Handy unter dem Bild, ab Laptop daneben */}
+            <div className="order-2 lg:order-1 lg:col-span-4 xl:col-span-3 relative h-[34vh] lg:h-[62vh]">
               {layers.map((l, i) => (
                 <LayerText
                   key={l.src}
@@ -188,7 +155,7 @@ export function LayerBreakdown({ layers }: { layers: BreakdownLayer[] }) {
             </div>
 
             {/* Bild — bleibt stehen, Ebenen blenden uebereinander */}
-            <div className="col-span-8 xl:col-span-9">
+            <div className="order-1 lg:order-2 lg:col-span-8 xl:col-span-9">
               <div className="relative overflow-hidden bg-[#050505] ring-1 ring-white/[0.06] aspect-[16/9] shadow-[0_40px_120px_-40px_rgba(0,0,0,0.9)]">
                 {layers.map((l, i) => (
                   <LayerImage

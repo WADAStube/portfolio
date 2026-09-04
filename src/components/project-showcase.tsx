@@ -73,10 +73,13 @@ export function ProjectShowcase({
   const small = useIsSmallScreen();
   const isGrid = project.layout === "grid";
   const invert = !!project.invert;
+  /* Projekte ohne Bildspalte (z. B. wenn alles im grossen
+     Auftritt und im Breakdown steckt) bekommen einen breiten
+     Textsatz — sonst klebt die Beschreibung schmal links und
+     rechts bleibt die halbe Seite leer. */
+  const wide = shots.length === 0 && !isGrid;
   const frameRatio = frameRatioFor(shots);
   const colWidth = columnWidthFor(frameRatio);
-  const num = String(index + 1).padStart(2, "0");
-  const totalLabel = String(total).padStart(2, "0");
 
   /* Fortschritt innerhalb der Bildspalte */
   const { scrollYProgress } = useScroll({
@@ -181,6 +184,16 @@ export function ProjectShowcase({
     >
       {project.showpiece && (
         <div className="mb-16 md:mb-24">
+          <div className="max-w-[1760px] mx-auto px-6 md:px-10 lg:px-12 pt-16 md:pt-24 pb-10 md:pb-14">
+            <div className="flex items-center gap-5">
+              <span className="h-px w-10 bg-white/20 shrink-0" />
+              <span className="text-[9px] uppercase tracking-[0.3em] text-white/35">
+                Project
+              </span>
+              <span className="h-px flex-1 bg-white/[0.07]" />
+            </div>
+          </div>
+
           <ShowpieceHero
             title={project.title}
             kicker={project.category}
@@ -195,8 +208,13 @@ export function ProjectShowcase({
       <div className="max-w-[1600px] mx-auto px-6 md:px-10 lg:px-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-10 gap-x-10 lg:gap-x-16">
           {/* ─────────── Sticky Info-Spalte ─────────── */}
-          <div className="lg:col-span-4">
-            <div className="lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:overflow-hidden">
+          <div className={wide ? "lg:col-span-12" : "lg:col-span-4"}>
+            <div
+              className={cn(
+                !wide &&
+                  "lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:overflow-hidden",
+              )}
+            >
               {/* Der ganze Textblock kommt von links herein.
                   Das x liegt auf dem INHALT, nicht auf dem
                   sticky-Element selbst — sonst bricht das Kleben. */}
@@ -213,20 +231,9 @@ export function ProjectShowcase({
                 viewport={{ once: true, amount: 0.15 }}
                 transition={{ duration: reduced ? 0.2 : 1.05, ease: EASE }}
               >
-              {/* Kopfzeile: Nummer + Kategorie */}
+              {/* Ruhige Trennlinie statt Nummer und Auszeichnung */}
               <Reveal direction="up" duration={0.8}>
-                <div className="flex items-center gap-4 mb-5">
-                  <span className={cn("font-mono text-[10px] tabular-nums", invert ? "text-black/45" : "text-white/30")}>
-                    {num}
-                    <span className={invert ? "text-black/25" : "text-white/15"}> / {totalLabel}</span>
-                  </span>
-                  <span className={cn("h-px flex-1", invert ? "bg-black/10" : "bg-white/[0.08]")} />
-                  {project.featured && (
-                    <span className={cn("text-[8px] uppercase tracking-[0.24em]", invert ? "text-black/45" : "text-white/35")}>
-                      Featured
-                    </span>
-                  )}
-                </div>
+                <div className={cn("h-px w-16 mb-6", invert ? "bg-black/15" : "bg-white/15")} />
               </Reveal>
 
               {/* Titel */}
@@ -382,21 +389,11 @@ export function ProjectShowcase({
               )}
 
               {/* Meta */}
-              <Stagger
-                className={cn("grid grid-cols-2 gap-6 mb-7 pt-6 border-t", invert ? "border-black/10" : "border-white/[0.06]")}
-                gap={0.06}
-              >
-                {project.role && (
-                  <StaggerItem>
-                    <p className={cn("text-[8px] uppercase tracking-[0.24em] mb-1.5", invert ? "text-black/40" : "text-white/22")}>
-                      Role
-                    </p>
-                    <p className={cn("text-sm font-light", invert ? "text-black/70" : "text-white/65")}>
-                      {project.role}
-                    </p>
-                  </StaggerItem>
-                )}
-                {project.year && (
+              {project.year && (
+                <Stagger
+                  className={cn("mb-7 pt-6 border-t", invert ? "border-black/10" : "border-white/[0.06]")}
+                  gap={0.06}
+                >
                   <StaggerItem>
                     <p className={cn("text-[8px] uppercase tracking-[0.24em] mb-1.5", invert ? "text-black/40" : "text-white/22")}>
                       Year
@@ -405,18 +402,24 @@ export function ProjectShowcase({
                       {project.year}
                     </p>
                   </StaggerItem>
-                )}
-              </Stagger>
+                </Stagger>
+              )}
 
-              {/* Beschreibung zuletzt — auf niedrigen Bildschirmen
-                  wird sie gekuerzt, damit oben nichts abgeschnitten wird. */}
+              {/* Beschreibung zuletzt — im schmalen Satz auf
+                  niedrigen Bildschirmen gekuerzt, im breiten Satz
+                  vollstaendig und deutlich groesser. */}
               <Reveal direction="up" delay={0.14} duration={0.9}>
                 <p
                   className={cn(
-                    "text-sm font-light leading-[1.85] max-w-md",
-                    invert ? "text-black/60" : "text-white/48",
-                    "lg:[@media(max-height:900px)]:line-clamp-6",
-                    "lg:[@media(max-height:780px)]:line-clamp-4",
+                    "font-light",
+                    invert ? "text-black/60" : "text-white/50",
+                    wide
+                      ? "text-base md:text-lg leading-[1.85] max-w-3xl"
+                      : [
+                          "text-sm leading-[1.85] max-w-md",
+                          "lg:[@media(max-height:900px)]:line-clamp-6",
+                          "lg:[@media(max-height:780px)]:line-clamp-4",
+                        ],
                   )}
                 >
                   {project.longDescription || project.description}
@@ -549,20 +552,6 @@ export function ProjectShowcase({
         </div>
       ) : null}
 
-      {/* Grosse Ordnungszahl im Hintergrund.
-          Eigener geclippter Wrapper — kein overflow-hidden auf der Section,
-          das wuerde position:sticky in der Info-Spalte aushebeln. */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 overflow-hidden hidden xl:block -z-10"
-      >
-        <motion.span
-          style={{ y: numY, opacity: numOpacity }}
-          className="select-none absolute right-6 top-1/2 font-display font-bold text-white/[0.028] leading-none"
-        >
-          <span style={{ fontSize: "clamp(8rem, 16vw, 20rem)" }}>{num}</span>
-        </motion.span>
-      </div>
     </section>
   );
 }
