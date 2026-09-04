@@ -41,103 +41,90 @@ function LayerBlock({
   const reduced = useReducedMotion();
   const small = useIsSmallScreen();
 
-  /* Bild rechts bei geraden, links bei ungeraden Ebenen */
   const flipped = index % 2 === 1;
   const from = flipped ? -1 : 1;
 
-  /* Ein einziger Fortschrittswert steuert Auftritt UND Abgang.
-     Vorher lief der Auftritt ueber einen Sichtbarkeits-Schalter —
-     das springt, sobald man schnell scrollt. Am Scroll gekoppelt
-     laeuft beides durchgehend. */
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
   });
 
-  const soft = { stiffness: 120, damping: 30, mass: 0.4 };
+  /* EINE Feder glaettet den Fortschritt, alle Werte werden
+     daraus abgeleitet. Vorher lief jede Eigenschaft ueber eine
+     eigene Feder — die laufen minimal unterschiedlich nach,
+     wodurch sich Verschiebung, Groesse und Deckkraft gegenseitig
+     "verhaken". Genau das hat unruhig gewirkt. */
+  const p = useSpring(scrollYProgress, {
+    stiffness: 90,
+    damping: 26,
+    mass: 0.35,
+    restDelta: 0.0005,
+  });
 
-  /* Auftritt: von der Seite herein */
-  const inX = useSpring(
-    useTransform(scrollYProgress, [0.06, 0.36], [reduced || small ? 0 : 72 * from, 0]),
-    soft,
-  );
-  const inXText = useSpring(
-    useTransform(scrollYProgress, [0.08, 0.40], [reduced || small ? 0 : -56 * from, 0]),
-    soft,
-  );
-  const inOpacity = useSpring(
-    useTransform(scrollYProgress, [0.05, 0.32], [0, 1]),
-    soft,
-  );
+  const off = reduced || small ? 0 : 1;
 
-  /* Abgang: aufsteigen, kleiner werden, weich zeichnen, ausblenden —
-     derselbe Ablauf wie beim Turntable. */
-  const outY = useSpring(
-    useTransform(scrollYProgress, [0.68, 0.98], [0, reduced ? 0 : -150]),
-    soft,
-  );
-  const outScale = useSpring(
-    useTransform(scrollYProgress, [0.68, 0.98], [1, reduced ? 1 : 0.93]),
-    soft,
-  );
-  const outOpacity = useSpring(
-    useTransform(scrollYProgress, [0.72, 0.99], [1, 0]),
-    soft,
-  );
-  const outBlurRaw = useTransform(
-    scrollYProgress,
-    [0.68, 0.98],
-    [0, reduced || small ? 0 : 9],
-  );
-  const outFilter = useTransform(outBlurRaw, (b) => `blur(${b}px)`);
+  /* Auftritt */
+  const inX = useTransform(p, [0.04, 0.40], [78 * from * off, 0]);
+  const inXText = useTransform(p, [0.07, 0.45], [-58 * from * off, 0]);
+  const inOpacity = useTransform(p, [0.04, 0.34], [0, 1]);
 
-  /* Leichter Versatz des Bildes gegen die Scrollrichtung */
-  const par = useSpring(
-    useTransform(scrollYProgress, [0, 1], [reduced || small ? 0 : 46, reduced || small ? 0 : -46]),
-    { stiffness: 110, damping: 30, mass: 0.45 },
+  /* Langsames Heranfahren, solange der Abschnitt sichtbar ist */
+  const imgScale = useTransform(p, [0.04, 0.7], [1 + 0.06 * off, 1]);
+
+  /* Abgang — gleiche Bewegung wie beim Turntable */
+  const outY = useTransform(p, [0.66, 1], [0, reduced ? 0 : -170]);
+  const outScale = useTransform(p, [0.66, 1], [1, reduced ? 1 : 0.92]);
+  const outOpacity = useTransform(p, [0.7, 0.99], [1, 0]);
+  const outFilter = useTransform(
+    useTransform(p, [0.66, 0.98], [0, reduced || small ? 0 : 7]),
+    (b) => `blur(${b}px)`,
   );
 
   return (
     <div
       ref={ref}
-      className="snap-center min-h-svh flex items-center py-16 md:py-20"
+      className={cn(
+        "flex items-center",
+        /* Genau eine Bildschirmhoehe, damit das Einrasten auch
+           genau dort stoppt. Vorher kam Innenabstand dazu — der
+           Block war hoeher als der Bildschirm und beim Einrasten
+           blieb oben und unten etwas verdeckt. */
+        "md:h-svh md:snap-center",
+        "min-h-svh py-16 md:py-0",
+      )}
     >
-      {/* Abgangs-Ebene: gilt fuer Bild und Text gemeinsam,
-          damit der ganze Abschnitt als Einheit wegzieht. */}
       <motion.div
         style={{
           y: outY,
           scale: outScale,
           opacity: outOpacity,
           filter: reduced || small ? undefined : outFilter,
+          willChange: "transform, opacity, filter",
         }}
-        className="w-full will-change-transform"
+        className="w-full"
       >
         <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-y-8 gap-x-10 xl:gap-x-12 items-center">
-          {/* Bild */}
           <motion.div
-            style={{ x: inX, opacity: inOpacity }}
+            style={{ x: inX, opacity: inOpacity, willChange: "transform, opacity" }}
             className={cn(
               "lg:col-span-8 xl:col-span-9",
               flipped ? "lg:order-1" : "lg:order-2",
             )}
           >
-            <motion.div style={{ y: par }}>
-              <div className="relative overflow-hidden bg-[#050505] ring-1 ring-white/[0.06] aspect-[16/9] shadow-[0_40px_120px_-40px_rgba(0,0,0,0.9)]">
-                <img
-                  src={layer.src}
-                  alt={`${layer.label} — ${layer.title}`}
-                  loading={index < 2 ? "eager" : "lazy"}
-                  decoding="async"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </motion.div>
+            <div className="relative overflow-hidden bg-[#050505] ring-1 ring-white/[0.06] aspect-[16/9] shadow-[0_40px_120px_-40px_rgba(0,0,0,0.9)]">
+              <motion.img
+                src={layer.src}
+                alt={`${layer.label} — ${layer.title}`}
+                loading={index < 2 ? "eager" : "lazy"}
+                decoding="async"
+                style={{ scale: imgScale, willChange: "transform" }}
+                className="w-full h-full object-cover"
+              />
+            </div>
           </motion.div>
 
-          {/* Text */}
           <motion.div
-            style={{ x: inXText, opacity: inOpacity }}
+            style={{ x: inXText, opacity: inOpacity, willChange: "transform, opacity" }}
             className={cn(
               "lg:col-span-4 xl:col-span-3",
               flipped ? "lg:order-2" : "lg:order-1",

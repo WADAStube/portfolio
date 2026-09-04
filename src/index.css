@@ -50,12 +50,11 @@
 @layer base {
   * { @apply border-border box-border; }
   html { scroll-behavior: smooth; }
-  html {
-    /* "proximity" statt "mandatory": zieht nur an, wenn man
-       ohnehin in der Naehe stoppt, und blockiert das
-       Durchscrollen nie. Nur die Breakdown-Bloecke setzen
-       scroll-snap-align. */
-    scroll-snap-type: y proximity;
+  /* Einrasten nur ab Tablet. Auf dem Handy sind die Bloecke
+     hoeher als der Bildschirm und das Einrasten wuerde mitten
+     im Text stoppen — dort ist es deshalb aus. */
+  @media (min-width: 768px) {
+    html { scroll-snap-type: y proximity; }
   }
 
   body {

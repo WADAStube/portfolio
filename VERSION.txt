@@ -1,30 +1,34 @@
-Portfolio — Version 28  (19.08.2026)
+Portfolio — Version 29  (19.08.2026)
 
-BREAKDOWN — smoother Abgang wie beim Turntable
-Jeder Abschnitt zieht beim Verlassen weg: er steigt 150 px
-nach oben, wird auf 93 % verkleinert, bekommt 9 px Unschaerfe
-und blendet aus. Bild und Text bewegen sich als Einheit, damit
-der ganze Abschnitt wie eine Karte wegzieht.
+SNAP — Ursache gefunden und behoben
+Die Bloecke waren hoeher als der Bildschirm: eine volle
+Bildschirmhoehe PLUS Innenabstand oben und unten. Beim
+mittigen Einrasten blieb dadurch oben und unten je ein Stueck
+verdeckt — und beim Weiterscrollen sprang es weiter als
+erwartet.
+Jetzt sind die Bloecke ab Tablet exakt eine Bildschirmhoehe
+hoch (nachgemessen: 900 px bei 900 px Fenster) und rasten
+genau auf Position 0 ein.
+Auf dem Handy ist das Einrasten ganz aus — dort ist der Inhalt
+zwangslaeufig hoeher als der Bildschirm und wuerde immer
+mitten im Text stoppen.
 
-Ausserdem umgebaut: Auftritt UND Abgang haengen jetzt an EINEM
-Scrollwert. Vorher lief der Auftritt ueber einen
-Sichtbarkeits-Schalter, der beim schnellen Scrollen springt.
-Am Scroll gekoppelt laeuft die Bewegung durchgehend, und alle
-Werte laufen ueber Federn statt harter Kurven — daher das
-weiche Nachziehen.
+BEWEGUNG — deutlich smoother
+Vorher lief jede Eigenschaft (Verschiebung, Groesse,
+Deckkraft, Unschaerfe) ueber eine eigene Feder. Vier Federn
+ziehen minimal unterschiedlich nach, dadurch verhaken sich die
+Werte gegenseitig — das war das Unruhige.
+Jetzt glaettet EINE Feder den Scrollfortschritt, alle Werte
+werden daraus abgeleitet und laufen exakt synchron.
+Zusaetzlich weicher eingestellt (stiffness 90 statt 120) und
+der konkurrierende Parallax am Bild entfernt.
 
-Zeitpunkte (Anteil am Scrollweg des Abschnitts):
-  0,05 - 0,36  Auftritt von der Seite
-  0,68 - 0,98  Aufsteigen, Verkleinern, Unschaerfe
-  0,72 - 0,99  Ausblenden
-Aenderbar in src/components/layer-breakdown.tsx.
-
-Auf dem Handy laeuft der Abgang ohne Unschaerfe — spart
-Rechenleistung und faellt dort kaum auf.
+NEU
+Das Bild faehrt langsam heran, solange der Abschnitt sichtbar
+ist (106 % auf 100 %), aus derselben geglaetteten Quelle.
 
 GEPRUEFT
-- Build und TypeScript fehlerfrei
-- Deckkraft pro Block nachgemessen:
-  1 -> 0,9 -> 0,72 -> 0,26 -> 0,05 -> 0, ohne Sprung
+- Blockhoehe exakt Bildschirmhoehe, Einrasten auf Position 0
+- Snap aktiv ab Tablet, auf dem Handy aus
 - Kein Ueberlauf bei 1920, 1440, 390 und 360 px
-- Keine 404, keine Konsolenfehler
+- Build, TypeScript, keine 404, keine Konsolenfehler
