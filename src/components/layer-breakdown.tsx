@@ -111,59 +111,61 @@ function LightSwitch({
   onChange: (v: boolean) => void;
 }) {
   return (
-    <button
-      type="button"
-      role="switch"
-      aria-checked={on}
-      aria-label={name}
-      onClick={() => onChange(!on)}
+    <div
       className={cn(
-        "group inline-flex items-center gap-3 select-none",
-        "border px-3 py-2 transition-colors duration-500",
+        "inline-flex items-center gap-5 rounded-2xl px-5 py-4",
+        "border backdrop-blur-md transition-colors duration-500",
         on
-          ? "border-amber-200/40 bg-amber-100/[0.06]"
-          : "border-white/12 bg-white/[0.02] hover:border-white/25",
+          ? "border-amber-200/25 bg-amber-100/[0.05]"
+          : "border-white/10 bg-white/[0.03]",
       )}
     >
-      <span
+      <div className="min-w-0">
+        <p
+          className={cn(
+            "text-[13px] font-medium tracking-tight transition-colors duration-500",
+            on ? "text-amber-50" : "text-white/80",
+          )}
+        >
+          {name}
+        </p>
+        <p
+          className={cn(
+            "text-[11px] mt-0.5 transition-colors duration-500",
+            on ? "text-amber-100/50" : "text-white/35",
+          )}
+        >
+          {on ? "On" : "Off"}
+        </p>
+      </div>
+
+      {/* Grosser Schieber im Stil eines Systemschalters */}
+      <button
+        type="button"
+        role="switch"
+        aria-checked={on}
+        aria-label={name}
+        onClick={() => onChange(!on)}
         className={cn(
-          "relative block shrink-0 h-[18px] w-[34px] rounded-full transition-colors duration-500",
-          on ? "bg-amber-200/70" : "bg-white/15",
+          "relative shrink-0 h-[34px] w-[58px] rounded-full",
+          "transition-colors duration-500 outline-none",
+          "focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-black",
+          on ? "bg-[#f0b64a]" : "bg-white/15",
         )}
+        style={
+          on
+            ? { boxShadow: "0 0 26px 4px rgba(240,182,74,0.35)" }
+            : undefined
+        }
       >
         <motion.span
-          animate={{ x: on ? 18 : 2 }}
-          transition={{ type: "spring", stiffness: 420, damping: 32 }}
-          className={cn(
-            "absolute left-0 top-[2px] h-[14px] w-[14px] rounded-full",
-            on ? "bg-[#1a1408]" : "bg-white/70",
-          )}
-          style={
-            on
-              ? { boxShadow: "0 0 14px 3px rgba(253,230,180,0.55)" }
-              : undefined
-          }
+          animate={{ x: on ? 26 : 3 }}
+          transition={{ type: "spring", stiffness: 500, damping: 34, mass: 0.6 }}
+          className="absolute top-[3px] left-0 h-[28px] w-[28px] rounded-full bg-white"
+          style={{ boxShadow: "0 2px 6px rgba(0,0,0,0.45)" }}
         />
-      </span>
-
-      <span
-        className={cn(
-          "text-[9px] uppercase tracking-[0.24em] transition-colors duration-500",
-          on ? "text-amber-100/85" : "text-white/40 group-hover:text-white/65",
-        )}
-      >
-        {name}
-      </span>
-
-      <span
-        className={cn(
-          "font-mono text-[9px] tabular-nums transition-colors duration-500",
-          on ? "text-amber-100/60" : "text-white/25",
-        )}
-      >
-        {on ? "ON" : "OFF"}
-      </span>
-    </button>
+      </button>
+    </div>
   );
 }
 
@@ -231,7 +233,7 @@ export function LayerBreakdown({ layers }: { layers: BreakdownLayer[] }) {
         >
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-6 gap-x-10 xl:gap-x-14 items-center">
             {/* Text — auf dem Handy unter dem Bild, ab Laptop daneben */}
-            <div className="order-2 lg:order-1 lg:col-span-4 xl:col-span-3 relative h-[34vh] lg:h-[62vh]">
+            <div className="order-3 lg:order-1 lg:col-span-4 xl:col-span-3 relative h-[32vh] lg:h-[62vh]">
               {layers.map((l, i) => (
                 <LayerText
                   key={l.src}
@@ -246,20 +248,28 @@ export function LayerBreakdown({ layers }: { layers: BreakdownLayer[] }) {
                 />
               ))}
 
-              {/* Schalter — erscheint mit der letzten Ebene */}
+              {/* Schalter am Laptop: unter dem Text der letzten
+                  Ebene, absolut positioniert. */}
               {toggle && (
                 <motion.div
                   style={{ opacity: switchOpacity }}
-                  className="absolute inset-x-0 bottom-0 lg:bottom-auto lg:top-1/2 lg:translate-y-[10.5rem]"
+                  className="hidden lg:block absolute left-0 top-1/2 translate-y-[10rem]"
                 >
-                  <LightSwitch
-                    name={toggle.name}
-                    on={lit}
-                    onChange={setLit}
-                  />
+                  <LightSwitch name={toggle.name} on={lit} onChange={setLit} />
                 </motion.div>
               )}
             </div>
+
+            {/* Schalter auf dem Handy: eigene Zeile unter dem
+                Bild, damit er sich nicht mit dem Text ueberlagert. */}
+            {toggle && (
+              <motion.div
+                style={{ opacity: switchOpacity }}
+                className="order-[2] lg:hidden flex justify-center"
+              >
+                <LightSwitch name={toggle.name} on={lit} onChange={setLit} />
+              </motion.div>
+            )}
 
             {/* Bild — bleibt stehen, Ebenen blenden uebereinander */}
             <div className="order-1 lg:order-2 lg:col-span-8 xl:col-span-9">

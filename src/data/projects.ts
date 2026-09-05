@@ -53,6 +53,8 @@ export interface Project {
   };
   /** Polygonzahlen aus dem Maya-HUD — werden hochgezaehlt */
   stats?: { verts: number; tris: number };
+  /** In Ueberarbeitung — Name bleibt, Inhalt wird ausgeblendet */
+  comingSoon?: boolean;
   /** Kehrt die Sektion auf hellen Grund um (Kontrastbruch) */
   invert?: boolean;
   /** Scrollgesteuerter Aufbau in Ebenen (gleiche Kamera) */
@@ -251,6 +253,7 @@ export const projectsData: Project[] = [
   },
   {
     id: "futuristic-bunker",
+    comingSoon: true,
     stats: { verts: 742687, tris: 1447482 },
     title: "Futuristic Bunker",
     category: "Sci-Fi Environment",
@@ -273,6 +276,7 @@ export const projectsData: Project[] = [
   },
   {
     id: "robot-study",
+    comingSoon: true,
     stats: { verts: 7852, tris: 15029 },
     title: "Robot Study",
     category: "Character Art / Fan Study",
@@ -336,6 +340,7 @@ export const projectsData: Project[] = [
   },
   {
     id: "apocalypse",
+    comingSoon: true,
     stats: { verts: 5118889, tris: 6799929 },
     title: "Apocalypse",
     category: "Environment Art",
@@ -358,6 +363,7 @@ export const projectsData: Project[] = [
   },
   {
     id: "character-studies",
+    comingSoon: true,
     stats: { verts: 236039, tris: 467765 },
     title: "Character Studies",
     category: "Character Modeling & Grooming",
@@ -380,6 +386,7 @@ export const projectsData: Project[] = [
   },
   {
     id: "isometric-room",
+    comingSoon: true,
     stats: { verts: 186633, tris: 261318 },
     title: "Isometric Room",
     category: "Interior / Prop Set",
@@ -404,22 +411,17 @@ export const projectsData: Project[] = [
   {
     id: "asset-studies",
     stats: { verts: 10145, tris: 20000 },
-    title: "Asset & Texturing Studies",
-    category: "Hard Surface / UV & PBR",
+    title: "Security Camera",
+    category: "Hard Surface Asset",
     filterCategory: "Texturing",
     role: "3D Asset & Texture Artist",
     year: "2024",
     tools: ["Autodesk Maya", "Substance Painter", "Arnold"],
     description:
-      "A set of standalone props taken through the full pipeline — modelling, UV layout and PBR texturing.",
+      "A hard-surface asset taken through the full pipeline — modelling, UV layout and PBR texturing.",
     longDescription:
       "A collection of individual assets used to drill the full pipeline end to end. Each prop was modelled clean, unwrapped with an eye on texel density and packing efficiency, then textured in Substance Painter. The UV layouts are included deliberately — packing quality is invisible in a beauty render but it's what decides whether an asset is production-ready or not.",
     shots: [
-      { src: "/images/projects/asset-studies/03.jpg", caption: "Fireplace — Substance Painter", w: 954, h: 632 },
-      { src: "/images/projects/asset-studies/04.jpg", caption: "Tool set — shaded", w: 1272, h: 683 },
-      { src: "/images/projects/asset-studies/05.jpg", caption: "Tool set — wireframe", w: 1263, h: 680 },
-      { src: "/images/projects/asset-studies/06.jpg", caption: "UV layout — pickaxe", w: 1467, h: 604 },
-      { src: "/images/projects/asset-studies/07.jpg", caption: "UV layout — hard surface", w: 1416, h: 680 },
     ],
     compare: {
       before: { src: "/images/projects/asset-studies/01.jpg", caption: "Security camera — shaded", w: 1269, h: 680 },
@@ -460,6 +462,7 @@ export const projectsData: Project[] = [
   },
   {
     id: "bloomest",
+    comingSoon: true,
     title: "Bloomest",
     category: "Corporate Design / Print",
     filterCategory: "Graphic Design",
@@ -479,6 +482,7 @@ export const projectsData: Project[] = [
 
   {
     id: "web-products",
+    comingSoon: true,
     title: "Web Products",
     category: "Full-Stack / Front-End",
     filterCategory: "Development",

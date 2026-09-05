@@ -165,6 +165,40 @@ export function ProjectShowcase({
     [0, 1, 1, 0],
   );
 
+  if (project.comingSoon) {
+    return (
+      <section
+        id={project.id}
+        className="relative scroll-mt-24 border-t border-white/[0.05] py-16 md:py-24"
+      >
+        <div className="max-w-[1760px] mx-auto px-6 md:px-10 lg:px-12">
+          <Reveal direction="up" duration={0.9}>
+            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+              <div>
+                <p className="text-[8px] uppercase tracking-[0.28em] text-white/22 mb-3">
+                  {project.category}
+                </p>
+                <h2
+                  className="font-display font-bold text-white/35 leading-none"
+                  style={{
+                    fontSize: "clamp(1.7rem, 4vw, 3.2rem)",
+                    letterSpacing: "-0.02em",
+                  }}
+                >
+                  {project.title}
+                </h2>
+              </div>
+              <span className="inline-flex items-center gap-2.5 text-[9px] uppercase tracking-[0.24em] text-white/30 border border-white/[0.09] px-3 py-2 self-start md:self-auto">
+                <span className="h-1.5 w-1.5 rounded-full bg-white/30" />
+                Coming soon
+              </span>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section
       ref={sectionRef}
