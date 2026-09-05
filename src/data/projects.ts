@@ -62,6 +62,14 @@ export interface Project {
     title: string;
     body: string;
     tech: string[];
+    toggle?: {
+      src: string;
+      label: string;
+      title: string;
+      body: string;
+      tech: string[];
+      name: string;
+    };
   }[];
   /** Grosser Auftritt ueber die volle Seitenbreite:
       Vergleichsbild + scrollgesteuertes Turntable */
@@ -186,17 +194,21 @@ export const projectsData: Project[] = [
           "Manual placement instead of scattering",
           "Slight tilts working against the tidy look",
         ],
-      },
-      {
-        src: "/images/projects/poor-house/layers/09.jpg",
-        label: "Light",
-        title: "The turn",
-        body: "Up to here the scene was neutrally lit. The final setup tips it into night — and the whole look depends on one decision: a directional key. Ambient light alone would soften the ramps and the cel shading would collapse.",
-        tech: [
-          "Key / fill / rim with a directional key for hard shadow edges",
-          "Lanterns and fire as practicals — emissive geometry plus a real light",
-          "Warm 2200 K against a cool ambient, shadows pushed slightly blue",
-        ],
+        /* Schalter auf der letzten Ebene: legt das Licht um.
+           Sobald Ebene 10 fertig ist, wandert der Schalter
+           eine Ebene weiter — nur diese Werte tauschen. */
+        toggle: {
+          name: "Light",
+          src: "/images/projects/poor-house/layers/09.jpg",
+          label: "Light",
+          title: "The turn",
+          body: "Up to here the scene was neutrally lit. The final setup tips it into night — and the whole look depends on one decision: a directional key. Ambient light alone would soften the ramps and the cel shading would collapse.",
+          tech: [
+            "Key / fill / rim with a directional key for hard shadow edges",
+            "Lanterns and fire as practicals — emissive geometry plus a real light",
+            "Warm 2200 K against a cool ambient, shadows pushed slightly blue",
+          ],
+        },
       },
     ],
     showpiece: {

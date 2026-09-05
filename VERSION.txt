@@ -1,28 +1,30 @@
-Portfolio — Version 31  (19.08.2026)
+Portfolio — Version 32  (19.08.2026)
 
-RUHIGER
-- "01 / 10" und die grosse Hintergrundziffer sind weg
-- "Featured" ist weg
-- "Rolle" bei allen Projekten entfernt, nur noch das Jahr
-Statt der Kopfzeile mit Nummer steht jetzt eine kurze Linie.
+LICHTSCHALTER AM LETZTEN BILD
+Auf der letzten Ebene des Breakdowns erscheint ein Schalter.
+Legt man ihn um, geht das Licht an: das Bild blendet auf die
+zweite Fassung, der Text daneben wechselt mit. Zurueckschalten
+fuehrt zurueck.
 
-HANDY — jetzt wie am Laptop
-Die Ebenen blenden auch auf dem Handy uebereinander, an
-derselben Stelle. Bild oben, Text darunter, beide wechseln
-gemeinsam mit dem Scrollen. Der Scrollweg ist dort etwas
-kuerzer (70vh statt 85vh pro Ebene).
+Der Schalter taucht erst mit der letzten Ebene auf und
+verschwindet wieder, wenn der Breakdown endet. Eingeschaltet
+faerbt er sich warm und der Griff bekommt ein leichtes Glimmen
+— dasselbe Bernstein wie die Laternen im Bild.
 
-TRENNUNG ZWISCHEN DEN PROJEKTEN
-Vorher stiess das Hero-Bild direkt an die Projektliste und
-wirkte wie deren Fortsetzung. Jetzt steht davor eine ruhige
-Zeile mit "Project" und einer Linie, dazu deutlich mehr Luft.
-
-BESCHREIBUNG
-Bei Projekten ohne Bildspalte (Lantern Island) stand der Text
-schmal links, rechts blieb die halbe Seite leer. Der Text
-laeuft jetzt breit ueber die Seite und ist groesser gesetzt.
+WICHTIG — vorlaeufige Belegung
+Bild 10 habe ich noch nicht. Damit du den Schalter trotzdem
+beurteilen kannst, ist er vorerst so verdrahtet:
+  AUS = Ebene 08 (Props, unbeleuchtet)
+  AN  = Ebene 09 (Light, Laternen an)
+Das ergibt inhaltlich bereits Sinn. Sobald Ebene 10 fertig
+ist, wandert der Schalter eine Ebene weiter: Ebene 09 kommt
+als normale Ebene zurueck, der Schalter sitzt dann dort.
+Dafuer sind nur die Werte im Feld "toggle" zu tauschen —
+src, label, title, body, tech.
+Zu finden in src/data/projects.ts, Projekt "poor-house".
 
 GEPRUEFT
-- Build und TypeScript fehlerfrei
-- Kein Ueberlauf bei 1440 und 390 px
-- Keine 404, keine Konsolenfehler
+- Schalter erscheint erst auf der letzten Ebene (nachgemessen)
+- Bild- und Textwechsel funktionieren, auch auf dem Handy
+- Kein Ueberlauf bei 1920, 1440, 390 und 360 px
+- Build, TypeScript, keine 404, keine Konsolenfehler

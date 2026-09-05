@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import {
   motion,
   useScroll,
@@ -16,6 +16,17 @@ export interface BreakdownLayer {
   title: string;
   body: string;
   tech: string[];
+  /** Nur bei der letzten Ebene: ein Schalter, der auf eine
+      zweite Fassung desselben Bildes umlegt. */
+  toggle?: {
+    src: string;
+    label: string;
+    title: string;
+    body: string;
+    tech: string[];
+    /** Beschriftung am Schalter, z. B. "Light" */
+    name: string;
+  };
 }
 
 /* ────────────────────────────────────────────────────────────
@@ -90,11 +101,79 @@ function LayerText({
   );
 }
 
+function LightSwitch({
+  name,
+  on,
+  onChange,
+}: {
+  name: string;
+  on: boolean;
+  onChange: (v: boolean) => void;
+}) {
+  return (
+    <button
+      type="button"
+      role="switch"
+      aria-checked={on}
+      aria-label={name}
+      onClick={() => onChange(!on)}
+      className={cn(
+        "group inline-flex items-center gap-3 select-none",
+        "border px-3 py-2 transition-colors duration-500",
+        on
+          ? "border-amber-200/40 bg-amber-100/[0.06]"
+          : "border-white/12 bg-white/[0.02] hover:border-white/25",
+      )}
+    >
+      <span
+        className={cn(
+          "relative block shrink-0 h-[18px] w-[34px] rounded-full transition-colors duration-500",
+          on ? "bg-amber-200/70" : "bg-white/15",
+        )}
+      >
+        <motion.span
+          animate={{ x: on ? 18 : 2 }}
+          transition={{ type: "spring", stiffness: 420, damping: 32 }}
+          className={cn(
+            "absolute left-0 top-[2px] h-[14px] w-[14px] rounded-full",
+            on ? "bg-[#1a1408]" : "bg-white/70",
+          )}
+          style={
+            on
+              ? { boxShadow: "0 0 14px 3px rgba(253,230,180,0.55)" }
+              : undefined
+          }
+        />
+      </span>
+
+      <span
+        className={cn(
+          "text-[9px] uppercase tracking-[0.24em] transition-colors duration-500",
+          on ? "text-amber-100/85" : "text-white/40 group-hover:text-white/65",
+        )}
+      >
+        {name}
+      </span>
+
+      <span
+        className={cn(
+          "font-mono text-[9px] tabular-nums transition-colors duration-500",
+          on ? "text-amber-100/60" : "text-white/25",
+        )}
+      >
+        {on ? "ON" : "OFF"}
+      </span>
+    </button>
+  );
+}
+
 export function LayerBreakdown({ layers }: { layers: BreakdownLayer[] }) {
   const trackRef = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
   const small = useIsSmallScreen();
   const n = layers.length;
+
+  const [lit, setLit] = useState(false);
 
   const { scrollYProgress } = useScroll({
     target: trackRef,
@@ -124,6 +203,16 @@ export function LayerBreakdown({ layers }: { layers: BreakdownLayer[] }) {
     (b) => `blur(${b}px)`,
   );
 
+  /* Der Schalter gehoert zur letzten Ebene und taucht erst
+     dort auf. */
+  const lastIndex = n - 1;
+  const toggle = layers[lastIndex]?.toggle;
+  const switchOpacity = useTransform(
+    p,
+    [lastIndex * step - step * 0.25, lastIndex * step + step * 0.2, build, build + 0.04],
+    [0, 1, 1, 0],
+  );
+
   /* Sehr langsames Heranfahren ueber den gesamten Aufbau */
   const imgScale = useTransform(p, [0, build], [reduced ? 1 : 1.05, 1]);
 
@@ -146,12 +235,30 @@ export function LayerBreakdown({ layers }: { layers: BreakdownLayer[] }) {
               {layers.map((l, i) => (
                 <LayerText
                   key={l.src}
-                  layer={l}
+                  layer={
+                    i === lastIndex && lit && l.toggle
+                      ? { ...l, ...l.toggle }
+                      : l
+                  }
                   progress={p}
                   start={i * step}
                   end={(i + 1) * step}
                 />
               ))}
+
+              {/* Schalter — erscheint mit der letzten Ebene */}
+              {toggle && (
+                <motion.div
+                  style={{ opacity: switchOpacity }}
+                  className="absolute inset-x-0 bottom-0 lg:bottom-auto lg:top-1/2 lg:translate-y-[10.5rem]"
+                >
+                  <LightSwitch
+                    name={toggle.name}
+                    on={lit}
+                    onChange={setLit}
+                  />
+                </motion.div>
+              )}
             </div>
 
             {/* Bild — bleibt stehen, Ebenen blenden uebereinander */}
@@ -167,6 +274,23 @@ export function LayerBreakdown({ layers }: { layers: BreakdownLayer[] }) {
                     scale={imgScale}
                   />
                 ))}
+
+                {/* Zweite Fassung der letzten Ebene, liegt
+                    darueber und wird eingeblendet */}
+                {toggle && (
+                  <motion.img
+                    src={toggle.src}
+                    alt={toggle.title}
+                    aria-hidden={!lit}
+                    loading="lazy"
+                    decoding="async"
+                    initial={false}
+                    animate={{ opacity: lit ? 1 : 0 }}
+                    transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                    style={{ scale: imgScale, willChange: "opacity, transform" }}
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                )}
               </div>
             </div>
           </div>
