@@ -27,6 +27,7 @@ import { projectsData } from "@/data/projects";
 import type { Project } from "@/data/projects";
 import { useAmbientSound } from "@/hooks/useAmbientSound";
 import { cn } from "@/lib/utils";
+import { useLang, t } from "@/lib/lang";
 
 /* ─────────────────────── static data ───────────────────────── */
 
@@ -236,6 +237,7 @@ function MuteBtn({ muted, onToggle }: { muted: boolean; onToggle: () => void }) 
 
 /* ─────────────── Projekt-Index ────────────────────────────── */
 function ProjectIndex({ projects }: { projects: Project[] }) {
+  const { lang } = useLang();
   const jump = (id: string) =>
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 
@@ -250,11 +252,14 @@ function ProjectIndex({ projects }: { projects: Project[] }) {
             <span className="font-mono text-[10px] text-white/25 tabular-nums shrink-0">
               {String(i + 1).padStart(2, "0")}
             </span>
-            <span className="font-display font-medium text-lg md:text-2xl text-white/65 group-hover:text-white transition-colors duration-300 flex-1 min-w-0 truncate">
+            <span className={cn(
+              "font-display font-medium text-lg md:text-2xl transition-colors duration-300 flex-1 min-w-0 truncate",
+              p.comingSoon ? "text-white/35" : "text-white/65 group-hover:text-white",
+            )}>
               {p.title}
             </span>
             <span className="hidden md:block text-[9px] uppercase tracking-[0.2em] text-white/25 shrink-0">
-              {p.tools.slice(0, 2).join(" · ")}
+              {p.comingSoon ? t("comingSoon", lang) : p.tools.slice(0, 2).join(" · ")}
             </span>
             <span className="text-white/25 group-hover:text-white/70 transition-colors duration-300 shrink-0">
               <svg width="11" height="11" viewBox="0 0 10 10" fill="none">
@@ -302,6 +307,7 @@ export default function Home() {
     videoRef as React.RefObject<HTMLVideoElement>,
   );
 
+  const { lang } = useLang();
   const projects = projectsData;
   const [loaded, setLoaded] = useState(false);
 
@@ -358,7 +364,7 @@ export default function Home() {
                 transition={{ duration: 1, ease: EASE, delay: loaded ? 0.1 : 1.2 }}
                 className="text-[9px] text-white/35 uppercase tracking-[0.28em] mb-4"
               >
-                Portfolio 2026
+                {t("portfolioYear", lang)}
               </motion.p>
               <h1
                 className="font-display font-bold text-white leading-[0.9]"
@@ -397,15 +403,15 @@ export default function Home() {
               className="flex flex-col items-start md:items-end gap-4 md:pb-2"
             >
               <p className="text-sm md:text-base font-light text-white/50 uppercase tracking-[0.22em]">
-                3D &amp; Game Art
+                {t("role", lang)}
               </p>
               <p className="text-[9px] font-light text-white/30 uppercase tracking-[0.2em] -mt-2">
-                Media Technology
+                {t("roleSub", lang)}
               </p>
               <div className="flex items-center gap-2">
                 <span className="h-[5px] w-[5px] rounded-full bg-green-500 animate-pulse" />
                 <span className="text-[9px] text-white/35 uppercase tracking-[0.18em]">
-                  Based in Hamburg
+                  {t("based", lang)}
                 </span>
               </div>
               <motion.button
@@ -419,7 +425,7 @@ export default function Home() {
                 className="text-[9px] text-white/28 uppercase tracking-[0.22em] hover:text-white/70 transition-colors duration-300 flex items-center gap-2 mt-2"
               >
                 <span className="w-5 h-px bg-current" />
-                View work
+                {t("viewWork", lang)}
               </motion.button>
             </motion.div>
           </div>
@@ -463,7 +469,7 @@ export default function Home() {
             <div>
               <Reveal direction="up" duration={0.8}>
                 <p className="text-[8px] text-white/22 uppercase tracking-[0.28em] mb-4">
-                  Selected Work
+                  {t("selectedWork", lang)}
                 </p>
               </Reveal>
               <StretchOnScroll>
@@ -474,14 +480,14 @@ export default function Home() {
                     letterSpacing: "-0.02em",
                   }}
                 >
-                  <SplitText text="Portfolio" />
+                  <SplitText key={lang} text={t("portfolio", lang)} />
                 </h2>
               </StretchOnScroll>
             </div>
             <Reveal direction="up" delay={0.15}>
               <p className="text-[9px] text-white/22 uppercase tracking-[0.22em] hidden md:block text-right">
                 {projects.length}{" "}
-                {projects.length === 1 ? "Project" : "Projects"}
+                {t("projects", lang)}
               </p>
             </Reveal>
           </div>
@@ -525,7 +531,7 @@ export default function Home() {
         <div className="relative max-w-[1600px] mx-auto px-6 md:px-10 lg:px-16">
           <Reveal direction="up">
             <p className="text-[8px] text-white/22 uppercase tracking-[0.28em] mb-14">
-              Contact
+              {t("contact", lang)}
             </p>
           </Reveal>
 
@@ -534,10 +540,10 @@ export default function Home() {
               className="font-display font-bold text-white leading-[0.9] mb-16"
               style={{ fontSize: "clamp(3rem, 10vw, 11rem)", letterSpacing: "-0.02em" }}
             >
-              <SplitText text="Let's work" />
+              <SplitText key={lang + "c"} text={t("letsWork", lang)} />
               <br />
               <span className="text-white/22">
-                <SplitText text="together." delay={0.15} />
+                <SplitText key={lang + "d"} text={t("together", lang)} delay={0.15} />
               </span>
             </h2>
           </StretchOnScroll>
@@ -601,7 +607,7 @@ export default function Home() {
                     />
                   </motion.svg>
                   <span className="relative text-[11px] md:text-xs uppercase tracking-[0.24em] text-white/75 group-hover:text-black font-medium transition-colors duration-500">
-                    Download CV
+                    {t("downloadCV", lang)}
                   </span>
                 </motion.a>
                 </Magnetic>

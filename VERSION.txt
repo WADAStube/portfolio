@@ -1,41 +1,43 @@
-Portfolio — Version 34  (19.08.2026)
+Portfolio — Version 35  (19.08.2026)
+Zweisprachig: Englisch und Deutsch.
 
-FEHLER BEHOBEN — Bild blieb beim Zurueckscrollen haengen
-Nein, das war keine Absicht. Das umgeschaltete Bild lag ueber
-ALLEN Ebenen. Solange der Schalter an war, verdeckte es beim
-Zurueckscrollen die frueheren Ebenen.
-Jetzt wird seine Deckkraft mit dem Sichtfenster der letzten
-Ebene multipliziert: scrollt man zurueck, blendet es aus und
-der normale Aufbau (08, 07, 06 ...) ist wieder zu sehen.
-Der Schalter behaelt seinen Zustand — scrollt man wieder nach
-unten, ist das Licht noch an.
-Nachgemessen beim Zurueckscrollen: 100 -> 28 -> 0.
+UMSCHALTER
+Oben rechts in der Navigation: EN / DE.
+Die Wahl wird im Browser gespeichert und bleibt beim naechsten
+Besuch erhalten. Ohne gespeicherte Wahl entscheidet die
+Browsersprache: deutscher Browser -> Deutsch, sonst Englisch.
+Das lang-Attribut der Seite wird mitgesetzt (wichtig fuer
+Google und Screenreader).
 
-ABOUT NEU GESCHRIEBEN
-Die Erzaehlform ist raus. Keine Wendepunkte, keine Lehren,
-keine Saetze wie "Best decision I've made" oder "repeat the
-boring part". Stattdessen sechs sachliche Abschnitte.
+UEBERSETZT
+- Navigation, Hero, Abschnittsueberschriften, Kontakt, Footer
+- Alle drei sichtbaren Projekte: Kategorie, Kurz- und
+  Langbeschreibung
+- Der komplette Breakdown von Lantern Island: alle acht Ebenen
+  mit Titel, Text und Technikzeile, dazu der Lichtschalter
+- Der RGB/CMYK-Erklaertext bei I Need Space
+- Der gesamte About-Bereich: Ueberschrift, Einleitung, alle
+  sechs Abschnitte, die vier Zahlen
+- "Coming soon" -> "In Arbeit"
 
-Neu dabei, weil bisher fast nichts zum Studium dastand:
-- Medientechnik an der Hochschule Emden/Leer, seit 2022,
-  Abschluss voraussichtlich Oktober 2027
-- Wahlmodule Richtung 3D, CAMP-Zertifikat
-- Ein eigener Abschnitt zu den Hochschulprojekten:
-  Future!comeback, E-Sports-Overlays, Gambia Insight,
-  Abschlussfeier-Produktion
-- Ein Abschnitt zur Arbeit: Werkstudent und Freelance
+AUFBAU
+Sprachlogik: src/lib/lang.tsx
+  - UI-Beschriftungen im Objekt UI
+  - pick(en, de, lang) waehlt den passenden Text
+Projekttexte: src/data/projects.ts, Feld "de" pro Projekt
+About-Texte: src/components/about-section.tsx, Felder
+  titleDe / bodyDe / labelDe
 
-Sport, Reisen und Techno stehen jetzt in EINEM kurzen
-Abschnitt am Ende, ohne Deutung.
+Fehlt eine deutsche Fassung, erscheint automatisch der
+englische Text — nichts bleibt leer.
 
-Ueberschrift: "I build environments and characters in 3D."
-Zahlen: 2007 / 2027 / 4 Sprachen / 10 Jahre Taekwondo.
-
-BITTE PRUEFEN
-Die Hochschulprojekte stammen aus deinem Lebenslauf. Falls
-dort etwas ungenau ist, sag Bescheid.
+NICHT UEBERSETZT (mit Absicht)
+Projektnamen, Softwarenamen und die Bildunterschriften der
+einzelnen Aufnahmen. Begriffe wie "Wireframe" oder "Turntable"
+sind auch im deutschen Sprachgebrauch ueblich.
 
 GEPRUEFT
-- Build und TypeScript fehlerfrei
+- Umschalten in beide Richtungen, lang-Attribut wechselt
+- Navigation, Kapitel und Marken auf Deutsch nachgemessen
 - Kein Ueberlauf bei 1440 und 390 px
-- Keine 404, keine Konsolenfehler
+- Build, TypeScript, keine 404, keine Konsolenfehler

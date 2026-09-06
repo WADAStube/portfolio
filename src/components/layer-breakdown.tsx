@@ -11,6 +11,7 @@ import {
 } from "framer-motion";
 import { useIsSmallScreen } from "@/components/motion-primitives";
 import { cn } from "@/lib/utils";
+import { useLang, t } from "@/lib/lang";
 
 export interface BreakdownLayer {
   src: string;
@@ -379,17 +380,18 @@ function LayerImage({
 }
 
 export function BreakdownIntro({ className }: { className?: string }) {
+  const { lang } = useLang();
   return (
     <div className={className}>
       <div className="max-w-[1760px] mx-auto px-6 md:px-10 lg:px-12">
         <p className="text-[8px] uppercase tracking-[0.28em] text-white/22 mb-4">
-          Breakdown
+          {t("breakdown", lang)}
         </p>
         <h3
           className="font-display font-bold text-white leading-none"
           style={{ fontSize: "clamp(1.6rem, 4vw, 3rem)", letterSpacing: "-0.02em" }}
         >
-          How it was built
+          {t("breakdownTitle", lang)}
         </h3>
       </div>
     </div>

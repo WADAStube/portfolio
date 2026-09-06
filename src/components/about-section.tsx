@@ -19,6 +19,7 @@ import {
   useIsSmallScreen,
 } from "@/components/motion-primitives";
 import { cn } from "@/lib/utils";
+import { useLang, t } from "@/lib/lang";
 
 /* ────────────────────────────────────────────────────────────
    Kapitel — als Zeitstrahl, anklickbar. Kein Fliesstext.
@@ -30,50 +31,62 @@ const CHAPTERS = [
     icon: Boxes,
     kicker: "2007",
     title: "Where it started",
+    titleDe: "Wo es anfing",
     body: "My cousin, a mechanical engineer, installed SolidWorks on my computer and showed me how to build an object from nothing. I was ten. I've been making things in 3D since.",
+    bodyDe: "Mein Cousin, Maschinenbauingenieur, installierte SolidWorks auf meinem Rechner und zeigte mir, wie man aus nichts ein Objekt baut. Ich war zehn. Seitdem baue ich Dinge in 3D.",
   },
   {
     id: "photoshop",
     icon: Trophy,
     kicker: "2011",
     title: "First competition",
+    titleDe: "Erster Wettbewerb",
     body: "A design competition in Photoshop CS5. Fourteen entries, second place, and a Sony Alpha NEX-3 as the prize. The camera is still in use.",
+    bodyDe: "Ein Design-Wettbewerb in Photoshop CS5. Vierzehn Einreichungen, zweiter Platz, als Preis eine Sony Alpha NEX-3. Die Kamera ist bis heute im Einsatz.",
   },
   {
     id: "study",
     icon: BookOpen,
     kicker: "Since 2022",
     title: "Media Technology, Hochschule Emden/Leer",
+    titleDe: "Medientechnik, Hochschule Emden/Leer",
     body: "Bachelor's degree, expected October 2027. The programme covers 3D design, modelling and animation alongside camera, audio and post-production. I've taken the elective modules toward 3D and real-time wherever they were offered, and hold the Computer-Aided Media Production certificate.",
+    bodyDe: "Bachelorstudium, Abschluss voraussichtlich Oktober 2027. Das Studium umfasst 3D-Design, Modellierung und Animation ebenso wie Kamera, Audio und Postproduktion. Die Wahlpflichtmodule habe ich, wo möglich, Richtung 3D und Echtzeit gelegt; dazu kommt das Zertifikat Computer-Aided Media Production.",
   },
   {
     id: "uni",
     icon: Boxes,
     kicker: "University work",
     title: "Projects on the course",
+    titleDe: "Projekte im Studium",
     body: "Future!comeback — a cinematic scene with two characters in a lab environment, where I handled modelling, rigging, UV mapping, texturing, lighting and rendering. Alongside that: stream overlays and 3D animations for a student e-sports event, a media installation project for a school in Sukuta, Gambia, and the audiovisual production of a graduation ceremony in a team of eight.",
+    bodyDe: "Future!comeback — eine cinematische Szene mit zwei Charakteren in einer Laborumgebung; verantwortlich für Modellierung, Rigging, UV-Mapping, Texturierung, Lighting und Rendering. Daneben: Stream-Overlays und 3D-Animationen für ein studentisches E-Sports-Event, ein Medienprojekt zur Begleitung einer Installation an einer Schule in Sukuta, Gambia, sowie die audiovisuelle Produktion einer Abschlussfeier im Team von acht.",
   },
   {
     id: "work",
     icon: Anchor,
     kicker: "Hamburg",
     title: "Alongside the degree",
+    titleDe: "Neben dem Studium",
     body: "Werkstudent in media technology at a company in Harburg: planning and producing photo, video and audio content, keeping the technical side running, and supporting marketing campaigns. Freelance since 2024 — 3D assets, interactive websites and apps, posters and flyers for local events.",
+    bodyDe: "Werkstudent im Bereich Medientechnik bei einem Unternehmen in Harburg: Planung, Erstellung und Bearbeitung von Foto-, Video- und Audioinhalten, technische Betreuung der Geräte und Unterstützung bei Marketingkampagnen. Freiberuflich seit 2024 — 3D-Assets, interaktive Websites und Apps, Poster und Flyer für lokale Veranstaltungen.",
   },
   {
     id: "outside",
     icon: Activity,
     kicker: "Outside the screen",
     title: "The rest",
+    titleDe: "Abseits vom Bildschirm",
     body: "Ten years of Taekwondo, four years as captain of my school's basketball team, three half marathons. I hike and camp when the weather allows, travel when I can, and produce and play techno — a hobby since Berlin, kept deliberately separate from the work.",
+    bodyDe: "Zehn Jahre Taekwondo, vier Jahre Kapitän der Basketballmannschaft meiner Schule, drei Halbmarathons. Ich wandere und campe, wenn das Wetter es zulässt, reise wann immer es geht und produziere und lege Techno auf — ein Hobby seit Berlin, bewusst getrennt von der Arbeit.",
   },
 ];
 
 const STATS = [
-  { value: "2007", label: "First 3D software" },
-  { value: "2027", label: "Expected graduation" },
-  { value: "4", label: "Languages" },
-  { value: "10", label: "Years Taekwondo" },
+  { value: "2007", label: "First 3D software", labelDe: "Erste 3D-Software" },
+  { value: "2027", label: "Expected graduation", labelDe: "Voraussichtl. Abschluss" },
+  { value: "4", label: "Languages", labelDe: "Sprachen" },
+  { value: "10", label: "Years Taekwondo", labelDe: "Jahre Taekwondo" },
 ];
 
 /* ────────────────────────────────────────────────────────────
@@ -126,6 +139,7 @@ function ChapterBlock({
   const reduced = useReducedMotion();
   const small = useIsSmallScreen();
   const Icon = chapter.icon;
+  const { lang } = useLang();
 
   return (
     <div
@@ -154,7 +168,7 @@ function ChapterBlock({
           className="font-display font-medium text-white leading-snug"
           style={{ fontSize: "clamp(1.15rem, 2vw, 1.6rem)" }}
         >
-          {chapter.title}
+          {lang === "de" && chapter.titleDe ? chapter.titleDe : chapter.title}
         </h3>
       </motion.div>
 
@@ -165,7 +179,7 @@ function ChapterBlock({
         className="md:col-span-7"
       >
         <p className="text-sm md:text-[0.95rem] font-light leading-[1.95] text-white/50">
-          {chapter.body}
+          {lang === "de" && chapter.bodyDe ? chapter.bodyDe : chapter.body}
         </p>
         <motion.span
           initial={{ scaleX: 0 }}
@@ -179,6 +193,7 @@ function ChapterBlock({
 }
 
 export function AboutSection() {
+  const { lang } = useLang();
   const portraitRef = useRef<HTMLDivElement>(null);
   const timelineRef = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
@@ -214,7 +229,7 @@ export function AboutSection() {
       <div className="max-w-[1600px] mx-auto px-6 md:px-10 lg:px-16">
         <Reveal direction="up">
           <p className="text-[8px] text-white/22 uppercase tracking-[0.28em] mb-10 md:mb-16">
-            About
+            {t("about", lang)}
           </p>
         </Reveal>
 
@@ -266,21 +281,25 @@ export function AboutSection() {
                 letterSpacing: "-0.015em",
               }}
             >
-              <SplitText text="I build environments" />
+              <SplitText
+                key={lang + "a"}
+                text={lang === "de" ? "Ich baue Umgebungen" : "I build environments"}
+              />
               <br />
               <span className="text-white/35">
-                <SplitText text="and characters in 3D." delay={0.22} />
+                <SplitText
+                  key={lang + "b"}
+                  text={lang === "de" ? "und Charaktere in 3D." : "and characters in 3D."}
+                  delay={0.22}
+                />
               </span>
             </blockquote>
 
             <Reveal direction="up" delay={0.1}>
               <p className="text-sm font-light leading-[1.95] text-white/45 max-w-xl">
-                Media Technology student at Hochschule Emden/Leer, based in
-                Hamburg, where I also work as a Werkstudent in media
-                technology. My focus is 3D — environments, characters, game
-                assets, and the texturing and lighting that make them read.
-                Alongside that: graphic design, and applications I design and
-                build myself. I work in Arabic, German, English and French.
+                {lang === "de"
+                  ? "Student der Medientechnik an der Hochschule Emden/Leer, ansässig in Hamburg, wo ich zusätzlich als Werkstudent in der Medientechnik arbeite. Mein Schwerpunkt ist 3D — Umgebungen, Charaktere, Game Assets sowie die Texturierung und das Licht, die sie lesbar machen. Daneben: Grafikdesign und Anwendungen, die ich selbst gestalte und entwickle. Ich arbeite auf Arabisch, Deutsch, Englisch und Französisch."
+                  : "Media Technology student at Hochschule Emden/Leer, based in Hamburg, where I also work as a Werkstudent in media technology. My focus is 3D — environments, characters, game assets, and the texturing and lighting that make them read. Alongside that: graphic design, and applications I design and build myself. I work in Arabic, German, English and French."}
               </p>
             </Reveal>
 
@@ -298,7 +317,7 @@ export function AboutSection() {
                     <CountUp value={s.value} />
                   </p>
                   <p className="mt-2 text-[8px] uppercase tracking-[0.2em] text-white/28">
-                    {s.label}
+                    {lang === "de" && s.labelDe ? s.labelDe : s.label}
                   </p>
                 </StaggerItem>
               ))}
@@ -309,7 +328,7 @@ export function AboutSection() {
         {/* ── Zeitstrahl ── beim Scrollen, ohne Klick ── */}
         <Reveal direction="up">
           <p className="text-[8px] text-white/22 uppercase tracking-[0.28em] mb-12">
-            Background
+            {t("background", lang)}
           </p>
         </Reveal>
 

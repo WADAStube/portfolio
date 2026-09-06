@@ -24,6 +24,7 @@ import { ScrollSequence } from "@/components/scroll-sequence";
 import { ShowpieceHero, ShowpieceTurntable } from "@/components/showpiece";
 import { LayerBreakdown, BreakdownIntro } from "@/components/layer-breakdown";
 import { cn } from "@/lib/utils";
+import { useLang, pick, t } from "@/lib/lang";
 
 /* ────────────────────────────────────────────────────────────
    Einheitliches Rahmenformat pro Projekt.
@@ -72,6 +73,8 @@ export function ProjectShowcase({
   const shots = project.shots;
   const small = useIsSmallScreen();
   const isGrid = project.layout === "grid";
+  const { lang } = useLang();
+  const de = project.de;
   const invert = !!project.invert;
   /* Projekte ohne Bildspalte (z. B. wenn alles im grossen
      Auftritt und im Breakdown steckt) bekommen einen breiten
@@ -166,6 +169,7 @@ export function ProjectShowcase({
   );
 
   if (project.comingSoon) {
+    /* eslint-disable react-hooks/rules-of-hooks */
     return (
       <section
         id={project.id}
@@ -176,7 +180,7 @@ export function ProjectShowcase({
             <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
               <div>
                 <p className="text-[8px] uppercase tracking-[0.28em] text-white/22 mb-3">
-                  {project.category}
+                  {pick(project.category, de?.category, lang)}
                 </p>
                 <h2
                   className="font-display font-bold text-white/35 leading-none"
@@ -190,7 +194,7 @@ export function ProjectShowcase({
               </div>
               <span className="inline-flex items-center gap-2.5 text-[9px] uppercase tracking-[0.24em] text-white/30 border border-white/[0.09] px-3 py-2 self-start md:self-auto">
                 <span className="h-1.5 w-1.5 rounded-full bg-white/30" />
-                Coming soon
+                {t("comingSoon", lang)}
               </span>
             </div>
           </Reveal>
@@ -222,7 +226,7 @@ export function ProjectShowcase({
             <div className="flex items-center gap-5">
               <span className="h-px w-10 bg-white/20 shrink-0" />
               <span className="text-[9px] uppercase tracking-[0.3em] text-white/35">
-                Project
+                {t("project", lang)}
               </span>
               <span className="h-px flex-1 bg-white/[0.07]" />
             </div>
@@ -230,7 +234,7 @@ export function ProjectShowcase({
 
           <ShowpieceHero
             title={project.title}
-            kicker={project.category}
+            kicker={pick(project.category, de?.category, lang)}
             before={project.showpiece.before}
             after={project.showpiece.after}
             beforeLabel={project.showpiece.beforeLabel}
@@ -287,7 +291,7 @@ export function ProjectShowcase({
 
               <Reveal direction="up" delay={0.1} duration={0.9}>
                 <p className={cn("text-[10px] uppercase tracking-[0.24em] mb-6", invert ? "text-black/45" : "text-white/35")}>
-                  {project.category}
+                  {pick(project.category, de?.category, lang)}
                 </p>
               </Reveal>
 
@@ -351,7 +355,7 @@ export function ProjectShowcase({
               {/* Software — ebenfalls oberhalb des Beschreibungstexts */}
               <div className="mb-7">
                 <p className={cn("text-[8px] uppercase tracking-[0.24em] mb-3", invert ? "text-black/40" : "text-white/22")}>
-                  Software
+                  {t("software", lang)}
                 </p>
                 <Stagger className="flex flex-wrap gap-2" gap={0.05}>
                   {project.tools.map((tool) => (
@@ -430,7 +434,7 @@ export function ProjectShowcase({
                 >
                   <StaggerItem>
                     <p className={cn("text-[8px] uppercase tracking-[0.24em] mb-1.5", invert ? "text-black/40" : "text-white/22")}>
-                      Year
+                      {t("year", lang)}
                     </p>
                     <p className={cn("text-sm font-light tabular-nums", invert ? "text-black/70" : "text-white/65")}>
                       {project.year}
@@ -456,7 +460,7 @@ export function ProjectShowcase({
                         ],
                   )}
                 >
-                  {project.longDescription || project.description}
+                  {pick(project.longDescription || project.description, de?.longDescription || de?.description, lang)}
                 </p>
               </Reveal>
               </motion.div>
@@ -554,7 +558,7 @@ export function ProjectShowcase({
                 after={project.compare.after}
                 beforeLabel={project.compare.beforeLabel}
                 afterLabel={project.compare.afterLabel}
-                note={project.compare.note}
+                note={pick(project.compare.note, de?.compareNote, lang)}
                 invert={invert}
                 className={columnWidthFor(
                   project.compare.before.w / project.compare.before.h,

@@ -24,7 +24,20 @@ export interface ProjectShot {
   poster?: string;
 }
 
+/** Deutsche Fassung der Textfelder eines Projekts. */
+export interface ProjectDE {
+  category?: string;
+  description?: string;
+  longDescription?: string;
+  layers?: { title?: string; label?: string; body?: string; tech?: string[] }[];
+  toggle?: { title?: string; label?: string; body?: string; tech?: string[]; name?: string };
+  compareNote?: string;
+  captions?: string[];
+}
+
 export interface Project {
+  /** Deutsche Fassung — fehlt sie, wird der englische Text genutzt */
+  de?: ProjectDE;
   id: string;
   title: string;
   category: string;
@@ -97,6 +110,24 @@ export const coverOf = (p: Project): string | null => p.shots[0]?.src ?? null;
 export const projectsData: Project[] = [
   {
     id: "poor-house",
+    de: {
+      category: "Stilisierte Umgebung",
+      description:
+        "Ein cel-shadetes Diorama — eine schiefe Hütte auf einer Felseninsel, beleuchtet von zwei Laternen.",
+      longDescription:
+        "Eine stilisierte Umgebung als geschlossenes Diorama: eine schiefe Holzhütte auf einer Felseninsel, ein Steinweg hinauf, vorn eine rote Brücke und ein Baum, der die Silhouette bricht. Die gesamte Szene ist cel-shadet — flache Farbflächen mit harten Konturen statt fotorealistischer Schattierung. Dadurch tragen Form, Kontrast und Licht die ganze Wirkung. Zwei Laternen bestimmen die Stimmung; alles außerhalb ihrer Reichweite fällt bewusst ins Dunkle.",
+      layers: [
+        { label: "Boden", title: "Die Basis", body: "Eine Fläche, mit Soft Select geformt und bewusst uneben gehalten. Die Silhouette entscheidet bereits, wo später der Weg verläuft und wo Bewuchs entsteht.", tech: ["Polygonfläche, unterteilt und per Soft Select modelliert", "Asymmetrischer Umriss — kein flacher Boden", "aiToon mit zwei Tonstufen, Konturen zurückgenommen"] },
+        { label: "Steine", title: "Der Rand", body: "Drei Grundfelsen, über MASH verteilt. Die Dichte steigt dort, wo das Auge eine Grenze lesen soll, statt gleichmäßig zu streuen.", tech: ["MASH-Verteilung im Mesh-Modus auf dem Terrain", "Random-Node für Rotation und Skalierung, ID-Node für Varianten", "Repro-Node für renderbare Geometrie"] },
+        { label: "Haus", title: "Die Mitte", body: "Vollständig von Hand modelliert und bewusst schief. Gerade Winkel würden gegen den gezeichneten Look arbeiten, auf dem die Szene aufbaut.", tech: ["Box-Modeling, von der Grundform zum Detail", "Stützkanten an jeder Kante, die scharf bleibt", "Niedriger Angle Threshold, damit Innenkanten Konturen bekommen"] },
+        { label: "Brücke", title: "Der Zugang", body: "Modularer Aufbau — ein Element mit erhaltener Transformation vervielfältigt. Sie sagt, dass der Ort erreichbar und bewohnt ist, und führt den Blick ins Bild.", tech: ["Wiederholte Elemente, dupliziert mit erhaltener Transformation", "Eigene Gruppe, unabhängig positioniert", "Kräftiges Rot als bewusster Akzent gegen das Grün"] },
+        { label: "Bäume", title: "Höhe und Rahmen", body: "Lizenzierte Basismodelle, vollständig neu geshadet — die fotorealistischen Materialien haben den Cel-Look gebrochen. Blätter sind Opacity-Masken statt Geometrie.", tech: ["Komplettes Neu-Shading für einheitlichen Stil", "Two-Sided-Material, damit Blattseiten unterschiedlich lesen", "Höherer Angle Threshold, damit das Laub nicht in Linien ertrinkt"] },
+        { label: "Gras", title: "Der Boden wird lebendig", body: "Mehrere hunderttausend Instanzen, die Dichte von Hand gemalt. Bewuchs sammelt sich an Kanten und in Mulden — gleichmäßige Streuung liest sich immer künstlich.", tech: ["MASH-Verteilung auf dem Terrain-Mesh", "Placer-Tool und Influence-Locator für lokale Dichte", "Konturen stark reduziert, sonst wird das Bild unruhig"] },
+        { label: "Details", title: "Bodendetails", body: "Die Trittsteine folgen der Laufrichtung von der Brücke zur Tür. Laub liegt auch auf den Felsen, nicht nur am Boden.", tech: ["Getrennte MASH-Netzwerke für Weg, Pflanzen und Laub", "Steine nach Absicht gesetzt, nicht zufällig", "Farbvariation von Grün bis Braun"] },
+        { label: "Props", title: "Spuren von Leben", body: "Feuerstelle, Kessel, Werkzeug, Leiter, Briefkasten — einzeln modelliert und von Hand gesetzt. Der Kessel steht dort, wo jemand gekocht hat.", tech: ["Einzeln modellierte Objekte mit eigenen Pivots", "Manuelle Platzierung statt Streuung", "Leichte Schieflagen gegen den aufgeräumten Eindruck"] }
+      ],
+      toggle: { name: "Licht", label: "Licht", title: "Der Umschlag", body: "Bis hierhin war die Szene neutral beleuchtet. Das finale Setup kippt sie in die Nacht — und der ganze Look hängt an einer Entscheidung: einem gerichteten Key-Light. Reines Umgebungslicht würde die Tonwertstufen weichzeichnen und das Cel-Shading zusammenbrechen lassen.", tech: ["Key / Fill / Rim mit gerichtetem Key für harte Schattenkanten", "Laternen und Feuer als Practicals — emissive Geometrie plus echtes Licht", "Warme 2200 K gegen ein kühles Ambient, Schatten leicht ins Blaue"] }
+    },
     title: "Lantern Island",
     category: "Stylised Environment",
     filterCategory: "3D Modeling",
@@ -253,6 +284,7 @@ export const projectsData: Project[] = [
   },
   {
     id: "futuristic-bunker",
+    de: { category: "Sci-Fi-Umgebung" },
     comingSoon: true,
     stats: { verts: 742687, tris: 1447482 },
     title: "Futuristic Bunker",
@@ -276,6 +308,7 @@ export const projectsData: Project[] = [
   },
   {
     id: "robot-study",
+    de: { category: "Character Art / Fan-Studie" },
     comingSoon: true,
     stats: { verts: 7852, tris: 15029 },
     title: "Robot Study",
@@ -340,6 +373,7 @@ export const projectsData: Project[] = [
   },
   {
     id: "apocalypse",
+    de: { category: "Environment Art" },
     comingSoon: true,
     stats: { verts: 5118889, tris: 6799929 },
     title: "Apocalypse",
@@ -363,6 +397,7 @@ export const projectsData: Project[] = [
   },
   {
     id: "character-studies",
+    de: { category: "Charakter-Modellierung & Grooming" },
     comingSoon: true,
     stats: { verts: 236039, tris: 467765 },
     title: "Character Studies",
@@ -386,6 +421,7 @@ export const projectsData: Project[] = [
   },
   {
     id: "isometric-room",
+    de: { category: "Interieur / Prop-Set" },
     comingSoon: true,
     stats: { verts: 186633, tris: 261318 },
     title: "Isometric Room",
@@ -410,6 +446,15 @@ export const projectsData: Project[] = [
   },
   {
     id: "asset-studies",
+    de: {
+      category: "Hard-Surface-Asset",
+      description:
+        "Ein Hard-Surface-Asset durch die komplette Pipeline — Modellierung, UV-Layout und PBR-Texturierung.",
+      longDescription:
+        "Ein einzelnes Asset, an dem die vollständige Pipeline durchgespielt wurde. Sauber modelliert, mit Blick auf Texeldichte und Packdichte aufgewickelt und anschließend in Substance Painter texturiert. Das UV-Layout ist bewusst mit dabei — Packqualität ist in einem Beauty-Render unsichtbar, entscheidet aber darüber, ob ein Asset produktionstauglich ist.",
+      compareNote:
+        "Shaded gegen Wireframe aus derselben Kamera. Das Drahtgitter zeigt, wohin das Polygonbudget geflossen ist: dicht dort, wo Rundungen und Kanten sauber lesen müssen, sparsam überall sonst."
+    },
     stats: { verts: 10145, tris: 20000 },
     title: "Security Camera",
     category: "Hard Surface Asset",
@@ -432,6 +477,15 @@ export const projectsData: Project[] = [
   },
   {
     id: "i-need-space",
+    de: {
+      category: "Filmplakat / Compositing",
+      description:
+        "Ein Filmplakat, das eine einzige Emotion tragen soll — Verlorenheit — über Komposition, Farbe und Typografie.",
+      longDescription:
+        "Ein Kursprojekt an der Hochschule Emden/Leer mit einer Vorgabe: eine bestimmte Emotion über ein einzelnes statisches Bild auslösen. Gewählt war Verlorenheit, und das Plakat antwortet darauf mit einem einzelnen Astronauten, der vor der Erdkrümmung treibt. Die Montage legt eine entsättigte, blaustichige Milchstraße als Basis, eine maskierte und farbkorrigierte Erde, einen über Luminanzmasken freigestellten Astronauten und Trümmer aus einer Explosionsaufnahme im Modus Aufhellen übereinander. Der Titel spielt mit beiden Lesarten — dem Weltraum und dem Bedürfnis nach Abstand.",
+      compareNote:
+        "Dasselbe Motiv in zwei Farbräumen. RGB besteht aus Licht und erreicht einen größeren Farbraum — das zeigt ein Bildschirm. CMYK besteht aus Druckfarbe und kommt dort nicht hin, deshalb treten die tiefen Blautöne und das Leuchten um die Erde zurück und die Schwarztöne werden wärmer. Konvertieren und Korrigieren vor dem Druck verhindert, dass ein Plakat matter ankommt als gestaltet."
+    },
     invert: true,
     title: "I Need Space",
     category: "Film Poster / Compositing",
@@ -462,6 +516,7 @@ export const projectsData: Project[] = [
   },
   {
     id: "bloomest",
+    de: { category: "Corporate Design / Print" },
     comingSoon: true,
     title: "Bloomest",
     category: "Corporate Design / Print",
@@ -482,6 +537,7 @@ export const projectsData: Project[] = [
 
   {
     id: "web-products",
+    de: { category: "Full-Stack / Front-End" },
     comingSoon: true,
     title: "Web Products",
     category: "Full-Stack / Front-End",

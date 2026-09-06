@@ -2,16 +2,18 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useLang, t } from "@/lib/lang";
 
 const sectionIds = ["work", "about", "contact"];
 
 const navLinks = [
-  { name: "Selected Work", href: "#work", id: "work" },
-  { name: "About", href: "#about", id: "about" },
-  { name: "Contact", href: "#contact", id: "contact" },
+  { key: "navWork" as const, href: "#work", id: "work" },
+  { key: "navAbout" as const, href: "#about", id: "about" },
+  { key: "navContact" as const, href: "#contact", id: "contact" },
 ];
 
 export function Navbar() {
+  const { lang, setLang } = useLang();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
@@ -90,7 +92,7 @@ export function Navbar() {
           <nav className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
               <a
-                key={link.name}
+                key={t(link.key, lang)}
                 href={link.href}
                 className={cn(
                   "text-sm font-medium transition-colors duration-200 relative group",
@@ -98,7 +100,7 @@ export function Navbar() {
                 )}
                 onClick={(e) => { e.preventDefault(); scrollTo(link.href); }}
               >
-                {link.name}
+                {t(link.key, lang)}
                 <span
                   className={cn(
                     "absolute -bottom-1 left-0 h-[1px] bg-primary transition-all duration-300",
@@ -109,12 +111,23 @@ export function Navbar() {
             ))}
 
             {/* Availability dot */}
+            <button
+              type="button"
+              onClick={() => setLang(lang === "de" ? "en" : "de")}
+              aria-label="Language"
+              className="hidden md:flex items-center gap-1 mr-5 text-[10px] uppercase tracking-[0.16em] text-white/30 hover:text-white/70 transition-colors duration-300"
+            >
+              <span className={lang === "en" ? "text-white/85" : undefined}>EN</span>
+              <span className="text-white/20">/</span>
+              <span className={lang === "de" ? "text-white/85" : undefined}>DE</span>
+            </button>
+
             <div className="flex items-center gap-2 text-xs text-muted-foreground/60 ml-2">
               <span className="relative flex h-[7px] w-[7px]">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-50" />
                 <span className="relative inline-flex rounded-full h-[7px] w-[7px] bg-green-500" />
               </span>
-              Based in Hamburg
+              {t("based", lang)}
             </div>
           </nav>
 
@@ -139,7 +152,7 @@ export function Navbar() {
               >
                 {navLinks.map((link, i) => (
                   <motion.a
-                    key={link.name}
+                    key={t(link.key, lang)}
                     href={link.href}
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
@@ -151,12 +164,12 @@ export function Navbar() {
                       scrollTo(link.href);
                     }}
                   >
-                    {link.name}
+                    {t(link.key, lang)}
                   </motion.a>
                 ))}
                 <div className="flex items-center gap-2 text-xs text-muted-foreground/50 pt-2 border-t border-white/5">
                   <span className="h-[6px] w-[6px] rounded-full bg-green-500" />
-                  Based in Hamburg
+                  {t("based", lang)}
                 </div>
               </motion.div>
             )}
