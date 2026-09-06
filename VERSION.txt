@@ -1,43 +1,44 @@
-Portfolio — Version 35  (19.08.2026)
-Zweisprachig: Englisch und Deutsch.
+Portfolio — Version 36  (19.08.2026)
 
-UMSCHALTER
-Oben rechts in der Navigation: EN / DE.
-Die Wahl wird im Browser gespeichert und bleibt beim naechsten
-Besuch erhalten. Ohne gespeicherte Wahl entscheidet die
-Browsersprache: deutscher Browser -> Deutsch, sonst Englisch.
-Das lang-Attribut der Seite wird mitgesetzt (wichtig fuer
-Google und Screenreader).
+NEU: "Theorie in der Anwendung"
+Ein eigener Abschnitt bei Lantern Island, zwischen Breakdown
+und Turntable. Er verbindet die Studienmodule mit den
+Entscheidungen im Projekt — drei Module, je drei Punkte:
 
-UEBERSETZT
-- Navigation, Hero, Abschnittsueberschriften, Kontakt, Footer
-- Alle drei sichtbaren Projekte: Kategorie, Kurz- und
-  Langbeschreibung
-- Der komplette Breakdown von Lantern Island: alle acht Ebenen
-  mit Titel, Text und Technikzeile, dazu der Lichtschalter
-- Der RGB/CMYK-Erklaertext bei I Need Space
-- Der gesamte About-Bereich: Ueberschrift, Einleitung, alle
-  sechs Abschnitte, die vier Zahlen
-- "Coming soon" -> "In Arbeit"
+  Lichttechnik
+    Drei-Punkt-Beleuchtung · Hartes gegen weiches Licht ·
+    Practicals
+  Farbenlehre
+    Kalt-Warm-Kontrast · Farbige Schatten · Begrenzte Palette
+  Studiotechnik
+    ACES · Belichtung in Blendenstufen · Lineare Ausgabe
 
-AUFBAU
-Sprachlogik: src/lib/lang.tsx
-  - UI-Beschriftungen im Objekt UI
-  - pick(en, de, lang) waehlt den passenden Text
-Projekttexte: src/data/projects.ts, Feld "de" pro Projekt
-About-Texte: src/components/about-section.tsx, Felder
-  titleDe / bodyDe / labelDe
+Vollstaendig zweisprachig.
+Datei: src/components/theory-section.tsx
+Inhalte: src/data/projects.ts, Feld "theory"
 
-Fehlt eine deutsche Fassung, erscheint automatisch der
-englische Text — nichts bleibt leer.
+AUS DEINEM DOKUMENT GEKUERZT
+Die Vorlage hatte deutlich mehr Punkte und je drei Absaetze
+(Theorie / Im Projekt / Unterschied). Ich habe pro Punkt einen
+Absatz daraus gemacht und die neun staerksten ausgewaehlt.
+Grund: In der Vorlage steht die Theorie oft vor der Anwendung —
+das liest sich wie ein Skript. Hier steht zuerst, was du
+getan hast, die Theorie traegt nur noch.
 
-NICHT UEBERSETZT (mit Absicht)
-Projektnamen, Softwarenamen und die Bildunterschriften der
-einzelnen Aufnahmen. Begriffe wie "Wireframe" oder "Turntable"
-sind auch im deutschen Sprachgebrauch ueblich.
+Nicht uebernommen: Lichtverhaeltnis, Lichtfuehrung, die
+Kelvin-Tabelle, Bittiefen-Details. Sie wiederholen groesstenteils,
+was die anderen Punkte schon sagen.
+
+BITTE PRUEFEN — WICHTIG
+Dein Dokument sagt selbst, die Zuordnung zu den Modulen sei
+geraten. Streiche alles, was in deinen Modulen nicht vorkam.
+Ein Dozent oder Lead erkennt sofort, wenn ein Modulinhalt
+behauptet wird, der nicht stattgefunden hat.
+Besonders pruefen: Hiess das Modul "Studiotechnik"? Kam ACES
+dort wirklich vor, oder hast du dir das selbst erarbeitet?
+Letzteres waere sogar staerker — dann sollte es so dastehen.
 
 GEPRUEFT
-- Umschalten in beide Richtungen, lang-Attribut wechselt
-- Navigation, Kapitel und Marken auf Deutsch nachgemessen
+- Build und TypeScript fehlerfrei
 - Kein Ueberlauf bei 1440 und 390 px
-- Build, TypeScript, keine 404, keine Konsolenfehler
+- Keine 404, keine Konsolenfehler

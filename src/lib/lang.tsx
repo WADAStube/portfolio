@@ -95,6 +95,15 @@ export const UI = {
   downloadCV: { en: "Download CV", de: "Lebenslauf laden" },
   swipe: { en: "Swipe", de: "Wischen" },
   scrollRotate: { en: "Hover to rotate", de: "Mauszeiger dreht" },
+  theory: { en: "Theory in practice", de: "Theorie in der Anwendung" },
+  theoryTitle: {
+    en: "What the coursework brought in",
+    de: "Was aus dem Studium ins Projekt floss",
+  },
+  theoryIntro: {
+    en: "A 3D project looks like software work. The decisions that actually shape the image are not software decisions — they are the same ones made on a film set, in a photo studio or in stage lighting. These came out of the lighting, colour theory and studio technology modules.",
+    de: "Ein 3D-Projekt sieht nach reiner Softwarearbeit aus. Die Entscheidungen, die über die Bildwirkung bestimmen, sind aber keine Software-Entscheidungen — es sind dieselben, die am Filmset, im Fotostudio oder in der Bühnenbeleuchtung getroffen werden. Diese hier stammen aus den Modulen Lichttechnik, Farbenlehre und Studiotechnik.",
+  },
 } as const;
 
 export function t(key: keyof typeof UI, lang: Lang) {

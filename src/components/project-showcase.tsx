@@ -23,6 +23,7 @@ import { CompareSlider } from "@/components/compare-slider";
 import { ScrollSequence } from "@/components/scroll-sequence";
 import { ShowpieceHero, ShowpieceTurntable } from "@/components/showpiece";
 import { LayerBreakdown, BreakdownIntro } from "@/components/layer-breakdown";
+import { TheorySection } from "@/components/theory-section";
 import { cn } from "@/lib/utils";
 import { useLang, pick, t } from "@/lib/lang";
 
@@ -579,6 +580,8 @@ export function ProjectShowcase({
           <LayerBreakdown layers={project.layers} />
         </>
       ) : null}
+
+      {project.theory?.length ? <TheorySection modules={project.theory} /> : null}
 
       {project.showpiece?.frames?.length ? (
         <div className="mt-16 md:mt-28">

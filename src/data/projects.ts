@@ -70,6 +70,12 @@ export interface Project {
   comingSoon?: boolean;
   /** Kehrt die Sektion auf hellen Grund um (Kontrastbruch) */
   invert?: boolean;
+  /** Theorie aus den Studienmodulen, auf das Projekt bezogen */
+  theory?: {
+    module: string;
+    moduleDe?: string;
+    items: { title: string; titleDe?: string; body: string; bodyDe?: string }[];
+  }[];
   /** Scrollgesteuerter Aufbau in Ebenen (gleiche Kamera) */
   layers?: {
     src: string;
@@ -139,6 +145,80 @@ export const projectsData: Project[] = [
       "A cel-shaded diorama — a leaning cottage on a rock island, lit by two lanterns.",
     longDescription:
       "A stylised environment built as a self-contained diorama: a leaning timber cottage on a rock island, a stone path leading up to it, a red bridge at the front and a tree breaking the silhouette. The whole scene is cel-shaded — flat colour blocks with hard outlines instead of photoreal shading — which puts all the weight on shape, contrast and lighting. Two lanterns carry the entire mood; everything outside their reach falls into darkness on purpose.",
+    theory: [
+      {
+        module: "Lighting",
+        moduleDe: "Lichttechnik",
+        items: [
+          {
+            title: "Three-point setup",
+            titleDe: "Drei-Punkt-Beleuchtung",
+            body: "Key from the side and above, fill opposite and much weaker, rim from behind. Without the rim the dark rocks would disappear against the dark background. In 3D an extra light costs only render time — the count was still kept low, because every additional source makes the image harder to read, not better.",
+            bodyDe: "Führungslicht seitlich erhöht, Aufhelllicht gegenüber und deutlich schwächer, Kantenlicht von hinten. Ohne das Kantenlicht würden die dunklen Felsen vor dem dunklen Hintergrund verschwinden. In 3D kostet ein zusätzliches Licht nur Rechenzeit — die Anzahl blieb trotzdem niedrig, weil jede weitere Quelle das Bild unlesbarer macht, nicht besser.",
+          },
+          {
+            title: "Hard against soft",
+            titleDe: "Hartes gegen weiches Licht",
+            body: "The shadow edge follows from source size against distance. Here that was not a style choice but a technical requirement: cel shading depends on hard tone steps, and a soft ambient would have produced gradients and killed the look. Hence a directional key — parallel rays from far away, like sun or moon.",
+            bodyDe: "Die Schattenkante ergibt sich aus Lichtquellengröße im Verhältnis zum Abstand. Das war hier keine Stilfrage, sondern technische Notwendigkeit: Cel-Shading lebt von harten Tonwertstufen, ein weiches Umgebungslicht hätte weiche Verläufe erzeugt und den Look zerstört. Deshalb ein gerichtetes Licht — parallele Strahlen aus großer Entfernung, wie Sonne oder Mond.",
+          },
+          {
+            title: "Practicals",
+            titleDe: "Practicals",
+            body: "Lanterns and fire are visible in frame and light their surroundings. On a set that is one object; in 3D it is two. An emissive material looks bright but lights nothing, so each practical is emissive geometry plus a real light in the same place.",
+            bodyDe: "Laternen und Feuerstelle sind im Bild sichtbar und beleuchten ihre Umgebung. Am Set ist das ein Objekt, in 3D sind es zwei. Ein selbstleuchtendes Material erscheint hell, beleuchtet aber nichts — jedes Practical besteht deshalb aus leuchtender Geometrie plus echter Lichtquelle an derselben Stelle.",
+          },
+        ],
+      },
+      {
+        module: "Colour theory",
+        moduleDe: "Farbenlehre",
+        items: [
+          {
+            title: "Warm against cool",
+            titleDe: "Kalt-Warm-Kontrast",
+            body: "Lanterns and fire sit at roughly 2200 K, deep orange; the ambient is kept cool. The contrast turns the warm zones into islands, with everything around them colder — which matches what the scene is about.",
+            bodyDe: "Laternen und Feuer liegen bei etwa 2200 Kelvin, tief orange; das Umgebungslicht bleibt kühl. Der Kontrast macht die warmen Zonen zu Inseln, um die herum es kälter wird — was zum Motiv passt.",
+          },
+          {
+            title: "Shadows are not grey",
+            titleDe: "Farbige Schatten",
+            body: "Shadows are lit by whatever else emits light, usually the sky, and the sky is blue. The shadow steps in the toon ramps are therefore tinted slightly blue rather than neutral grey. The same base colour reads dull with a grey shadow and alive with a blue one.",
+            bodyDe: "Schatten werden von dem beleuchtet, was sonst noch Licht abgibt — meist der Himmel, und der ist blau. Die Schattenstufen in den Toon-Ramps sind deshalb leicht bläulich getönt statt neutralgrau. Dieselbe Grundfarbe wirkt mit grauem Schatten stumpf und mit blaustichigem lebendig.",
+          },
+          {
+            title: "A limited palette",
+            titleDe: "Begrenzte Palette",
+            body: "The whole scene runs on around twelve base colours. With a stylised look and no textures that is not an option but a requirement — on flat colour surfaces any unmatched colour shows immediately. Saturation carries the eye: strong colour only on the lantern glow, the red bridge and the flames.",
+            bodyDe: "Die gesamte Szene arbeitet mit rund zwölf Grundfarben. Bei einem stilisierten Look ohne Texturen ist das keine Option, sondern Voraussetzung — auf flachen Farbflächen fällt jede unabgestimmte Farbe sofort auf. Die Sättigung führt den Blick: kräftige Farbe nur am Laternenlicht, an der roten Brücke und an den Flammen.",
+          },
+        ],
+      },
+      {
+        module: "Studio technology",
+        moduleDe: "Studiotechnik",
+        items: [
+          {
+            title: "ACES colour management",
+            titleDe: "Farbmanagement mit ACES",
+            body: "The scene works in an ACES workflow — material colours, light values, viewport and output. It also produced the one problem that was hardest to identify: renderers work linearly, screens display gamma-corrected. Without the output transform on export the files looked almost black outside the software, although the data was correct.",
+            bodyDe: "Die Szene arbeitet durchgehend im ACES-Workflow — Materialfarben, Lichtwerte, Viewport und Ausgabe. Daraus entstand auch das Problem, das am schwersten zu erkennen war: Renderer rechnen linear, Bildschirme zeigen gammakorrigiert. Ohne Ausgangstransformation beim Export erschienen die Dateien außerhalb der Software fast schwarz, obwohl die Daten korrekt waren.",
+          },
+          {
+            title: "Exposure in stops",
+            titleDe: "Belichtung in Blendenstufen",
+            body: "Brightness in Arnold is set through exposure in stops rather than linear intensity values — the same logic as on a camera, where one step doubles the light. It makes the values comparable instead of arbitrary.",
+            bodyDe: "Die Helligkeit wird in Arnold über Exposure in Blendenstufen gesteuert, nicht über lineare Intensitätswerte — dieselbe Logik wie an der Kamera, wo ein Schritt einer Verdopplung entspricht. Das macht die Werte vergleichbar statt beliebig.",
+          },
+          {
+            title: "Linear output",
+            titleDe: "Lineare Ausgabe",
+            body: "Rendered out as EXR at high bit depth, comparable to a RAW file in photography: more information than the display can show, and room left for grading afterwards.",
+            bodyDe: "Ausgabe als EXR mit hoher Bittiefe, vergleichbar mit einer RAW-Datei in der Fotografie: mehr Information als der Bildschirm zeigen kann, und Spielraum für die Nachbearbeitung.",
+          },
+        ],
+      },
+    ],
     layers: [
       {
         src: "/images/projects/poor-house/layers/01.jpg",
