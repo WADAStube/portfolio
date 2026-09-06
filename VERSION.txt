@@ -1,38 +1,41 @@
-Portfolio — Version 33  (19.08.2026)
+Portfolio — Version 34  (19.08.2026)
 
-PROJEKTE IN UEBERARBEITUNG AUSGEBLENDET
-Sieben Projekte zeigen nur noch Name, Kategorie und den
-Hinweis "Coming soon" — keine Bilder mehr:
-  Futuristic Bunker, Robot Study, Apocalypse,
-  Character Studies, Isometric Room, Bloomest, Web Products
-In der Liste oben stehen sie gedimmt mit "Coming soon".
+FEHLER BEHOBEN — Bild blieb beim Zurueckscrollen haengen
+Nein, das war keine Absicht. Das umgeschaltete Bild lag ueber
+ALLEN Ebenen. Solange der Schalter an war, verdeckte es beim
+Zurueckscrollen die frueheren Ebenen.
+Jetzt wird seine Deckkraft mit dem Sichtfenster der letzten
+Ebene multipliziert: scrollt man zurueck, blendet es aus und
+der normale Aufbau (08, 07, 06 ...) ist wieder zu sehen.
+Der Schalter behaelt seinen Zustand — scrollt man wieder nach
+unten, ist das Licht noch an.
+Nachgemessen beim Zurueckscrollen: 100 -> 28 -> 0.
 
-Sichtbar bleiben: Lantern Island, Security Camera,
-I Need Space.
+ABOUT NEU GESCHRIEBEN
+Die Erzaehlform ist raus. Keine Wendepunkte, keine Lehren,
+keine Saetze wie "Best decision I've made" oder "repeat the
+boring part". Stattdessen sechs sachliche Abschnitte.
 
-"Asset & Texturing Studies" heisst jetzt "Security Camera"
-und zeigt nur noch den Vergleich Shaded/Wireframe der Kamera.
+Neu dabei, weil bisher fast nichts zum Studium dastand:
+- Medientechnik an der Hochschule Emden/Leer, seit 2022,
+  Abschluss voraussichtlich Oktober 2027
+- Wahlmodule Richtung 3D, CAMP-Zertifikat
+- Ein eigener Abschnitt zu den Hochschulprojekten:
+  Future!comeback, E-Sports-Overlays, Gambia Insight,
+  Abschlussfeier-Produktion
+- Ein Abschnitt zur Arbeit: Werkstudent und Freelance
 
-Zurueckholen: in src/data/projects.ts die Zeile
-comingSoon: true beim jeweiligen Projekt loeschen.
+Sport, Reisen und Techno stehen jetzt in EINEM kurzen
+Abschnitt am Ende, ohne Deutung.
 
-SCHALTER NEU
-Deutlich groesser und praesenter: Karte mit Namen und Zustand
-links, daneben ein Schieber im Systemstil (58 x 34 px, mit
-Federbewegung). Eingeschaltet warmes Bernstein mit weichem
-Schein — dieselbe Farbe wie die Laternen im Bild.
+Ueberschrift: "I build environments and characters in 3D."
+Zahlen: 2007 / 2027 / 4 Sprachen / 10 Jahre Taekwondo.
 
-HANDY — Ueberlagerung behoben
-Der Schalter lag auf dem Textstapel und ueberdeckte ihn. Jetzt
-steht er in einer eigenen Zeile zwischen Bild und Text.
+BITTE PRUEFEN
+Die Hochschulprojekte stammen aus deinem Lebenslauf. Falls
+dort etwas ungenau ist, sag Bescheid.
 
 GEPRUEFT
-- Sieben Coming-soon-Marken gezaehlt
-- Schalter funktioniert auf Desktop und Handy, keine
-  Ueberlagerung mehr
+- Build und TypeScript fehlerfrei
 - Kein Ueberlauf bei 1440 und 390 px
-- Build, TypeScript, keine 404, keine Konsolenfehler
-
-OFFEN
-Der Beschreibungstext von Lantern Island wartet auf deine
-Stichpunkte — dann setze ich Layout und Typografie dort neu.
+- Keine 404, keine Konsolenfehler

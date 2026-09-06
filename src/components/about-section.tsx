@@ -29,57 +29,51 @@ const CHAPTERS = [
     id: "origin",
     icon: Boxes,
     kicker: "2007",
-    title: "It started with one sentence",
-    body: "My cousin, a mechanical engineer, installed SolidWorks on my computer and said: with this you can build things that don't exist yet. I was ten. I didn't understand half the interface, but I understood that sentence.",
+    title: "Where it started",
+    body: "My cousin, a mechanical engineer, installed SolidWorks on my computer and showed me how to build an object from nothing. I was ten. I've been making things in 3D since.",
   },
   {
     id: "photoshop",
     icon: Trophy,
     kicker: "2011",
-    title: "Second out of fourteen",
-    body: "My first design competition, working in Photoshop CS5. Fourteen entries, second place, and a Sony Alpha NEX-3 as the prize. That camera is still the reason I think about framing before I think about geometry.",
-  },
-  {
-    id: "body",
-    icon: Activity,
-    kicker: "Discipline",
-    title: "Ten years of showing up",
-    body: "Taekwondo from childhood into my late teens, ten years of it. Four years as captain of my school's basketball team, and three half marathons since. Turn up, repeat the boring part, and one day the hard thing is easy. Retopology works exactly like that.",
-  },
-  {
-    id: "berlin",
-    icon: Disc3,
-    kicker: "Berlin",
-    title: "Techno got me to Germany",
-    body: "I moved from Tunisia at nineteen, learned the language, and played my first set in 2017. Producing and DJing stay a hobby by choice — the one thing I do purely because I want to.",
-  },
-  {
-    id: "road",
-    icon: Plane,
-    kicker: "Outdoors",
-    title: "The camera comes along",
-    body: "I travel, hike and camp whenever I can, and the camera is always in the bag. Composition, light, knowing when to press and when to wait — I picked that up outside, and it's the same eye I use to frame a render.",
+    title: "First competition",
+    body: "A design competition in Photoshop CS5. Fourteen entries, second place, and a Sony Alpha NEX-3 as the prize. The camera is still in use.",
   },
   {
     id: "study",
     icon: BookOpen,
-    kicker: "Emden",
-    title: "Media Technology",
-    body: "Medientechnik at Hochschule Emden/Leer is where 3D, game design, code and image share one room. Environments, characters, texturing and pipeline thinking — the degree gave the thing I'd been doing since 2007 a proper structure.",
+    kicker: "Since 2022",
+    title: "Media Technology, Hochschule Emden/Leer",
+    body: "Bachelor's degree, expected October 2027. The programme covers 3D design, modelling and animation alongside camera, audio and post-production. I've taken the elective modules toward 3D and real-time wherever they were offered, and hold the Computer-Aided Media Production certificate.",
   },
   {
-    id: "hamburg",
+    id: "uni",
+    icon: Boxes,
+    kicker: "University work",
+    title: "Projects on the course",
+    body: "Future!comeback — a cinematic scene with two characters in a lab environment, where I handled modelling, rigging, UV mapping, texturing, lighting and rendering. Alongside that: stream overlays and 3D animations for a student e-sports event, a media installation project for a school in Sukuta, Gambia, and the audiovisual production of a graduation ceremony in a team of eight.",
+  },
+  {
+    id: "work",
     icon: Anchor,
     kicker: "Hamburg",
-    title: "Where I work now",
-    body: "I live in Hamburg and work here as a Werkstudent in media technology — planning and producing photo, video and audio content, and keeping the technical side running. Red brick, water through the middle of the city, harbour light. Good place to build things.",
+    title: "Alongside the degree",
+    body: "Werkstudent in media technology at a company in Harburg: planning and producing photo, video and audio content, keeping the technical side running, and supporting marketing campaigns. Freelance since 2024 — 3D assets, interactive websites and apps, posters and flyers for local events.",
+  },
+  {
+    id: "outside",
+    icon: Activity,
+    kicker: "Outside the screen",
+    title: "The rest",
+    body: "Ten years of Taekwondo, four years as captain of my school's basketball team, three half marathons. I hike and camp when the weather allows, travel when I can, and produce and play techno — a hobby since Berlin, kept deliberately separate from the work.",
   },
 ];
 
 const STATS = [
   { value: "2007", label: "First 3D software" },
-  { value: "10", label: "Years Taekwondo" },
+  { value: "2027", label: "Expected graduation" },
   { value: "4", label: "Languages" },
+  { value: "10", label: "Years Taekwondo" },
 ];
 
 /* ────────────────────────────────────────────────────────────
@@ -119,7 +113,6 @@ function CountUp({ value }: { value: string }) {
 
 /* ────────────────────────────────────────────────────────────
    ChapterBlock — ein Abschnitt des Zeitstrahls.
-   Erscheint beim Scrollen von selbst, nichts zum Anklicken.
    ──────────────────────────────────────────────────────────── */
 function ChapterBlock({
   chapter,
@@ -129,7 +122,7 @@ function ChapterBlock({
   index: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, amount: 0.45 });
+  const inView = useInView(ref, { once: true, amount: 0.4 });
   const reduced = useReducedMotion();
   const small = useIsSmallScreen();
   const Icon = chapter.icon;
@@ -139,7 +132,6 @@ function ChapterBlock({
       ref={ref}
       className="relative grid grid-cols-1 md:grid-cols-12 gap-x-10 gap-y-3 pl-9 md:pl-14 py-8 md:py-12"
     >
-      {/* Punkt auf der Linie */}
       <motion.span
         initial={{ scale: reduced ? 1 : 0.4, opacity: 0 }}
         animate={inView ? { scale: 1, opacity: 1 } : {}}
@@ -149,7 +141,6 @@ function ChapterBlock({
         <Icon size={9} />
       </motion.span>
 
-      {/* Zeit + Titel */}
       <motion.div
         initial={{ opacity: 0, x: reduced || small ? 0 : -34, y: reduced ? 0 : 18 }}
         animate={inView ? { opacity: 1, x: 0, y: 0 } : {}}
@@ -167,29 +158,19 @@ function ChapterBlock({
         </h3>
       </motion.div>
 
-      {/* Text */}
       <motion.div
         initial={{ opacity: 0, x: reduced || small ? 0 : 40, y: reduced ? 0 : 18 }}
         animate={inView ? { opacity: 1, x: 0, y: 0 } : {}}
-        transition={{
-          duration: reduced ? 0.2 : 0.9,
-          ease: EASE,
-          delay: reduced ? 0 : 0.12,
-        }}
+        transition={{ duration: reduced ? 0.2 : 0.9, ease: EASE, delay: reduced ? 0 : 0.12 }}
         className="md:col-span-7"
       >
         <p className="text-sm md:text-[0.95rem] font-light leading-[1.95] text-white/50">
           {chapter.body}
         </p>
-        {/* Feine Linie, die unter dem Text aufzieht */}
         <motion.span
           initial={{ scaleX: 0 }}
           animate={inView ? { scaleX: 1 } : {}}
-          transition={{
-            duration: reduced ? 0.2 : 1.1,
-            ease: EASE,
-            delay: reduced ? 0 : 0.3,
-          }}
+          transition={{ duration: reduced ? 0.2 : 1.1, ease: EASE, delay: reduced ? 0 : 0.3 }}
           className="mt-6 block h-px w-full max-w-md origin-left bg-white/[0.08]"
         />
       </motion.div>
@@ -285,27 +266,27 @@ export function AboutSection() {
                 letterSpacing: "-0.015em",
               }}
             >
-              <SplitText text="I make things that" />
+              <SplitText text="I build environments" />
               <br />
               <span className="text-white/35">
-                <SplitText text="didn't exist yesterday." delay={0.22} />
+                <SplitText text="and characters in 3D." delay={0.22} />
               </span>
             </blockquote>
 
             <Reveal direction="up" delay={0.1}>
               <p className="text-sm font-light leading-[1.95] text-white/45 max-w-xl">
-                29, Tunisian, based in Hamburg. I build in 3D — environments,
-                characters, game assets, and the textures and layouts that
-                make them read. Alongside that: graphic design, and apps I
-                design and code myself. I speak Arabic, German, English and
-                French, and I'm at my best on projects that need more than
-                one of those skills at once.
+                Media Technology student at Hochschule Emden/Leer, based in
+                Hamburg, where I also work as a Werkstudent in media
+                technology. My focus is 3D — environments, characters, game
+                assets, and the texturing and lighting that make them read.
+                Alongside that: graphic design, and applications I design and
+                build myself. I work in Arabic, German, English and French.
               </p>
             </Reveal>
 
             {/* Zahlen */}
             <Stagger
-              className="grid grid-cols-3 gap-6 mt-12 pt-10 border-t border-white/[0.07]"
+              className="grid grid-cols-2 sm:grid-cols-4 gap-6 mt-12 pt-10 border-t border-white/[0.07]"
               gap={0.08}
             >
               {STATS.map((s) => (
@@ -328,7 +309,7 @@ export function AboutSection() {
         {/* ── Zeitstrahl ── beim Scrollen, ohne Klick ── */}
         <Reveal direction="up">
           <p className="text-[8px] text-white/22 uppercase tracking-[0.28em] mb-12">
-            The long version
+            Background
           </p>
         </Reveal>
 

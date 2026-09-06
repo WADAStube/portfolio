@@ -1,6 +1,8 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
+  animate,
   motion,
+  useMotionValue,
   useScroll,
   useSpring,
   useTransform,
@@ -215,6 +217,31 @@ export function LayerBreakdown({ layers }: { layers: BreakdownLayer[] }) {
     [0, 1, 1, 0],
   );
 
+  /* Das umgeschaltete Bild liegt ueber ALLEN Ebenen. Ohne
+     Fenster bliebe es beim Zurueckscrollen sichtbar und wuerde
+     die frueheren Ebenen verdecken. Deshalb wird seine
+     Deckkraft mit dem Sichtfenster der letzten Ebene
+     multipliziert: scrollt man zurueck, verschwindet es und
+     der normale Aufbau ist wieder zu sehen. Der Schalter
+     behaelt seinen Zustand. */
+  const toggleWindow = useTransform(
+    p,
+    [lastIndex * step - step * 0.5, lastIndex * step + step * 0.15, build, build + 0.05],
+    [0, 1, 1, 0],
+  );
+  const litValue = useMotionValue(0);
+  useEffect(() => {
+    const c = animate(litValue, lit ? 1 : 0, {
+      duration: 0.55,
+      ease: [0.16, 1, 0.3, 1],
+    });
+    return () => c.stop();
+  }, [lit, litValue]);
+  const toggleOpacity = useTransform(
+    [toggleWindow, litValue] as const,
+    ([w, l]: number[]) => w * l,
+  );
+
   /* Sehr langsames Heranfahren ueber den gesamten Aufbau */
   const imgScale = useTransform(p, [0, build], [reduced ? 1 : 1.05, 1]);
 
@@ -294,10 +321,11 @@ export function LayerBreakdown({ layers }: { layers: BreakdownLayer[] }) {
                     aria-hidden={!lit}
                     loading="lazy"
                     decoding="async"
-                    initial={false}
-                    animate={{ opacity: lit ? 1 : 0 }}
-                    transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                    style={{ scale: imgScale, willChange: "opacity, transform" }}
+                    style={{
+                      opacity: toggleOpacity,
+                      scale: imgScale,
+                      willChange: "opacity, transform",
+                    }}
                     className="absolute inset-0 w-full h-full object-cover"
                   />
                 )}
