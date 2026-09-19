@@ -68,6 +68,11 @@ export interface Project {
   stats?: { verts: number; tris: number };
   /** In Ueberarbeitung — Name bleibt, Inhalt wird ausgeblendet */
   comingSoon?: boolean;
+  /** Bereich in der Werkuebersicht.
+      "3d"    — Maya, Unity, Substance: der Schwerpunkt
+      "other" — Gestaltung, Motion, Entwicklung
+      Fehlt der Wert, zaehlt das Projekt zu "3d". */
+  group?: "3d" | "other";
   /** Kehrt die Sektion auf hellen Grund um (Kontrastbruch) */
   invert?: boolean;
   /** Theorie aus den Studienmodulen, auf das Projekt bezogen */
@@ -105,6 +110,10 @@ export interface Project {
   };
   /** Optional: scrollgesteuerte Bildfolge (Drehung) */
   sequence?: { frames: string[]; ratio: number; caption?: string };
+  /** Zweiter Teil des Projekts: Portierung in die Engine.
+      Inhalt steckt in components/unity-section.tsx, weil er
+      projektspezifisch ist und sonst diese Datei sprengt. */
+  unity?: boolean;
   /** "stack" (Standard) = grosse Bilder untereinander.
       "grid" = kompaktes Raster — passend fuer App-Screenshots,
       die sonst neben den grossen Renders unruhig wirken. */
@@ -121,7 +130,7 @@ export const projectsData: Project[] = [
       description:
         "Ein cel-shadetes Diorama — eine schiefe Hütte auf einer Felseninsel, beleuchtet von zwei Laternen.",
       longDescription:
-        "Eine stilisierte Umgebung als geschlossenes Diorama: eine schiefe Holzhütte auf einer Felseninsel, ein Steinweg hinauf, vorn eine rote Brücke und ein Baum, der die Silhouette bricht. Die gesamte Szene ist cel-shadet — flache Farbflächen mit harten Konturen statt fotorealistischer Schattierung. Dadurch tragen Form, Kontrast und Licht die ganze Wirkung. Zwei Laternen bestimmen die Stimmung; alles außerhalb ihrer Reichweite fällt bewusst ins Dunkle.",
+        "Eine stilisierte Umgebung als geschlossenes Diorama: eine schiefe Holzhütte auf einer Felseninsel, ein Steinweg hinauf, vorn eine rote Brücke und ein Baum, der die Silhouette bricht. Die gesamte Szene ist cel-shadet — flache Farbflächen mit harten Konturen statt fotorealistischer Schattierung. Dadurch tragen Form, Kontrast und Licht die ganze Wirkung. Zwei Laternen bestimmen die Stimmung; alles außerhalb ihrer Reichweite fällt bewusst ins Dunkle. Anschließend wurde die Szene als Game-Ready-Asset neu aufgebaut und nach Unity 6 portiert, wo sie mit spielbarem Character in Echtzeit läuft.",
       layers: [
         { label: "Boden", title: "Die Basis", body: "Eine Fläche, mit Soft Select geformt und bewusst uneben gehalten. Die Silhouette entscheidet bereits, wo später der Weg verläuft und wo Bewuchs entsteht.", tech: ["Polygonfläche, unterteilt und per Soft Select modelliert", "Asymmetrischer Umriss — kein flacher Boden", "aiToon mit zwei Tonstufen, Konturen zurückgenommen"] },
         { label: "Steine", title: "Der Rand", body: "Drei Grundfelsen, über MASH verteilt. Die Dichte steigt dort, wo das Auge eine Grenze lesen soll, statt gleichmäßig zu streuen.", tech: ["MASH-Verteilung im Mesh-Modus auf dem Terrain", "Random-Node für Rotation und Skalierung, ID-Node für Varianten", "Repro-Node für renderbare Geometrie"] },
@@ -140,11 +149,11 @@ export const projectsData: Project[] = [
     role: "3D Environment Artist",
     year: "2026",
     featured: true,
-    tools: ["Autodesk Maya", "Substance Painter", "Arnold"],
+    tools: ["Autodesk Maya", "Substance Painter", "Arnold", "Unity 6 · URP", "C#"],
     description:
       "A cel-shaded diorama — a leaning cottage on a rock island, lit by two lanterns.",
     longDescription:
-      "A stylised environment built as a self-contained diorama: a leaning timber cottage on a rock island, a stone path leading up to it, a red bridge at the front and a tree breaking the silhouette. The whole scene is cel-shaded — flat colour blocks with hard outlines instead of photoreal shading — which puts all the weight on shape, contrast and lighting. Two lanterns carry the entire mood; everything outside their reach falls into darkness on purpose.",
+      "A stylised environment built as a self-contained diorama: a leaning timber cottage on a rock island, a stone path leading up to it, a red bridge at the front and a tree breaking the silhouette. The whole scene is cel-shaded — flat colour blocks with hard outlines instead of photoreal shading — which puts all the weight on shape, contrast and lighting. Two lanterns carry the entire mood; everything outside their reach falls into darkness on purpose. The scene was then rebuilt as a game-ready asset and ported into Unity 6, where it runs in real time with a playable character.",
     theory: [
       {
         module: "Lighting",
@@ -360,6 +369,7 @@ export const projectsData: Project[] = [
       frameRatio: 16 / 9,
       caption: "Turntable — scroll to rotate",
     },
+    unity: true,
     shots: [],
   },
   {
@@ -526,6 +536,9 @@ export const projectsData: Project[] = [
   },
   {
     id: "asset-studies",
+    /* Wird ueberarbeitet: UV-Mapping fuer mehrere Assets statt
+       nur der Kamera. Bis dahin nur der Name. */
+    comingSoon: true,
     de: {
       category: "Hard-Surface-Asset",
       description:
@@ -557,6 +570,7 @@ export const projectsData: Project[] = [
   },
   {
     id: "i-need-space",
+    group: "other",
     de: {
       category: "Filmplakat / Compositing",
       description:
@@ -596,6 +610,7 @@ export const projectsData: Project[] = [
   },
   {
     id: "bloomest",
+    group: "other",
     de: { category: "Corporate Design / Print" },
     comingSoon: true,
     title: "Bloomest",
@@ -616,7 +631,26 @@ export const projectsData: Project[] = [
   },
 
   {
+    id: "motion-design",
+    group: "other",
+    de: { category: "Motion Design / Schnitt" },
+    comingSoon: true,
+    title: "Motion Design",
+    category: "Motion Design / Editing",
+    filterCategory: "Motion Design",
+    role: "Motion Designer & Editor",
+    year: "2026",
+    tools: ["Adobe After Effects", "Adobe Premiere Pro"],
+    description:
+      "Animated pieces and edits built in After Effects.",
+    longDescription:
+      "A set of animated pieces and edits put together in After Effects — titles, transitions and short-form work.",
+    shots: [],
+  },
+
+  {
     id: "web-products",
+    group: "other",
     de: { category: "Full-Stack / Front-End" },
     comingSoon: true,
     title: "Web Products",

@@ -133,16 +133,46 @@
 
 
 /* ── Marquee ───────────────────────────────────────────────── */
-.mq-wrap { overflow: hidden; white-space: nowrap; }
+/* Laufband: an den Raendern ausgeblendet, damit die Namen
+   nicht abgeschnitten wirken, sondern weich verschwinden. */
+.mq-wrap {
+  overflow: hidden;
+  white-space: nowrap;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 12%,
+    #000 88%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 12%,
+    #000 88%,
+    transparent 100%
+  );
+}
 .mq-track {
   display: inline-flex;
-  animation: mq 30s linear infinite;
+  animation: mq 46s linear infinite;
   will-change: transform;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
 }
-.mq-track:hover { animation-play-state: paused; }
+.mq-wrap:hover .mq-track { animation-play-state: paused; }
+
+/* Einzelne Namen hellen beim Ueberfahren auf */
+.mq-item { transition: color .4s cubic-bezier(0.16, 1, 0.3, 1); }
+.mq-item:hover { color: rgba(255, 255, 255, 0.9); }
+
 @keyframes mq {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mq-track { animation: none; }
 }
 
 /* ── Scrollbar none ────────────────────────────────────────── */

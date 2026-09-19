@@ -1,44 +1,143 @@
-Portfolio — Version 36  (19.08.2026)
+Portfolio — Version 46  (19.09.2026)
 
-NEU: "Theorie in der Anwendung"
-Ein eigener Abschnitt bei Lantern Island, zwischen Breakdown
-und Turntable. Er verbindet die Studienmodule mit den
-Entscheidungen im Projekt — drei Module, je drei Punkte:
+WERKUEBERSICHT IN ZWEI BEREICHE GETEILT
+Die Projekte stehen nicht mehr in einer durchlaufenden Liste.
 
-  Lichttechnik
-    Drei-Punkt-Beleuchtung · Hartes gegen weiches Licht ·
-    Practicals
-  Farbenlehre
-    Kalt-Warm-Kontrast · Farbige Schatten · Begrenzte Palette
-  Studiotechnik
-    ACES · Belichtung in Blendenstufen · Lineare Ausgabe
+  01  3D & GAME ART
+      Lantern Island, Futuristic Bunker, Robot Study,
+      Apocalypse, Character Studies, Isometric Room,
+      Security Camera
 
-Vollstaendig zweisprachig.
-Datei: src/components/theory-section.tsx
-Inhalte: src/data/projects.ts, Feld "theory"
+  02  GESTALTUNG, MOTION & CODE
+      I Need Space, Bloomest, Motion Design, Web Products
 
-AUS DEINEM DOKUMENT GEKUERZT
-Die Vorlage hatte deutlich mehr Punkte und je drei Absaetze
-(Theorie / Im Projekt / Unterschied). Ich habe pro Punkt einen
-Absatz daraus gemacht und die neun staerksten ausgewaehlt.
-Grund: In der Vorlage steht die Theorie oft vor der Anwendung —
-das liest sich wie ein Skript. Hier steht zuerst, was du
-getan hast, die Theorie traegt nur noch.
+Beide Bereiche haben eine eigene Ueberschrift, eine kurze
+Einordnung darunter und eine eigene Nummerierung ab 01. Vor dem
+ersten Projekt des zweiten Bereichs steht beim Durchscrollen ein
+grosses Trennband, damit klar wird, dass hier etwas anderes
+anfaengt. Gesteuert ueber das neue Feld `group` in projects.ts —
+ohne Angabe zaehlt ein Projekt zu 3D.
 
-Nicht uebernommen: Lichtverhaeltnis, Lichtfuehrung, die
-Kelvin-Tabelle, Bittiefen-Details. Sie wiederholen groesstenteils,
-was die anderen Punkte schon sagen.
+SECURITY CAMERA AUSGEBLENDET
+Steht jetzt wie die anderen als "In Arbeit" — nur der Name, kein
+Inhalt. Die vorhandenen Texte und Bilder bleiben in der Datei
+liegen und kommen zurueck, sobald das UV-Mapping fuer die
+weiteren Assets fertig ist.
 
-BITTE PRUEFEN — WICHTIG
-Dein Dokument sagt selbst, die Zuordnung zu den Modulen sei
-geraten. Streiche alles, was in deinen Modulen nicht vorkam.
-Ein Dozent oder Lead erkennt sofort, wenn ein Modulinhalt
-behauptet wird, der nicht stattgefunden hat.
-Besonders pruefen: Hiess das Modul "Studiotechnik"? Kam ACES
-dort wirklich vor, oder hast du dir das selbst erarbeitet?
-Letzteres waere sogar staerker — dann sollte es so dastehen.
+MOTION DESIGN ANGELEGT
+Neuer Platzhalter im zweiten Bereich, vorerst "In Arbeit".
+Sobald die After-Effects-Sachen da sind, kommen sie dort rein.
+
+I NEED SPACE — LAYOUT REPARIERT
+Vorher stand der Text ueber die volle Breite und das Plakat
+darunter klein in acht von zwoelf Spalten: die halbe Flaeche
+blieb leer. Ursache war eine Regel, die jedes Projekt ohne
+Bildergalerie auf breiten Textsatz stellt — ohne zu pruefen, ob
+in der Bildspalte ein Vergleich liegt.
+
+  - Breiter Textsatz nur noch, wenn die Bildspalte wirklich
+    leer bleibt
+  - Traegt ein Projekt NUR einen Vergleich, bekommt dieser eine
+    eigene, deutlich groessere Breite und steht mittig
+  - Fuer ein Plakat im Hochformat heisst das: Text schmal und
+    mitlaufend links, Plakat gross rechts
+
+────────────────────────────────────────────
+
+Portfolio — Version 45  (19.09.2026)
+
+HERO-SECTION ZURUECK AUF DEN STAND VON VERSION 36
+Der Character im Hero ist raus. Wieder der formatfuellende
+Videoclip mit Auto — automatische Wiedergabe in Schleife,
+beim Scrollen faehrt er langsam heran und das Schwarz darueber
+wird dichter.
+
+ENTFERNT
+- src/components/hero-character.tsx (Maus-Scrubbing des Kopfes)
+- public/videos/look.mp4 (4 MB gespart)
+
+WIEDER DA (unveraendert aus v36 uebernommen)
+- /videos/hero.mp4 formatfuellend, auf dem Handy als 4:3-Band
+  mit massvollem Beschnitt statt starker Hochskalierung
+- Ueberblendung beim Scrollen: Skalierung, Parallaxe, Schwarz
+  von 40 auf 85 Prozent
+- "Issam Selmi" zeilenweise von unten, Rolle und Standort rechts
+- Senkrechtes Label "WADAS · Est. 2016" links
+- Pfeil unten als Scroll-Hinweis
+- Der Ton-Schalter oben rechts steuert wieder wirklich diesen
+  Clip — zwischendurch hing er an keinem Video
+
+UNVERAENDERT GEBLIEBEN
+Alles ab dem Software-Laufband abwaerts, einschliesslich der
+neuen Unity-Sektion aus Version 44.
 
 GEPRUEFT
-- Build und TypeScript fehlerfrei
-- Kein Ueberlauf bei 1440 und 390 px
-- Keine 404, keine Konsolenfehler
+- Build und TypeScript sauber
+- 1600 px und 390 px, kein waagerechter Ueberlauf
+- /videos/hero.mp4 wird ausgeliefert (H.264, 1920x812, 6,1 s)
+- Keine Verweise mehr auf hero-character oder look.mp4
+
+────────────────────────────────────────────
+
+Portfolio — Version 44  (19.09.2026)
+
+NEUE SEKTION: UNITY-PORTIERUNG (Lantern Island)
+Haengt direkt hinter dem Turntable, gleiche Bildsprache wie der
+Rest der Seite — Schwarz, duenne Linien, kleine Versalien.
+Alles zweisprachig EN/DE.
+
+1  KOPF UND STANDBILD
+   "Aus einem Bild wird ein Ort." Dazu ein Standbild der Szene
+   in Unity 6.5 / URP. Character Chiara wird namentlich genannt.
+
+2  ANATOMIE EINES FRAMES
+   Fuenf Schritte aus EINEM Frame, abgegriffen im Frame Debugger:
+   Shadowmap -> Tiefe+Normalen -> SSAO -> SSAO gefiltert -> Bild.
+   Gepinnt, Kreuzblende, Text laeuft daneben mit, Schrittleiste
+   darunter. Abgang am Ende wie beim Turntable (Hoch, Skalierung,
+   Weichzeichner).
+   Alle fuenf Bilder haben exakt dieselben Masse (1540x1037) und
+   denselben Bildausschnitt — nur die Game-View, kein Editor.
+
+3  MESSUNG
+   Zahlen links, das Statistics-Fenster rechts daneben. Jede Zahl
+   auf der Seite ist in diesem Screenshot ablesbar:
+   6 063,3 k Dreiecke, 4 609,4 k Vertices, 54 Set Pass Calls,
+   1 327 Draw Calls (1 309 instanziert), 30,4 MB Texturspeicher,
+   8 sichtbare Skinned Meshes.
+
+4  FUENF PROBLEME, FUENF URSACHEN
+   Je Zeile: Symptom, Ursache, Behebung.
+   01 Rig nicht Humanoid-tauglich -> Mixamo-Umweg, FBX fuer Unity
+   02 Character 42,5-mal zu klein -> gemessen, nicht geraten
+   03 Einsinken beim Laufen -> Gravitation -20, Tunneling
+   04 Raycast trifft Chiara -> Physics.OverlapSphere
+   05 Objekt nicht wieder aufnehmbar -> Collider neu anmelden
+   Danach die Arbeitsweise als grosses Zitat.
+
+5  SYSTEME UND STEUERUNG
+   PlayerMovement.cs, PlayerPickup.cs, Pickupable.cs,
+   ColliderTool.cs — je zwei Saetze. Daneben die Tastenbelegung
+   und der Stand (drei erledigt, Crouch/Slide zurueckgestellt).
+
+SOFTWARE-BADGES
+Lantern Island fuehrt jetzt zusaetzlich "Unity 6 · URP" und "C#".
+
+NEUE BILDER
+public/images/projects/poor-house/unity/
+  hero.jpg, stats.jpg,
+  frame-01-shadowmap.jpg ... frame-05-final.jpg
+Alle beschnitten auf reine Game-View, alle gleich gross.
+
+OFFEN — BITTE PRUEFEN
+- MAYA_TRIS in src/components/unity-section.tsx steht auf
+  11 000 000 ("vorher"). Exakte Zahl aus dem Maya-HUD eintragen
+  oder die Zeile loeschen.
+- Hero-Video (Chiara laeuft, hebt auf, wirft) fehlt noch. Es
+  ersetzt spaeter das Standbild ganz oben in der Sektion.
+
+GEPRUEFT
+- Build und TypeScript sauber
+- 1600 px und 390 px durchgescrollt, kein waagerechter Ueberlauf
+  (scrollWidth 390 auf dem Handy)
+- Gepinnte Bildfolge laeuft auf beiden Breiten durch

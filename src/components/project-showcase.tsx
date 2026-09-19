@@ -24,6 +24,7 @@ import { ScrollSequence } from "@/components/scroll-sequence";
 import { ShowpieceHero, ShowpieceTurntable } from "@/components/showpiece";
 import { LayerBreakdown, BreakdownIntro } from "@/components/layer-breakdown";
 import { TheorySection } from "@/components/theory-section";
+import { UnitySection } from "@/components/unity-section";
 import { cn } from "@/lib/utils";
 import { useLang, pick, t } from "@/lib/lang";
 
@@ -43,6 +44,17 @@ const frameRatioFor = (shots: { w: number; h: number }[]) => {
   const median =
     ratios.length % 2 ? ratios[mid] : (ratios[mid - 1] + ratios[mid]) / 2;
   return Math.min(2.1, Math.max(0.48, median));
+};
+
+/* Traegt ein Projekt NUR einen Vergleich und sonst keine Bilder,
+   darf dieser deutlich groesser stehen als in einer Reihe mit
+   anderen Bildern — sonst bleibt die halbe Seite leer.
+   Mittig gesetzt, damit rechts und links gleich viel Luft ist. */
+const soloCompareWidth = (ratio: number) => {
+  if (ratio < 0.62) return "w-full sm:w-[76%] md:w-[58%] mx-auto"; // sehr hoch
+  if (ratio < 0.95) return "w-full sm:w-[86%] md:w-[66%] mx-auto"; // Plakat
+  if (ratio < 1.35) return "w-full md:w-[88%] mx-auto"; // quadratisch
+  return "w-full";
 };
 
 /* Spaltenbreite passend zum Rahmenformat — ein Hochformat darf
@@ -81,7 +93,14 @@ export function ProjectShowcase({
      Auftritt und im Breakdown steckt) bekommen einen breiten
      Textsatz — sonst klebt die Beschreibung schmal links und
      rechts bleibt die halbe Seite leer. */
-  const wide = shots.length === 0 && !isGrid;
+  /* Breiter Textsatz nur, wenn die Bildspalte wirklich leer
+     bleibt. Traegt sie einen Vergleich oder eine Bildfolge,
+     wuerde der breite Satz den Text ueber die volle Breite
+     legen und das Bild darunter allein in acht von zwoelf
+     Spalten stehen lassen — halbe Seite leer. */
+  const columnHasContent = !!project.compare || !!project.sequence;
+  const wide = shots.length === 0 && !isGrid && !columnHasContent;
+  const soloCompare = shots.length === 0 && !isGrid && !!project.compare;
   const frameRatio = frameRatioFor(shots);
   const colWidth = columnWidthFor(frameRatio);
 
@@ -561,7 +580,7 @@ export function ProjectShowcase({
                 afterLabel={project.compare.afterLabel}
                 note={pick(project.compare.note, de?.compareNote, lang)}
                 invert={invert}
-                className={columnWidthFor(
+                className={(soloCompare ? soloCompareWidth : columnWidthFor)(
                   project.compare.before.w / project.compare.before.h,
                 )}
               />
@@ -593,6 +612,12 @@ export function ProjectShowcase({
         </div>
       ) : null}
 
+      {/* Zweiter Teil: aus dem Render wird eine begehbare Szene */}
+      {project.unity ? (
+        <div className="mt-20 md:mt-32">
+          <UnitySection />
+        </div>
+      ) : null}
     </section>
   );
 }

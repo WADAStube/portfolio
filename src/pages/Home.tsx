@@ -201,15 +201,15 @@ function Cursor() {
 function Marquee() {
   const items = [...MARQUEE, ...MARQUEE];
   return (
-    <div className="mq-wrap border-y border-white/[0.05] py-3">
+    <div className="mq-wrap border-y border-white/[0.05] py-6 md:py-8">
       <div className="mq-track">
         {items.map((t, i) => (
           <span
             key={i}
-            className="inline-flex items-center gap-4 px-4 text-[9px] uppercase tracking-[0.25em] text-white/20"
+            className="mq-item inline-flex items-center gap-6 md:gap-9 px-6 md:px-9 text-[13px] md:text-[15px] font-light tracking-[0.02em] text-white/35 whitespace-nowrap"
           >
             {t}
-            <span className="text-white/12">·</span>
+            <span className="h-1 w-1 rounded-full bg-white/15 shrink-0" />
           </span>
         ))}
       </div>
@@ -236,13 +236,63 @@ function MuteBtn({ muted, onToggle }: { muted: boolean; onToggle: () => void }) 
 }
 
 /* ─────────────── Projekt-Index ────────────────────────────── */
+/* Die Werkuebersicht laeuft in zwei Bereichen: zuerst 3D und
+   Game Art, danach alles andere. Beide Bereiche zaehlen eigen —
+   eine durchlaufende Nummer wuerde die Trennung wieder aufheben. */
 function ProjectIndex({ projects }: { projects: Project[] }) {
+  const { lang } = useLang();
+  const three = projects.filter((p) => (p.group ?? "3d") === "3d");
+  const other = projects.filter((p) => p.group === "other");
+
+  return (
+    <div className="space-y-16 md:space-y-24">
+      <IndexGroup
+        projects={three}
+        title={t("group3d", lang)}
+        sub={t("group3dSub", lang)}
+      />
+      {other.length > 0 && (
+        <IndexGroup
+          projects={other}
+          title={t("groupOther", lang)}
+          sub={t("groupOtherSub", lang)}
+        />
+      )}
+    </div>
+  );
+}
+
+function IndexGroup({
+  projects,
+  title,
+  sub,
+}: {
+  projects: Project[];
+  title: string;
+  sub: string;
+}) {
   const { lang } = useLang();
   const jump = (id: string) =>
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 
   return (
-    <Stagger className="border-t border-white/[0.06]" gap={0.05}>
+    <div>
+      <Reveal direction="up" duration={0.85}>
+        <div className="flex items-baseline gap-5 mb-5">
+          <h3 className="font-display font-medium text-white/85 text-base md:text-lg tracking-tight shrink-0">
+            {title}
+          </h3>
+          <span className="h-px flex-1 bg-white/[0.09]" />
+          <span className="font-mono text-[10px] text-white/22 tabular-nums shrink-0">
+            {String(projects.length).padStart(2, "0")}
+          </span>
+        </div>
+        <p className="text-[11px] font-light leading-relaxed text-white/28 mb-7 max-w-xl">
+          {sub}
+        </p>
+      </Reveal>
+
+      <Stagger className="border-t border-white/[0.06]" gap={0.05}>
       {projects.map((p, i) => (
         <StaggerItem key={p.id} distance={16}>
           <button
@@ -273,7 +323,41 @@ function ProjectIndex({ projects }: { projects: Project[] }) {
           </button>
         </StaggerItem>
       ))}
-    </Stagger>
+      </Stagger>
+    </div>
+  );
+}
+
+/* Trennband zwischen den beiden Bereichen. Steht zwischen den
+   Projekt-Sections, damit beim Durchscrollen klar wird, dass
+   ab hier etwas anderes kommt. */
+function GroupDivider({ title, sub }: { title: string; sub: string }) {
+  return (
+    <section className="relative border-t border-white/[0.05] py-24 md:py-36">
+      <div className="max-w-[1760px] mx-auto px-6 md:px-10 lg:px-12">
+        <Reveal direction="up" duration={0.95}>
+          <div className="flex items-center gap-5 mb-8">
+            <span className="h-px w-10 bg-white/20 shrink-0" />
+            <span className="font-mono text-[9px] tracking-[0.3em] text-white/35">
+              02
+            </span>
+            <span className="h-px flex-1 bg-white/[0.07]" />
+          </div>
+          <h2
+            className="font-display font-bold text-white leading-[1.02]"
+            style={{
+              fontSize: "clamp(2rem, 5.5vw, 4.4rem)",
+              letterSpacing: "-0.03em",
+            }}
+          >
+            {title}
+          </h2>
+          <p className="mt-6 text-sm md:text-base font-light leading-[1.85] text-white/45 max-w-xl">
+            {sub}
+          </p>
+        </Reveal>
+      </div>
+    </section>
   );
 }
 
@@ -507,16 +591,28 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Einzelne Projekt-Sections */}
-      {projects.map((project, i) => (
-        <ProjectShowcase
-          key={project.id}
-          project={project}
-          index={i}
-          total={projects.length}
-          onOpenShot={(p, idx) => setLightbox({ project: p, index: idx })}
-        />
-      ))}
+      {/* Einzelne Projekt-Sections. Vor dem ersten Projekt des
+          zweiten Bereichs steht ein Trennband. */}
+      {projects.map((project, i) => {
+        const group = project.group ?? "3d";
+        const prev = i > 0 ? (projects[i - 1].group ?? "3d") : group;
+        return (
+          <div key={project.id}>
+            {group !== prev && (
+              <GroupDivider
+                title={t("groupOther", lang)}
+                sub={t("groupOtherSub", lang)}
+              />
+            )}
+            <ProjectShowcase
+              project={project}
+              index={i}
+              total={projects.length}
+              onOpenShot={(p, idx) => setLightbox({ project: p, index: idx })}
+            />
+          </div>
+        );
+      })}
 
       {/* ══════════════════ ABOUT ══════════════════ */}
       <AboutSection />

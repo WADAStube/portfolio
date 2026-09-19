@@ -79,6 +79,17 @@ export const UI = {
   projects: { en: "Projects", de: "Projekte" },
   project: { en: "Project", de: "Projekt" },
   comingSoon: { en: "Coming soon", de: "In Arbeit" },
+  /* Die zwei Bereiche der Werkuebersicht */
+  group3d: { en: "3D & Game Art", de: "3D & Game Art" },
+  group3dSub: {
+    en: "Environments, assets and characters — Maya, Unity, Substance Painter",
+    de: "Umgebungen, Assets und Charaktere — Maya, Unity, Substance Painter",
+  },
+  groupOther: { en: "Design, Motion & Code", de: "Gestaltung, Motion & Code" },
+  groupOtherSub: {
+    en: "Work outside 3D — poster and print design, motion, and products built end to end",
+    de: "Arbeiten ausserhalb von 3D — Plakat und Print, Motion, und selbst gebaute Produkte",
+  },
   software: { en: "Software", de: "Software" },
   year: { en: "Year", de: "Jahr" },
   breakdown: { en: "Breakdown", de: "Entstehung" },
