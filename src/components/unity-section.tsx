@@ -70,40 +70,40 @@ const FRAMES: FrameStep[] = [
     pass: "IP 18 — Draw Main Light Shadowmap",
     label: "The shadow map",
     labelDe: "Die Shadow Map",
-    body: "Before anything visible is drawn, the scene is rendered once from the light's point of view. What comes out is not a picture but a distance table — an atlas of how far the light reaches before it hits something. Every shadow later in the frame is a lookup into this texture.",
-    bodyDe: "Bevor irgendetwas Sichtbares gezeichnet wird, rendert die Engine die Szene einmal aus Sicht des Lichts. Heraus kommt kein Bild, sondern eine Entfernungstabelle — ein Atlas darüber, wie weit das Licht kommt, bevor es auf etwas trifft. Jeder Schatten im späteren Bild ist ein Nachschlagen in dieser Textur.",
+    body: "The scene is rendered once from the light's point of view. The result is a depth atlas, not an image: how far the light travels before it hits something. Every shadow in the final frame is a lookup into this texture.",
+    bodyDe: "Die Szene wird einmal aus Sicht des Lichts gerendert. Das Ergebnis ist kein Bild, sondern ein Tiefen-Atlas: wie weit das Licht kommt, bevor es auf etwas trifft. Jeder Schatten im fertigen Bild ist ein Nachschlagen in dieser Textur.",
   },
   {
     src: `${BASE}/frame-02-depthnormals.jpg`,
     pass: "IP 19 — DrawDepthNormalPrepass",
     label: "Depth and normals",
     labelDe: "Tiefe und Normalen",
-    body: "A second pass writes, per pixel, how far away the surface is and which way it faces. The colours are the direction vector itself. Nothing here reaches the screen — it is the input the next steps need in order to know anything about the geometry at all.",
-    bodyDe: "Ein zweiter Durchgang schreibt pro Pixel, wie weit die Oberfläche entfernt ist und in welche Richtung sie zeigt. Die Farben sind der Richtungsvektor selbst. Nichts davon landet auf dem Bildschirm — es ist die Eingabe, die die nächsten Schritte brauchen, um überhaupt etwas über die Geometrie zu wissen.",
+    body: "Per pixel: distance to the surface and the direction it faces. The colours are the normal vector itself. Nothing here reaches the screen — it is input for the passes that follow.",
+    bodyDe: "Pro Pixel: Entfernung zur Oberfläche und ihre Ausrichtung. Die Farben sind der Normalenvektor selbst. Nichts davon landet auf dem Bildschirm — es ist Eingabe für die folgenden Durchgänge.",
   },
   {
     src: `${BASE}/frame-03-ssao.jpg`,
     pass: "IP 22 — SSAO",
     label: "Where surfaces meet",
     labelDe: "Wo Flächen zusammenstoßen",
-    body: "Screen space ambient occlusion reads depth and normals back and asks, for every pixel, how much of the sky it can still see. Corners, gaps and contact points see less, and therefore get darker. It is derived entirely from the two buffers above — no extra geometry is touched.",
-    bodyDe: "Screen Space Ambient Occlusion liest Tiefe und Normalen zurück und fragt für jedes Pixel, wie viel Himmel es noch sieht. Ecken, Spalten und Auflagepunkte sehen weniger und werden deshalb dunkler. Das entsteht vollständig aus den beiden Puffern darüber — zusätzliche Geometrie wird nicht angefasst.",
+    body: "SSAO reads depth and normals back and computes, per pixel, how much of the surroundings is blocked. Corners, gaps and contact points come out darker. Derived entirely from the two buffers above — no geometry is drawn again.",
+    bodyDe: "SSAO liest Tiefe und Normalen zurück und berechnet pro Pixel, wie stark die Umgebung verdeckt ist. Ecken, Spalten und Auflagepunkte werden dunkler. Entsteht vollständig aus den beiden Puffern darüber — Geometrie wird nicht erneut gezeichnet.",
   },
   {
     src: `${BASE}/frame-04-ssao-filtered.jpg`,
     pass: "IP 23 — SSAO",
     label: "Filtered",
     labelDe: "Gefiltert",
-    body: "The raw occlusion is noisy, so it gets blurred and ends up as a near-white mask with thin dark lines exactly along the contact edges — under the rocks, inside the fence, where the bridge meets the ground. That mask is the entire contribution of this effect to the final image.",
-    bodyDe: "Die rohe Verdeckung ist verrauscht, wird also gefiltert und endet als fast weiße Maske mit dünnen dunklen Linien genau an den Berührungskanten — unter den Felsen, im Zaun, wo die Brücke den Boden trifft. Diese Maske ist der gesamte Beitrag des Effekts zum fertigen Bild.",
+    body: "The raw occlusion is noisy and gets filtered. What remains is a near-white mask with thin dark lines along the contact edges — under the rocks, inside the fence, where the bridge meets the ground.",
+    bodyDe: "Die rohe Verdeckung ist verrauscht und wird gefiltert. Übrig bleibt eine fast weiße Maske mit dünnen dunklen Linien an den Berührungskanten — unter den Felsen, im Zaun, wo die Brücke den Boden trifft.",
   },
   {
     src: `${BASE}/frame-05-final.jpg`,
     pass: "IP 27 — BlitFinalToBackBuffer",
     label: "The frame",
     labelDe: "Das Bild",
-    body: "Only now is the visible image assembled and written to the back buffer. Everything before it was preparation that nobody ever sees. This is what runs sixty times a second — and the reason a stylised look is not only a style decision but a budget decision.",
-    bodyDe: "Erst jetzt wird das sichtbare Bild zusammengesetzt und in den Back Buffer geschrieben. Alles davor war Vorbereitung, die niemand je zu sehen bekommt. Das hier läuft sechzigmal pro Sekunde — und ist der Grund, warum ein stilisierter Look nicht nur eine Stilentscheidung ist, sondern eine Budgetentscheidung.",
+    body: "The visible image is composited and written to the back buffer. Everything before this was preparation. Four passes of setup for one frame — which is why the look is a budget decision as much as a style one.",
+    bodyDe: "Das sichtbare Bild wird zusammengesetzt und in den Back Buffer geschrieben. Alles davor war Vorbereitung. Vier Durchgänge für ein Bild — deshalb ist der Look genauso eine Budget- wie eine Stilentscheidung.",
   },
 ];
 
@@ -361,22 +361,22 @@ const CASES: Case[] = [
     title: "The rig would not import",
     titleDe: "Das Rig ließ sich nicht importieren",
     symptom:
-      "Unity refused to build a Humanoid Avatar from the character: “Not enough bones to create human avatar”, plus duplicate bone assignments.",
+      "Humanoid import fails: “Not enough bones to create human avatar”, plus duplicate bone assignments.",
     symptomDe:
-      "Unity weigerte sich, aus dem Character einen Humanoid-Avatar zu bauen: „Not enough bones to create human avatar“, dazu doppelt zugewiesene Bones.",
+      "Humanoid-Import schlägt fehl: „Not enough bones to create human avatar“, dazu doppelt zugewiesene Bones.",
     cause:
-      "Unity's Humanoid system expects a specific, unambiguous bone set. A rig that works perfectly for rendering in Maya does not automatically satisfy that contract — and the export settings decide whether it ever gets the chance to.",
+      "The Maya rig does not match the bone set Unity expects for Humanoid. The export settings decide this, not the hierarchy.",
     causeDe:
-      "Das Humanoid-System von Unity erwartet einen bestimmten, eindeutigen Satz an Bones. Ein Rig, das in Maya zum Rendern einwandfrei funktioniert, erfüllt diesen Vertrag nicht automatisch — und die Export-Einstellungen entscheiden, ob es überhaupt die Chance dazu bekommt.",
+      "Das Maya-Rig entspricht nicht dem Bone-Satz, den Unity für Humanoid erwartet. Entschieden wird das über die Export-Einstellungen, nicht über die Hierarchie.",
     fix: [
-      "Mesh exported on its own, without the skeleton",
-      "Auto-rigged through Mixamo, re-imported as FBX for Unity",
-      "Rig set to Humanoid, Avatar created from this model, T-Pose enforced",
+      "Mesh exported without the skeleton",
+      "Auto-rig via Mixamo, re-import as FBX for Unity",
+      "Rig: Humanoid, Avatar from this model, T-Pose enforced",
     ],
     fixDe: [
-      "Mesh allein exportiert, ohne Skelett",
-      "Über Mixamo automatisch gerigged, als FBX für Unity zurückgeholt",
-      "Rig auf Humanoid, Avatar aus diesem Modell erzeugt, T-Pose erzwungen",
+      "Mesh ohne Skelett exportiert",
+      "Auto-Rig über Mixamo, Reimport als FBX für Unity",
+      "Rig: Humanoid, Avatar aus diesem Modell, T-Pose erzwungen",
     ],
   },
   {
@@ -384,20 +384,20 @@ const CASES: Case[] = [
     title: "The character was 42.5 times too small",
     titleDe: "Der Character war 42,5-mal zu klein",
     symptom:
-      "Chiara stood in the scene as a speck. Guessing at scale values would have taken an afternoon.",
+      "Chiara stands in the scene as a speck.",
     symptomDe:
-      "Chiara stand als Punkt in der Szene. Sich an Skalierungswerte heranzuraten hätte einen Nachmittag gekostet.",
+      "Chiara steht als Punkt in der Szene.",
     cause:
-      "The CharacterController reported a height of 0.04 where roughly 1.7 was expected. Two numbers, one division: factor 42.5. Not an estimate — a measurement.",
+      "CharacterController height reads 0.04 against an expected 1.7. Factor 42.5 — read off, not estimated.",
     causeDe:
-      "Der CharacterController meldete eine Höhe von 0,04, erwartet waren rund 1,7. Zwei Zahlen, eine Division: Faktor 42,5. Keine Schätzung — eine Messung.",
+      "CharacterController-Height liegt bei 0,04 statt bei erwarteten 1,7. Faktor 42,5 — abgelesen, nicht geschätzt.",
     fix: [
-      "Scale Factor raised by exactly that factor",
-      "Character and scene scaled together, so the proportion holds",
+      "Scale Factor raised by 42.5",
+      "Character and scene scaled together",
     ],
     fixDe: [
-      "Scale Factor um genau diesen Faktor angehoben",
-      "Character und Szene gemeinsam skaliert, damit das Verhältnis stimmt",
+      "Scale Factor um 42,5 angehoben",
+      "Character und Szene gemeinsam skaliert",
     ],
   },
   {
@@ -405,20 +405,20 @@ const CASES: Case[] = [
     title: "Running sank her through the floor",
     titleDe: "Beim Laufen sank sie durch den Boden ein",
     symptom:
-      "Walking was fine. At running speed the character dropped into the terrain.",
+      "Walking is fine. At running speed the character drops into the terrain.",
     symptomDe:
-      "Gehen war in Ordnung. Bei Laufgeschwindigkeit sackte der Character ins Terrain.",
+      "Gehen funktioniert. Bei Laufgeschwindigkeit sinkt der Character ins Terrain.",
     cause:
-      "Gravity was a hard-coded −20. Between two physics steps the controller moved further than the collider was thick, so the collision was never evaluated — it passed straight through before Skin Width could do anything.",
+      "Gravity hard-coded at −20. Per physics step the controller travels further than the collider is thick, so the collision is never evaluated.",
     causeDe:
-      "Die Gravitation stand fest auf −20. Zwischen zwei Physikschritten bewegte sich der Controller weiter, als der Collider dick war — die Kollision wurde nie ausgewertet, er ging hindurch, bevor Skin Width überhaupt greifen konnte.",
+      "Gravitation fest auf −20. Pro Physikschritt legt der Controller mehr Weg zurück, als der Collider dick ist — die Kollision wird nie ausgewertet.",
     fix: [
-      "Gravity set to the real −9.81",
-      "Skin Width reduced from 0.08 to 0.04",
+      "Gravity −20 → −9.81",
+      "Skin Width 0.08 → 0.04",
     ],
     fixDe: [
-      "Gravitation auf die echten −9,81 gesetzt",
-      "Skin Width von 0,08 auf 0,04 verringert",
+      "Gravitation −20 → −9,81",
+      "Skin Width 0,08 → 0,04",
     ],
   },
   {
@@ -426,21 +426,21 @@ const CASES: Case[] = [
     title: "The raycast kept hitting the character",
     titleDe: "Der Raycast traf immer den Character",
     symptom:
-      "Picking objects up worked from some angles and not from others, with no obvious pattern.",
+      "Pick-up works from some angles and not from others.",
     symptomDe:
-      "Das Aufheben funktionierte aus manchen Winkeln und aus anderen nicht, ohne erkennbares Muster.",
+      "Aufnehmen funktioniert aus manchen Winkeln, aus anderen nicht.",
     cause:
-      "The log named the culprit outright. The third-person camera does a LookAt on the character, so camera-forward frequently points at her — the ray hit Chiara before it ever reached the object behind her.",
+      "The third-person camera does a LookAt on the character, so camera-forward points at her. The ray hits Chiara before the object behind her.",
     causeDe:
-      "Das Log nannte die Ursache direkt. Die Third-Person-Kamera macht ein LookAt auf den Character, ihre Blickrichtung zeigt also häufig auf ihn selbst — der Strahl traf Chiara, bevor er das Objekt dahinter erreichte.",
+      "Die Third-Person-Kamera macht LookAt auf den Character, die Blickrichtung zeigt also auf ihn. Der Strahl trifft Chiara vor dem Objekt dahinter.",
     log: "Getroffenes Objekt \"Chiara\" hat kein Pickupable-Skript",
     fix: [
-      "Raycast dropped entirely",
-      "Physics.OverlapSphere around the character instead — direction no longer matters",
+      "Raycast removed",
+      "Physics.OverlapSphere around the character — direction-independent",
     ],
     fixDe: [
-      "Raycast komplett verworfen",
-      "Stattdessen Physics.OverlapSphere um den Character — die Blickrichtung ist damit egal",
+      "Raycast entfernt",
+      "Physics.OverlapSphere um den Character — richtungsunabhängig",
     ],
   },
   {
@@ -448,22 +448,22 @@ const CASES: Case[] = [
     title: "Dropped objects could not be picked up again",
     titleDe: "Abgelegte Objekte ließen sich nicht wieder aufnehmen",
     symptom:
-      "An object could be carried and dropped once. After that the game behaved as if it no longer existed.",
+      "An object can be carried and dropped once. After that it is no longer detected.",
     symptomDe:
-      "Ein Objekt ließ sich tragen und einmal ablegen. Danach verhielt sich das Spiel, als gäbe es das Objekt nicht mehr.",
+      "Ein Objekt lässt sich tragen und einmal ablegen. Danach wird es nicht mehr erkannt.",
     cause:
-      "Detaching from the hand lost the world position, and the collider was never re-registered with the physics system — so the detection sphere had nothing left to find.",
+      "Detaching loses the world position, and the collider is not re-registered with the physics system.",
     causeDe:
-      "Beim Lösen von der Hand ging die Weltposition verloren, und der Collider wurde nicht neu bei der Physik angemeldet — die Erkennungskugel fand schlicht nichts mehr.",
+      "Beim Lösen geht die Weltposition verloren, der Collider wird nicht neu bei der Physik angemeldet.",
     fix: [
-      "SetParent(null, true) so the world transform survives",
-      "World position written explicitly on drop",
-      "Collider switched off and on again to force re-registration",
+      "SetParent(null, true)",
+      "World position set explicitly on drop",
+      "Collider off and on again to force re-registration",
     ],
     fixDe: [
-      "SetParent(null, true), damit die Welt-Transformation erhalten bleibt",
-      "Weltposition beim Ablegen ausdrücklich gesetzt",
-      "Collider kurz aus- und wieder eingeschaltet, um die Neuanmeldung zu erzwingen",
+      "SetParent(null, true)",
+      "Weltposition beim Ablegen explizit gesetzt",
+      "Collider aus und wieder an, erzwingt Neuanmeldung",
     ],
   },
 ];
@@ -596,8 +596,8 @@ export function UnitySection() {
             <Reveal direction="up" delay={0.12} duration={0.95}>
               <p className="text-base md:text-lg font-light leading-[1.85] text-white/50 max-w-xl">
                 {lang === "de"
-                  ? "Ein Render ist fertig, wenn das Bild stimmt. Eine Spielszene ist fertig, wenn sie sechzigmal pro Sekunde stimmt — aus jedem Winkel, an jeder Stelle, an der jemand stehen kann. Das Diorama wurde für Maya gebaut und für die Engine neu gedacht: Geometrie halbiert, Materialien auf batchbare Instanzen umgestellt, ein Character gerigged und animiert, und ein Interaktionssystem geschrieben, das Objekte aufnimmt und wirft."
-                  : "A render is finished when the image is right. A playable scene is finished when it is right sixty times a second — from any angle, from anywhere a person can stand. The diorama was built for Maya and rethought for the engine: geometry halved, materials moved onto batchable instances, a character rigged and animated, and an interaction system written that picks objects up and throws them."}
+                  ? "Das Diorama war auf ein Standbild hin gebaut. Für die Engine muss es aus jedem Winkel und sechzigmal pro Sekunde funktionieren. Umgesetzt: Geometrie halbiert, Materialien auf batchbare Instanzen umgestellt, Character gerigged und animiert, Interaktionssystem in C# für Aufnehmen, Zielen und Werfen."
+                  : "The diorama was built towards a still. For the engine it has to hold up from any angle, sixty times a second. Done: geometry halved, materials moved onto batchable instances, character rigged and animated, interaction system written in C# for picking up, aiming and throwing."}
               </p>
             </Reveal>
             <Reveal direction="up" delay={0.2} duration={0.95}>
@@ -654,8 +654,8 @@ export function UnitySection() {
           </h3>
           <p className="text-sm md:text-base font-light leading-[1.9] text-white/45 max-w-2xl">
             {lang === "de"
-              ? "Ein Bild entsteht in der Engine nicht auf einmal. Die Szene wird mehrfach gerendert, bevor das erste sichtbare Pixel geschrieben wird. Fünf Schritte aus einem einzigen Frame, abgegriffen im Frame Debugger — in der Reihenfolge, in der die Engine sie ausführt."
-              : "The engine does not draw a picture in one go. The scene is rendered several times before the first visible pixel is written. Five steps out of one single frame, captured in the Frame Debugger, in the order the engine runs them."}
+              ? "Die Szene wird mehrfach gerendert, bevor das erste sichtbare Pixel geschrieben wird. Fünf Schritte aus einem einzigen Frame, abgegriffen im Frame Debugger, in der Reihenfolge der Ausführung."
+              : "The scene is rendered several times before the first visible pixel is written. Five steps out of one frame, captured in the Frame Debugger, in execution order."}
           </p>
         </Reveal>
       </div>
@@ -685,13 +685,13 @@ export function UnitySection() {
               </h3>
               <p className="text-sm font-light leading-[1.9] text-white/45 max-w-md">
                 {lang === "de"
-                  ? "Die Maya-Fassung war auf ein Standbild hin gebaut — Vegetation als echte Geometrie, jede Instanz ein eigenes Objekt. Für die Engine wurde das Diorama neu aufgebaut: die Dreieckszahl mehr als halbiert, Materialien so gesetzt, dass der SRP Batcher greift. Von 1 327 Draw Calls sind 1 309 instanziert."
-                  : "The Maya version was built towards a still — vegetation as real geometry, every instance its own object. For the engine the diorama was rebuilt: triangle count more than halved, materials set up so the SRP Batcher can take over. Of 1,327 draw calls, 1,309 are instanced."}
+                  ? "In der Maya-Fassung war die Vegetation echte Geometrie, jede Instanz ein eigenes Objekt. Für die Engine neu aufgebaut: Dreieckszahl mehr als halbiert, Materialien so gesetzt, dass der SRP Batcher greift. Von 1 327 Draw Calls sind 1 309 instanziert."
+                  : "In the Maya version vegetation was real geometry, every instance its own object. Rebuilt for the engine: triangle count more than halved, materials set up so the SRP Batcher takes over. Of 1,327 draw calls, 1,309 are instanced."}
               </p>
               <p className="mt-5 text-[11px] leading-relaxed text-white/28 max-w-md">
                 {lang === "de"
-                  ? "Die auffälligste Zahl ist die kleinste: 30,4 MB Texturspeicher. Cel-Shading arbeitet mit Farbstufen statt mit Texturkarten — was im Maya-Projekt eine Stilentscheidung war, ist in der Engine ein Budgetvorteil."
-                  : "The most telling number is the smallest one: 30.4 MB of texture memory. Cel shading works with colour steps instead of texture maps — what was a style decision in the Maya project turns into a budget advantage in the engine."}
+                  ? "30,4 MB Texturspeicher bei dieser Szenengröße: Cel-Shading arbeitet mit Farbstufen statt mit Texturkarten. Im Maya-Projekt eine Stilentscheidung, in der Engine ein Budgetvorteil."
+                  : "30.4 MB of texture memory at this scene size: cel shading works with colour steps instead of texture maps. A style decision in the Maya project, a budget advantage in the engine."}
               </p>
             </Reveal>
 
@@ -795,8 +795,8 @@ export function UnitySection() {
           </h3>
           <p className="text-sm md:text-base font-light leading-[1.9] text-white/45 max-w-2xl mb-4">
             {lang === "de"
-              ? "Keines davon wurde durch Herumprobieren gelöst. In jedem Fall führte ein eindeutiger Test zur Ursache — ein Log, ein Zahlenvergleich, ein Ausschluss. Erst danach wurde etwas geändert."
-              : "None of these were solved by trial and error. In every case one unambiguous test pointed at the cause — a log line, a comparison of two numbers, an exclusion. Only then was anything changed."}
+              ? "Jeweils über einen eindeutigen Test eingegrenzt — Log, Zahlenvergleich, Ausschluss — und erst danach geändert."
+              : "Each one narrowed down by an unambiguous test — a log line, a comparison of values, an exclusion — and only then changed."}
           </p>
         </Reveal>
 

@@ -1,3 +1,68 @@
+Portfolio — Version 49  (01.10.2026)
+
+BLOOMEST — A5-BLATT ENTFERNT
+Das Querformat liess sich im Hochformat-Rahmen nur mit Rand
+zeigen. Datei geloescht, Eintrag raus. Bleiben drei Motive,
+alle A1/A2 im gleichen Format.
+
+LANTERN ISLAND — FUENF PROBLEME NEU GESCHRIEBEN
+Symptom, Ursache und Behebung jetzt in Kurzform. Keine
+erklaerenden Nebensaetze, keine Wertungen. Beispiel:
+
+  vorher  "Der CharacterController meldete eine Hoehe von 0,04,
+           erwartet waren rund 1,7. Zwei Zahlen, eine Division:
+           Faktor 42,5. Keine Schaetzung — eine Messung."
+  jetzt   "CharacterController-Height liegt bei 0,04 statt bei
+           erwarteten 1,7. Faktor 42,5 — abgelesen, nicht
+           geschaetzt."
+
+Dieselbe Kuerzung in der Einleitung der Sektion, in den fuenf
+Frame-Debugger-Schritten und bei den Messwerten.
+
+PROJEKTE OHNE INHALT NUR NOCH IN DER LISTE
+Sechs Projekte stehen auf "In Arbeit". Bisher hatte jedes davon
+weiter unten eine eigene leere Section — man scrollte durch sechs
+Ueberschriften ohne Inhalt.
+
+  oben    alle elf Projekte, "In Arbeit" wie gehabt, aber ohne
+          Pfeil und ohne Sprung (das Ziel gibt es ja nicht)
+  unten   nur Lantern Island, I Need Space, Bloomest
+
+I NEED SPACE — BEIDE MODULE, ECHTE AUFGABE
+Modul: "Mediendesign · Computergrafik".
+Aufgabenstellung aus der Pruefungsleistung: ueber ein visuelles
+Medium eine festgelegte Emotion ausloesen und das Ergebnis im
+Bericht begruenden — Konzeption, Umsetzung, Reflexion.
+
+Beschreibung auf die technischen Angaben umgestellt, Quelle ist
+der Projektbericht: Luminanzmaske zum Freistellen vor schwarzem
+Grund, Gradationskurve und Ebenenmaske fuer die Erde,
+Explosionsaufnahme im Modus Aufhellen mit angehobenem Kontrast,
+Ausgabe CMYK 300 dpi, Nachkorrektur von Tiefblau und Schatten
+nach der Konvertierung. Dazu die eine Entwurfsentscheidung, die
+zaehlt: Astronaut verkleinert und aus der Mitte gerueckt.
+
+  OFFEN: Du hattest A0 gesagt, im Projektbericht steht
+  "ca. DIN A1, Verhaeltnis 2:3". Auf der Seite steht jetzt nur
+  "Kinoplakat im Hochformat". Sag mir, was stimmt.
+
+UEBER MICH — SPIELE UND TECHNICAL ART
+  Ich baue Umgebungen und Charaktere fuer Spiele.
+  Und die Systeme, die sie bewegen.
+
+Text benennt jetzt Unity, die C#-Skripte fuer Movement und
+Interaktion, die eigenen Editor-Tools und die Richtung Technical
+Art. Bildunterschrift am Portrait: "3D & Game Art · Technical
+Art · Unity".
+
+GEPRUEFT
+- Build und TypeScript sauber
+- 1600, 1280 und 390 px, beide Sprachen, kein Ueberlauf
+- Ueberschrift "Ueber mich" bricht ueberall sauber um
+- Nur noch drei Projekt-Sections im Dokument
+
+────────────────────────────────────────────
+
 Portfolio — Version 48  (01.10.2026)
 
 I NEED SPACE — MODUL KORRIGIERT

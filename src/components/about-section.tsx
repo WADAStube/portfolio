@@ -264,7 +264,7 @@ export function AboutSection() {
                       Issam Selmi
                     </p>
                     <p className="text-[9px] uppercase tracking-[0.2em] text-white/50 mt-1">
-                      3D &amp; Game Art · Real-Time · Media Technology
+                      3D &amp; Game Art · Technical Art · Unity
                     </p>
                   </div>
                 </div>
@@ -285,8 +285,8 @@ export function AboutSection() {
                 key={lang + "a"}
                 text={
                   lang === "de"
-                    ? "Ich baue Umgebungen und Charaktere."
-                    : "I build environments and characters."
+                    ? "Ich baue Umgebungen und Charaktere für Spiele."
+                    : "I build environments and characters for games."
                 }
               />
               <br />
@@ -306,8 +306,8 @@ export function AboutSection() {
             <Reveal direction="up" delay={0.1}>
               <p className="text-sm font-light leading-[1.95] text-white/45 max-w-xl">
                 {lang === "de"
-                  ? "Student der Medientechnik an der Hochschule Emden/Leer, ansässig in Hamburg, wo ich zusätzlich als Werkstudent in der Medientechnik arbeite. Schwerpunkt ist 3D — Umgebungen, Charaktere und Game Assets samt der Texturierung und dem Licht, die sie lesbar machen. Es hört aber nicht beim Rendering auf: Szenen gehen bei mir in die Engine, werden auf Echtzeit optimiert und bekommen Rig, Animation und die Systeme in C#, die daraus etwas Spielbares machen. Dazu Grafikdesign und Anwendungen, die ich selbst gestalte und entwickle. Ich arbeite auf Arabisch, Deutsch, Englisch und Französisch."
-                  : "Media Technology student at Hochschule Emden/Leer, based in Hamburg, where I also work as a Werkstudent in media technology. My focus is 3D — environments, characters and game assets, with the texturing and lighting that make them read. It doesn\u2019t stop at the render: scenes go into the engine, get optimised for real time, and get the rig, the animation and the C# systems that turn them into something playable. Alongside that: graphic design, and applications I design and build myself. I work in Arabic, German, English and French."}
+                  ? "Student der Medientechnik an der Hochschule Emden/Leer, ansässig in Hamburg, dort auch Werkstudent in der Medientechnik. Schwerpunkt: 3D für Spiele — Umgebungen, Charaktere, Game Assets, Texturierung und Licht. Die Arbeit endet nicht beim Rendering. Szenen gehen nach Unity, werden auf Echtzeit optimiert und bekommen Rig, Animation und die C#-Skripte dazu: Movement, Interaktion und eigene Editor-Tools für Schritte, die sonst von Hand liefen. Das ist die Richtung Technical Art — zwischen Asset und Code. Daneben Grafikdesign und Anwendungen, die ich selbst entwickle. Arabisch, Deutsch, Englisch, Französisch."
+                  : "Media Technology student at Hochschule Emden/Leer, based in Hamburg, also working there as a Werkstudent in media technology. Focus: 3D for games — environments, characters, game assets, texturing and lighting. The work does not end at the render. Scenes go into Unity, get optimised for real time, and get the rig, the animation and the C# behind them: movement, interaction, and editor tools I wrote for steps that were otherwise manual. That is the direction of technical art — between asset and code. Alongside that, graphic design and applications I build myself. Arabic, German, English, French."}
               </p>
             </Reveal>
 

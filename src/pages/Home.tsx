@@ -295,9 +295,20 @@ function IndexGroup({
       <Stagger className="border-t border-white/[0.06]" gap={0.05}>
       {projects.map((p, i) => (
         <StaggerItem key={p.id} distance={16}>
-          <button
-            onClick={() => jump(p.id)}
-            className="group w-full flex items-baseline gap-5 md:gap-8 py-5 border-b border-white/[0.06] text-left transition-colors duration-300 hover:bg-white/[0.015]"
+          {/* Projekte ohne Inhalt stehen nur in der Liste. Sie
+              bekommen weiter unten keine Section, also auch kein
+              Sprungziel — ein Klick ins Leere waere schlechter
+              als gar kein Klick. */}
+          {(() => {
+            const empty = !!p.comingSoon;
+            const Tag = empty ? "div" : "button";
+            return (
+          <Tag
+            onClick={empty ? undefined : () => jump(p.id)}
+            className={cn(
+              "group w-full flex items-baseline gap-5 md:gap-8 py-5 border-b border-white/[0.06] text-left transition-colors duration-300",
+              empty ? "cursor-default" : "hover:bg-white/[0.015]",
+            )}
           >
             <span className="font-mono text-[10px] text-white/25 tabular-nums shrink-0">
               {String(i + 1).padStart(2, "0")}
@@ -311,16 +322,29 @@ function IndexGroup({
             <span className="hidden md:block text-[9px] uppercase tracking-[0.2em] text-white/25 shrink-0">
               {p.comingSoon ? t("comingSoon", lang) : p.tools.slice(0, 2).join(" · ")}
             </span>
-            <span className="text-white/25 group-hover:text-white/70 transition-colors duration-300 shrink-0">
-              <svg width="11" height="11" viewBox="0 0 10 10" fill="none">
-                <path
-                  d="M1 9L9 1M9 1H3M9 1V7"
-                  stroke="currentColor"
-                  strokeWidth="1.2"
-                />
-              </svg>
+            <span
+              className={cn(
+                "shrink-0 transition-colors duration-300",
+                empty
+                  ? "text-white/10"
+                  : "text-white/25 group-hover:text-white/70",
+              )}
+            >
+              {empty ? (
+                <span className="block h-px w-[11px] bg-current" />
+              ) : (
+                <svg width="11" height="11" viewBox="0 0 10 10" fill="none">
+                  <path
+                    d="M1 9L9 1M9 1H3M9 1V7"
+                    stroke="currentColor"
+                    strokeWidth="1.2"
+                  />
+                </svg>
+              )}
             </span>
-          </button>
+          </Tag>
+            );
+          })()}
         </StaggerItem>
       ))}
       </Stagger>
@@ -591,11 +615,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Einzelne Projekt-Sections. Vor dem ersten Projekt des
-          zweiten Bereichs steht ein Trennband. */}
-      {projects.map((project, i) => {
+      {/* Einzelne Projekt-Sections. Projekte ohne Inhalt stehen
+          nur in der Liste oben und tauchen hier nicht mehr auf —
+          sonst scrollt man durch eine Reihe leerer Ueberschriften.
+          Vor dem ersten Projekt des zweiten Bereichs steht ein
+          Trennband. */}
+      {projects.filter((p) => !p.comingSoon).map((project, i, shown) => {
         const group = project.group ?? "3d";
-        const prev = i > 0 ? (projects[i - 1].group ?? "3d") : group;
+        const prev = i > 0 ? (shown[i - 1].group ?? "3d") : group;
         return (
           <div key={project.id}>
             {group !== prev && (
@@ -607,7 +634,7 @@ export default function Home() {
             <ProjectShowcase
               project={project}
               index={i}
-              total={projects.length}
+              total={shown.length}
               onOpenShot={(p, idx) => setLightbox({ project: p, index: idx })}
             />
           </div>

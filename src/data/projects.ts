@@ -588,16 +588,16 @@ export const projectsData: Project[] = [
       description:
         "Ein Filmplakat, das eine einzige Emotion tragen soll — Verlorenheit — über Komposition, Farbe und Typografie.",
       longDescription:
-        "Gewählt war Verlorenheit, und das Plakat im Format A0 antwortet darauf mit einem einzelnen Astronauten, der vor der Erdkrümmung treibt. Die Montage legt eine entsättigte, blaustichige Milchstraße als Basis, eine maskierte und farbkorrigierte Erde, einen über Luminanzmasken freigestellten Astronauten und Trümmer aus einer Explosionsaufnahme im Modus Aufhellen übereinander. Der Titel spielt mit beiden Lesarten — dem Weltraum und dem Bedürfnis nach Abstand.",
+        "Gewählte Emotion: Verlorenheit. Kinoplakat im Hochformat, vollständig in Photoshop montiert, Ausgabe druckreif in CMYK bei 300 dpi. Die Milchstraße bildet die Basis, in der Helligkeit reduziert und blau getönt. Die Erde liegt als eigene Ebene rechts, über Gradationskurve angeglichen, der Übergang zum Schwarz über Ebenenmaske. Der Astronaut ist per Luminanzmaske aus schwarzem Hintergrund freigestellt — bei einfarbigem Grund die saubersten Kanten. Die Trümmer stammen aus einer Explosionsaufnahme im Modus Aufhellen mit angehobenem Kontrast, sodass nur die hellen Partikel stehen bleiben. Zwei Entscheidungen prägen das Ergebnis: der Astronaut wurde gegenüber dem ersten Entwurf verkleinert und aus der Mitte gerückt, weil eine große, zentrale Figur handlungsfähig wirkt und nicht verloren. Und nach der CMYK-Konvertierung mussten das tiefe Blau der Erde und die Schattenbereiche von Hand nachkorrigiert werden.",
       brief:
-        "Mit einem Plakat, Bild oder einer Werbung eine Emotion erzeugen — und die Wirkung begründen. Format A0, in RGB und CMYK.",
+        "Über ein visuelles Medium eine festgelegte Emotion auslösen und das Ergebnis im Bericht begründen — Konzeption, Umsetzung, Reflexion. Druckreif in CMYK.",
       compareNote:
         "Dasselbe Motiv in zwei Farbräumen. RGB besteht aus Licht und erreicht einen größeren Farbraum — das zeigt ein Bildschirm. CMYK besteht aus Druckfarbe und kommt dort nicht hin, deshalb treten die tiefen Blautöne und das Leuchten um die Erde zurück und die Schwarztöne werden wärmer. Konvertieren und Korrigieren vor dem Druck verhindert, dass ein Plakat matter ankommt als gestaltet."
     },
     invert: true,
-    module: "Computergrafik",
+    module: "Mediendesign · Computergrafik",
     brief:
-      "Create an emotion with a poster, image or advert — and argue for how it works. A0 format, delivered in RGB and CMYK.",
+      "Trigger a defined emotion with a visual medium, then justify the result in a report — concept, execution, reflection. Print-ready in CMYK.",
     title: "I Need Space",
     category: "Film Poster / Compositing",
     filterCategory: "Graphic Design",
@@ -608,7 +608,7 @@ export const projectsData: Project[] = [
     description:
       "A film poster built to carry a single emotion — lostness — through composition, colour and type.",
     longDescription:
-      "The chosen emotion was lostness, and the A0 poster answers it with a lone astronaut adrift against the curve of Earth. The composite layers a desaturated, blue-shifted Milky Way base, a masked and colour-graded Earth, an astronaut extracted with luminance masks, and debris pulled from an explosion plate using a lighten blend. The title plays on both readings of the phrase — physical space, and the need for distance.",
+      "Chosen emotion: lostness. A portrait cinema poster, composited entirely in Photoshop, output print-ready in CMYK at 300 dpi. The Milky Way forms the base, pulled down in brightness and shifted blue. Earth sits on its own layer at the right, matched with a curves adjustment, the edge into black handled with a layer mask. The astronaut is extracted with a luminance mask off a black background — the cleanest edges when the source is a flat colour. Debris comes from an explosion plate in lighten blend mode with the contrast raised, so only the bright particles survive. Two decisions shaped the result: the astronaut was made smaller and moved off centre against the first draft, because a large central figure reads as capable, not lost. And after the CMYK conversion the deep blue of Earth and the shadow areas had to be corrected by hand.",
     shots: [],
     compare: {
       before: { src: "/images/projects/i-need-space/01.jpg", caption: "RGB", w: 1559, h: 2200 },
@@ -658,7 +658,6 @@ export const projectsData: Project[] = [
       { src: "/images/projects/bloomest/01.jpg", caption: "A1 window — 48 Minuten", w: 1554, h: 2200 },
       { src: "/images/projects/bloomest/02.jpg", caption: "A1 window — Beste Bewertung", w: 1554, h: 2200 },
       { src: "/images/projects/bloomest/03.jpg", caption: "A2 poster — Hygiene", w: 1556, h: 2200 },
-      { src: "/images/projects/bloomest/04.jpg", caption: "A5 in-store — opening hours", w: 1554, h: 2200 },
     ],
   },
 
