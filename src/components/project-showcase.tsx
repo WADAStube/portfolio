@@ -447,19 +447,43 @@ export function ProjectShowcase({
               )}
 
               {/* Meta */}
-              {project.year && (
+              {(project.year || project.module) && (
                 <Stagger
-                  className={cn("mb-7 pt-6 border-t", invert ? "border-black/10" : "border-white/[0.06]")}
+                  className={cn("mb-7 pt-6 border-t space-y-5", invert ? "border-black/10" : "border-white/[0.06]")}
                   gap={0.06}
                 >
-                  <StaggerItem>
-                    <p className={cn("text-[8px] uppercase tracking-[0.24em] mb-1.5", invert ? "text-black/40" : "text-white/22")}>
-                      {t("year", lang)}
-                    </p>
-                    <p className={cn("text-sm font-light tabular-nums", invert ? "text-black/70" : "text-white/65")}>
-                      {project.year}
-                    </p>
-                  </StaggerItem>
+                  {project.year && (
+                    <StaggerItem>
+                      <p className={cn("text-[8px] uppercase tracking-[0.24em] mb-1.5", invert ? "text-black/40" : "text-white/22")}>
+                        {t("year", lang)}
+                      </p>
+                      <p className={cn("text-sm font-light tabular-nums", invert ? "text-black/70" : "text-white/65")}>
+                        {project.year}
+                      </p>
+                    </StaggerItem>
+                  )}
+
+                  {/* Herkunft aus dem Studium. Steht neben dem Jahr,
+                      nicht im Fliesstext — es ist eine Angabe zur
+                      Arbeit, keine Erzaehlung ueber sie. */}
+                  {(project.module || project.client) && (
+                    <StaggerItem>
+                      <p className={cn("text-[8px] uppercase tracking-[0.24em] mb-1.5", invert ? "text-black/40" : "text-white/22")}>
+                        {project.module ? t("module", lang) : t("client", lang)}
+                      </p>
+                      <p className={cn("text-sm font-light leading-snug", invert ? "text-black/70" : "text-white/65")}>
+                        {project.module ?? project.client}
+                      </p>
+                      {(project.brief || de?.brief) && (
+                        <p className={cn("mt-2 text-[11px] font-light leading-[1.7] max-w-xs", invert ? "text-black/45" : "text-white/32")}>
+                          <span className={cn(invert ? "text-black/30" : "text-white/20")}>
+                            {t("brief", lang)}:{" "}
+                          </span>
+                          {pick(project.brief, de?.brief, lang)}
+                        </p>
+                      )}
+                    </StaggerItem>
+                  )}
                 </Stagger>
               )}
 

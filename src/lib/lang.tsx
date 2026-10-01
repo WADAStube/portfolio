@@ -85,11 +85,18 @@ export const UI = {
     en: "Environments, assets and characters — Maya, Unity, Substance Painter",
     de: "Umgebungen, Assets und Charaktere — Maya, Unity, Substance Painter",
   },
-  groupOther: { en: "Design, Motion & Code", de: "Gestaltung, Motion & Code" },
-  groupOtherSub: {
-    en: "Work outside 3D — poster and print design, motion, and products built end to end",
-    de: "Arbeiten ausserhalb von 3D — Plakat und Print, Motion, und selbst gebaute Produkte",
+  groupOther: {
+    en: "What the degree adds",
+    de: "Was das Studium beisteuert",
   },
+  groupOtherSub: {
+    en: "Design, motion and self-built products — most of it out of the modules of the Media Technology degree, each named with the module and the brief it answered.",
+    de: "Gestaltung, Motion und selbst gebaute Produkte — überwiegend aus den Modulen des Medientechnik-Studiums, jeweils mit dem Modul und der Aufgabenstellung, aus der die Arbeit entstanden ist.",
+  },
+  /* Beschriftungen fuer die Modul-Herkunft einer Arbeit */
+  module: { en: "Module", de: "Modul" },
+  brief: { en: "Brief", de: "Aufgabenstellung" },
+  client: { en: "Client", de: "Auftraggeber" },
   software: { en: "Software", de: "Software" },
   year: { en: "Year", de: "Jahr" },
   breakdown: { en: "Breakdown", de: "Entstehung" },

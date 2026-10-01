@@ -264,7 +264,7 @@ export function AboutSection() {
                       Issam Selmi
                     </p>
                     <p className="text-[9px] uppercase tracking-[0.2em] text-white/50 mt-1">
-                      3D &amp; Game Art · Media Technology
+                      3D &amp; Game Art · Real-Time · Media Technology
                     </p>
                   </div>
                 </div>
@@ -283,13 +283,21 @@ export function AboutSection() {
             >
               <SplitText
                 key={lang + "a"}
-                text={lang === "de" ? "Ich baue Umgebungen" : "I build environments"}
+                text={
+                  lang === "de"
+                    ? "Ich baue Umgebungen und Charaktere."
+                    : "I build environments and characters."
+                }
               />
               <br />
               <span className="text-white/35">
                 <SplitText
                   key={lang + "b"}
-                  text={lang === "de" ? "und Charaktere in 3D." : "and characters in 3D."}
+                  text={
+                    lang === "de"
+                      ? "Und die Systeme, die sie bewegen."
+                      : "And the systems that move them."
+                  }
                   delay={0.22}
                 />
               </span>
@@ -298,8 +306,8 @@ export function AboutSection() {
             <Reveal direction="up" delay={0.1}>
               <p className="text-sm font-light leading-[1.95] text-white/45 max-w-xl">
                 {lang === "de"
-                  ? "Student der Medientechnik an der Hochschule Emden/Leer, ansässig in Hamburg, wo ich zusätzlich als Werkstudent in der Medientechnik arbeite. Mein Schwerpunkt ist 3D — Umgebungen, Charaktere, Game Assets sowie die Texturierung und das Licht, die sie lesbar machen. Daneben: Grafikdesign und Anwendungen, die ich selbst gestalte und entwickle. Ich arbeite auf Arabisch, Deutsch, Englisch und Französisch."
-                  : "Media Technology student at Hochschule Emden/Leer, based in Hamburg, where I also work as a Werkstudent in media technology. My focus is 3D — environments, characters, game assets, and the texturing and lighting that make them read. Alongside that: graphic design, and applications I design and build myself. I work in Arabic, German, English and French."}
+                  ? "Student der Medientechnik an der Hochschule Emden/Leer, ansässig in Hamburg, wo ich zusätzlich als Werkstudent in der Medientechnik arbeite. Schwerpunkt ist 3D — Umgebungen, Charaktere und Game Assets samt der Texturierung und dem Licht, die sie lesbar machen. Es hört aber nicht beim Rendering auf: Szenen gehen bei mir in die Engine, werden auf Echtzeit optimiert und bekommen Rig, Animation und die Systeme in C#, die daraus etwas Spielbares machen. Dazu Grafikdesign und Anwendungen, die ich selbst gestalte und entwickle. Ich arbeite auf Arabisch, Deutsch, Englisch und Französisch."
+                  : "Media Technology student at Hochschule Emden/Leer, based in Hamburg, where I also work as a Werkstudent in media technology. My focus is 3D — environments, characters and game assets, with the texturing and lighting that make them read. It doesn\u2019t stop at the render: scenes go into the engine, get optimised for real time, and get the rig, the animation and the C# systems that turn them into something playable. Alongside that: graphic design, and applications I design and build myself. I work in Arabic, German, English and French."}
               </p>
             </Reveal>
 

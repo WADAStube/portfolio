@@ -33,6 +33,7 @@ export interface ProjectDE {
   toggle?: { title?: string; label?: string; body?: string; tech?: string[]; name?: string };
   compareNote?: string;
   captions?: string[];
+  brief?: string;
 }
 
 export interface Project {
@@ -68,6 +69,17 @@ export interface Project {
   stats?: { verts: number; tris: number };
   /** In Ueberarbeitung — Name bleibt, Inhalt wird ausgeblendet */
   comingSoon?: boolean;
+  /** Herkunft aus dem Studium: Name des Moduls, in dem die
+      Arbeit entstanden ist. Zum Beispiel "Mediendesign" oder
+      "Mediendesign · 3. Semester". Fehlt das Feld, wird nichts
+      angezeigt — freie Arbeiten behaupten keine Modulherkunft. */
+  module?: string;
+  /** Auftraggeber bei echter Kundenarbeit. Schliesst `module`
+      nicht aus, steht aber normalerweise an dessen Stelle. */
+  client?: string;
+  /** Die Aufgabenstellung des Moduls in EINEM Satz. Nicht die
+      Projektbeschreibung — das, was verlangt war. */
+  brief?: string;
   /** Bereich in der Werkuebersicht.
       "3d"    — Maya, Unity, Substance: der Schwerpunkt
       "other" — Gestaltung, Motion, Entwicklung
@@ -180,8 +192,8 @@ export const projectsData: Project[] = [
         ],
       },
       {
-        module: "Colour theory",
-        moduleDe: "Farbenlehre",
+        module: "Computer graphics",
+        moduleDe: "Computergrafik",
         items: [
           {
             title: "Warm against cool",
@@ -576,11 +588,16 @@ export const projectsData: Project[] = [
       description:
         "Ein Filmplakat, das eine einzige Emotion tragen soll — Verlorenheit — über Komposition, Farbe und Typografie.",
       longDescription:
-        "Ein Kursprojekt an der Hochschule Emden/Leer mit einer Vorgabe: eine bestimmte Emotion über ein einzelnes statisches Bild auslösen. Gewählt war Verlorenheit, und das Plakat antwortet darauf mit einem einzelnen Astronauten, der vor der Erdkrümmung treibt. Die Montage legt eine entsättigte, blaustichige Milchstraße als Basis, eine maskierte und farbkorrigierte Erde, einen über Luminanzmasken freigestellten Astronauten und Trümmer aus einer Explosionsaufnahme im Modus Aufhellen übereinander. Der Titel spielt mit beiden Lesarten — dem Weltraum und dem Bedürfnis nach Abstand.",
+        "Gewählt war Verlorenheit, und das Plakat im Format A0 antwortet darauf mit einem einzelnen Astronauten, der vor der Erdkrümmung treibt. Die Montage legt eine entsättigte, blaustichige Milchstraße als Basis, eine maskierte und farbkorrigierte Erde, einen über Luminanzmasken freigestellten Astronauten und Trümmer aus einer Explosionsaufnahme im Modus Aufhellen übereinander. Der Titel spielt mit beiden Lesarten — dem Weltraum und dem Bedürfnis nach Abstand.",
+      brief:
+        "Mit einem Plakat, Bild oder einer Werbung eine Emotion erzeugen — und die Wirkung begründen. Format A0, in RGB und CMYK.",
       compareNote:
         "Dasselbe Motiv in zwei Farbräumen. RGB besteht aus Licht und erreicht einen größeren Farbraum — das zeigt ein Bildschirm. CMYK besteht aus Druckfarbe und kommt dort nicht hin, deshalb treten die tiefen Blautöne und das Leuchten um die Erde zurück und die Schwarztöne werden wärmer. Konvertieren und Korrigieren vor dem Druck verhindert, dass ein Plakat matter ankommt als gestaltet."
     },
     invert: true,
+    module: "Computergrafik",
+    brief:
+      "Create an emotion with a poster, image or advert — and argue for how it works. A0 format, delivered in RGB and CMYK.",
     title: "I Need Space",
     category: "Film Poster / Compositing",
     filterCategory: "Graphic Design",
@@ -591,7 +608,7 @@ export const projectsData: Project[] = [
     description:
       "A film poster built to carry a single emotion — lostness — through composition, colour and type.",
     longDescription:
-      "A course project at Hochschule Emden/Leer with one brief: trigger a specific emotion using a single static image. The chosen emotion was lostness, and the poster answers it with a lone astronaut adrift against the curve of Earth. The composite layers a desaturated, blue-shifted Milky Way base, a masked and colour-graded Earth, an astronaut extracted with luminance masks, and debris pulled from an explosion plate using a lighten blend. The title plays on both readings of the phrase — physical space, and the need for distance.",
+      "The chosen emotion was lostness, and the A0 poster answers it with a lone astronaut adrift against the curve of Earth. The composite layers a desaturated, blue-shifted Milky Way base, a masked and colour-graded Earth, an astronaut extracted with luminance masks, and debris pulled from an explosion plate using a lighten blend. The title plays on both readings of the phrase — physical space, and the need for distance.",
     shots: [],
     compare: {
       before: { src: "/images/projects/i-need-space/01.jpg", caption: "RGB", w: 1559, h: 2200 },
@@ -611,8 +628,22 @@ export const projectsData: Project[] = [
   {
     id: "bloomest",
     group: "other",
-    de: { category: "Corporate Design / Print" },
-    comingSoon: true,
+    /* Echte Kundenarbeit, entstanden in der Werkstudententaetigkeit —
+       kein Studienmodul. Alle Motive sind bewusst allgemein
+       gehalten: keine Anschrift, keine Telefonnummer, keine
+       personenbezogenen Angaben. */
+    client: "Bloomest Harburg · Werkstudent, Medientechnik & Marketing",
+    brief:
+      "A poster system for the branch that works in the window, on the wall and on the machines — in German, English and Turkish, because the customers are.",
+    de: {
+      category: "Corporate Design / Print",
+      description:
+        "Eine Plakatkampagne für einen Smart-Waschsalon — Schaufenster, A2-Aushänge und eine Infoserie im Laden.",
+      longDescription:
+        "Ein Plakatsystem für Bloomest, einen Selbstbedienungs-Waschsalon, entstanden in meiner Werkstudententätigkeit. Die Arbeit läuft über drei Formate: große A1-Motive im Schaufenster, die vom Gehweg aus wirken müssen, A2-Aushänge zum Näherlesen und eine querformatige A5-Serie im Laden für die praktischen Angaben. Zusammengehalten wird es von einer strengen typografischen Hierarchie, einem sparsamen Rot als einzigem Akzent über helle und dunkle Varianten hinweg und einer Icon-Sprache aus Konturlinien, die freundlich bleibt, ohne dekorativ zu werden. Jedes Motiv trägt eine große Zahl als Anker — 48 Minuten, 4,9 von 5 — weil ein Plakat im Vorbeigehen genau eine Information durchbringt. Die Fließtexte stehen auf Deutsch, Englisch und Türkisch, weil die Kundschaft es tut.",
+      brief:
+        "Ein Plakatsystem für die Filiale, das im Schaufenster, an der Wand und an den Maschinen funktioniert — auf Deutsch, Englisch und Türkisch, weil die Kundschaft es ist.",
+    },
     title: "Bloomest",
     category: "Corporate Design / Print",
     filterCategory: "Graphic Design",
@@ -622,11 +653,12 @@ export const projectsData: Project[] = [
     description:
       "A print campaign for a smart laundry brand — window posters, A2 sheets and an in-store info series.",
     longDescription:
-      "A campaign system for Bloomest, a self-service smart laundry. The work runs across three formats: large A1 window posters that have to land from the pavement, A2 posters for closer reading, and a landscape A5 in-store series carrying practical information. The system holds together through a strict typographic hierarchy, a restrained red accent against light and dark variants, and an outline icon language that keeps the tone friendly without going decorative.",
+      "A poster system for Bloomest, a self-service smart laundry, made during my Werkstudent role there. The work runs across three formats: large A1 motifs in the window that have to land from the pavement, A2 sheets for closer reading, and a landscape A5 in-store series carrying the practical information. It holds together through a strict typographic hierarchy, one restrained red accent across light and dark variants, and an outline icon language that stays friendly without going decorative. Every motif carries a single large number as its anchor — 48 minutes, 4.9 out of 5 — because a poster passed on foot gets exactly one message through. Body copy runs in German, English and Turkish, because the customers do.",
     shots: [
       { src: "/images/projects/bloomest/01.jpg", caption: "A1 window — 48 Minuten", w: 1554, h: 2200 },
       { src: "/images/projects/bloomest/02.jpg", caption: "A1 window — Beste Bewertung", w: 1554, h: 2200 },
       { src: "/images/projects/bloomest/03.jpg", caption: "A2 poster — Hygiene", w: 1556, h: 2200 },
+      { src: "/images/projects/bloomest/04.jpg", caption: "A5 in-store — opening hours", w: 1554, h: 2200 },
     ],
   },
 
@@ -651,7 +683,14 @@ export const projectsData: Project[] = [
   {
     id: "web-products",
     group: "other",
-    de: { category: "Full-Stack / Front-End" },
+    module: "Produktion Digitaler Medien",
+    brief:
+      "Design and build a complete digital product end to end — KI Lesebuch came out of the module, Qrib is my own.",
+    de: {
+      category: "Full-Stack / Front-End",
+      brief:
+        "Ein vollständiges digitales Produkt von der Gestaltung bis zur Umsetzung — KI Lesebuch stammt aus dem Modul, Qrib ist ein Eigenprojekt.",
+    },
     comingSoon: true,
     title: "Web Products",
     category: "Full-Stack / Front-End",

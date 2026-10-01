@@ -1,3 +1,127 @@
+Portfolio — Version 48  (01.10.2026)
+
+I NEED SPACE — MODUL KORRIGIERT
+Modul ist Computergrafik, nicht Mediendesign.
+Aufgabenstellung jetzt vollstaendig: "Mit einem Plakat, Bild
+oder einer Werbung eine Emotion erzeugen — und die Wirkung
+begruenden. Format A0, in RGB und CMYK."
+Das Format A0 steht zusaetzlich im Beschreibungstext — eine
+Plakatgroesse, die im Druck etwas aussagt.
+
+LANTERN ISLAND — FARBENLEHRE RAUS
+In der Theorie-Sektion heisst das Modul jetzt Computergrafik
+(EN: Computer graphics). "Farbenlehre" gibt es im Modulhandbuch
+nicht; die Inhalte stehen dort unter Computergrafik.
+
+BLOOMEST WIEDER SICHTBAR — ALS KUNDENARBEIT
+Kein "In Arbeit" mehr. Eingeordnet als echte Auftragsarbeit aus
+der Werkstudententaetigkeit, nicht als Studienprojekt:
+
+  AUFTRAGGEBER
+  Bloomest Harburg · Werkstudent, Medientechnik & Marketing
+
+Neues Feld `client` in projects.ts, wird an derselben Stelle wie
+`module` angezeigt. Projekte mit Auftraggeber behaupten keine
+Modulherkunft und umgekehrt.
+
+Beschreibung neu geschrieben, Deutsch jetzt vollstaendig
+vorhanden (vorher nur die Kategorie). Benannt wird, was an der
+Arbeit die Entscheidung war: eine grosse Zahl als Anker pro
+Motiv, ein einziger roter Akzent ueber helle und dunkle
+Varianten, Fliesstext auf Deutsch, Englisch und Tuerkisch.
+
+  KEINE PERSONENBEZOGENEN ANGABEN
+  Das vierte Motiv (A5 quer, Oeffnungszeiten) trug Anschrift,
+  Telefonnummer, Web-Adresse und einen Produktionsvermerk im
+  Fuss. Der gesamte Fussbereich ist weggeschnitten, die Datei
+  ueberschrieben — die ungekuerzte Fassung liegt nicht mehr im
+  Projekt. 01 bis 03 waren bereits frei davon.
+  Gegengeprueft: kein Treffer auf Anschrift, Telefonnummer oder
+  Domain im gesamten Quelltext.
+
+  Das beschnittene Querformat stand im Hochformat-Rahmen in
+  einem grossen weichgezeichneten Rand. Es sitzt jetzt mittig
+  auf einer Flaeche im Papierton der Serie und hat damit
+  dasselbe Rahmenformat wie die drei Plakate — in der Spalte
+  springt nichts mehr.
+
+UEBER MICH — BREITER AUFGESTELLT
+Die Aussage endete bisher bei "Umgebungen und Charaktere in 3D".
+Das unterschlaegt die Haelfte der Arbeit.
+
+  vorher   Ich baue Umgebungen
+           und Charaktere in 3D.
+
+  jetzt    Ich baue Umgebungen und Charaktere.
+           Und die Systeme, die sie bewegen.
+
+Der Einleitungstext benennt die Kette jetzt zu Ende: Szenen
+gehen in die Engine, werden auf Echtzeit optimiert und bekommen
+Rig, Animation und die Systeme in C#, die daraus etwas
+Spielbares machen. Keine Adjektive, nur was tatsaechlich im
+Portfolio nachweisbar ist.
+Bildunterschrift am Portrait: "3D & Game Art · Real-Time ·
+Media Technology".
+
+GEPRUEFT
+- Build und TypeScript sauber
+- 1600 px und 390 px, beide Sprachen, kein Ueberlauf
+- Ueberschrift "Ueber mich" bricht in beiden Sprachen sauber
+  (lief vorher rechts aus dem Bild)
+
+────────────────────────────────────────────
+
+Portfolio — Version 47  (25.09.2026)
+
+ZWEITER BEREICH AUF DAS STUDIUM AUSGERICHTET
+Ueberschrift und Einordnung neu:
+
+  vorher   Gestaltung, Motion & Code
+           Arbeiten ausserhalb von 3D
+
+  jetzt    Was das Studium beisteuert
+           (EN: What the degree adds)
+           Gestaltung, Motion und selbst gebaute Produkte —
+           ueberwiegend aus den Modulen des Medientechnik-
+           Studiums, jeweils mit dem Modul und der
+           Aufgabenstellung, aus der die Arbeit entstanden ist.
+
+"ueberwiegend" steht da bewusst: nicht jede Arbeit in diesem
+Bereich ist eine Studienarbeit, und die Ueberschrift behauptet
+es auch nicht.
+
+MODUL UND AUFGABENSTELLUNG PRO PROJEKT
+Zwei neue Felder in projects.ts:
+
+  module   Name des Moduls, z. B. "Mediendesign" oder
+           "Mediendesign · 3. Semester"
+  brief    Die Aufgabenstellung in EINEM Satz — das, was
+           verlangt war, nicht was daraus geworden ist
+           (deutsche Fassung unter de.brief)
+
+Angezeigt in der Infospalte neben dem Jahr, klein gesetzt.
+Fehlen die Felder, wird nichts angezeigt — eine freie Arbeit
+behauptet keine Modulherkunft.
+
+Schon eingetragen:
+  I Need Space   Mediendesign
+                 "Eine bestimmte Emotion ueber ein einzelnes
+                  statisches Bild ausloesen."
+  Web Products   Produktion Digitaler Medien
+                 (mit dem Hinweis, dass Qrib ein Eigenprojekt
+                  ist und nur KI Lesebuch aus dem Modul stammt)
+
+I NEED SPACE — DOPPELUNG RAUS
+Der erste Satz der Beschreibung war wortgleich die
+Aufgabenstellung. Da sie jetzt als eigenes Feld darueber steht,
+faengt der Text direkt bei "Gewaehlt war Verlorenheit" an.
+
+NOCH EINZUTRAGEN
+Bloomest und Motion Design haben noch kein Modul. Wenn sie aus
+einem stammen, Feld setzen; wenn nicht, weglassen.
+
+────────────────────────────────────────────
+
 Portfolio — Version 46  (19.09.2026)
 
 WERKUEBERSICHT IN ZWEI BEREICHE GETEILT
