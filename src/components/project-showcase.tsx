@@ -25,6 +25,7 @@ import { ShowpieceHero, ShowpieceTurntable } from "@/components/showpiece";
 import { LayerBreakdown, BreakdownIntro } from "@/components/layer-breakdown";
 import { TheorySection } from "@/components/theory-section";
 import { UnitySection } from "@/components/unity-section";
+import { Walkthrough } from "@/components/walkthrough";
 import { cn } from "@/lib/utils";
 import { useLang, pick, t } from "@/lib/lang";
 
@@ -98,7 +99,8 @@ export function ProjectShowcase({
      wuerde der breite Satz den Text ueber die volle Breite
      legen und das Bild darunter allein in acht von zwoelf
      Spalten stehen lassen — halbe Seite leer. */
-  const columnHasContent = !!project.compare || !!project.sequence;
+  const columnHasContent =
+    !!project.compare || !!project.sequence || !!project.walkthrough?.length;
   const wide = shots.length === 0 && !isGrid && !columnHasContent;
   const soloCompare = shots.length === 0 && !isGrid && !!project.compare;
   const frameRatio = frameRatioFor(shots);
@@ -524,6 +526,42 @@ export function ProjectShowcase({
             transition={{ duration: reduced ? 0.2 : 1.05, ease: EASE }}
             className="lg:col-span-8 space-y-14 md:space-y-20 lg:space-y-28"
           >
+            {project.walkthrough?.map((wt, wi) => (
+              <div key={wi}>
+                <p className={cn("text-[8px] uppercase tracking-[0.28em] mb-4", invert ? "text-black/40" : "text-white/22")}>
+                  {t("walkthrough", lang)}
+                  {(wt.label || wt.labelDe) && (
+                    <span className={invert ? "text-black/65" : "text-white/55"}>
+                      {" — "}
+                      {pick(wt.label, wt.labelDe, lang)}
+                    </span>
+                  )}
+                </p>
+                <Walkthrough steps={wt.steps} phone={wt.phone} />
+                <p className={cn("mt-4 text-[10px] leading-relaxed", invert ? "text-black/35" : "text-white/25")}>
+                  {t("walkthroughNote", lang)}
+                </p>
+                {project.liveUrl && wi === (project.walkthrough?.length ?? 1) - 1 && (
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={cn(
+                      "mt-6 inline-flex items-center gap-3 border px-5 py-3 text-[10px] uppercase tracking-[0.22em] transition-colors duration-300",
+                      invert
+                        ? "border-black/15 text-black/60 hover:border-black/45 hover:text-black"
+                        : "border-white/15 text-white/55 hover:border-white/45 hover:text-white",
+                    )}
+                  >
+                    {t("liveSite", lang)}
+                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                      <path d="M1 9L9 1M9 1H3M9 1V7" stroke="currentColor" strokeWidth="1.2" />
+                    </svg>
+                  </a>
+                )}
+              </div>
+            ))}
+
             {small && !isGrid ? (
               /* Handy: waagerecht wischbare Galerie mit Einrasten.
                  Statt eines langen Stapels, durch den man nur

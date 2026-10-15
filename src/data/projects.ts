@@ -81,10 +81,11 @@ export interface Project {
       Projektbeschreibung — das, was verlangt war. */
   brief?: string;
   /** Bereich in der Werkuebersicht.
-      "3d"    — Maya, Unity, Substance: der Schwerpunkt
-      "other" — Gestaltung, Motion, Entwicklung
+      "3d"     — Maya, Unity, Substance: der Schwerpunkt (Startseite)
+      "apps"   — Web- und App-Entwicklung (/apps)
+      "design" — Gestaltung, Print, Motion (/design)
       Fehlt der Wert, zaehlt das Projekt zu "3d". */
-  group?: "3d" | "other";
+  group?: "3d" | "apps" | "design";
   /** Kehrt die Sektion auf hellen Grund um (Kontrastbruch) */
   invert?: boolean;
   /** Theorie aus den Studienmodulen, auf das Projekt bezogen */
@@ -120,6 +121,17 @@ export interface Project {
     frameRatio: number;
     caption?: string;
   };
+  /** Anklickbarer Ablauf durch eine Anwendung. Echte
+      Screenshots, der Besucher klickt sich selbst durch. */
+  walkthrough?: {
+    /** Ueberschrift, wenn ein Projekt mehrere Ablaeufe hat */
+    label?: string;
+    labelDe?: string;
+    phone?: boolean;
+    steps: { src: string; w: number; h: number; caption: string; captionDe?: string }[];
+  }[];
+  /** Oeffentlich erreichbare Fassung, falls vorhanden */
+  liveUrl?: string;
   /** Optional: scrollgesteuerte Bildfolge (Drehung) */
   sequence?: { frames: string[]; ratio: number; caption?: string };
   /** Zweiter Teil des Projekts: Portierung in die Engine.
@@ -582,7 +594,7 @@ export const projectsData: Project[] = [
   },
   {
     id: "i-need-space",
-    group: "other",
+    group: "design",
     de: {
       category: "Filmplakat / Compositing",
       description:
@@ -627,7 +639,7 @@ export const projectsData: Project[] = [
   },
   {
     id: "bloomest",
-    group: "other",
+    group: "design",
     /* Echte Kundenarbeit, entstanden in der Werkstudententaetigkeit —
        kein Studienmodul. Alle Motive sind bewusst allgemein
        gehalten: keine Anschrift, keine Telefonnummer, keine
@@ -663,7 +675,7 @@ export const projectsData: Project[] = [
 
   {
     id: "motion-design",
-    group: "other",
+    group: "design",
     de: { category: "Motion Design / Schnitt" },
     comingSoon: true,
     title: "Motion Design",
@@ -680,44 +692,182 @@ export const projectsData: Project[] = [
   },
 
   {
-    id: "web-products",
-    group: "other",
+    id: "ki-lesebuch",
+    group: "apps",
     module: "Produktion Digitaler Medien",
     brief:
-      "Design and build a complete digital product end to end — KI Lesebuch came out of the module, Qrib is my own.",
+      "Design and build a complete digital product end to end — concept, front end, back end and documentation.",
     de: {
-      category: "Full-Stack / Front-End",
+      category: "Full-Stack / Lern-Anwendung",
+      description:
+        "Eine Lern-Anwendung für Sprachen: Kurzgeschichten, die sich Satz für Satz erklären.",
+      longDescription:
+        "Eine Webanwendung zum Sprachenlernen über Lesen statt über Vokabellisten. Kurzgeschichten werden über ein Sprachmodell für mehrere Sprachen und GER-Stufen erzeugt. Jeder Satz lässt sich aufklappen und zeigt die Übersetzung; eine Grammatiktafel zerlegt Wortart und Zeitform; einzelne Wörter führen zu Synonymen und Beispielsätzen. Dazu ein Quizmodus mit Themenauswahl und Serienzählung. Gebaut mit React, TypeScript und Vite im Front-End, Express und Drizzle ORM auf einer PostgreSQL-Datenbank im Back-End. Gestaltung, Front-End und Back-End von mir.",
       brief:
-        "Ein vollständiges digitales Produkt von der Gestaltung bis zur Umsetzung — KI Lesebuch stammt aus dem Modul, Qrib ist ein Eigenprojekt.",
+        "Ein vollständiges digitales Produkt entwerfen und umsetzen — Konzept, Front-End, Back-End und Dokumentation.",
     },
-    comingSoon: true,
-    title: "Web Products",
-    category: "Full-Stack / Front-End",
+    title: "KI Lesebuch",
+    category: "Full-Stack / Learning App",
     filterCategory: "Development",
     role: "Solo Designer & Developer",
     year: "2026",
-    layout: "grid",
-    tools: [
-      "React",
-      "TypeScript",
-      "Tailwind CSS",
-      "Express.js",
-      "HTML",
-      "CSS",
-      "JavaScript",
-    ],
+    featured: true,
+    tools: ["React", "TypeScript", "Vite", "Tailwind CSS", "Express.js", "PostgreSQL"],
+    walkthrough: [{
+      steps: [
+        { src: "/images/projects/ki-lesebuch/01.jpg", w: 918, h: 857,
+          caption: "The entry point. One decision per screen — nothing to configure before the first story.",
+          captionDe: "Der Einstieg. Eine Entscheidung pro Bildschirm — vor der ersten Geschichte ist nichts einzustellen." },
+        { src: "/images/projects/ki-lesebuch/03.jpg", w: 603, h: 645,
+          caption: "Language and CEFR level. The level steers the generated vocabulary and sentence length, not just a label.",
+          captionDe: "Sprache und GER-Stufe. Die Stufe steuert Wortschatz und Satzlänge der erzeugten Geschichte, sie ist keine Beschriftung." },
+        { src: "/images/projects/ki-lesebuch/04.jpg", w: 808, h: 864,
+          caption: "Reading. Every sentence opens its translation in place — no switching back and forth between two texts.",
+          captionDe: "Lesen. Jeder Satz öffnet seine Übersetzung an Ort und Stelle — kein Hin und Her zwischen zwei Texten." },
+        { src: "/images/projects/ki-lesebuch/06.jpg", w: 929, h: 855,
+          caption: "The grammar panel breaks the sentence into word class and tense. This is where reading turns into learning.",
+          captionDe: "Die Grammatiktafel zerlegt den Satz in Wortart und Zeitform. Hier wird aus Lesen Lernen." },
+        { src: "/images/projects/ki-lesebuch/07.jpg", w: 878, h: 851,
+          caption: "A single word leads to synonyms and example sentences, so an unknown word does not stop the reading.",
+          captionDe: "Ein einzelnes Wort führt zu Synonymen und Beispielsätzen, damit ein unbekanntes Wort das Lesen nicht abbricht." },
+      ],
+    }],
     description:
-      "Two products designed, built and shipped solo — a language-learning app and a marketplace site.",
+      "A language-learning app: short stories that explain themselves sentence by sentence.",
     longDescription:
-      "Two self-built products. KI Lesebuch is a full-stack language-learning web app: short stories where every sentence opens its translation, a grammar panel breaks down word function and tense, and individual words reveal synonyms and examples — generated across several languages and CEFR levels. Qrib is a Tunisian services marketplace; I built its nineteen-page public site in plain HTML, CSS and JavaScript, in French, English and Arabic, responsive down to phone width. Design, front-end and back-end on both.",
-    shots: [
-      { src: "/images/projects/ki-lesebuch/04.jpg", caption: "KI Lesebuch — story reader", w: 808, h: 864 },
-      { src: "/images/projects/ki-lesebuch/06.jpg", caption: "KI Lesebuch — grammar breakdown", w: 929, h: 855 },
-      { src: "/images/projects/ki-lesebuch/07.jpg", caption: "KI Lesebuch — word detail", w: 878, h: 851 },
-      { src: "/images/projects/ki-lesebuch/03.jpg", caption: "KI Lesebuch — language & level", w: 603, h: 645 },
-      { src: "/images/projects/qrib-web/01.jpg", caption: "Qrib — landing", w: 2000, h: 1250 },
-      { src: "/images/projects/qrib-web/02.jpg", caption: "Qrib — the profile as product", w: 2000, h: 1250 },
-      { src: "/images/projects/qrib-web/04.jpg", caption: "Qrib — trust model", w: 2000, h: 1250 },
-    ],
+      "A web application for learning a language by reading rather than by vocabulary lists. Short stories are generated through a language model across several languages and CEFR levels. Every sentence opens to reveal its translation; a grammar panel breaks down word class and tense; individual words lead to synonyms and example sentences. A quiz mode with topic selection and streak tracking sits alongside. Built with React, TypeScript and Vite on the front end, Express and Drizzle ORM over a PostgreSQL database on the back end. Design, front end and back end all mine.",
+    shots: [],
+  },
+
+  {
+    id: "safemeet",
+    group: "apps",
+    client: "WADAS Production · Eigenprodukt",
+    de: {
+      category: "Mobile App / Persönliche Sicherheit",
+      description:
+        "Eine Sicherheits-App für Treffen und für die Familie — begleiten, melden, im Ernstfall Alarm.",
+      longDescription:
+        "Eine App für Situationen, in denen jemand wissen soll, wo man ist: ein Treffen mit einer fremden Person, der Heimweg, ein Kind oder ein Angehöriger unterwegs. Die Bedienung läuft über einen einzigen Kreis — tippen startet eine Sitzung, halten löst den Notruf aus. Um den Kreis liegen die Angehörigen als Knoten in einem Netz; wer gerade zusieht, leuchtet. Läuft eine Sitzung, fragt die App in Abständen nach; bleibt die Antwort aus, geht die Meldung raus. Alles Zeitkritische funktioniert auch bei gesperrtem Bildschirm über einen Vordergrunddienst, und die Alarmierung läuft serverseitig weiter, selbst wenn das Handy ausfällt. Eine Zwangs-PIN sieht aus wie ein Abbruch, sendet aber stillen Alarm und teilt den Standort verdeckt weiter. Gebaut mit Flutter, Firebase für Anmeldung und Datenhaltung, Twilio für die Notfall-SMS.",
+    },
+    title: "SafeMeet",
+    category: "Mobile App / Personal Safety",
+    filterCategory: "Development",
+    role: "Solo Designer & Developer",
+    year: "2026",
+    featured: true,
+    tools: ["Flutter", "Dart", "Firebase", "Firestore", "Twilio"],
+    description:
+      "A personal safety app for meetings and for family — accompany, check in, raise the alarm.",
+    longDescription:
+      "An app for situations where someone should know where you are: meeting a stranger, the walk home, a child or a relative on the move. Everything runs through a single circle — tap to start a session, hold to raise the alarm. Around the circle the people close to you sit as nodes in a net; whoever is currently watching lights up. While a session runs the app asks at intervals whether you are fine; if the answer does not come, the alert goes out. Everything time-critical keeps working with the screen locked through a foreground service, and the alerting continues server-side even if the phone drops out. A duress PIN looks like a cancel but sends a silent alarm and keeps sharing the location covertly. Built with Flutter, Firebase for auth and data, Twilio for the emergency SMS.",
+    walkthrough: [{
+      phone: true,
+      steps: [
+        { src: "/images/projects/safemeet/01_startseite.jpg", w: 540, h: 1140,
+          caption: "One control instead of a menu. Tap starts a session, hold raises the alarm. The people around the ring are the contacts who would be told.",
+          captionDe: "Ein Bedienelement statt eines Menüs. Tippen startet eine Sitzung, Halten löst den Alarm aus. Die Punkte um den Ring sind die Kontakte, die benachrichtigt würden." },
+        { src: "/images/projects/safemeet/05_bereitschafts_check.jpg", w: 540, h: 1140,
+          caption: "Protection is only as good as the setup. The check scores it out of seven and names what is still missing — nobody reads a settings screen before an emergency.",
+          captionDe: "Schutz ist nur so gut wie die Einrichtung. Der Check bewertet sie aus sieben Punkten und benennt, was noch fehlt — vor dem Ernstfall liest niemand eine Einstellungsseite." },
+        { src: "/images/projects/safemeet/02_treffen_laeuft.jpg", w: 540, h: 1140,
+          caption: "A running session: time left, who is watching, and the next check-in. The app asks at intervals — silence is what triggers the alarm, not a missing button press.",
+          captionDe: "Laufende Sitzung: Restzeit, wer zusieht, nächste Abfrage. Die App fragt in Abständen nach — ausgelöst wird durch Schweigen, nicht durch einen vergessenen Knopfdruck." },
+        { src: "/images/projects/safemeet/03_alarm.jpg", w: 540, h: 1140,
+          caption: "Alarm. Location and live link go out to the contacts over the server, so the alert survives the phone dying.",
+          captionDe: "Alarm. Standort und Live-Link gehen über den Server an die Kontakte — die Meldung überlebt damit auch ein ausfallendes Handy." },
+        { src: "/images/projects/safemeet/07_live_seite_angehoerige.jpg", w: 540, h: 1140,
+          caption: "What the other side sees: route trail, last confirmation, battery and network. Two buttons — ask whether she is okay, or call the emergency number.",
+          captionDe: "Was die Gegenseite sieht: Wegspur, letzte Bestätigung, Akku und Netz. Zwei Knöpfe — nachfragen oder den Notruf wählen." },
+        { src: "/images/projects/safemeet/08_notfall_sms.jpg", w: 540, h: 1140,
+          caption: "The SMS a contact receives. It has to work for someone who has never opened the app — time, meeting, location link, battery, and what to do.",
+          captionDe: "Die SMS, die ein Kontakt bekommt. Sie muss für jemanden funktionieren, der die App nie geöffnet hat — Uhrzeit, Treffen, Standortlink, Akku und was zu tun ist." },
+        { src: "/images/projects/safemeet/04_familienmodus.jpg", w: 540, h: 1140,
+          caption: "Family mode shares the location continuously and drops the check-ins — meant for a child or a relative, not for one meeting.",
+          captionDe: "Der Familienmodus teilt den Standort durchgehend und lässt die Abfragen weg — gedacht für ein Kind oder einen Angehörigen, nicht für ein einzelnes Treffen." },
+        { src: "/images/projects/safemeet/06_probealarm.jpg", w: 540, h: 1140,
+          caption: "A test alarm sends the contacts one clearly marked message. Nobody should be seeing their first alarm during a real one.",
+          captionDe: "Ein Probealarm schickt den Kontakten eine deutlich markierte Nachricht. Niemand soll im Ernstfall zum ersten Mal sehen, wie ein Alarm aussieht." },
+      ],
+    }],
+    shots: [],
+  },
+
+  {
+    id: "qrib-web",
+    group: "apps",
+    client: "Qrib",
+    de: {
+      category: "Mobile App & Website",
+      description:
+        "Eine tunesische Plattform für Dienstleistungen — App und öffentlicher Auftritt.",
+      longDescription:
+        "Eine Plattform, die Handwerker und Dienstleister mit Kunden zusammenbringt. Zwei Teile: die App in Flutter mit Firebase im Rücken, und der öffentliche Auftritt mit neunzehn Seiten in reinem HTML, CSS und JavaScript ohne Framework. Beides auf Französisch, Englisch und Arabisch — Arabisch heißt rechtsläufiges Layout, nicht nur übersetzter Text. Inhaltlich trägt alles dasselbe Thema: Vertrauen. Das Profil ist das Produkt, der Qrib Score macht Reputation sichtbar und lässt sich nicht kaufen, die Verifizierung läuft in Stufen statt als Ja-Nein.",
+    },
+    title: "Qrib",
+    category: "Mobile App & Website",
+    filterCategory: "Development",
+    role: "Designer & Developer",
+    year: "2026",
+    featured: true,
+    tools: ["Flutter", "Dart", "Firebase", "HTML", "CSS", "JavaScript"],
+    description:
+      "A Tunisian services platform — the app and the public site.",
+    longDescription:
+      "A platform connecting tradespeople and service providers with customers. Two parts: the app in Flutter with Firebase behind it, and the public site, nineteen pages in plain HTML, CSS and JavaScript with no framework. Both in French, English and Arabic — Arabic meaning a right-to-left layout, not just translated text. One theme runs through all of it: trust. The profile is the product, the Qrib Score makes reputation visible and cannot be bought, and verification runs in levels rather than as a yes or no.",
+    walkthrough: [
+    {
+      label: "The app",
+      labelDe: "Die App",
+      phone: true,
+      steps: [
+        { src: "/images/projects/qrib-app/01_start.jpg", w: 540, h: 1199,
+          caption: "The customer side starts with a question, not a list of providers. Describe the problem and the providers come to you with their prices.",
+          captionDe: "Die Kundenseite beginnt mit einer Frage, nicht mit einer Anbieterliste. Problem beschreiben — die Anbieter kommen mit ihren Preisen auf dich zu." },
+        { src: "/images/projects/qrib-app/02_anfrage.jpg", w: 540, h: 1199,
+          caption: "The request form asks the questions a tradesperson would ask anyway. One line settles it: no provider sees you before you send.",
+          captionDe: "Das Anfrageformular stellt die Fragen, die ein Handwerker ohnehin stellen würde. Eine Zeile klärt den Rest: kein Anbieter sieht dich, bevor du abschickst." },
+        { src: "/images/projects/qrib-app/03_anbieter.jpg", w: 540, h: 1199,
+          caption: "The other side. Requests nearby, each one costing credits to answer — which is what keeps the platform free for customers.",
+          captionDe: "Die Gegenseite. Anfragen in der Nähe, jede Antwort kostet Guthaben — das hält die Plattform für Kunden kostenlos." },
+        { src: "/images/projects/qrib-app/04_profil.jpg", w: 540, h: 1199,
+          caption: "A provider profile. The score sits above the price, and the price range comes from completed jobs rather than from a claim.",
+          captionDe: "Ein Anbieterprofil. Der Score steht über dem Preis, und die Preisspanne stammt aus abgeschlossenen Aufträgen, nicht aus einer Behauptung." },
+        { src: "/images/projects/qrib-app/05_bewertung.jpg", w: 540, h: 1199,
+          caption: "Rating in six dimensions instead of stars. The six feed one calculated number — a single star rating is too easy to game.",
+          captionDe: "Bewertung in sechs Dimensionen statt in Sternen. Die sechs ergeben eine berechnete Zahl — eine einzelne Sternewertung lässt sich zu leicht manipulieren." },
+        { src: "/images/projects/qrib-app/06_credits.jpg", w: 540, h: 1199,
+          caption: "The business model, stated plainly in the app: free for customers, credits only when a provider answers. Including a kiosk card for people without a bank card.",
+          captionDe: "Das Geschäftsmodell, offen in der App benannt: kostenlos für Kunden, Guthaben nur beim Antworten. Inklusive Kiosk-Karte für alle ohne Bankkarte." },
+        { src: "/images/projects/qrib-app/07_colis.jpg", w: 540, h: 1199,
+          caption: "Parcels and spare seats between Europe and Tunisia. Same mechanics — score and credits — applied to a different need.",
+          captionDe: "Pakete und freie Plätze zwischen Europa und Tunesien. Dieselbe Mechanik aus Score und Guthaben, anderes Bedürfnis." },
+        { src: "/images/projects/qrib-app/08_campus.jpg", w: 540, h: 1199,
+          caption: "Campus: timetable, study group, internships. The platform grows past trades without needing a second app.",
+          captionDe: "Campus: Stundenplan, Lerngruppe, Praktika. Die Plattform wächst über das Handwerk hinaus, ohne eine zweite App zu brauchen." },
+      ],
+    },
+    {
+      label: "The website",
+      labelDe: "Die Website",
+      steps: [
+        { src: "/images/projects/qrib-web/01.jpg", w: 1800, h: 1125,
+          caption: "The landing page says what the platform sells: your work, your reputation. Two routes — browse, or install the app.",
+          captionDe: "Die Startseite sagt, was die Plattform verkauft: deine Arbeit, deine Reputation. Zwei Wege — ansehen oder die App laden." },
+        { src: "/images/projects/qrib-web/02.jpg", w: 1800, h: 1125,
+          caption: "The Qrib Score. The page spends its space on what the score cannot do — it is not for sale, a paid subscription does not raise it.",
+          captionDe: "Der Qrib Score. Die Seite verwendet ihren Platz darauf, was der Score nicht kann — er ist nicht käuflich, ein Abo hebt ihn nicht." },
+        { src: "/images/projects/qrib-web/03.jpg", w: 1800, h: 1125,
+          caption: "Verification in levels instead of a badge. Each level states exactly what was checked and what it does not prove.",
+          captionDe: "Verifizierung in Stufen statt als Abzeichen. Jede Stufe sagt, was geprüft wurde — und was sie nicht belegt." },
+        { src: "/images/projects/qrib-web/04.jpg", w: 1800, h: 1125,
+          caption: "Community rules. On a trust platform these are not legal boilerplate but part of the product.",
+          captionDe: "Die Gemeinschaftsregeln. Auf einer Vertrauensplattform sind sie kein Kleingedrucktes, sondern Teil des Produkts." },
+        { src: "/images/projects/qrib-web/05.jpg", w: 1800, h: 1125,
+          caption: "The same page in Arabic: the layout mirrors, the language switch stays where a right-to-left reader expects it.",
+          captionDe: "Dieselbe Seite auf Arabisch: das Layout spiegelt, die Sprachumschaltung bleibt dort, wo ein rechtsläufig lesender Besucher sie erwartet." },
+      ],
+    }],
+    shots: [],
   },
 ];

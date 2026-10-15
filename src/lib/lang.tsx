@@ -66,7 +66,7 @@ export function pick<T>(en: T, de: T | undefined, lang: Lang): T {
 
 /* ── Feste Beschriftungen der Oberflaeche ── */
 export const UI = {
-  navWork: { en: "Selected Work", de: "Projekte" },
+  navWork: { en: "3D & Game Art", de: "3D & Game Art" },
   navAbout: { en: "About", de: "Über mich" },
   navContact: { en: "Contact", de: "Kontakt" },
   based: { en: "Based in Hamburg", de: "Ansässig in Hamburg" },
@@ -85,14 +85,27 @@ export const UI = {
     en: "Environments, assets and characters — Maya, Unity, Substance Painter",
     de: "Umgebungen, Assets und Charaktere — Maya, Unity, Substance Painter",
   },
-  groupOther: {
-    en: "What the degree adds",
-    de: "Was das Studium beisteuert",
+  groupApps: { en: "Web & App Development", de: "Web- und App-Entwicklung" },
+  groupAppsSub: {
+    en: "Products designed and built end to end — front end, back end, and the app itself.",
+    de: "Produkte von der Gestaltung bis zur Umsetzung — Front-End, Back-End und die App selbst.",
   },
-  groupOtherSub: {
-    en: "Design, motion and self-built products — most of it out of the modules of the Media Technology degree, each named with the module and the brief it answered.",
-    de: "Gestaltung, Motion und selbst gebaute Produkte — überwiegend aus den Modulen des Medientechnik-Studiums, jeweils mit dem Modul und der Aufgabenstellung, aus der die Arbeit entstanden ist.",
+  groupDesign: { en: "Design & Coursework", de: "Gestaltung & Studium" },
+  groupDesignSub: {
+    en: "Poster and print design, motion, and work out of the modules of the degree.",
+    de: "Plakat und Print, Motion und Arbeiten aus den Modulen des Studiums.",
   },
+  moreWork: { en: "More work", de: "Weitere Arbeiten" },
+  clickThrough: { en: "Click through", de: "Durchklicken" },
+  walkthrough: { en: "Walkthrough", de: "Ablauf" },
+  walkthroughNote: {
+    en: "Click the right side to go forward, the left to go back. Arrow keys and swipe work too.",
+    de: "Rechts klicken führt weiter, links zurück. Pfeiltasten und Wischen gehen auch.",
+  },
+  liveSite: { en: "Open the live site", de: "Zur Live-Seite" },
+  navApps: { en: "Apps", de: "Apps" },
+  navDesign: { en: "Design", de: "Design" },
+
   /* Beschriftungen fuer die Modul-Herkunft einer Arbeit */
   module: { en: "Module", de: "Modul" },
   brief: { en: "Brief", de: "Aufgabenstellung" },

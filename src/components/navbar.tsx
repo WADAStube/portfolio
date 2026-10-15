@@ -1,22 +1,26 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import { Link, useLocation } from "wouter";
 import { cn } from "@/lib/utils";
 import { useLang, t } from "@/lib/lang";
 
-const sectionIds = ["work", "about", "contact"];
-
+/* Die Arbeiten liegen auf drei Seiten. "Kontakt" bleibt ein
+   Sprung innerhalb der aktuellen Seite — der Block steht
+   ueberall unten. */
 const navLinks = [
-  { key: "navWork" as const, href: "#work", id: "work" },
-  { key: "navAbout" as const, href: "#about", id: "about" },
-  { key: "navContact" as const, href: "#contact", id: "contact" },
+  { key: "navWork" as const, to: "/" },
+  { key: "navApps" as const, to: "/apps" },
+  { key: "navDesign" as const, to: "/design" },
+  { key: "navAbout" as const, to: "/about" },
+  { key: "navContact" as const, anchor: "#contact" },
 ];
 
 export function Navbar() {
   const { lang, setLang } = useLang();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("");
+  const [location, navigate] = useLocation();
 
   /* Scroll progress bar */
   const { scrollYProgress } = useScroll();
@@ -29,25 +33,25 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  /* Active section via IntersectionObserver */
-  useEffect(() => {
-    const observers: IntersectionObserver[] = [];
-    sectionIds.forEach((id) => {
-      const el = document.getElementById(id);
-      if (!el) return;
-      const obs = new IntersectionObserver(
-        ([entry]) => { if (entry.isIntersecting) setActiveSection(id); },
-        { threshold: 0.25 }
-      );
-      obs.observe(el);
-      observers.push(obs);
-    });
-    return () => observers.forEach((o) => o.disconnect());
-  }, []);
-
   const scrollTo = (href: string) => {
     const el = document.querySelector(href);
     el?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  /* Nur die Seitenlinks werden hervorgehoben, nicht "Kontakt" */
+  const isActive = (to?: string) => !!to && location === to;
+
+  const go = (link: (typeof navLinks)[number]) => {
+    if (link.anchor) {
+      scrollTo(link.anchor);
+      return;
+    }
+    if (link.to && location !== link.to) {
+      navigate(link.to);
+      window.scrollTo({ top: 0 });
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   };
 
   return (
@@ -67,10 +71,10 @@ export function Navbar() {
         <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
 
           {/* Logo */}
+          <Link href="/">
           <a
-            href="#top"
             className="flex items-center gap-3 z-50 group"
-            onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+            onClick={() => window.scrollTo({ top: 0 })}
           >
             {/* WADAS-Monogramm */}
             <span className="relative inline-flex items-center justify-center h-7 w-7 shrink-0 border border-white/25 group-hover:border-white/60 transition-colors duration-300">
@@ -87,24 +91,25 @@ export function Navbar() {
               </span>
             </span>
           </a>
+          </Link>
 
           {/* Desktop nav */}
           <nav className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
               <a
                 key={t(link.key, lang)}
-                href={link.href}
+                href={link.to ?? link.anchor}
                 className={cn(
                   "text-sm font-medium transition-colors duration-200 relative group",
-                  activeSection === link.id ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+                  isActive(link.to) ? "text-foreground" : "text-muted-foreground hover:text-foreground"
                 )}
-                onClick={(e) => { e.preventDefault(); scrollTo(link.href); }}
+                onClick={(e) => { e.preventDefault(); go(link); }}
               >
                 {t(link.key, lang)}
                 <span
                   className={cn(
                     "absolute -bottom-1 left-0 h-[1px] bg-primary transition-all duration-300",
-                    activeSection === link.id ? "w-full" : "w-0 group-hover:w-full"
+                    isActive(link.to) ? "w-full" : "w-0 group-hover:w-full"
                   )}
                 />
               </a>
@@ -153,15 +158,18 @@ export function Navbar() {
                 {navLinks.map((link, i) => (
                   <motion.a
                     key={t(link.key, lang)}
-                    href={link.href}
+                    href={link.to ?? link.anchor}
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: i * 0.1 }}
-                    className="text-lg font-display font-medium text-foreground hover:text-primary transition-colors"
+                    className={cn(
+                      "text-lg font-display font-medium transition-colors",
+                      isActive(link.to) ? "text-primary" : "text-foreground hover:text-primary",
+                    )}
                     onClick={(e) => {
                       e.preventDefault();
                       setMobileMenuOpen(false);
-                      scrollTo(link.href);
+                      go(link);
                     }}
                   >
                     {t(link.key, lang)}

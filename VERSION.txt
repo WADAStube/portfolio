@@ -1,3 +1,260 @@
+Portfolio — Version 55  (15.10.2026)
+
+NUR NOCH ABLAEUFE, KEINE LOSEN BILDER
+Unter den Ablaeufen standen bisher noch einzelne Screenshots.
+Die sind raus. Jedes Projekt auf /apps besteht jetzt aus Text
+links und Ablauf rechts, sonst nichts.
+
+Die guten Einzelbilder sind nicht verloren, sondern an den
+Ablauf angehaengt:
+
+  SafeMeet   jetzt 8 Schritte
+             ... 07 Familienmodus, 08 Probealarm
+  Qrib App   jetzt 8 Schritte
+             ... 07 Colis & covoiturage, 08 Campus
+
+KI Lesebuch hatte sechs Einzelbilder, die dieselben Dateien
+waren wie die Ablaufschritte — ersatzlos gestrichen.
+
+Qrib behaelt zwei Ablaeufe, weil es zwei Produkte sind: die App
+im Hochformat, die Website im Querformat. In einem gemeinsamen
+Ablauf muesste eines von beiden in einen falschen Rahmen.
+
+  Seitenhoehe /apps   6 876 px (vorher rund 10 000)
+
+GEPRUEFT
+- Build und TypeScript sauber
+- Nachgezaehlt im fertigen Dokument:
+  ki-lesebuch 1 Ablauf / 0 Einzelbilder
+  safemeet    1 Ablauf / 0 Einzelbilder
+  qrib        2 Ablaeufe / 0 Einzelbilder
+- 1600 px, kein waagerechter Ueberlauf
+
+────────────────────────────────────────────
+
+Portfolio — Version 54  (15.10.2026)
+
+QRIB HAT JETZT ZWEI ABLAEUFE
+Ein Projekt kann mehrere Ablaeufe haben. Das Feld walkthrough ist
+dafuer eine Liste geworden, jeder Eintrag mit eigener
+Ueberschrift:
+
+  Ablauf — Die App        6 Schritte, Hochformat
+  Ablauf — Die Website    5 Schritte, Querformat
+
+Der App-Ablauf erzaehlt die Plattform von beiden Seiten:
+  01  Start — Problem beschreiben statt Anbieter suchen
+  02  Anfrage — kein Anbieter sieht dich vor dem Absenden
+  03  Anbietermodus — Anfragen in der Naehe, Antwort kostet
+      Guthaben
+  04  Profil — Score ueber Preis, Preisspanne aus echten
+      Auftraegen
+  05  Bewertung — sechs Dimensionen statt Sterne
+  06  Guthaben — das Geschaeftsmodell offen benannt
+
+Dazu zwei Einzelbilder: Colis & covoiturage, Campus.
+
+DATEIEN
+public/images/projects/qrib-app/ — acht Bilder, aus 902x1944
+auf 540x1199 gerechnet, je 47 bis 69 KB.
+
+KI LESEBUCH LAEUFT LOKAL
+Das Repo startet hier (tsx server/index.ts, Port frei waehlbar).
+Ohne DATABASE_URL faellt es sauber auf Speicher-Ablage zurueck,
+Registrierung und Personalisierung funktionieren.
+
+Nicht weiter gekommen: die eigentlichen Leseansichten brauchen
+eine erzeugte Geschichte und damit den OpenAI-Schluessel. Den
+habe ich nicht benutzt.
+
+────────────────────────────────────────────
+
+Portfolio — Version 53  (15.10.2026)
+
+QRIB IST APP UND WEBSITE
+Der Eintrag beschrieb nur die Website. Jetzt beides: die App in
+Flutter mit Firebase und der oeffentliche Auftritt mit neunzehn
+Seiten in reinem HTML, CSS und JavaScript. Kategorie, Software
+und Beschreibung entsprechend.
+
+NEUE QRIB-BILDER, SELBST AUFGENOMMEN
+Die alten Screenshots waren weich. Ich habe die Website aus
+qrib.zip lokal gestartet und bei 1440x900 mit doppelter
+Pixeldichte neu abfotografiert — 2880x1800, dann auf 1800x1125
+gerechnet.
+
+  01  Landing
+  02  Qrib Score
+  03  Verifizierung
+  04  Gemeinschaftsregeln
+  05  dieselbe Seite auf Arabisch, gespiegeltes Layout
+
+Als anklickbarer Ablauf, fuenf Schritte.
+provider.html faellt weg: die Seite laedt ihre Daten aus
+Firebase und bleibt ohne Anmeldung im Ladezustand stehen.
+
+OFFEN
+App-Screenshots von Qrib fehlen noch. Sobald sie da sind, kommt
+ein zweiter Ablauf im Hochformat dazu, wie bei SafeMeet.
+
+────────────────────────────────────────────
+
+Portfolio — Version 52  (15.10.2026)
+
+SAFEMEET IST DRIN
+Kein "In Arbeit" mehr. Vollstaendiger Eintrag auf /apps.
+
+  Ablauf (anklickbar, 6 Schritte)
+    01  Startseite — ein Bedienelement statt eines Menues
+    05  Bereitschafts-Check — Schutz ist nur so gut wie die
+        Einrichtung
+    02  Treffen laeuft — Restzeit, Zuschauer, naechste Abfrage
+    03  Alarm — Standort und Live-Link ueber den Server
+    07  Live-Seite der Angehoerigen — Wegspur, Akku, Netz
+    08  Notfall-SMS — muss ohne App verstaendlich sein
+
+  Einzelbilder darunter
+    04  Familienmodus
+    06  Probealarm
+
+Je Schritt ein Satz, der sagt, welches Problem der Bildschirm
+loest — nicht was man sieht.
+
+Beschreibung auf Deutsch und Englisch geschrieben: Puls-Kreis als
+einziges Bedienelement, Sicherheitsnetz aus Kontakten, Abfragen
+waehrend der Sitzung, Vordergrunddienst bei gesperrtem Schirm,
+serverseitige Alarmierung, Zwangs-PIN mit stillem Alarm.
+Stack: Flutter, Dart, Firebase, Firestore, Twilio.
+
+BILDER
+Aus 1080x2280 PNG (je 150 bis 760 KB) wurden 540x1140 JPG
+(je 47 bis 65 KB). Zusammen 465 KB statt 3,9 MB.
+
+ABLAUF STEHT JETZT UEBER DEN EINZELBILDERN
+Vorher lag er darunter — bei SafeMeet sah man zuerst zwei
+Standbilder und erst danach den eigentlichen Ablauf.
+
+HOCHFORMAT IM ABLAUF
+phone: true setzt den Rahmen auf 19 rem Breite und die
+Bildunterschrift mittig darunter. Bei 22 rem war das Geraet
+hoeher als der sichtbare Bereich.
+
+GEPRUEFT
+- Build und TypeScript sauber
+- Durchklicken in /apps getestet, Schritt 1 -> 4 -> 6
+- 1600 und 390 px, kein waagerechter Ueberlauf
+
+────────────────────────────────────────────
+
+Portfolio — Version 51  (15.10.2026)
+
+ANKLICKBARER ABLAUF FUER ANWENDUNGEN
+Neu: src/components/walkthrough.tsx
+
+Echte Screenshots, die der Besucher selbst durchklickt.
+Rechte Haelfte weiter, linke zurueck, dazu Pfeiltasten und
+Wischen auf dem Handy. Darunter eine Schrittleiste zum direkten
+Anspringen, ein Zaehler und je Schritt eine Bildunterschrift,
+die sagt, welches Problem der Bildschirm loest.
+
+Beim ersten Mal steht unten rechts ein Hinweis "Durchklicken",
+der nach dem ersten Klick verschwindet.
+
+Warum kein eingebetteter echter Build: der braucht Server,
+Anmeldung und Geraeterechte und ist genau dann kaputt, wenn
+jemand ihn sich ansieht. Der Ablauf laedt sofort und
+funktioniert immer.
+
+ZWEI NEUE FELDER IN projects.ts
+  walkthrough  { phone?, steps: [{ src, w, h, caption, captionDe }] }
+  liveUrl      oeffentlich erreichbare Fassung; erzeugt unter
+               dem Ablauf einen Knopf "Zur Live-Seite"
+
+KI LESEBUCH ALS ERSTES BEISPIEL
+Fuenf Schritte: Einstieg, Sprache und Stufe, Lesen, Grammatik,
+Wortdetail. Das Raster ist dafuer entfallen — ein Ablauf erzaehlt
+mehr als sechs Bilder nebeneinander.
+
+GEPRUEFT
+- Build und TypeScript sauber
+- Durchklicken vor und zurueck getestet
+- Bildrahmen nimmt das Format des ersten Schritts, abweichende
+  Formate werden eingepasst statt beschnitten
+
+────────────────────────────────────────────
+
+Portfolio — Version 50  (15.10.2026)
+
+DREI SEITEN STATT EINER
+Die Startseite war 33 000 px lang. Jetzt:
+
+  /         3D & Game Art — Hero, Werkuebersicht, Lantern Island
+  /apps     Web- und App-Entwicklung
+  /design   Gestaltung & Studium
+  /about    Ueber mich
+
+Die Startseite bleibt 3D. Sie ist die Seite, die an ein Studio
+geht; Apps und Design haengen daneben, nicht davor.
+
+  Startseite    28 200 px (vorher 33 000)
+  /apps          6 400 px
+  /design        6 700 px
+  /about         3 900 px
+
+Navigation oben: 3D & Game Art · Apps · Design · Ueber mich ·
+Kontakt. "Kontakt" bleibt ein Sprung innerhalb der Seite, der
+Block steht unten auf allen vier Seiten.
+
+In der Werkuebersicht auf der Startseite stehen weiterhin alle
+Projekte, in drei Gruppen. Die Ueberschriften von Gruppe 2 und 3
+und ihre Zeilen fuehren auf die jeweilige Seite statt zu einem
+Anker. Am Fuss jeder Seite stehen zwei Kacheln zu den beiden
+anderen Bereichen.
+
+WEB PRODUCTS AUFGETEILT
+Aus einem Sammeleintrag werden drei eigene Projekte:
+
+  KI Lesebuch   Modul Produktion Digitaler Medien
+                React, TypeScript, Vite, Express, PostgreSQL
+                sechs Screenshots im Raster
+  Qrib          Auftraggeber Qrib
+                HTML, CSS, JavaScript, 19 Seiten, FR/EN/AR
+                vier Screenshots
+  SafeMeet      WADAS Production, Eigenprodukt
+                Flutter, Firebase, Twilio
+                vorerst "In Arbeit" — Screenshots fehlen noch
+
+NEUES FELD IN projects.ts
+group: "3d" | "apps" | "design" — entscheidet, auf welcher Seite
+ein Projekt landet. Ohne Angabe: "3d".
+
+SEITENUEBERSCHRIFTEN OHNE SPLITTEXT
+Die wortweise Blende arbeitet mit overflow:hidden je Wort. Bei
+enger Zeilenhoehe und noch nicht geladener Schrift schneidet das
+Oberlaengen ab — auf /apps war die Ueberschrift dadurch zeitweise
+gar nicht zu sehen, auf /design nur das "&". Auf den vier
+Seitenkoepfen jetzt eine einfache Einblendung, Zeilenhoehe 1,02.
+Hero und Kontakt behalten die Blende.
+
+GEMEINSAME BAUSTEINE AUSGELAGERT
+Neu: src/components/site-chrome.tsx — Kontaktblock, Fussleiste,
+Rauschen, Mauszeiger, Seitenkopf, Projektfolge, Verweiskacheln.
+Lag vorher alles nur in Home.tsx.
+
+sitemap.xml um die drei neuen Adressen ergaenzt. Die
+Weiterleitung in netlify.toml faengt die Unterseiten bereits ab,
+dort war nichts zu aendern.
+
+GEPRUEFT
+- Build und TypeScript sauber
+- Alle vier Adressen liefern 200, auch beim direkten Aufruf
+- 1600 und 390 px, kein waagerechter Ueberlauf
+- Handy-Menue zeigt alle fuenf Eintraege
+- Keine Fehler in der Konsole (ausser blockierten Google Fonts
+  in der Testumgebung)
+
+────────────────────────────────────────────
+
 Portfolio — Version 49  (01.10.2026)
 
 BLOOMEST — A5-BLATT ENTFERNT

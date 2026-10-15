@@ -9,7 +9,17 @@ import {
   useReducedMotion,
 } from "framer-motion";
 import { Volume2, VolumeX, ArrowDown } from "lucide-react";
+import { Link, useLocation } from "wouter";
 import { Navbar } from "@/components/navbar";
+import {
+  CV_FILE,
+  Grain,
+  Cursor,
+  StretchOnScroll,
+  OtherPages,
+  ContactSection,
+  SiteFooter,
+} from "@/components/site-chrome";
 import { Lightbox } from "@/components/lightbox";
 import { ProjectShowcase } from "@/components/project-showcase";
 import { AboutSection } from "@/components/about-section";
@@ -31,12 +41,7 @@ import { useLang, t } from "@/lib/lang";
 
 /* ─────────────────────── static data ───────────────────────── */
 
-/* Lebenslauf-Download.
-   Zum Aktivieren: PDF nach public/ legen und den Pfad hier
-   eintragen, z.B. "/Issam-Selmi-CV.pdf".
-   Solange null, wird der Button gar nicht erst angezeigt —
-   so entsteht kein toter Link auf der Live-Seite. */
-const CV_FILE: string | null = "/Issam-Selmi-CV.pdf";
+
 /* Nur Software, die in den Projekten auf dieser Seite
    tatsaechlich zum Einsatz kam. */
 const MARQUEE = [
@@ -57,28 +62,6 @@ const MARQUEE = [
 ];
 
 /* ──────── Ueberschrift zieht sich beim Scrollen in Form ────── */
-function StretchOnScroll({ children }: { children: React.ReactNode }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const reduced = useReducedMotion();
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start 95%", "start 45%"],
-  });
-  const raw = useTransform(scrollYProgress, [0, 1], [0.9, 1]);
-  const scaleX = useSpring(raw, { stiffness: 140, damping: 26, mass: 0.4 });
-
-  return (
-    <div ref={ref}>
-      <motion.div
-        style={{ scaleX: reduced ? 1 : scaleX, originX: 0 }}
-        className="will-change-transform"
-      >
-        {children}
-      </motion.div>
-    </div>
-  );
-}
-
 /* ─────────────────────── Loader ─────────────────────────────── */
 function Loader({ onDone }: { onDone: () => void }) {
   const [pct, setPct] = useState(0);
@@ -143,60 +126,8 @@ function Loader({ onDone }: { onDone: () => void }) {
   );
 }
 
-/* ─────────────────────── Grain overlay ─────────────────────── */
-const Grain = () => <div aria-hidden="true" className="grain" />;
 
 /* ─────────────────────── Custom cursor ─────────────────────── */
-function Cursor() {
-  const dx = useMotionValue(-100);
-  const dy = useMotionValue(-100);
-  const rx = useMotionValue(-100);
-  const ry = useMotionValue(-100);
-  const sx = useSpring(rx, { stiffness: 200, damping: 22 });
-  const sy = useSpring(ry, { stiffness: 200, damping: 22 });
-  const [expanded, setExpanded] = useState(false);
-  const [ready, setReady] = useState(false);
-
-  /* Auf Touch-Geräten komplett deaktiviert */
-  const [fine, setFine] = useState(false);
-  useEffect(() => {
-    setFine(window.matchMedia("(pointer: fine)").matches);
-  }, []);
-
-  useEffect(() => {
-    if (!fine) return;
-    const mv = (e: MouseEvent) => {
-      dx.set(e.clientX - 2);
-      dy.set(e.clientY - 2);
-      rx.set(e.clientX - 18);
-      ry.set(e.clientY - 18);
-      setReady(true);
-    };
-    const mo = (e: MouseEvent) => {
-      setExpanded(
-        !!(e.target as HTMLElement).closest("a,button,[role='button'],figure"),
-      );
-    };
-    window.addEventListener("mousemove", mv);
-    window.addEventListener("mouseover", mo);
-    return () => {
-      window.removeEventListener("mousemove", mv);
-      window.removeEventListener("mouseover", mo);
-    };
-  }, [dx, dy, rx, ry, fine]);
-
-  if (!fine || !ready) return null;
-  return (
-    <>
-      <motion.div className="cur-dot" style={{ x: dx, y: dy }} />
-      <motion.div
-        className={cn("cur-ring", expanded && "expanded")}
-        style={{ x: sx, y: sy }}
-      />
-    </>
-  );
-}
-
 /* ──────────────────────── Marquee strip ────────────────────── */
 function Marquee() {
   const items = [...MARQUEE, ...MARQUEE];
@@ -242,7 +173,8 @@ function MuteBtn({ muted, onToggle }: { muted: boolean; onToggle: () => void }) 
 function ProjectIndex({ projects }: { projects: Project[] }) {
   const { lang } = useLang();
   const three = projects.filter((p) => (p.group ?? "3d") === "3d");
-  const other = projects.filter((p) => p.group === "other");
+  const apps = projects.filter((p) => p.group === "apps");
+  const design = projects.filter((p) => p.group === "design");
 
   return (
     <div className="space-y-16 md:space-y-24">
@@ -251,11 +183,20 @@ function ProjectIndex({ projects }: { projects: Project[] }) {
         title={t("group3d", lang)}
         sub={t("group3dSub", lang)}
       />
-      {other.length > 0 && (
+      {apps.length > 0 && (
         <IndexGroup
-          projects={other}
-          title={t("groupOther", lang)}
-          sub={t("groupOtherSub", lang)}
+          projects={apps}
+          title={t("groupApps", lang)}
+          sub={t("groupAppsSub", lang)}
+          to="/apps"
+        />
+      )}
+      {design.length > 0 && (
+        <IndexGroup
+          projects={design}
+          title={t("groupDesign", lang)}
+          sub={t("groupDesignSub", lang)}
+          to="/design"
         />
       )}
     </div>
@@ -266,22 +207,41 @@ function IndexGroup({
   projects,
   title,
   sub,
+  to,
 }: {
   projects: Project[];
   title: string;
   sub: string;
+  /* Liegt die Gruppe auf einer eigenen Seite, fuehren
+     Ueberschrift und Zeilen dorthin statt zu einem Anker. */
+  to?: string;
 }) {
   const { lang } = useLang();
-  const jump = (id: string) =>
+  const [, navigate] = useLocation();
+  const jump = (id: string) => {
+    if (to) {
+      navigate(to);
+      window.scrollTo({ top: 0 });
+      return;
+    }
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <div>
       <Reveal direction="up" duration={0.85}>
         <div className="flex items-baseline gap-5 mb-5">
+          {to ? (
+            <Link href={to}>
+              <a className="font-display font-medium text-white/85 hover:text-white text-base md:text-lg tracking-tight shrink-0 transition-colors duration-300">
+                {title}
+              </a>
+            </Link>
+          ) : (
           <h3 className="font-display font-medium text-white/85 text-base md:text-lg tracking-tight shrink-0">
             {title}
           </h3>
+          )}
           <span className="h-px flex-1 bg-white/[0.09]" />
           <span className="font-mono text-[10px] text-white/22 tabular-nums shrink-0">
             {String(projects.length).padStart(2, "0")}
@@ -349,39 +309,6 @@ function IndexGroup({
       ))}
       </Stagger>
     </div>
-  );
-}
-
-/* Trennband zwischen den beiden Bereichen. Steht zwischen den
-   Projekt-Sections, damit beim Durchscrollen klar wird, dass
-   ab hier etwas anderes kommt. */
-function GroupDivider({ title, sub }: { title: string; sub: string }) {
-  return (
-    <section className="relative border-t border-white/[0.05] py-24 md:py-36">
-      <div className="max-w-[1760px] mx-auto px-6 md:px-10 lg:px-12">
-        <Reveal direction="up" duration={0.95}>
-          <div className="flex items-center gap-5 mb-8">
-            <span className="h-px w-10 bg-white/20 shrink-0" />
-            <span className="font-mono text-[9px] tracking-[0.3em] text-white/35">
-              02
-            </span>
-            <span className="h-px flex-1 bg-white/[0.07]" />
-          </div>
-          <h2
-            className="font-display font-bold text-white leading-[1.02]"
-            style={{
-              fontSize: "clamp(2rem, 5.5vw, 4.4rem)",
-              letterSpacing: "-0.03em",
-            }}
-          >
-            {title}
-          </h2>
-          <p className="mt-6 text-sm md:text-base font-light leading-[1.85] text-white/45 max-w-xl">
-            {sub}
-          </p>
-        </Reveal>
-      </div>
-    </section>
   );
 }
 
@@ -620,168 +547,26 @@ export default function Home() {
           sonst scrollt man durch eine Reihe leerer Ueberschriften.
           Vor dem ersten Projekt des zweiten Bereichs steht ein
           Trennband. */}
-      {projects.filter((p) => !p.comingSoon).map((project, i, shown) => {
-        const group = project.group ?? "3d";
-        const prev = i > 0 ? (shown[i - 1].group ?? "3d") : group;
-        return (
-          <div key={project.id}>
-            {group !== prev && (
-              <GroupDivider
-                title={t("groupOther", lang)}
-                sub={t("groupOtherSub", lang)}
-              />
-            )}
-            <ProjectShowcase
-              project={project}
-              index={i}
-              total={shown.length}
-              onOpenShot={(p, idx) => setLightbox({ project: p, index: idx })}
-            />
-          </div>
-        );
-      })}
+      {projects
+        .filter((p) => (p.group ?? "3d") === "3d" && !p.comingSoon)
+        .map((project, i, shown) => (
+          <ProjectShowcase
+            key={project.id}
+            project={project}
+            index={i}
+            total={shown.length}
+            onOpenShot={(p, idx) => setLightbox({ project: p, index: idx })}
+          />
+        ))}
+
+      {/* Weiter zu den anderen Bereichen */}
+      <OtherPages exclude="3d" />
 
       {/* ══════════════════ ABOUT ══════════════════ */}
       <AboutSection />
 
-      {/* ══════════════════ CONTACT ══════════════════ */}
-      <section
-        id="contact"
-        className="relative py-32 md:py-56 overflow-hidden border-t border-white/[0.05]"
-      >
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-[#0a0a0a]" />
-
-        <div className="relative max-w-[1600px] mx-auto px-6 md:px-10 lg:px-16">
-          <Reveal direction="up">
-            <p className="text-[8px] text-white/22 uppercase tracking-[0.28em] mb-14">
-              {t("contact", lang)}
-            </p>
-          </Reveal>
-
-          <StretchOnScroll>
-            <h2
-              className="font-display font-bold text-white leading-[0.9] mb-16"
-              style={{ fontSize: "clamp(3rem, 10vw, 11rem)", letterSpacing: "-0.02em" }}
-            >
-              <SplitText key={lang + "c"} text={t("letsWork", lang)} />
-              <br />
-              <span className="text-white/22">
-                <SplitText key={lang + "d"} text={t("together", lang)} delay={0.15} />
-              </span>
-            </h2>
-          </StretchOnScroll>
-
-          <Reveal direction="up" delay={0.1}>
-            <a
-              href="mailto:issam-selmi@outlook.com"
-              className="group inline-flex items-baseline gap-4 mb-16 md:mb-24"
-            >
-              <span
-                className="font-display font-medium text-white/75 group-hover:text-white transition-colors duration-300"
-                style={{ fontSize: "clamp(1rem, 2.2vw, 1.6rem)" }}
-              >
-                issam-selmi@outlook.com
-              </span>
-              <motion.svg
-                className="text-white/30 group-hover:text-white/65 transition-colors"
-                width="16"
-                height="16"
-                viewBox="0 0 10 10"
-                fill="none"
-                whileHover={{ x: 3, y: -3 }}
-              >
-                <path
-                  d="M1 9L9 1M9 1H3M9 1V7"
-                  stroke="currentColor"
-                  strokeWidth="1.2"
-                />
-              </motion.svg>
-            </a>
-
-            {CV_FILE && (
-              <div className="flex justify-center mb-20 md:mb-28">
-                <Magnetic strength={0.3} radius={110}>
-                <motion.a
-                  href={CV_FILE}
-                  download
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ y: -3 }}
-                  whileTap={{ scale: 0.98 }}
-                  transition={{ duration: 0.3, ease: EASE }}
-                  className="group relative inline-flex items-center justify-center gap-4 border border-white/20 hover:border-white/50 px-9 py-5 md:px-12 md:py-6 overflow-hidden transition-colors duration-500"
-                >
-                  {/* Fuellung faehrt beim Hovern von unten hoch */}
-                  <span className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]" />
-
-                  <motion.svg
-                    width="17"
-                    height="17"
-                    viewBox="0 0 14 14"
-                    fill="none"
-                    className="relative text-white/60 group-hover:text-black transition-colors duration-500"
-                  >
-                    <path
-                      d="M7 1v8m0 0L4 6m3 3l3-3M1 11v1a1 1 0 001 1h10a1 1 0 001-1v-1"
-                      stroke="currentColor"
-                      strokeWidth="1.3"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </motion.svg>
-                  <span className="relative text-[11px] md:text-xs uppercase tracking-[0.24em] text-white/75 group-hover:text-black font-medium transition-colors duration-500">
-                    {t("downloadCV", lang)}
-                  </span>
-                </motion.a>
-                </Magnetic>
-              </div>
-            )}
-
-            <div className="w-full h-px bg-white/[0.07] mb-16" />
-
-            <div className="flex flex-wrap items-center gap-10">
-              {[
-                {
-                  label: "Instagram",
-                  href: "https://www.instagram.com/issam_selmy",
-                },
-                {
-                  label: "LinkedIn",
-                  href: "https://www.linkedin.com/in/issam-selmi-6253241b9",
-                },
-                { label: "GitHub", href: "https://github.com/WADAStube" },
-              ].map(({ label, href }) => (
-                <motion.a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ y: -2 }}
-                  transition={{ duration: 0.25, ease: EASE }}
-                  className="text-[11px] text-white/28 hover:text-white/70 uppercase tracking-[0.2em] transition-colors duration-200"
-                >
-                  {label}
-                </motion.a>
-              ))}
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="border-t border-white/[0.05] py-6">
-        <div className="max-w-[1600px] mx-auto px-6 md:px-10 lg:px-16 flex items-center justify-between">
-          <p className="flex items-center gap-2.5 text-[9px] text-white/18 uppercase tracking-widest">
-            <span className="inline-flex items-center justify-center h-4 w-4 border border-white/20 text-[7px] font-display font-bold text-white/40">
-              W
-            </span>
-            © {new Date().getFullYear()} Issam Selmi · WADAS
-          </p>
-          <p className="text-[9px] text-white/14 uppercase tracking-wider">
-            3D &amp; Game Art · Media Technology
-          </p>
-        </div>
-      </footer>
+      <ContactSection />
+      <SiteFooter />
 
       <Lightbox
         project={lightbox?.project ?? null}
