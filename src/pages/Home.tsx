@@ -16,6 +16,7 @@ import {
   Grain,
   Cursor,
   StretchOnScroll,
+  AreaSwitch,
   OtherPages,
   ContactSection,
   SiteFooter,
@@ -526,6 +527,8 @@ export default function Home() {
               </p>
             </Reveal>
           </div>
+
+          <AreaSwitch current="3d" className="mb-12" />
 
           {projects.length > 0 && <ProjectIndex projects={projects} />}
 

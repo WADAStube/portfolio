@@ -41,6 +41,7 @@ export default function Design() {
             ? "Gestaltung außerhalb von 3D: Plakat und Print, Motion und Arbeiten aus den Modulen des Studiums. Jedes Projekt nennt entweder das Modul und die Aufgabenstellung oder den Auftraggeber."
             : "Design outside 3D: poster and print, motion, and work out of the modules of the degree. Each project names either the module and its brief, or the client."
         }
+        area="design"
       />
 
       <ProjectFlow projects={projects} />

@@ -1,3 +1,57 @@
+Portfolio — Version 56  (22.10.2026)
+
+ABSCHLUSSDATUM UEBERALL ENTFERNT
+Auf der Seite stand an drei Stellen, wann das Studium endet.
+Alle raus:
+
+  Ueber mich, Kapitel Studium
+    vorher  "Bachelorstudium, Abschluss voraussichtlich
+             Oktober 2027. Das Studium umfasst ..."
+    jetzt   "Ein Bachelorstudium, das 3D-Design, Modellierung
+             und Animation ebenso umfasst wie ..."
+
+  Kennzahl
+    vorher  2027 — Voraussichtl. Abschluss
+    jetzt   2011 — Erste Auszeichnung
+
+  Kapitel-Marke
+    vorher  "Since 2022"
+    jetzt   "Bachelor"
+    Auch das Anfangsjahr ist raus: aus Beginn plus Regelstudien-
+    zeit laesst sich das Ende ausrechnen.
+
+LEBENSLAUF-PDF EBENFALLS
+Im Lebenslauf stand "Aktuelles Studium der Medientechnik an der
+Hochschule Emden/Leer, voraussichtlicher Abschluss im October
+2027." Der zweite Teil ist aus der Datei entfernt, nicht nur
+ueberdeckt — der Text ist weg, nicht unsichtbar. Der Ersatz
+steht in derselben Schrift (Asap-Regular, 10 pt), die dafuer aus
+dem PDF selbst geholt wurde.
+Gegengeprueft: "2027" und "voraussichtlich" kommen in der Datei
+nicht mehr vor.
+
+BEREICHSLEISTE AUF DEM HANDY
+Am Telefon lag die Navigation hinter dem Menuesymbol. Wer nicht
+darauf getippt hat, hat nie erfahren, dass es ausser 3D noch
+Apps und Design gibt — genau das war der Eindruck, die neuen
+Seiten seien auf dem Handy nicht da.
+
+Jetzt steht auf allen drei Seiten eine schmale Leiste mit
+3D & Game Art · Apps · Design, der aktuelle Bereich hervor-
+gehoben. Auf der Startseite ueber der Werkuebersicht, auf den
+Unterseiten unter der Einleitung. Nur unterhalb von 768 px;
+darueber steht die Navigation ohnehin oben.
+
+GEPRUEFT
+- Build und TypeScript sauber
+- 390 px: alle vier Seiten, Leiste sichtbar und richtig markiert,
+  kein waagerechter Ueberlauf
+- Ablauf auf dem Handy mit Tippen durchgeklickt, funktioniert
+- 1600 px: Leiste korrekt ausgeblendet, "2027" kommt im
+  gesamten Seitentext nicht mehr vor
+
+────────────────────────────────────────────
+
 Portfolio — Version 55  (15.10.2026)
 
 NUR NOCH ABLAEUFE, KEINE LOSEN BILDER

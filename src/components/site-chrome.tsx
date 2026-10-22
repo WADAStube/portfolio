@@ -55,16 +55,72 @@ export function StretchOnScroll({ children }: { children: React.ReactNode }) {
   );
 }
 
+/* ────────────────── Bereichswechsel auf dem Handy ──────────────────
+   Am Telefon liegt die Navigation hinter dem Menuesymbol. Wer nicht
+   darauf tippt, erfaehrt nie, dass es ausser 3D noch zwei weitere
+   Bereiche gibt. Diese Leiste zeigt sie direkt — nur unterhalb von
+   md, darueber steht die Navigation ohnehin oben.
+   ──────────────────────────────────────────────────────────── */
+
+export function AreaSwitch({
+  current,
+  className,
+}: {
+  current: "3d" | "apps" | "design";
+  className?: string;
+}) {
+  const { lang } = useLang();
+  const areas = [
+    { id: "3d" as const, to: "/", key: "navWork" as const },
+    { id: "apps" as const, to: "/apps", key: "navApps" as const },
+    { id: "design" as const, to: "/design", key: "navDesign" as const },
+  ];
+
+  return (
+    <nav
+      aria-label={t("selectedWork", lang)}
+      className={cn(
+        "md:hidden -mx-6 px-6 overflow-x-auto no-scroll",
+        className,
+      )}
+    >
+      <div className="flex items-center gap-2 w-max">
+        {areas.map((a) => {
+          const active = a.id === current;
+          return (
+            <Link key={a.id} href={a.to}>
+              <a
+                onClick={() => window.scrollTo({ top: 0 })}
+                aria-current={active ? "page" : undefined}
+                className={cn(
+                  "whitespace-nowrap border px-3.5 py-2 text-[10px] uppercase tracking-[0.18em] transition-colors duration-300",
+                  active
+                    ? "border-white/45 text-white"
+                    : "border-white/[0.09] text-white/35",
+                )}
+              >
+                {t(a.key, lang)}
+              </a>
+            </Link>
+          );
+        })}
+      </div>
+    </nav>
+  );
+}
+
 /* ────────────────── Kopf einer Unterseite ────────────────── */
 
 export function PageHeader({
   kicker,
   title,
   intro,
+  area,
 }: {
   kicker: string;
   title: string;
   intro: string;
+  area?: "3d" | "apps" | "design";
 }) {
   return (
     <section className="relative pt-36 md:pt-48 pb-16 md:pb-24 border-b border-white/[0.05]">
@@ -101,6 +157,8 @@ export function PageHeader({
             {intro}
           </p>
         </Reveal>
+
+        {area && <AreaSwitch current={area} className="mt-10" />}
       </div>
     </section>
   );

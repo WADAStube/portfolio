@@ -47,11 +47,13 @@ const CHAPTERS = [
   {
     id: "study",
     icon: BookOpen,
-    kicker: "Since 2022",
+    /* Bewusst ohne Jahreszahl: weder Beginn noch Abschluss des
+       Studiums gehoeren auf die Seite. */
+    kicker: "Bachelor",
     title: "Media Technology, Hochschule Emden/Leer",
     titleDe: "Medientechnik, Hochschule Emden/Leer",
-    body: "Bachelor's degree, expected October 2027. The programme covers 3D design, modelling and animation alongside camera, audio and post-production. I've taken the elective modules toward 3D and real-time wherever they were offered, and hold the Computer-Aided Media Production certificate.",
-    bodyDe: "Bachelorstudium, Abschluss voraussichtlich Oktober 2027. Das Studium umfasst 3D-Design, Modellierung und Animation ebenso wie Kamera, Audio und Postproduktion. Die Wahlpflichtmodule habe ich, wo möglich, Richtung 3D und Echtzeit gelegt; dazu kommt das Zertifikat Computer-Aided Media Production.",
+    body: "A bachelor's programme covering 3D design, modelling and animation alongside camera, audio and post-production. I've taken the elective modules toward 3D and real-time wherever they were offered, and hold the Computer-Aided Media Production certificate.",
+    bodyDe: "Ein Bachelorstudium, das 3D-Design, Modellierung und Animation ebenso umfasst wie Kamera, Audio und Postproduktion. Die Wahlpflichtmodule habe ich, wo möglich, Richtung 3D und Echtzeit gelegt; dazu kommt das Zertifikat Computer-Aided Media Production.",
   },
   {
     id: "uni",
@@ -84,7 +86,7 @@ const CHAPTERS = [
 
 const STATS = [
   { value: "2007", label: "First 3D software", labelDe: "Erste 3D-Software" },
-  { value: "2027", label: "Expected graduation", labelDe: "Voraussichtl. Abschluss" },
+  { value: "2011", label: "First design award", labelDe: "Erste Auszeichnung" },
   { value: "4", label: "Languages", labelDe: "Sprachen" },
   { value: "10", label: "Years Taekwondo", labelDe: "Jahre Taekwondo" },
 ];
