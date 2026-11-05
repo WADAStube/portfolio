@@ -52,8 +52,8 @@ const CHAPTERS = [
     kicker: "Bachelor",
     title: "Media Technology, Hochschule Emden/Leer",
     titleDe: "Medientechnik, Hochschule Emden/Leer",
-    body: "A bachelor's programme covering 3D design, modelling and animation alongside camera, audio and post-production. I've taken the elective modules toward 3D and real-time wherever they were offered, and hold the Computer-Aided Media Production certificate.",
-    bodyDe: "Ein Bachelorstudium, das 3D-Design, Modellierung und Animation ebenso umfasst wie Kamera, Audio und Postproduktion. Die Wahlpflichtmodule habe ich, wo möglich, Richtung 3D und Echtzeit gelegt; dazu kommt das Zertifikat Computer-Aided Media Production.",
+    body: "A bachelor's programme covering 3D design, modelling and animation alongside camera, audio and post-production. I've taken the elective modules toward 3D and real-time wherever they were offered, and I'm three of four modules into the Computer-Aided Media Production certificate.",
+    bodyDe: "Ein Bachelorstudium, das 3D-Design, Modellierung und Animation ebenso umfasst wie Kamera, Audio und Postproduktion. Die Wahlpflichtmodule habe ich, wo möglich, Richtung 3D und Echtzeit gelegt; dazu der Zertifikatskurs Computer-Aided Media Production, davon drei von vier Modulen abgeschlossen.",
   },
   {
     id: "uni",
@@ -61,8 +61,8 @@ const CHAPTERS = [
     kicker: "University work",
     title: "Projects on the course",
     titleDe: "Projekte im Studium",
-    body: "Future!comeback — a cinematic scene with two characters in a lab environment, where I handled modelling, rigging, UV mapping, texturing, lighting and rendering. Alongside that: stream overlays and 3D animations for a student e-sports event, a media installation project for a school in Sukuta, Gambia, and the audiovisual production of a graduation ceremony in a team of eight.",
-    bodyDe: "Future!comeback — eine cinematische Szene mit zwei Charakteren in einer Laborumgebung; verantwortlich für Modellierung, Rigging, UV-Mapping, Texturierung, Lighting und Rendering. Daneben: Stream-Overlays und 3D-Animationen für ein studentisches E-Sports-Event, ein Medienprojekt zur Begleitung einer Installation an einer Schule in Sukuta, Gambia, sowie die audiovisuelle Produktion einer Abschlussfeier im Team von acht.",
+    body: "Future!comeback — a cinematic scene with two characters in a lab environment, currently in progress; I handle modelling, rigging, UV mapping, texturing, lighting and rendering. Alongside that: stream overlays and 3D animations for a student e-sports event, a media installation project for a school in Sukuta, Gambia, and the audiovisual production of a graduation ceremony in a team of eight.",
+    bodyDe: "Future!comeback — eine cinematische Szene mit zwei Charakteren in einer Laborumgebung, zurzeit in Arbeit; verantwortlich für Modellierung, Rigging, UV-Mapping, Texturierung, Lighting und Rendering. Daneben: Stream-Overlays und 3D-Animationen für ein studentisches E-Sports-Event, ein Medienprojekt zur Begleitung einer Installation an einer Schule in Sukuta, Gambia, sowie die audiovisuelle Produktion einer Abschlussfeier im Team von acht.",
   },
   {
     id: "work",
@@ -266,7 +266,7 @@ export function AboutSection() {
                       Issam Selmi
                     </p>
                     <p className="text-[9px] uppercase tracking-[0.2em] text-white/50 mt-1">
-                      3D &amp; Game Art · Technical Art · Unity
+                      3D &amp; Game Art · Real-Time · Unity
                     </p>
                   </div>
                 </div>
@@ -308,8 +308,8 @@ export function AboutSection() {
             <Reveal direction="up" delay={0.1}>
               <p className="text-sm font-light leading-[1.95] text-white/45 max-w-xl">
                 {lang === "de"
-                  ? "Student der Medientechnik an der Hochschule Emden/Leer, ansässig in Hamburg, dort auch Werkstudent in der Medientechnik. Schwerpunkt: 3D für Spiele — Umgebungen, Charaktere, Game Assets, Texturierung und Licht. Die Arbeit endet nicht beim Rendering. Szenen gehen nach Unity, werden auf Echtzeit optimiert und bekommen Rig, Animation und die C#-Skripte dazu: Movement, Interaktion und eigene Editor-Tools für Schritte, die sonst von Hand liefen. Das ist die Richtung Technical Art — zwischen Asset und Code. Daneben Grafikdesign und Anwendungen, die ich selbst entwickle. Arabisch, Deutsch, Englisch, Französisch."
-                  : "Media Technology student at Hochschule Emden/Leer, based in Hamburg, also working there as a Werkstudent in media technology. Focus: 3D for games — environments, characters, game assets, texturing and lighting. The work does not end at the render. Scenes go into Unity, get optimised for real time, and get the rig, the animation and the C# behind them: movement, interaction, and editor tools I wrote for steps that were otherwise manual. That is the direction of technical art — between asset and code. Alongside that, graphic design and applications I build myself. Arabic, German, English, French."}
+                  ? "Student der Medientechnik an der Hochschule Emden/Leer, ansässig in Hamburg, dort auch Werkstudent in der Medientechnik. Schwerpunkt: 3D für Spiele — Umgebungen, Charaktere, Game Assets, Texturierung und Licht. Die Arbeit endet nicht beim Rendering. Szenen gehen nach Unity, werden auf Echtzeit optimiert und bekommen Rig, Animation und die Skripte, die daraus etwas Spielbares machen. Daneben Grafikdesign und Anwendungen, die ich selbst gestalte und entwickle. Arabisch, Deutsch, Englisch, Französisch."
+                  : "Media Technology student at Hochschule Emden/Leer, based in Hamburg, also working there as a Werkstudent in media technology. Focus: 3D for games — environments, characters, game assets, texturing and lighting. The work does not end at the render. Scenes go into Unity, get optimised for real time, and get the rig, the animation and the scripting that turns them into something playable. Alongside that, graphic design and applications I design and build myself. Arabic, German, English, French."}
               </p>
             </Reveal>
 

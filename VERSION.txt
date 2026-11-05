@@ -1,3 +1,69 @@
+Portfolio — Version 58  (05.11.2026)
+
+CAMP-ZERTIFIKAT: STAND STATT ABSCHLUSS
+Stand bisher da, als waere es fertig.
+
+  Ueber mich
+    vorher  "dazu kommt das Zertifikat Computer-Aided Media
+             Production."
+    jetzt   "dazu der Zertifikatskurs Computer-Aided Media
+             Production, davon drei von vier Modulen
+             abgeschlossen."
+    Englisch: "I'm three of four modules into the
+    Computer-Aided Media Production certificate."
+
+  Lebenslauf, Abschnitt ZERTIFIKATE
+    "Computer-Aided Media Production (CAMP)_Hochschule
+     Emden/Leer (3 von 4 Modulen abgeschlossen)"
+    In Grau hinter der Zeile, gleiche Schrift, als echter Text.
+
+────────────────────────────────────────────
+
+Portfolio — Version 57  (05.11.2026)
+
+FUTURE!COMEBACK LAEUFT NOCH
+Stand bisher ueberall in der Vergangenheit, als waere es fertig.
+
+  Lebenslauf   Titelzeile jetzt
+               "Future!comeback (zurzeit in Arbeit)"
+               In derselben Schrift wie der Rest (Asap-Regular,
+               10 pt, aus dem PDF selbst geholt), in Grau neben
+               dem fetten Titel. Als echter Text eingefuegt,
+               nicht als Bild — kopierbar und fuer
+               Bewerbungssysteme lesbar.
+
+  Ueber mich   "... in einer Laborumgebung, zurzeit in Arbeit;
+               verantwortlich fuer Modellierung, Rigging ..."
+               Englisch entsprechend "currently in progress",
+               Zeitform von "handled" auf "handle" gesetzt.
+
+CODE-AUSSAGE ZURUECKGENOMMEN
+Der Text behauptete mehr, als belegt ist.
+
+  vorher  "... bekommen Rig, Animation und die C#-Skripte dazu:
+           Movement, Interaktion und eigene Editor-Tools fuer
+           Schritte, die sonst von Hand liefen. Das ist die
+           Richtung Technical Art — zwischen Asset und Code."
+
+  jetzt   "... bekommen Rig, Animation und die Skripte, die
+           daraus etwas Spielbares machen."
+
+Raus sind: die ausdrueckliche Urheberschaft an den Editor-Tools,
+die Nennung von C# an dieser Stelle und der Satz zu Technical
+Art. Bildunterschrift am Portrait entsprechend von
+"3D & Game Art · Technical Art · Unity" auf
+"3D & Game Art · Real-Time · Unity".
+
+Unveraendert geblieben ist "Anwendungen, die ich selbst gestalte
+und entwickle" — das belegt die Seite /apps mit drei Projekten.
+
+GEPRUEFT
+- Build und TypeScript sauber
+- Ueber mich in beiden Sprachen durchgesehen
+- Lebenslauf: Einfuegung als Text vorhanden, Satzbild stimmt
+
+────────────────────────────────────────────
+
 Portfolio — Version 56  (22.10.2026)
 
 ABSCHLUSSDATUM UEBERALL ENTFERNT
