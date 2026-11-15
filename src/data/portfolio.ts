@@ -282,8 +282,8 @@ export const CASES: Record<string, CaseStudy> = {
       de: "Eine stilisierte Umgebung, die zweimal funktioniert: als gerendertes Standbild und als dieselbe Szene in Echtzeit in einer Game Engine.",
     },
     approach: {
-      en: "Build the diorama in Maya and render it in Arnold with a cel-shaded look. Then rebuild it as a game-ready asset, move it into Unity 6 and add a character that can walk through it and interact with objects.",
-      de: "Das Diorama in Maya bauen und in Arnold mit Cel-Shading rendern. Danach als Game-Ready-Asset neu aufbauen, nach Unity 6 bringen und einen Character ergänzen, der sich darin bewegt und mit Objekten interagiert.",
+      en: "Build the diorama in Maya and render it in Arnold with a cel-shaded look. Then rebuild it as a game-ready asset, move it into Unity 6, and turn it into something that can be played: a character who walks through the scene, picks things up and lights the lanterns.",
+      de: "Das Diorama in Maya bauen und in Arnold mit Cel-Shading rendern. Danach als Game-Ready-Asset neu aufbauen, nach Unity 6 bringen und daraus etwas Spielbares machen: eine Figur, die sich durch die Szene bewegt, Dinge aufnimmt und die Laternen anzündet.",
     },
     implementation: {
       en: "Maya: box modelling, vegetation distributed procedurally with MASH, aiToon shading with per-material contour settings, colour management in ACEScg. Unity 6 (URP): Humanoid avatar, Animator with a 1D blend tree, CharacterController, the new Input System, and C# scripts for movement, picking up, aiming and throwing.",
@@ -308,8 +308,8 @@ export const CASES: Record<string, CaseStudy> = {
       },
     ],
     outcome: {
-      en: "Arnold stills and a turntable; a Unity scene with third-person movement, jump, pick-up, aim and throw. Read off the editor statistics: 6,063k triangles, 54 set-pass calls, 1,327 draw calls, 1,309 of them instanced. Crouch and slide are deferred.",
-      de: "Arnold-Standbilder und ein Turntable; eine Unity-Szene mit Third-Person-Bewegung, Sprung, Aufnehmen, Zielen und Werfen. Aus der Editor-Statistik abgelesen: 6 063k Dreiecke, 54 Set-Pass-Calls, 1 327 Draw Calls, davon 1 309 instanziert. Ducken und Rutschen sind zurückgestellt.",
+      en: "Arnold stills and a turntable, and a playable game published on itch.io: eleven lanterns to light, glimmers to call and send out, a satchel and health. Read off the editor statistics: 6,063k triangles, 54 set-pass calls, 1,327 draw calls, 1,309 of them instanced. Crouch and slide are deferred.",
+      de: "Arnold-Standbilder und ein Turntable, dazu ein spielbares Spiel auf itch.io: elf Laternen zum Anzünden, Glimmer zum Rufen und Losschicken, eine Tasche und Lebenspunkte. Aus der Editor-Statistik abgelesen: 6 063k Dreiecke, 54 Set-Pass-Calls, 1 327 Draw Calls, davon 1 309 instanziert. Ducken und Rutschen sind zurückgestellt.",
     },
     share: {
       en: "My own project, from modelling to the Unity port. The base tree models are licensed and were re-shaded.",

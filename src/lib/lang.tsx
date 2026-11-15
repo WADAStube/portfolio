@@ -138,6 +138,7 @@ export const UI = {
     de: "Ein Klick rechts führt weiter, einer links zurück. Pfeiltasten und Wischen gehen genauso.",
   },
   liveSite: { en: "Open the live site", de: "Zur Live-Seite" },
+  theGame: { en: "The game", de: "Das Spiel" },
   navApps: { en: "Apps", de: "Apps" },
   navDesign: { en: "Design", de: "Design" },
 

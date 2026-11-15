@@ -700,7 +700,7 @@ export function ProjectShowcase({
       {/* Zweiter Teil: aus dem Render wird eine begehbare Szene */}
       {project.unity ? (
         <div className="mt-20 md:mt-32">
-          <UnitySection />
+          <UnitySection play={project.play} />
         </div>
       ) : null}
     </section>

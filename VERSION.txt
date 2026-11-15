@@ -1,3 +1,29 @@
+Portfolio — Version 61  (15.11.2026)
+
+LANTERN ISLAND IST EIN SPIEL
+  - Neuer Abschnitt "Das Spiel" am Ende der Unity-Sektion:
+    Titelbildschirm, Vorspann im Wortlaut, Steuerung im Spiel
+    (WASD, E, F, Q, R, I) und drei Bilder aus dem Spiel.
+  - Knopf "Auf itch.io spielen", zweimal: oben im Kopf der
+    Projektseite und im neuen Abschnitt. Öffnet in neuem Tab.
+  - Stand-Liste: "Spielbare Fassung auf itch.io veröffentlicht".
+  - Kurzbeschreibung, Langtext und Fallstudie (Ansatz, Ergebnis)
+    nennen jetzt das Spiel: elf Laternen, Glimmer, Tasche,
+    Lebenspunkte.
+
+NEUE BILDER
+  public/images/projects/poor-house/game/
+    title.jpg   Titelbildschirm
+    island.jpg  Insel aus der Ferne
+    camp.jpg    an der Hütte
+    path.jpg    im Gras
+  Alle vier auf 1920 x 1080 gebracht, gleiches Format.
+
+NEUES DATENFELD
+  Project.play = { url, where }  →  Knopf "Auf <where> spielen"
+
+──────────────────────────────────────────────────────────────
+
 Portfolio — Version 60  (15.11.2026)
 
 RELAUNCH: NEUE POSITIONIERUNG UND NEUE STRUKTUR

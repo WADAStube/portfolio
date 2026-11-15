@@ -15,8 +15,9 @@ import {
   useIsSmallScreen,
   CountUpNumber,
 } from "@/components/motion-primitives";
+import { PlayButton } from "@/components/site-chrome";
 import { cn } from "@/lib/utils";
-import { useLang, pick } from "@/lib/lang";
+import { useLang, pick, t } from "@/lib/lang";
 
 /* ────────────────────────────────────────────────────────────
    UNITY-PORTIERUNG — Lantern Island
@@ -34,6 +35,38 @@ import { useLang, pick } from "@/lib/lang";
    ──────────────────────────────────────────────────────────── */
 
 const BASE = "/images/projects/poor-house/unity";
+const GAME = "/images/projects/poor-house/game";
+
+/* ── Die fertige Fassung ──
+   Steuerung und Vorspann stehen so auf dem Titelbildschirm des
+   Spiels; die Zahlen stehen so im HUD. Nichts davon ist
+   hinzugedichtet. */
+const GAME_KEYS = [
+  { key: "WASD", en: "Move", de: "Bewegen" },
+  { key: "E", en: "Interact", de: "Interagieren" },
+  { key: "F", en: "Extinguish", de: "Löschen" },
+  { key: "Q", en: "Call glimmers", de: "Glimmer rufen" },
+  { key: "R", en: "Send glimmers", de: "Glimmer schicken" },
+  { key: "I", en: "Satchel", de: "Tasche" },
+];
+
+const GAME_SHOTS = [
+  {
+    src: `${GAME}/island.jpg`,
+    en: "The island from a distance",
+    de: "Die Insel aus der Ferne",
+  },
+  {
+    src: `${GAME}/camp.jpg`,
+    en: "At the hut — two of eleven lanterns lit",
+    de: "An der Hütte — zwei von elf Laternen brennen",
+  },
+  {
+    src: `${GAME}/path.jpg`,
+    en: "Glimmers follow the player",
+    de: "Die Glimmer folgen der Spielerin",
+  },
+];
 
 /* ── Zahlen. Alle abgelesen aus dem Statistics-Fenster, das
       daneben abgebildet ist — was auf der Seite steht, steht
@@ -550,7 +583,13 @@ const CONTROLS = [
 
 /* ────────────────── Sektion ────────────────── */
 
-export function UnitySection() {
+export function UnitySection({
+  play,
+}: {
+  /** Spielbare Fassung — kommt aus den Projektdaten, damit die
+      Adresse nur an einer Stelle steht. */
+  play?: { url: string; where: string };
+}) {
   const { lang } = useLang();
 
   return (
@@ -931,6 +970,11 @@ export function UnitySection() {
                       de: "Kollision gegen die gesamte Szene",
                     },
                     {
+                      done: true,
+                      en: "Playable build published on itch.io",
+                      de: "Spielbare Fassung auf itch.io veröffentlicht",
+                    },
+                    {
                       done: false,
                       en: "Crouch and slide — deferred, root motion snaps back",
                       de: "Ducken und Rutschen — zurückgestellt, Root Motion springt zurück",
@@ -958,6 +1002,123 @@ export function UnitySection() {
                 </ul>
               </div>
             </Reveal>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Die fertige Fassung ── */}
+      <div className="mt-28 md:mt-40 border-t border-white/[0.05] pt-20 md:pt-28">
+        <div className="max-w-[1760px] mx-auto px-6 md:px-10 lg:px-12">
+          <Reveal direction="up" duration={0.9}>
+            <p className="text-[8px] uppercase tracking-[0.28em] text-white/22 mb-4">
+              {lang === "de" ? "Veröffentlicht" : "Released"}
+            </p>
+            <h3
+              className="font-display font-bold text-white leading-none mb-6"
+              style={{ fontSize: "clamp(1.6rem, 4vw, 3rem)", letterSpacing: "-0.02em" }}
+            >
+              {t("theGame", lang)}
+            </h3>
+          </Reveal>
+
+          <Reveal direction="up" delay={0.08} duration={1}>
+            <figure>
+              <div className="relative overflow-hidden bg-[#050505] ring-1 ring-white/[0.06] aspect-[16/9] shadow-[0_40px_120px_-40px_rgba(0,0,0,0.9)]">
+                <img
+                  src={`${GAME}/title.jpg`}
+                  alt={
+                    lang === "de"
+                      ? "Titelbildschirm von Lantern Island"
+                      : "Title screen of Lantern Island"
+                  }
+                  loading="lazy"
+                  decoding="async"
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+              </div>
+            </figure>
+          </Reveal>
+
+          <div className="mt-12 md:mt-16 grid grid-cols-1 lg:grid-cols-12 gap-x-16 gap-y-12">
+            <div className="lg:col-span-7">
+              <Reveal direction="up" duration={0.9}>
+                <blockquote
+                  className="font-display font-light text-white/80 leading-[1.3]"
+                  style={{ fontSize: "clamp(1.1rem, 2vw, 1.5rem)" }}
+                  lang="en"
+                >
+                  „The grey has swallowed the island.
+                  <br />
+                  Light every lantern to bring it back.“
+                </blockquote>
+                <p className="mt-4 font-mono text-[9px] tracking-[0.14em] text-white/25">
+                  {lang === "de" ? "Vorspann des Spiels" : "The game's own opening line"}
+                </p>
+              </Reveal>
+
+              <Reveal direction="up" delay={0.1} duration={0.9}>
+                <p className="mt-8 text-sm md:text-base font-light leading-[1.9] text-white/50 max-w-xl">
+                  {lang === "de"
+                    ? "Aus der portierten Szene ist ein Spiel geworden. Elf Laternen stehen auf der Insel, der Zähler oben läuft mit. Die Glimmer lassen sich rufen und losschicken, Gegenstände wandern in die Tasche, die Figur hat Lebenspunkte. Die Fassung läuft als Download auf itch.io."
+                    : "The ported scene has become a game. Eleven lanterns stand on the island and the counter at the top keeps track. Glimmers can be called and sent out, objects go into the satchel, the character has health. The build runs as a download on itch.io."}
+                </p>
+              </Reveal>
+
+              {play && (
+                <Reveal direction="up" delay={0.16} duration={0.9}>
+                  <PlayButton play={play} className="mt-10" />
+                </Reveal>
+              )}
+            </div>
+
+            <div className="lg:col-span-4 lg:col-start-9">
+              <Reveal direction="up" delay={0.1} duration={0.9}>
+                <p className="text-[8px] uppercase tracking-[0.28em] text-white/22 mb-8">
+                  {lang === "de" ? "Steuerung im Spiel" : "In-game controls"}
+                </p>
+              </Reveal>
+              <Stagger className="space-y-0" gap={0.05}>
+                {GAME_KEYS.map((c) => (
+                  <StaggerItem key={c.key}>
+                    <div className="flex items-baseline gap-5 border-t border-white/[0.07] py-4">
+                      <span className="font-mono text-[10px] tracking-[0.1em] text-white/70 w-14 shrink-0">
+                        {c.key}
+                      </span>
+                      <span className="text-[13px] font-light leading-[1.7] text-white/42">
+                        {pick(c.en, c.de, lang)}
+                      </span>
+                    </div>
+                  </StaggerItem>
+                ))}
+              </Stagger>
+            </div>
+          </div>
+
+          <div className="mt-16 md:mt-24 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+            {GAME_SHOTS.map((shot, i) => (
+              <Reveal
+                key={shot.src}
+                direction="up"
+                delay={0.06 * i}
+                duration={0.9}
+                className={i === 0 ? "md:col-span-2" : undefined}
+              >
+                <figure>
+                  <div className="relative overflow-hidden bg-[#050505] ring-1 ring-white/[0.06] aspect-[16/9]">
+                    <img
+                      src={shot.src}
+                      alt={pick(shot.en, shot.de, lang)}
+                      loading="lazy"
+                      decoding="async"
+                      className="absolute inset-0 w-full h-full object-cover"
+                    />
+                  </div>
+                  <figcaption className="mt-3 font-mono text-[9px] tracking-[0.14em] text-white/25">
+                    {pick(shot.en, shot.de, lang)}
+                  </figcaption>
+                </figure>
+              </Reveal>
+            ))}
           </div>
         </div>
       </div>

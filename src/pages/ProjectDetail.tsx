@@ -7,6 +7,7 @@ import {
   ContactSection,
   SiteFooter,
   StatusBadge,
+  PlayButton,
   usePageMeta,
 } from "@/components/site-chrome";
 import { ProjectShowcase } from "@/components/project-showcase";
@@ -76,6 +77,7 @@ export default function ProjectDetail() {
               {entry.fields.map((f) => fieldLabel(f)[lang]).join("  ·  ")}
             </p>
             <StatusBadge status={entry.status} className="md:ml-auto" />
+            {p.play && <PlayButton play={p.play} className="w-full md:w-auto justify-center" />}
           </div>
         </div>
 

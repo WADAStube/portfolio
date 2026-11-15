@@ -39,6 +39,40 @@ export function usePageMeta(title: string, description?: string) {
   }, [title, description]);
 }
 
+/* Knopf zur spielbaren Fassung. Oeffnet in einem neuen Tab, weil
+   die Seite daneben stehen bleiben soll. */
+export function PlayButton({
+  play,
+  className,
+}: {
+  play: { url: string; where: string };
+  className?: string;
+}) {
+  const { lang } = useLang();
+  const label =
+    lang === "de" ? `Auf ${play.where} spielen` : `Play on ${play.where}`;
+
+  return (
+    <a
+      href={play.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={cn(
+        "group inline-flex items-center gap-3 border border-white/25 bg-white/[0.03] px-6 py-3.5",
+        "text-[10px] uppercase tracking-[0.2em] text-white/85",
+        "transition-colors duration-300 hover:bg-white hover:text-black hover:border-white",
+        "focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-white/60",
+        className,
+      )}
+    >
+      <svg width="11" height="11" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+        <path d="M2 1.2L8.4 5 2 8.8V1.2Z" fill="currentColor" />
+      </svg>
+      {label}
+    </a>
+  );
+}
+
 /* Stand eines Projekts. Farbe allein traegt die Aussage nicht,
    der Text steht immer dabei. */
 export function StatusBadge({

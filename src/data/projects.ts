@@ -132,6 +132,9 @@ export interface Project {
   }[];
   /** Oeffentlich erreichbare Fassung, falls vorhanden */
   liveUrl?: string;
+  /** Oeffentlich spielbare Fassung: Adresse und Plattform.
+      Erzeugt den Knopf "Auf <Plattform> spielen". */
+  play?: { url: string; where: string };
   /** Optional: scrollgesteuerte Bildfolge (Drehung) */
   sequence?: { frames: string[]; ratio: number; caption?: string };
   /** Zweiter Teil des Projekts: Portierung in die Engine.
@@ -149,12 +152,13 @@ export const coverOf = (p: Project): string | null => p.shots[0]?.src ?? null;
 export const projectsData: Project[] = [
   {
     id: "poor-house",
+    play: { url: "https://wadasxxx.itch.io/lantern-island", where: "itch.io" },
     de: {
       category: "Stilisierte Umgebung",
       description:
-        "Ein cel-shadetes Diorama — eine schiefe Hütte auf einer Felseninsel, beleuchtet von zwei Laternen.",
+        "Ein cel-shadetes Diorama in Maya, daraus ein spielbares Spiel in Unity. Auf itch.io.",
       longDescription:
-        "Eine stilisierte Umgebung als geschlossenes Diorama: eine schiefe Holzhütte auf einer Felseninsel, ein Steinweg hinauf, vorn eine rote Brücke und ein Baum, der die Silhouette bricht. Die gesamte Szene ist cel-shadet: flache Farbflächen mit harten Konturen statt fotorealistischer Schattierung. Damit tragen Form, Kontrast und Licht die ganze Wirkung allein. Zwei Laternen bestimmen die Stimmung; alles außerhalb ihrer Reichweite fällt bewusst ins Dunkle. Anschließend wurde die Szene als Game-Ready-Asset neu aufgebaut und nach Unity 6 portiert, wo sie mit spielbarem Character in Echtzeit läuft.",
+        "Eine stilisierte Umgebung als geschlossenes Diorama: eine schiefe Holzhütte auf einer Felseninsel, ein Steinweg hinauf, vorn eine rote Brücke und ein Baum, der die Silhouette bricht. Die gesamte Szene ist cel-shadet: flache Farbflächen mit harten Konturen statt fotorealistischer Schattierung. Damit tragen Form, Kontrast und Licht die ganze Wirkung allein. Zwei Laternen bestimmen die Stimmung; alles außerhalb ihrer Reichweite fällt bewusst ins Dunkle. Anschließend wurde die Szene als Game-Ready-Asset neu aufgebaut und nach Unity 6 portiert, wo sie mit spielbarem Character in Echtzeit läuft. Daraus ist ein Spiel geworden: elf Laternen, die auf der Insel angezündet werden wollen, Glimmer zum Rufen und Losschicken, eine Tasche. Die Fassung liegt auf itch.io.",
       layers: [
         { label: "Boden", title: "Die Basis", body: "Eine Fläche, mit Soft Select geformt und bewusst uneben gehalten. Die Silhouette entscheidet bereits, wo später der Weg verläuft und wo Bewuchs entsteht.", tech: ["Polygonfläche, unterteilt und per Soft Select modelliert", "Asymmetrischer Umriss — kein flacher Boden", "aiToon mit zwei Tonstufen, Konturen zurückgenommen"] },
         { label: "Steine", title: "Der Rand", body: "Drei Grundfelsen, über MASH verteilt. Die Dichte steigt dort, wo das Auge eine Grenze lesen soll, statt gleichmäßig zu streuen.", tech: ["MASH-Verteilung im Mesh-Modus auf dem Terrain", "Random-Node für Rotation und Skalierung, ID-Node für Varianten", "Repro-Node für renderbare Geometrie"] },
@@ -175,9 +179,9 @@ export const projectsData: Project[] = [
     featured: true,
     tools: ["Autodesk Maya", "Substance Painter", "Arnold", "Unity 6 · URP", "C#"],
     description:
-      "A cel-shaded diorama — a leaning cottage on a rock island, lit by two lanterns.",
+      "A cel-shaded diorama in Maya, turned into a playable game in Unity. On itch.io.",
     longDescription:
-      "A stylised environment built as a self-contained diorama: a leaning timber cottage on a rock island, a stone path leading up to it, a red bridge at the front and a tree breaking the silhouette. The whole scene is cel-shaded — flat colour blocks with hard outlines instead of photoreal shading — which puts all the weight on shape, contrast and lighting. Two lanterns carry the entire mood; everything outside their reach falls into darkness on purpose. The scene was then rebuilt as a game-ready asset and ported into Unity 6, where it runs in real time with a playable character.",
+      "A stylised environment built as a self-contained diorama: a leaning timber cottage on a rock island, a stone path leading up to it, a red bridge at the front and a tree breaking the silhouette. The whole scene is cel-shaded — flat colour blocks with hard outlines instead of photoreal shading — which puts all the weight on shape, contrast and lighting. Two lanterns carry the entire mood; everything outside their reach falls into darkness on purpose. The scene was then rebuilt as a game-ready asset and ported into Unity 6, where it runs in real time with a playable character. Out of that came a game: eleven lanterns to light across the island, glimmers that can be called and sent out, a satchel. The build is on itch.io.",
     theory: [
       {
         module: "Lighting",

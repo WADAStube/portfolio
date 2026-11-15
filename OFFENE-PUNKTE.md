@@ -22,6 +22,13 @@ Nichts davon ist auf der Seite erfunden worden. Wo eine Angabe fehlt, steht sie 
 13. **KI Lesebuch:** Screenshots in höherer Auflösung (DevTools, Gerätemodus 1440 × 900, DPR 2, „Capture screenshot“).
 14. **Über mich:** Welche Aussage zu Code war falsch? Der Absatz ist neu geschrieben, bitte gegenlesen.
 
+## Lantern Island auf itch.io
+
+17. Die itch.io-Seite ließ sich aus meiner Umgebung nicht öffnen, die Adresse steht genau so im Code, wie du sie geschickt hast: `https://wadasxxx.itch.io/lantern-island`. Bitte den Knopf nach dem Hochladen einmal anklicken.
+18. Ich schreibe „Die Fassung läuft als Download auf itch.io.“ Falls sie im Browser spielbar ist, sag Bescheid, dann ändere ich den Satz.
+19. Auf dem Titelbild steht „The grey has swallowed the island.“ Das Spiel ist auf Englisch. Soll das im deutschen Text so bleiben? Zurzeit steht der Vorspann im Wortlaut da, der Rest ist deutsch.
+20. Glimmer: Woher kommen sie, und wofür werden sie ausgegeben? Zurzeit steht nur, dass sie sich rufen und losschicken lassen, weil das auf dem Titelbild steht.
+
 ## Technisch
 
 15. **Sicherungs-Branch:** aus der Sandbox ist kein Push möglich. Vor dem Entpacken von v60 einmal ausführen (siehe Antwort im Chat).
