@@ -29,6 +29,15 @@ Nichts davon ist auf der Seite erfunden worden. Wo eine Angabe fehlt, steht sie 
 19. Auf dem Titelbild steht „The grey has swallowed the island.“ Das Spiel ist auf Englisch. Soll das im deutschen Text so bleiben? Zurzeit steht der Vorspann im Wortlaut da, der Rest ist deutsch.
 20. Glimmer: Woher kommen sie, und wofür werden sie ausgegeben? Zurzeit steht nur, dass sie sich rufen und losschicken lassen, weil das auf dem Titelbild steht.
 
+## Campus Quest
+
+21. **Teamkollegen:** Auf der Seite steht nur „Team zu viert“. Wenn die drei einverstanden sind, schick mir die Namen, dann trage ich sie ein.
+22. **Panorama-Aufnahmen** stehen beim Team. Hast du selbst fotografiert? Dann wandern sie zu „Mein Anteil“.
+23. **Fotos der Räume:** Studio, Bildregie und Aufnahmeraum sind öffentlich zu sehen. Ist das mit der Hochschule geklärt?
+24. **Zahlen** (59 Szenen, 42 Panoramen, 280+ Elemente, 22 Zustandsmerker, rund 2 500 geprüfte Spielstände) habe ich aus deinen Unterlagen übernommen. Bitte einmal bestätigen.
+25. **Spielbar?** Lässt sich das PaneoVR-Projekt öffentlich erreichbar machen? Dann baue ich einen Knopf wie bei Lantern Island ein.
+26. Die mitgelieferte Einzelseite habe ich nicht eingebaut, sondern ihre Inhalte in die Projektseite überführt, damit alles eine Gestaltung, eine Navigation und beide Sprachen hat. Die Panoramen, der Graph und Pannellum sind übernommen.
+
 ## Technisch
 
 15. **Sicherungs-Branch:** aus der Sandbox ist kein Push möglich. Vor dem Entpacken von v60 einmal ausführen (siehe Antwort im Chat).

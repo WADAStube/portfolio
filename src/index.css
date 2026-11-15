@@ -178,3 +178,78 @@
 /* ── Scrollbar none ────────────────────────────────────────── */
 .no-scroll { scrollbar-width: none; -ms-overflow-style: none; }
 .no-scroll::-webkit-scrollbar { display: none; }
+
+/* ── 360°-Betrachter: Punkte und Erklaerungen ──────────────── */
+/* Pannellum setzt die Punkte absolut in die Szene. Hier bekommen
+   sie die Formensprache der Seite: duenner Ring, dunkler Kern,
+   die Erklaerung erscheint beim Ueberfahren oder Antippen. */
+.cq-hotspot { width: 26px; height: 26px; margin: -13px 0 0 -13px; }
+
+.cq-pin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  background: rgba(10, 10, 10, 0.72);
+  color: rgba(255, 255, 255, 0.9);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+  line-height: 1;
+  cursor: pointer;
+  backdrop-filter: blur(2px);
+  transition: transform .35s cubic-bezier(0.16, 1, 0.3, 1), background .35s;
+}
+.cq-pin:hover,
+.cq-pin:focus-visible,
+.cq-pin.is-open { background: #fff; color: #000; transform: scale(1.12); }
+.cq-pin:focus-visible { outline: 1px solid rgba(255, 255, 255, 0.8); outline-offset: 3px; }
+.cq-pin-go { font-size: 15px; padding-bottom: 2px; }
+
+.cq-tip {
+  position: absolute;
+  bottom: 34px;
+  left: 50%;
+  transform: translate(-50%, 6px);
+  width: max-content;
+  max-width: 17rem;
+  padding: .75rem .9rem;
+  background: rgba(8, 8, 8, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.62);
+  font-family: inherit;
+  font-size: 11.5px;
+  font-weight: 300;
+  line-height: 1.65;
+  text-align: left;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .35s ease, transform .35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.cq-tip b {
+  display: block;
+  margin-bottom: .35rem;
+  color: #fff;
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: .04em;
+}
+.cq-pin:hover .cq-tip,
+.cq-pin:focus-visible .cq-tip,
+.cq-pin.is-open .cq-tip {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+}
+
+/* Am Rand darf die Erklaerung nicht aus dem Bild laufen */
+@media (max-width: 640px) {
+  .cq-tip { max-width: 13rem; font-size: 11px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cq-pin, .cq-tip { transition: none; }
+}

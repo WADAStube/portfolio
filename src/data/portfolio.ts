@@ -97,6 +97,13 @@ const META: Record<string, Meta> = {
     fields: ["software", "design"],
     status: "complete",
     cover: { src: "/images/projects/qrib-web/01.jpg", fit: "cover" },
+    home: 4,
+  },
+  "campus-quest": {
+    slug: "campus-quest",
+    fields: ["software", "design", "engineering"],
+    status: "complete",
+    cover: { src: "/images/projects/campus-quest/still-studio.jpg", fit: "cover" },
     home: 3,
   },
   "ki-lesebuch": {
@@ -104,13 +111,14 @@ const META: Record<string, Meta> = {
     fields: ["software"],
     status: "complete",
     cover: { src: "/images/projects/ki-lesebuch/01.jpg", fit: "cover" },
-    home: 4,
+    home: 5,
   },
   "i-need-space": {
     slug: "i-need-space",
     fields: ["design"],
     status: "complete",
     cover: { src: "/images/projects/i-need-space/01.jpg", fit: "contain" },
+    home: 6,
   },
   bloomest: {
     slug: "bloomest",
@@ -412,6 +420,51 @@ export const CASES: Record<string, CaseStudy> = {
     share: {
       en: "Design and development of app and website.",
       de: "Gestaltung und Entwicklung von App und Website.",
+    },
+  },
+
+  "campus-quest": {
+    challenge: {
+      en: "New media students meet the TV studio, the control room and the audio rooms all at once, with expensive equipment and little time to practise on it.",
+      de: "Studierende treffen am Anfang auf Fernsehstudio, Bildregie und Aufnahmeräume gleichzeitig, auf teure Technik und wenig Zeit, sie zu üben.",
+    },
+    approach: {
+      en: "Let them run the whole workflow once before they touch anything, inside 360° photographs of the real rooms. Two tasks in two buildings, and the player decides the order.",
+      de: "Den ganzen Ablauf einmal durchspielen lassen, bevor jemand etwas anfasst, in 360°-Aufnahmen der echten Räume. Zwei Aufträge in zwei Gebäuden, die Reihenfolge bestimmt der Spieler.",
+    },
+    implementation: {
+      en: "Built in PaneoVR, a node-based authoring tool: every scene is a panorama, every hotspot, quiz and condition a node. 59 scenes, 42 panoramas, more than 280 interactive elements and 22 state flags, without a line of code. Inventory, quizzes, checklists and hints are all graph logic.",
+      de: "Gebaut in PaneoVR, einem knotenbasierten Autorenwerkzeug: Jede Szene ist ein Panorama, jeder Hotspot, jedes Quiz und jede Bedingung ein Knoten. 59 Szenen, 42 Panoramen, über 280 interaktive Elemente und 22 Zustandsmerker, ohne eine Zeile Code. Inventar, Quizfragen, Checklisten und Hinweise sind Logik im Graphen.",
+    },
+    decisions: [
+      {
+        en: "Free task order instead of a guided tour, although the tool is built for linear tours.",
+        de: "Freie Reihenfolge statt geführter Rundgang, obwohl das Werkzeug für lineare Rundgänge gebaut ist.",
+      },
+      {
+        en: "State changes happen only in one-time confirmation scenes. Rooms every route passes through read state, they never write it.",
+        de: "Zustandsänderungen nur in einmaligen Bestätigungsszenen. Räume, durch die jeder Weg führt, lesen den Zustand, schreiben ihn aber nie.",
+      },
+      {
+        en: "Game logic runs on progress flags alone; the inventory is a display layer and decides nothing.",
+        de: "Die Spiellogik hängt allein an Fortschrittsmerkern; das Inventar ist Anzeige und entscheidet nichts.",
+      },
+      {
+        en: "Three kinds of text with one job each: task, knowledge, checklist. Anything depending on progress belongs in a checklist, not a popup.",
+        de: "Drei Textsorten mit je einer Aufgabe: Auftrag, Wissen, Checkliste. Was vom Fortschritt abhängt, gehört in die Checkliste, nicht in eine Einblendung.",
+      },
+    ],
+    outcome: {
+      en: "A playable game covering the camera setup, the vision mixer, the recording, the audio recording in the other building and the submission. Before each build the graph was checked against all reachable game states, around 2,500, for dead ends, lost progress and steps that could be skipped.",
+      de: "Ein spielbares Spiel über Kameraaufbau, Bildregie, Aufnahme, Tonaufnahme im anderen Gebäude und Abgabe. Vor jedem Build wurde der Graph gegen alle erreichbaren Spielstände geprüft, rund 2 500, auf Sackgassen, verlorenen Fortschritt und überspringbare Schritte.",
+    },
+    share: {
+      en: "Group project in the module Interaktive Medien 2. The team did concept, storyboard and the panorama shoots; the PaneoVR implementation and the game logic are mine.",
+      de: "Gruppenarbeit im Modul Interaktive Medien 2. Konzept, Storyboard und die Panorama-Aufnahmen kommen aus dem Team; die Umsetzung in PaneoVR und die Spiellogik sind meine Arbeit.",
+    },
+    learned: {
+      en: "The hard part was not the tool. It was designing states that survive any order of play — and that holds in any engine.",
+      de: "Das Schwierige war nicht das Werkzeug, sondern Zustände zu entwerfen, die jede Reihenfolge überstehen. Das gilt in jeder Engine gleich.",
     },
   },
 

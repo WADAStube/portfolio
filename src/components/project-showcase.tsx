@@ -25,6 +25,12 @@ import { ShowpieceHero, ShowpieceTurntable } from "@/components/showpiece";
 import { LayerBreakdown, BreakdownIntro } from "@/components/layer-breakdown";
 import { TheorySection } from "@/components/theory-section";
 import { UnitySection } from "@/components/unity-section";
+import {
+  CampusQuestSection,
+  CQ_SCENES,
+  CQ_POSTER,
+} from "@/components/campus-quest-section";
+import { Panorama } from "@/components/panorama";
 import { Walkthrough } from "@/components/walkthrough";
 import { cn } from "@/lib/utils";
 import { useLang, pick, t } from "@/lib/lang";
@@ -246,6 +252,26 @@ export function ProjectShowcase({
           : "border-white/[0.05]",
       )}
     >
+      {project.campusQuest && (
+        <div className="mb-16 md:mb-24 max-w-[1760px] mx-auto px-6 md:px-10 lg:px-12">
+          <div className="flex items-center gap-5 mb-8">
+            <span className="h-px w-10 bg-white/20 shrink-0" />
+            <span className="text-[9px] uppercase tracking-[0.3em] text-white/35">
+              {t("project", lang)}
+            </span>
+            <span className="h-px flex-1 bg-white/[0.07]" />
+          </div>
+          <Panorama
+            scenes={CQ_SCENES}
+            poster={CQ_POSTER}
+            note={{
+              en: "Blue dots explain, arrows lead to the next room",
+              de: "Punkte erklären, Pfeile führen in den nächsten Raum",
+            }}
+          />
+        </div>
+      )}
+
       {project.showpiece && (
         <div className="mb-16 md:mb-24">
           <div className="max-w-[1760px] mx-auto px-6 md:px-10 lg:px-12 pt-16 md:pt-24 pb-10 md:pb-14">
@@ -701,6 +727,13 @@ export function ProjectShowcase({
       {project.unity ? (
         <div className="mt-20 md:mt-32">
           <UnitySection play={project.play} />
+        </div>
+      ) : null}
+
+      {/* Aufbau des Spiels: Ablauf, Graph, Probleme, Textsorten */}
+      {project.campusQuest ? (
+        <div className="mt-20 md:mt-32">
+          <CampusQuestSection />
         </div>
       ) : null}
     </section>

@@ -64,6 +64,7 @@ const MODULES: { module: string; work: { title: string; to: string }[] }[] = [
   { module: "Computeranimation", work: [{ title: "Lantern Island", to: "/projects/lantern-island" }] },
   { module: "Autorensysteme", work: [{ title: "Lantern Island", to: "/projects/lantern-island" }] },
   { module: "Produktion Digitaler Medien", work: [{ title: "KI Lesebuch", to: "/projects/ki-lesebuch" }] },
+  { module: "Interaktive Medien 2", work: [{ title: "Campus Quest", to: "/projects/campus-quest" }] },
 ];
 
 interface Applied {
@@ -75,6 +76,7 @@ const LI = { title: "Lantern Island", to: "/projects/lantern-island" };
 const SM = { title: "SafeMeet", to: "/projects/safemeet" };
 const QR = { title: "Qrib", to: "/projects/qrib" };
 const KL = { title: "KI Lesebuch", to: "/projects/ki-lesebuch" };
+const CQ = { title: "Campus Quest", to: "/projects/campus-quest" };
 const INS = { title: "I Need Space", to: "/projects/i-need-space" };
 const BL = { title: "Bloomest", to: "/projects/bloomest" };
 
@@ -110,6 +112,13 @@ const APPLIED: Record<FieldId, Applied[]> = {
     },
     {
       what: {
+        en: "Interactive 360° content in PaneoVR: scene graph, conditions, quizzes, persistent progress",
+        de: "Interaktive 360°-Inhalte in PaneoVR: Szenengraph, Bedingungen, Quizfragen, bleibender Fortschritt",
+      },
+      where: [CQ],
+    },
+    {
+      what: {
         en: "Calling a language model through its API",
         de: "Anbindung eines Sprachmodells über dessen API",
       },
@@ -137,6 +146,13 @@ const APPLIED: Record<FieldId, Applied[]> = {
         de: "Fehler über Logs und Messwerte eingrenzen",
       },
       where: [LI],
+    },
+    {
+      what: {
+        en: "State design for free task order, checked against every reachable game state",
+        de: "Zustandsentwurf für freie Reihenfolge, geprüft gegen jeden erreichbaren Spielstand",
+      },
+      where: [CQ],
     },
     {
       what: {
@@ -194,6 +210,13 @@ const APPLIED: Record<FieldId, Applied[]> = {
     },
     {
       what: {
+        en: "Text and guidance inside a 360° space: task, knowledge and checklist, each with one job",
+        de: "Text und Führung im 360°-Raum: Auftrag, Wissen und Checkliste, jedes mit genau einer Aufgabe",
+      },
+      where: [CQ],
+    },
+    {
+      what: {
         en: "Camera work and post-production in Premiere Pro",
         de: "Kameraführung und Postproduktion in Premiere Pro",
       },
@@ -209,7 +232,7 @@ const TOOLS: { group: Bi; items: string[] }[] = [
   },
   {
     group: { en: "Engines", de: "Engines" },
-    items: ["Unity 6 · URP", "Unreal Engine"],
+    items: ["Unity 6 · URP", "Unreal Engine", "PaneoVR"],
   },
   {
     group: { en: "3D", de: "3D" },

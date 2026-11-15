@@ -1,3 +1,56 @@
+Portfolio — Version 62  (15.11.2026)
+
+NEUES PROJEKT: CAMPUS QUEST
+  Eingebaut als vollwertiges Projekt unter /projects/campus-quest,
+  nicht als eigene Seite daneben. Es erscheint in den Filtern
+  Software & Anwendungen, Gestaltung & Medien und Engineering &
+  Echtzeit und steht auf der Startseite an dritter Stelle.
+
+  Die Projektseite enthält:
+    - 360°-Betrachter mit drei Räumen (Studio G28, Bildregie,
+      Aufnahmeraum E115), Punkten zum Erklären und Pfeilen in den
+      nächsten Raum. Zweisprachig, Tastatur bedienbar.
+    - Fallstudie wie bei den anderen Projekten
+    - Wer was gemacht hat: Team zu viert gegen eigenen Anteil
+    - Ablauf: zwei Stränge, freie Reihenfolge, Abgabe
+    - Unter der Haube: PaneoVR-Graph, 59 Szenen, 42 Panoramen,
+      280+ Elemente, 22 Zustandsmerker
+    - Drei Probleme der freien Reihenfolge, je mit Lösung
+    - Drei Arten von Text, als Tafeln wie im Spiel
+    - Die echten Räume: drei Ansichten aus den Panoramen gerechnet
+    - Ausblick und Nachweis
+
+STARTSEITE
+  Jetzt sechs ausgewählte Projekte statt vier, damit alle vier
+  Fachrichtungen vertreten sind: Lantern Island, SafeMeet,
+  Campus Quest, Qrib, KI Lesebuch, I Need Space.
+
+360°-BETRACHTER
+  src/components/panorama.tsx — allgemein gehalten, nimmt beliebige
+  Szenen entgegen. Lädt Pannellum erst, wenn der Betrachter in
+  Sichtweite kommt (die Panoramen sind rund 1 MB je Raum). Ohne
+  WebGL bleibt das Standbild stehen. Achtet auf "Bewegung
+  reduzieren".
+
+NEUE DATEIEN
+  src/components/panorama.tsx
+  src/components/campus-quest-section.tsx
+  public/images/projects/campus-quest/   Panoramen, Vorschauen,
+                                         Graph, drei Standbilder
+  public/vendor/pannellum/               Pannellum 2.5.6 (MIT)
+  Dazu: Stile für die Punkte in src/index.css,
+        Feld Project.campusQuest, Eintrag in Engineering und
+        sitemap.xml
+
+NICHT ÜBERNOMMEN
+  Die mitgelieferte Einzelseite (index.html mit eigenen Schriften
+  und eigenem Layout) wurde nicht eingebaut. Ihre Inhalte stecken
+  jetzt in der Projektseite, in derselben Gestaltung wie der Rest.
+  Aus dem Paket übernommen: die drei Panoramen, der Graph und
+  Pannellum.
+
+──────────────────────────────────────────────────────────────
+
 Portfolio — Version 61  (15.11.2026)
 
 LANTERN ISLAND IST EIN SPIEL

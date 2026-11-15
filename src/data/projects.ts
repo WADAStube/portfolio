@@ -141,6 +141,9 @@ export interface Project {
       Inhalt steckt in components/unity-section.tsx, weil er
       projektspezifisch ist und sonst diese Datei sprengt. */
   unity?: boolean;
+  /** Campus Quest: 360°-Betrachter oben, Aufbau des Spiels
+      unten. Inhalt in components/campus-quest-section.tsx. */
+  campusQuest?: boolean;
   /** "stack" (Standard) = grosse Bilder untereinander.
       "grid" = kompaktes Raster — passend fuer App-Screenshots,
       die sonst neben den grossen Renders unruhig wirken. */
@@ -692,6 +695,30 @@ export const projectsData: Project[] = [
       "Animated pieces and edits built in After Effects.",
     longDescription:
       "A set of animated pieces and edits put together in After Effects — titles, transitions and short-form work.",
+    shots: [],
+  },
+
+  {
+    id: "campus-quest",
+    campusQuest: true,
+    group: "apps",
+    title: "Campus Quest",
+    category: "360° learning game",
+    filterCategory: "Interactive",
+    year: "2026",
+    module: "Interaktive Medien 2",
+    tools: ["PaneoVR", "Figma"],
+    description:
+      "A 360° learning game that teaches media students how to run a TV studio.",
+    longDescription:
+      "New media students meet the TV studio, the control room and the audio rooms all at once, with expensive equipment and little time. Campus Quest lets them practise the whole workflow first, inside 360° photographs of the real rooms on campus. The player gets a message from the lecturer: the submission closes at 4 pm and needs a video from Studio G28 and an audio recording from room E115, and the lab partner has called in sick. From there it is a walk across campus, a camera set up in seven steps, the vision mixer, the recording, the audio recording in the other building and the submission. The order is up to the player. A group of four planned the game; the playable version is mine, built as a node graph in PaneoVR.",
+    de: {
+      category: "360°-Lernspiel",
+      description:
+        "Ein 360°-Lernspiel, das durch den Betrieb eines Fernsehstudios führt.",
+      longDescription:
+        "Im ersten Semester treffen Studierende auf Fernsehstudio, Bildregie und Aufnahmeräume gleichzeitig, auf teure Technik und wenig Zeit. Campus Quest lässt den ganzen Ablauf vorher üben, in 360°-Aufnahmen der echten Räume auf dem Campus. Das Spiel beginnt mit einer Nachricht des Dozenten: Abgabe bis 16 Uhr, gebraucht werden ein Video aus Studio G28 und eine Tonaufnahme aus Raum E115, und der Laborpartner ist krank. Danach geht es über den Campus, eine Kamera wird in sieben Schritten aufgebaut, die Bildregie in Betrieb genommen, aufgenommen, im anderen Gebäude der Ton eingespielt und am Ende alles abgegeben. Die Reihenfolge bestimmt der Spieler. Geplant hat das Spiel eine Gruppe zu viert; die spielbare Fassung ist meine Arbeit, gebaut als Knotengraph in PaneoVR.",
+    },
     shots: [],
   },
 
