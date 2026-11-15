@@ -18,8 +18,8 @@ export default function About() {
   usePageMeta(
     t("about", lang),
     lang === "de"
-      ? "Issam Selmi: Medientechnik-Student in Hamburg. Werdegang, Arbeit, Ehrenamt und Sprachen."
-      : "Issam Selmi: Media Technology student in Hamburg. Background, work, volunteering and languages.",
+      ? "Issam Selmi: 3D Artist und Entwickler in Hamburg, Medientechnik an der Hochschule Emden/Leer. Werdegang, Arbeit, Ehrenamt und das Ziel eines eigenen Spiels."
+      : "Issam Selmi: 3D artist and developer based in Hamburg, studying Media Technology at Hochschule Emden/Leer. Background, work, volunteering and the goal of building a game.",
   );
   useEffect(() => {
     window.scrollTo({ top: 0 });

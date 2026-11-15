@@ -45,21 +45,34 @@ const MARQUEE = [
   "TypeScript",
 ];
 
-/* In zehn Sekunden: was er studiert, woran er arbeitet, wo, und
-   was er sucht. */
+/* In zehn Sekunden: was er studiert, wo, wann es fertig ist, wo
+   er wohnt, woran er arbeitet und was er sucht. Hochschule und
+   Wohnort stehen getrennt — studiert wird in Emden, gewohnt in
+   Hamburg. */
 const FACTS: { k: Bi; v: Bi }[] = [
   {
     k: { en: "Degree", de: "Studium" },
     v: {
-      en: "Media Technology, Bachelor of Engineering (in progress), Hochschule Emden/Leer",
-      de: "Medientechnik, Bachelor of Engineering (angestrebt), Hochschule Emden/Leer",
+      en: "Media Technology, Bachelor of Engineering (in progress), Hochschule Emden/Leer, Emden",
+      de: "Medientechnik, Bachelor of Engineering (in Arbeit), Hochschule Emden/Leer, Emden",
+    },
+  },
+  {
+    k: { en: "Expected graduation", de: "Abschluss" },
+    v: { en: "October 2027", de: "voraussichtlich Oktober 2027" },
+  },
+  {
+    k: { en: "Based in", de: "Wohnort" },
+    v: {
+      en: "Hamburg. In Emden for on-site classes, exams and projects.",
+      de: "Hamburg. In Emden für Präsenztermine, Prüfungen und Projekte.",
     },
   },
   {
     k: { en: "Fields", de: "Arbeitsfelder" },
     v: {
-      en: "App and web development, real-time scenes in Unity, 3D modelling and rendering, media production",
-      de: "App- und Web-Entwicklung, Echtzeit-Szenen in Unity, 3D-Modellierung und Rendering, Medienproduktion",
+      en: "3D and game art, real-time scenes in Unity, app and web development, media production",
+      de: "3D und Game Art, Echtzeit-Szenen in Unity, App- und Web-Entwicklung, Medienproduktion",
     },
   },
   {
@@ -236,10 +249,10 @@ export default function Home() {
   const { lang } = useLang();
   const featured = ENTRIES.filter((e) => e.home).sort((a, b) => a.home! - b.home!);
   usePageMeta(
-    "Media Technology Engineering",
+    "3D Artist & Creative Developer",
     lang === "de"
-      ? "Issam Selmi, Medientechnik-Student (B.Eng.) in Hamburg: Softwareentwicklung, interaktive Systeme, 3D-Visualisierung und digitale Medien."
-      : "Issam Selmi, Media Technology student (B.Eng.) in Hamburg: software development, interactive systems, 3D visualization and digital media.",
+      ? "Issam Selmi: 3D-Umgebungen und Charaktere, Echtzeit-Szenen in Unity, Apps und Web-Anwendungen. Medientechnik (B.Eng. in Arbeit) an der Hochschule Emden/Leer, Wohnort Hamburg."
+      : "Issam Selmi: 3D environments and characters, real-time scenes in Unity, apps and web applications. Media Technology (B.Eng. in progress) at Hochschule Emden/Leer, based in Hamburg.",
   );
   const [loaded, setLoaded] = useState(false);
 
@@ -342,11 +355,24 @@ export default function Home() {
               transition={{ duration: 1, ease: EASE, delay: loaded ? 0.45 : 1.55 }}
               className="flex flex-col items-start md:items-end gap-4 md:pb-2"
             >
-              <p className="text-sm md:text-lg font-normal text-white/90 uppercase tracking-[0.2em] md:text-right">
-                {t("role", lang)}
+              <p className="flex flex-col items-start md:items-end text-sm md:text-base font-normal text-white/90 uppercase tracking-[0.2em] md:text-right">
+                {t("role", lang)
+                  .split(" · ")
+                  .map((part) => (
+                    <span key={part} className="whitespace-nowrap">
+                      {part}
+                    </span>
+                  ))}
               </p>
-              <p className="text-[10px] md:text-[11px] font-light leading-[1.9] text-white/70 uppercase tracking-[0.16em] -mt-1 max-w-[22rem] md:text-right">
-                {t("roleSub", lang)}
+              <p className="flex flex-wrap gap-x-2 md:justify-end text-[10px] md:text-[11px] font-light leading-[1.9] text-white/70 uppercase tracking-[0.16em] -mt-1 max-w-[22rem] md:text-right">
+                {t("roleSub", lang)
+                  .split(" · ")
+                  .map((part, i, all) => (
+                    <span key={part} className="whitespace-nowrap">
+                      {part}
+                      {i < all.length - 1 && <span className="ml-2 text-white/35">·</span>}
+                    </span>
+                  ))}
               </p>
               <div className="flex items-center gap-2">
                 <span className="h-[5px] w-[5px] rounded-full bg-green-500 animate-pulse" />
@@ -404,16 +430,17 @@ export default function Home() {
 
       {/* ══════════════════ AUF EINEN BLICK ══════════════════ */}
       <section id="work" className="border-b border-white/[0.05]">
-        <dl className="max-w-[1600px] mx-auto px-6 md:px-10 lg:px-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+        <dl className="max-w-[1600px] mx-auto px-6 md:px-10 lg:px-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {FACTS.map((f, i) => (
             <div
               key={f.k.en}
               className={cn(
-                "py-8 md:py-10 lg:pr-10 border-white/[0.06]",
+                "py-7 md:py-9 lg:pr-10 border-white/[0.06]",
                 i > 0 && "border-t sm:border-t-0",
-                i > 1 && "sm:border-t lg:border-t-0",
+                i > 1 && "sm:border-t",
+                i > 2 && "lg:border-t",
                 i % 2 === 1 && "sm:pl-10 lg:pl-0",
-                i > 0 && "lg:pl-10 lg:border-l",
+                i % 3 !== 0 && "lg:pl-10 lg:border-l",
               )}
             >
               <dt className="text-[9px] uppercase tracking-[0.26em] text-white/48 mb-3">{f.k[lang]}</dt>
@@ -422,25 +449,49 @@ export default function Home() {
           ))}
         </dl>
 
-        {/* Der Stapel in Kurzform. Ein Recruiter sucht genau das
-            zuerst, und soll ihn nicht auf einer Unterseite suchen
-            müssen. Vollständig steht er unter /engineering. */}
-        <div className="max-w-[1600px] mx-auto px-6 md:px-10 lg:px-16 border-t border-white/[0.06]">
-          <dl className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 py-8 md:py-10 gap-y-8">
-            {STACK.map((g, i) => (
-              <div key={g.group.en} className={cn(i > 0 && "lg:pl-10")}>
-                <dt className="text-[9px] uppercase tracking-[0.26em] text-white/48 mb-3">
+        {/* Womit gearbeitet wird. Drei Gruppen, jede mit einem Satz
+            dazu — eine Reihe aus zwanzig Namen sagt nichts aus.
+            Vollständig steht es unter /engineering. */}
+        <div className="max-w-[1600px] mx-auto px-6 md:px-10 lg:px-16 border-t border-white/[0.06] py-10 md:py-14">
+          <p className="text-[9px] uppercase tracking-[0.26em] text-white/48 mb-8">
+            {t("stackTitle", lang)}
+          </p>
+          <dl className="grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-10">
+            {STACK.map((g) => (
+              <div key={g.group.en}>
+                <dt className="text-[10px] uppercase tracking-[0.2em] text-white/70 mb-3">
                   {g.group[lang]}
                 </dt>
-                <dd className="flex flex-wrap gap-1.5">
-                  {g.items.map((it) => (
-                    <span
-                      key={it}
-                      className="border border-white/[0.14] px-2.5 py-1.5 font-mono text-[10px] tracking-[0.04em] text-white/70"
-                    >
-                      {it}
-                    </span>
-                  ))}
+                <dd>
+                  <p className="mb-4 text-[12.5px] font-light leading-[1.8] text-white/55">
+                    {g.note[lang]}
+                  </p>
+                  <ul className="flex flex-wrap gap-1.5">
+                    {g.items.map((it) => (
+                      <li
+                        key={it}
+                        className="border border-white/[0.14] px-2.5 py-1.5 font-mono text-[10px] tracking-[0.04em] text-white/70"
+                      >
+                        {it}
+                      </li>
+                    ))}
+                    {g.early?.map((it) => (
+                      <li
+                        key={it}
+                        title={t("stackEarly", lang)}
+                        className="border border-dashed border-white/[0.14] px-2.5 py-1.5 font-mono text-[10px] tracking-[0.04em] text-white/45"
+                      >
+                        {it}
+                      </li>
+                    ))}
+                  </ul>
+                  {g.early?.length ? (
+                    <p className="mt-3 text-[10px] text-white/40">
+                      {lang === "de"
+                        ? "Gestrichelt: erste Erfahrungen."
+                        : "Dashed: first experience."}
+                    </p>
+                  ) : null}
                 </dd>
               </div>
             ))}

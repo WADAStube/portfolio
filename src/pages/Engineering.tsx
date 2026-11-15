@@ -11,7 +11,7 @@ import {
 } from "@/components/site-chrome";
 import { Reveal } from "@/components/motion-primitives";
 import { FIELDS, STACK, type Bi, type FieldId } from "@/data/portfolio";
-import { useLang } from "@/lib/lang";
+import { useLang, t } from "@/lib/lang";
 
 /* ────────────────────────────────────────────────────────────
    Engineering & Expertise
@@ -165,8 +165,8 @@ const APPLIED: Record<FieldId, Applied[]> = {
   "3d": [
     {
       what: {
-        en: "Modelling, UV mapping, texturing, lighting and rendering in Maya, Substance Painter and Arnold",
-        de: "Modellierung, UV-Mapping, Texturierung, Licht und Rendering in Maya, Substance Painter und Arnold",
+        en: "The full chain in Maya: modelling, UVs, rigging, animation, shading, lighting and rendering, with Substance 3D Painter and Arnold",
+        de: "Die ganze Kette in Maya: Modellierung, UVs, Rigging, Animation, Shading, Licht und Rendering, dazu Substance 3D Painter und Arnold",
       },
       where: [LI, { title: "Future!comeback" }],
     },
@@ -267,8 +267,8 @@ export default function Engineering() {
   usePageMeta(
     "Engineering & Expertise",
     de
-      ? "Medientechnik (B.Eng., angestrebt) an der Hochschule Emden/Leer: Studieninhalte, angewandtes Wissen und Werkzeuge von Issam Selmi."
-      : "Media Technology (B.Eng., in progress) at Hochschule Emden/Leer: programme content, applied knowledge and tools of Issam Selmi.",
+      ? "Medientechnik (B.Eng., in Arbeit) an der Hochschule Emden/Leer in Emden: Studieninhalte, angewandtes Wissen und Werkzeuge von Issam Selmi, 3D Artist und Entwickler in Hamburg."
+      : "Media Technology (B.Eng., in progress) at Hochschule Emden/Leer in Emden: programme content, applied knowledge and tools of Issam Selmi, 3D artist and developer based in Hamburg.",
   );
 
   useEffect(() => {
@@ -286,8 +286,8 @@ export default function Engineering() {
         title={de ? "Medientechnik, Bachelor of Engineering" : "Media Technology, Bachelor of Engineering"}
         intro={
           de
-            ? "Ich studiere Medientechnik an der Hochschule Emden/Leer, Abschlussziel Bachelor of Engineering. Diese Seite hält auseinander, was der Studiengang lehrt, was ich davon in Projekten angewendet habe und womit ich arbeite."
-            : "I study Media Technology at Hochschule Emden/Leer, working towards a Bachelor of Engineering. This page keeps apart what the programme teaches, what I have applied in projects, and what I work with."
+            ? "Ich studiere Medientechnik an der Hochschule Emden/Leer in Emden, Abschlussziel Bachelor of Engineering, voraussichtlich im Oktober 2027. Mein Wohnort ist Hamburg; nach Emden fahre ich für Präsenztermine, Prüfungen und Projekte. Diese Seite hält auseinander, was der Studiengang lehrt, was ich davon in Projekten angewendet habe und womit ich arbeite."
+            : "I study Media Technology at Hochschule Emden/Leer in Emden, working towards a Bachelor of Engineering, expected in October 2027. I am based in Hamburg and travel to Emden for on-site classes, exams and projects. This page keeps apart what the programme teaches, what I have applied in projects, and what I work with."
         }
       />
 
@@ -407,22 +407,47 @@ export default function Engineering() {
         title={de ? "Werkzeuge" : "Tools"}
         note={
           de
-            ? "Womit die Projekte auf dieser Seite gebaut wurden. Unreal Engine bisher nur für Tests in Future!comeback."
-            : "What the projects on this site were built with. Unreal Engine so far only for tests in Future!comeback."
+            ? "Womit die Projekte auf dieser Seite gebaut wurden. Was unter „Erste Erfahrungen“ steht, habe ich ausprobiert, aber noch kein Projekt damit abgeschlossen."
+            : "What the projects on this site were built with. Anything under “First experience” I have tried, without finishing a project in it."
         }
       >
-        <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-10">
+        <dl className="space-y-12">
           {STACK.map((g) => (
-            <div key={g.group.en}>
-              <dt className="text-[10px] uppercase tracking-[0.24em] text-white/55 mb-4">{g.group[lang]}</dt>
+            <div key={g.group.en} className="border-t border-white/[0.12] pt-6">
+              <dt className="text-[10px] uppercase tracking-[0.24em] text-white/60 mb-3">
+                {g.group[lang]}
+              </dt>
               <dd>
-                <ul className="space-y-2">
+                <p className="mb-5 max-w-2xl text-sm font-light leading-[1.85] text-white/55">
+                  {g.note[lang]}
+                </p>
+                <ul className="flex flex-wrap gap-1.5">
                   {g.items.map((i) => (
-                    <li key={i} className="text-sm font-light text-white/70">
+                    <li
+                      key={i}
+                      className="border border-white/[0.18] px-3 py-2 font-mono text-[11px] tracking-[0.04em] text-white/75"
+                    >
                       {i}
                     </li>
                   ))}
                 </ul>
+                {g.early?.length ? (
+                  <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2">
+                    <span className="text-[9px] uppercase tracking-[0.2em] text-white/45">
+                      {t("stackEarly", lang)}
+                    </span>
+                    <ul className="flex flex-wrap gap-1.5">
+                      {g.early.map((i) => (
+                        <li
+                          key={i}
+                          className="border border-dashed border-white/[0.18] px-3 py-2 font-mono text-[11px] tracking-[0.04em] text-white/50"
+                        >
+                          {i}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ) : null}
               </dd>
             </div>
           ))}

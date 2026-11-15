@@ -38,6 +38,15 @@ Nichts davon ist auf der Seite erfunden worden. Wo eine Angabe fehlt, steht sie 
 25. **Spielbar?** Lässt sich das PaneoVR-Projekt öffentlich erreichbar machen? Dann baue ich einen Knopf wie bei Lantern Island ein.
 26. Die mitgelieferte Einzelseite habe ich nicht eingebaut, sondern ihre Inhalte in die Projektseite überführt, damit alles eine Gestaltung, eine Navigation und beide Sprachen hat. Die Panoramen, der Graph und Pannellum sind übernommen.
 
+## Aus der Richtigstellung (v64)
+
+27. **Abschlussdatum.** Oktober 2027 steht jetzt auf der Startseite und der Engineering-Seite. Im Oktober hattest du gesagt, niemand solle wissen, wann du fertig bist. Diesmal hast du es ausdrücklich verlangt, deshalb steht es drin. Ein Wort von dir, und es ist wieder raus.
+28. **Bifrost.** Neu in der Gruppe „3D & Echtzeit“, also als Können ausgewiesen, nicht unter „Erste Erfahrungen“. In welchem Projekt hast du damit gearbeitet? Dann kann ich es dort auch zeigen.
+29. **Unreal Engine** steht unter „Erste Erfahrungen“, weil bisher nur Tests in Future!comeback belegt sind. Falls du mehr damit gemacht hast, sag es, dann rückt es hoch.
+30. **Die sechs 3D-Studien** (Futuristic Bunker, Robot Study, Apocalypse, Character Studies, Isometric Room, Security Camera) stehen weiter auf „Folgt“. Jetzt, wo 3D vorn steht, wirkt das schwach. Sollen sie auf „vollständig gezeigt“ wechseln? Dann brauche ich je zwei, drei Sätze zur Einordnung.
+31. **Lebenslauf (PDF).** Steht noch als „Medientechniker“ mit reinem 3D-Design-Schwerpunkt da und passt weder zur alten noch zur neuen Positionierung. Soll ich ihn auf „3D Artist · Creative Developer“ umstellen, und soll der Abschlusstermin dort hinein?
+32. **Film, Animation und VFX** nennst du als Zielbereich. Belegt sind Motion Design, die E-Sports-Overlays und die Abschlussfeier, alle ohne Bildmaterial. Mit Material dazu wird dieser Bereich sichtbar.
+
 ## Technisch
 
 15. **Sicherungs-Branch:** aus der Sandbox ist kein Push möglich. Vor dem Entpacken von v60 einmal ausführen (siehe Antwort im Chat).

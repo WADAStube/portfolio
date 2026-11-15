@@ -413,7 +413,7 @@ export function SiteFooter() {
           © {new Date().getFullYear()} Issam Selmi · WADAS
         </p>
         <p className="text-[9px] text-white/14 uppercase tracking-wider">
-          Media Technology Engineering · Hamburg
+          3D &amp; Game Art · Development · Hamburg
         </p>
       </div>
     </footer>

@@ -75,6 +75,16 @@ const CHAPTERS = [
     bodyDe: "Future!comeback ist eine cinematische Szene mit zwei Charakteren in einer Laborumgebung, zurzeit in Arbeit. Modellierung, Rigging, UV-Mapping, Texturierung, Licht und Rendering liegen bei mir. Dazu kamen Stream-Overlays und 3D-Animationen für ein studentisches E-Sports-Event, ein Medienprojekt zu einer Installation an einer Schule in Sukuta in Gambia und die audiovisuelle Produktion einer Abschlussfeier, zu acht.",
   },
   {
+    id: "goal",
+    icon: Boxes,
+    kicker: "Goal",
+    kickerDe: "Ziel",
+    title: "A game of my own",
+    titleDe: "Ein eigenes Spiel",
+    body: "What I am working towards is a game built from scratch: modelling the environments and assets, building a world, setting up materials, shaders and lighting, adding animation and gameplay systems, and putting it together in an engine. It is the reason the 3D side and the programming side belong together for me. Lantern Island is the first step in that direction — a rendered scene turned into something playable and put on itch.io. A full game of my own it is not, not yet.",
+    bodyDe: "Worauf ich hinarbeite, ist ein Spiel von Grund auf: Umgebungen und Assets modellieren, eine Welt bauen, Materialien, Shader und Licht einstellen, Animation und Gameplay-Systeme dazu, und das Ganze in einer Engine zusammensetzen. Das ist der Grund, warum die 3D-Seite und das Programmieren für mich zusammengehören. Lantern Island ist der erste Schritt dahin: Aus einer gerenderten Szene wurde etwas Spielbares, das jetzt auf itch.io liegt. Ein vollständiges eigenes Spiel ist es noch nicht.",
+  },
+  {
     id: "work",
     icon: Anchor,
     kicker: "Hamburg",
@@ -277,7 +287,7 @@ export function AboutSection() {
                       Issam Selmi
                     </p>
                     <p className="text-[9px] uppercase tracking-[0.2em] text-white/65 mt-1">
-                      {lang === "de" ? "Medientechnik · Hamburg" : "Media Technology · Hamburg"}
+                      {lang === "de" ? "3D & Game Art · Entwicklung" : "3D & Game Art · Development"}
                     </p>
                   </div>
                 </div>
@@ -298,8 +308,8 @@ export function AboutSection() {
                 key={lang + "a"}
                 text={
                   lang === "de"
-                    ? "Medientechnik-Student in Hamburg."
-                    : "Media Technology student in Hamburg."
+                    ? "Ich baue digitale Welten."
+                    : "I build digital worlds."
                 }
               />
               <br />
@@ -308,8 +318,8 @@ export function AboutSection() {
                   key={lang + "b"}
                   text={
                     lang === "de"
-                      ? "Software, Echtzeit, 3D und Gestaltung."
-                      : "Software, real time, 3D and design."
+                      ? "Und die Technik, die sie zum Laufen bringt."
+                      : "And the technology that makes them run."
                   }
                   delay={0.22}
                 />
@@ -319,8 +329,8 @@ export function AboutSection() {
             <Reveal direction="up" delay={0.1}>
               <p className="text-sm font-light leading-[1.95] text-white/62 max-w-xl">
                 {lang === "de"
-                  ? "Ich studiere Medientechnik an der Hochschule Emden/Leer mit dem Ziel Bachelor of Engineering, lebe in Hamburg und arbeite dort als Werkstudent im selben Fach. Mit 3D hat es angefangen. Dazugekommen sind Spiele in Unity, Apps und Web-Anwendungen, die ich selbst entwerfe und baue, und Gestaltung für Druck und Bildschirm. Ich arbeite auf Arabisch, Deutsch, Englisch und Französisch."
-                  : "I study Media Technology at Hochschule Emden/Leer, working towards a Bachelor of Engineering. I live in Hamburg and work there as a working student in the same field. It started with 3D. Since then came games in Unity, apps and web applications I design and build myself, and design for print and screen. I work in Arabic, German, English and French."}
+                  ? "Ich studiere Medientechnik an der Hochschule Emden/Leer in Emden, mit dem Ziel Bachelor of Engineering. Wohnen tue ich in Hamburg und arbeite dort als Werkstudent im selben Fach; nach Emden fahre ich für Präsenztermine, Prüfungen und Projekte. Angefangen hat alles mit 3D, und das ist bis heute der Schwerpunkt: Umgebungen, Charaktere, Licht und Rendering. Dazugekommen sind Echtzeit in Unity, Apps und Web-Anwendungen, die ich selbst entwerfe und baue, und Gestaltung für Druck und Bildschirm. Ich arbeite auf Arabisch, Deutsch, Englisch und Französisch."
+                  : "I study Media Technology at Hochschule Emden/Leer in Emden, working towards a Bachelor of Engineering. I live in Hamburg, where I also work as a working student in the same field, and travel to Emden for on-site classes, exams and projects. It all started with 3D, and that is still the centre of it: environments, characters, lighting and rendering. Since then came real time in Unity, apps and web applications I design and build myself, and design for print and screen. I work in Arabic, German, English and French."}
               </p>
             </Reveal>
 

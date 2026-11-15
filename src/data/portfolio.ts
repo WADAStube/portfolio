@@ -27,6 +27,14 @@ export interface Bi {
 
 export const FIELDS: { id: FieldId; label: Bi; sub: Bi }[] = [
   {
+    id: "3d",
+    label: { en: "3D & Game Art", de: "3D & Game Art" },
+    sub: {
+      en: "Environments, characters and props: modelling, shading, lighting and rendering in Maya, Arnold and Substance.",
+      de: "Umgebungen, Charaktere und Props: Modellierung, Shading, Licht und Rendering in Maya, Arnold und Substance.",
+    },
+  },
+  {
     id: "software",
     label: { en: "Software & Applications", de: "Software & Anwendungen" },
     sub: {
@@ -38,16 +46,8 @@ export const FIELDS: { id: FieldId; label: Bi; sub: Bi }[] = [
     id: "engineering",
     label: { en: "Engineering & Real-Time", de: "Engineering & Echtzeit" },
     sub: {
-      en: "Systems that have to run live: engine scenes, alert pipelines, measured budgets.",
-      de: "Systeme, die live laufen müssen: Engine-Szenen, Alarmketten, gemessene Budgets.",
-    },
-  },
-  {
-    id: "3d",
-    label: { en: "3D & Visualization", de: "3D & Visualisierung" },
-    sub: {
-      en: "Modelling, shading, lighting and rendering in Maya, Arnold and Unity.",
-      de: "Modellierung, Shading, Licht und Rendering in Maya, Arnold und Unity.",
+      en: "Systems that have to run live: engine scenes, game logic, alert pipelines, measured budgets.",
+      de: "Systeme, die live laufen müssen: Engine-Szenen, Spiellogik, Alarmketten, gemessene Budgets.",
     },
   },
   {
@@ -63,24 +63,67 @@ export const FIELDS: { id: FieldId; label: Bi; sub: Bi }[] = [
 export const fieldLabel = (id: FieldId) =>
   FIELDS.find((f) => f.id === id)!.label;
 
-/* Womit gearbeitet wird. Steht auf der Startseite als Kurzform
-   und auf der Engineering-Seite vollstaendig — eine Quelle. */
-export const STACK: { group: Bi; items: string[] }[] = [
+/* Womit gearbeitet wird. Eine Quelle fuer Startseite und
+   Engineering-Seite.
+
+   Jede Gruppe sagt in einem Satz, wofuer sie steht — eine Liste
+   aus zwanzig Namen ohne Zusammenhang sagt nichts aus. "early"
+   trennt die Programme ab, mit denen es bisher nur erste
+   Versuche gab; was dort steht, wird nicht als Koennen
+   ausgegeben. */
+export const STACK: {
+  group: Bi;
+  note: Bi;
+  items: string[];
+  early?: string[];
+}[] = [
   {
-    group: { en: "Languages and frameworks", de: "Sprachen und Frameworks" },
-    items: ["C#", "Dart · Flutter", "TypeScript · React", "HTML · CSS · JavaScript", "Express.js", "PostgreSQL · Drizzle ORM", "Firebase · Firestore"],
+    group: { en: "3D & real time", de: "3D & Echtzeit" },
+    note: {
+      en: "Modelling, UVs, rigging, animation, shading, lighting and rendering, and the same assets rebuilt to run in an engine.",
+      de: "Modellierung, UVs, Rigging, Animation, Shading, Licht und Rendering, und dieselben Assets so neu aufgebaut, dass sie in einer Engine laufen.",
+    },
+    items: [
+      "Autodesk Maya",
+      "Bifrost",
+      "Arnold",
+      "Substance 3D Painter",
+      "XGen",
+      "MASH",
+      "Unity 6 · URP",
+      "C#",
+    ],
+    early: ["Unreal Engine"],
   },
   {
-    group: { en: "Engines", de: "Engines" },
-    items: ["Unity 6 · URP", "Unreal Engine", "PaneoVR"],
+    group: { en: "Development", de: "Entwicklung" },
+    note: {
+      en: "Apps and web applications built end to end, from the data model and the server to the interface.",
+      de: "Apps und Web-Anwendungen von Anfang bis Ende: Datenmodell, Server und Oberfläche.",
+    },
+    items: [
+      "Dart · Flutter",
+      "TypeScript · React",
+      "HTML · CSS · JavaScript",
+      "Express.js",
+      "PostgreSQL · Drizzle ORM",
+      "Firebase · Firestore",
+    ],
   },
   {
-    group: { en: "3D", de: "3D" },
-    items: ["Autodesk Maya", "Arnold", "Substance Painter", "XGen", "MASH"],
-  },
-  {
-    group: { en: "Image, layout, video", de: "Bild, Satz, Video" },
-    items: ["Photoshop", "Illustrator", "InDesign", "After Effects", "Premiere Pro"],
+    group: { en: "Media & interaction", de: "Medien & Interaktion" },
+    note: {
+      en: "Image and layout for print and screen, camera and post-production, and interactive 360° work.",
+      de: "Bild und Satz für Druck und Bildschirm, Kamera und Postproduktion, dazu interaktive 360°-Anwendungen.",
+    },
+    items: [
+      "Photoshop",
+      "Illustrator",
+      "InDesign",
+      "After Effects",
+      "Premiere Pro",
+      "PaneoVR",
+    ],
   },
 ];
 

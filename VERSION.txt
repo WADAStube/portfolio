@@ -1,3 +1,87 @@
+Portfolio — Version 64  (15.11.2026)
+
+POSITIONIERUNG: BEIDE SEITEN GLEICHBERECHTIGT
+  Vorher: "Media Technology Engineering" mit Software zuerst.
+  Jetzt:  Medientechnik · 3D Artist · Creative Developer
+          3D & Game Art · Echtzeit · Apps & Web · Medienproduktion
+  Satz im Hero: "Ich baue digitale Welten und die Technik
+  dahinter: 3D-Umgebungen und Charaktere, Echtzeit-Szenen in
+  Unity, Apps und Web-Anwendungen."
+  Die Rollen stehen untereinander, damit der Name einzeilig
+  bleibt und jede Rolle für sich lesbar ist.
+
+STUDIENORT KORRIGIERT
+  Nirgends steht mehr "Medientechnik-Student in Hamburg".
+  Getrennt ausgewiesen, auf Startseite, Über mich und
+  Engineering-Seite:
+    Studium    Medientechnik, Bachelor of Engineering (in Arbeit),
+               Hochschule Emden/Leer, Emden
+    Abschluss  voraussichtlich Oktober 2027
+    Wohnort    Hamburg. In Emden für Präsenztermine, Prüfungen
+               und Projekte.
+  Betrifft außerdem: Bildunterschrift am Porträt, Fußzeile,
+  Seitentitel und Beschreibungen, JSON-LD (affiliation mit Emden,
+  homeLocation Hamburg).
+
+  ACHTUNG: Das Abschlussdatum stand bewusst nirgends, weil du
+  das im Oktober ausdrücklich entfernen lassen hast. Es steht
+  jetzt wieder drin, weil du es diesmal ausdrücklich verlangst.
+  Sag Bescheid, wenn es wieder raus soll.
+
+SOFTWAREKENNTNISSE VOLLSTÄNDIGER
+  Die Liste aus zwanzig Namen ist raus. Stattdessen drei Gruppen,
+  jede mit einem Satz dazu, auf Startseite und Engineering-Seite
+  aus derselben Quelle (data/portfolio.ts, STACK):
+    3D & Echtzeit        Maya, Bifrost, Arnold, Substance 3D
+                         Painter, XGen, MASH, Unity 6 · URP, C#
+    Entwicklung          Flutter/Dart, TypeScript/React,
+                         HTML/CSS/JS, Express, PostgreSQL mit
+                         Drizzle, Firebase/Firestore
+    Medien & Interaktion Photoshop, Illustrator, InDesign,
+                         After Effects, Premiere Pro, PaneoVR
+  Neu getrennt: "Erste Erfahrungen" (gestrichelter Rahmen).
+  Dort steht zurzeit nur Unreal Engine, weil dazu bisher nur
+  Tests in Future!comeback belegt sind.
+  Neu aufgenommen: Bifrost.
+  Die Maya-Kette steht jetzt vollständig: Modellierung, UVs,
+  Rigging, Animation, Shading, Licht und Rendering.
+  PaneoVR war und bleibt korrekt geschrieben, Pano2VR kam
+  nirgends vor.
+
+FACHRICHTUNGEN
+  "3D & Visualisierung" heißt jetzt "3D & Game Art" und steht
+  an erster Stelle, vor Software & Anwendungen, Engineering &
+  Echtzeit, Gestaltung & Medien. Gilt für Filter und Startseite.
+
+ÜBER MICH
+  - Aussage: "Ich baue digitale Welten. Und die Technik, die sie
+    zum Laufen bringt."
+  - Einleitung nennt Emden, Hamburg und den 3D-Schwerpunkt.
+  - Neues Kapitel "Ein eigenes Spiel": Umgebungen, Worldbuilding,
+    Assets, Materialien, Shader, Licht, Animation, Gameplay,
+    Engine. Mit dem ehrlichen Zusatz, dass Lantern Island der
+    erste Schritt ist und noch kein vollständiges eigenes Spiel.
+  - Cousin und SolidWorks, Wettbewerb, Ehrenamt, Studium,
+    Projekte, Freiberufliches und Privates bleiben unverändert.
+
+SEO
+  Titel, Beschreibungen, Open Graph, Twitter und JSON-LD auf die
+  neue Positionierung umgestellt. knowsAbout enthält jetzt
+  Environment Art, Game Art, Character Art, Maya, Substance,
+  Arnold, Unity, C# und die Entwicklungsthemen.
+
+GEPRÜFT
+  1920, 1440, 1280, 834 und 390 px, Deutsch und Englisch:
+  kein seitliches Scrollen, keine defekten Bilder, keine Fehler.
+  Behoben: Der Name brach bei 1440 px auf zwei Zeilen um,
+  "Apps & Web" brach mitten im Begriff.
+
+UNVERÄNDERT
+  Gestaltung, Animationen, Hero-Video, Fallstudien, 360°-
+  Betrachter, Unity-Dokumentation, alle Projekte und Bilder.
+
+──────────────────────────────────────────────────────────────
+
 Portfolio — Version 63  (15.11.2026)
 
 DURCHGANG AUS SICHT EINES RECRUITERS MIT 30 SEKUNDEN
