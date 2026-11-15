@@ -9,9 +9,8 @@ import { useLang, t } from "@/lib/lang";
    Sprung innerhalb der aktuellen Seite — der Block steht
    ueberall unten. */
 const navLinks = [
-  { key: "navWork" as const, to: "/" },
-  { key: "navApps" as const, to: "/apps" },
-  { key: "navDesign" as const, to: "/design" },
+  { key: "navProjects" as const, to: "/projects" },
+  { key: "navEngineering" as const, to: "/engineering" },
   { key: "navAbout" as const, to: "/about" },
   { key: "navContact" as const, anchor: "#contact" },
 ];
@@ -39,7 +38,8 @@ export function Navbar() {
   };
 
   /* Nur die Seitenlinks werden hervorgehoben, nicht "Kontakt" */
-  const isActive = (to?: string) => !!to && location === to;
+  const isActive = (to?: string) =>
+    !!to && (location === to || location.startsWith(to + "/"));
 
   const go = (link: (typeof navLinks)[number]) => {
     if (link.anchor) {
@@ -119,7 +119,7 @@ export function Navbar() {
             <button
               type="button"
               onClick={() => setLang(lang === "de" ? "en" : "de")}
-              aria-label="Language"
+              aria-label={lang === "de" ? "Switch to English" : "Auf Deutsch umschalten"}
               className="hidden md:flex items-center gap-1 mr-5 text-[10px] uppercase tracking-[0.16em] text-white/30 hover:text-white/70 transition-colors duration-300"
             >
               <span className={lang === "en" ? "text-white/85" : undefined}>EN</span>
@@ -141,6 +141,7 @@ export function Navbar() {
             className="md:hidden z-50 text-foreground p-2 -mr-2"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
+            aria-expanded={mobileMenuOpen}
           >
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -175,6 +176,15 @@ export function Navbar() {
                     {t(link.key, lang)}
                   </motion.a>
                 ))}
+                <button
+                  type="button"
+                  onClick={() => setLang(lang === "de" ? "en" : "de")}
+                  className="self-start flex items-center gap-1 text-xs uppercase tracking-[0.16em] text-white/40"
+                >
+                  <span className={lang === "en" ? "text-white" : undefined}>EN</span>
+                  <span className="text-white/20">/</span>
+                  <span className={lang === "de" ? "text-white" : undefined}>DE</span>
+                </button>
                 <div className="flex items-center gap-2 text-xs text-muted-foreground/50 pt-2 border-t border-white/5">
                   <span className="h-[6px] w-[6px] rounded-full bg-green-500" />
                   {t("based", lang)}

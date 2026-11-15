@@ -154,7 +154,7 @@ export const projectsData: Project[] = [
       description:
         "Ein cel-shadetes Diorama — eine schiefe Hütte auf einer Felseninsel, beleuchtet von zwei Laternen.",
       longDescription:
-        "Eine stilisierte Umgebung als geschlossenes Diorama: eine schiefe Holzhütte auf einer Felseninsel, ein Steinweg hinauf, vorn eine rote Brücke und ein Baum, der die Silhouette bricht. Die gesamte Szene ist cel-shadet — flache Farbflächen mit harten Konturen statt fotorealistischer Schattierung. Dadurch tragen Form, Kontrast und Licht die ganze Wirkung. Zwei Laternen bestimmen die Stimmung; alles außerhalb ihrer Reichweite fällt bewusst ins Dunkle. Anschließend wurde die Szene als Game-Ready-Asset neu aufgebaut und nach Unity 6 portiert, wo sie mit spielbarem Character in Echtzeit läuft.",
+        "Eine stilisierte Umgebung als geschlossenes Diorama: eine schiefe Holzhütte auf einer Felseninsel, ein Steinweg hinauf, vorn eine rote Brücke und ein Baum, der die Silhouette bricht. Die gesamte Szene ist cel-shadet: flache Farbflächen mit harten Konturen statt fotorealistischer Schattierung. Damit tragen Form, Kontrast und Licht die ganze Wirkung allein. Zwei Laternen bestimmen die Stimmung; alles außerhalb ihrer Reichweite fällt bewusst ins Dunkle. Anschließend wurde die Szene als Game-Ready-Asset neu aufgebaut und nach Unity 6 portiert, wo sie mit spielbarem Character in Echtzeit läuft.",
       layers: [
         { label: "Boden", title: "Die Basis", body: "Eine Fläche, mit Soft Select geformt und bewusst uneben gehalten. Die Silhouette entscheidet bereits, wo später der Weg verläuft und wo Bewuchs entsteht.", tech: ["Polygonfläche, unterteilt und per Soft Select modelliert", "Asymmetrischer Umriss — kein flacher Boden", "aiToon mit zwei Tonstufen, Konturen zurückgenommen"] },
         { label: "Steine", title: "Der Rand", body: "Drei Grundfelsen, über MASH verteilt. Die Dichte steigt dort, wo das Auge eine Grenze lesen soll, statt gleichmäßig zu streuen.", tech: ["MASH-Verteilung im Mesh-Modus auf dem Terrain", "Random-Node für Rotation und Skalierung, ID-Node für Varianten", "Repro-Node für renderbare Geometrie"] },
@@ -398,7 +398,7 @@ export const projectsData: Project[] = [
   },
   {
     id: "futuristic-bunker",
-    de: { category: "Sci-Fi-Umgebung" },
+    de: { category: "Sci-Fi-Umgebung", description: "Ein Sci-Fi-Kontrollraum, komplett selbst gebaut: Stasis-Kapseln, Konsolen und leuchtende Paneele.", longDescription: "Ein vollständiges Sci-Fi-Interieur, von Grund auf modelliert und texturiert. Im Zentrum steht eine Reihe Stasis-Kapseln mit leuchtendem Innenraum, drumherum Steuerkonsolen und Hard-Surface-Verkleidung. Die Materialien sind in Substance Painter entstanden, mit Schwerpunkt auf geschichteter Abnutzung, gebürstetem Metall und den Leuchtflächen in Cyan und Magenta, die das Licht der Szene tragen. Zu sehen sind der fertige Arnold-Render, der untexturierte Viewport und das Wireframe." },
     comingSoon: true,
     stats: { verts: 742687, tris: 1447482 },
     title: "Futuristic Bunker",
@@ -422,7 +422,7 @@ export const projectsData: Project[] = [
   },
   {
     id: "robot-study",
-    de: { category: "Character Art / Fan-Studie" },
+    de: { category: "Character Art / Fan-Studie", description: "Ein stilisierter Roboter als private Fan-Studie: modelliert, texturiert und game-ready gehalten.", longDescription: "Eine private Fan-Studie eines stilisierten Roboters, angelehnt an die Anthologie-Serie Love, Death & Robots. In Maya von Grund auf modelliert: Helm, bewegliche Gliedmaßen und die kleinen mechanischen Gelenke, durch die auch eine gedrungene Silhouette noch posierbar wirkt. Das Mesh liegt bei rund 7.900 Vertices und 15.000 Dreiecken und ist bewusst leicht gehalten, damit es game-ready bleibt. Der Schieberegler zeigt die Topologie darunter." },
     comingSoon: true,
     stats: { verts: 7852, tris: 15029 },
     title: "Robot Study",
@@ -487,7 +487,7 @@ export const projectsData: Project[] = [
   },
   {
     id: "apocalypse",
-    de: { category: "Environment Art" },
+    de: { category: "Environment Art", description: "Ein postapokalyptisches Gehöft: verwittertes Wellblech, hohes Gras und ein Autowrack.", longDescription: "Eine postapokalyptische Außenszene rund um ein verfallendes Gehöft. Es ging um glaubwürdigen Materialverfall: rostiges Wellblech, ausgebleichtes Holz und abblätternde Farbe, alles in Substance Painter erstellt. Die Vegetation ist so verteilt, dass sie das Gebäude zurückerobert, und ein Autowrack verankert die Geschichte. Ein zweiter Unterstand ist als Begleit-Asset modelliert und hier in Viewport und Wireframe zu sehen." },
     comingSoon: true,
     stats: { verts: 5118889, tris: 6799929 },
     title: "Apocalypse",
@@ -511,7 +511,7 @@ export const projectsData: Project[] = [
   },
   {
     id: "character-studies",
-    de: { category: "Charakter-Modellierung & Grooming" },
+    de: { category: "Charakter-Modellierung & Grooming", description: "Ein Charakter als Ganzkörpermodell, dazu eine Haarstudie in XGen und ein Blick auf die Gesichtstopologie.", longDescription: "Zwei Charakterstudien nebeneinander. Der männliche Charakter ist als vollständige Figur modelliert, abgewickelt und texturiert, zu sehen vom fertigen Render bis zum Wireframe darunter. Die zweite Studie gilt den Haaren: ein kompletter XGen-Groom aus Guide-Kurven und Dichte-Maps, gerendert in Arnold. Zum Schluss die Gesichtstopologie mit Mundinnenraum, Zähnen und Zunge, also den Teilen, an denen sich entscheidet, ob ein Gesicht sauber verformt." },
     comingSoon: true,
     stats: { verts: 236039, tris: 467765 },
     title: "Character Studies",
@@ -535,7 +535,7 @@ export const projectsData: Project[] = [
   },
   {
     id: "isometric-room",
-    de: { category: "Interieur / Prop-Set" },
+    de: { category: "Interieur / Prop-Set", description: "Ein warmes isometrisches Interieur. Jedes Objekt ist von Hand modelliert, vom Kamin bis zum Bücherregal.", longDescription: "Ein aufgeschnittenes isometrisches Interieur, gebaut als zusammenhängendes Prop-Set. Jedes Objekt im Raum ist von Hand modelliert: Kamin, Sitzmöbel, Regale, Pflanzen und die Kleinigkeiten, durch die ein Raum bewohnt wirkt. Wegen der festen isometrischen Kamera musste die Komposition schon im Layout stimmen und nicht erst in der Nachbearbeitung: Platzierung, Trennung der Silhouetten und Farbflächen müssen aus einem einzigen Blickwinkel funktionieren." },
     comingSoon: true,
     stats: { verts: 186633, tris: 261318 },
     title: "Isometric Room",
@@ -568,7 +568,7 @@ export const projectsData: Project[] = [
       description:
         "Ein Hard-Surface-Asset durch die komplette Pipeline — Modellierung, UV-Layout und PBR-Texturierung.",
       longDescription:
-        "Ein einzelnes Asset, an dem die vollständige Pipeline durchgespielt wurde. Sauber modelliert, mit Blick auf Texeldichte und Packdichte aufgewickelt und anschließend in Substance Painter texturiert. Das UV-Layout ist bewusst mit dabei — Packqualität ist in einem Beauty-Render unsichtbar, entscheidet aber darüber, ob ein Asset produktionstauglich ist.",
+        "Ein einzelnes Asset, an dem die vollständige Pipeline durchgespielt wurde. Sauber modelliert, mit Blick auf Texeldichte und Packdichte aufgewickelt und anschließend in Substance Painter texturiert. Das UV-Layout zeige ich bewusst mit. In einem Beauty-Render sieht man von der Packqualität nichts, und trotzdem entscheidet sie darüber, ob ein Asset produktionstauglich ist.",
       compareNote:
         "Shaded gegen Wireframe aus derselben Kamera. Das Drahtgitter zeigt, wohin das Polygonbudget geflossen ist: dicht dort, wo Rundungen und Kanten sauber lesen müssen, sparsam überall sonst."
     },
@@ -600,7 +600,7 @@ export const projectsData: Project[] = [
       description:
         "Ein Filmplakat, das eine einzige Emotion tragen soll — Verlorenheit — über Komposition, Farbe und Typografie.",
       longDescription:
-        "Gewählte Emotion: Verlorenheit. Kinoplakat im Hochformat, vollständig in Photoshop montiert, Ausgabe druckreif in CMYK bei 300 dpi. Die Milchstraße bildet die Basis, in der Helligkeit reduziert und blau getönt. Die Erde liegt als eigene Ebene rechts, über Gradationskurve angeglichen, der Übergang zum Schwarz über Ebenenmaske. Der Astronaut ist per Luminanzmaske aus schwarzem Hintergrund freigestellt — bei einfarbigem Grund die saubersten Kanten. Die Trümmer stammen aus einer Explosionsaufnahme im Modus Aufhellen mit angehobenem Kontrast, sodass nur die hellen Partikel stehen bleiben. Zwei Entscheidungen prägen das Ergebnis: der Astronaut wurde gegenüber dem ersten Entwurf verkleinert und aus der Mitte gerückt, weil eine große, zentrale Figur handlungsfähig wirkt und nicht verloren. Und nach der CMYK-Konvertierung mussten das tiefe Blau der Erde und die Schattenbereiche von Hand nachkorrigiert werden.",
+        "Gewählte Emotion: Verlorenheit. Kinoplakat im Hochformat, vollständig in Photoshop montiert, Ausgabe druckreif in CMYK bei 300 dpi. Die Milchstraße bildet die Basis, in der Helligkeit reduziert und blau getönt. Die Erde liegt als eigene Ebene rechts, über Gradationskurve angeglichen, der Übergang zum Schwarz über Ebenenmaske. Den Astronauten habe ich per Luminanzmaske aus schwarzem Hintergrund freigestellt; bei einfarbigem Grund gibt das die saubersten Kanten. Die Trümmer stammen aus einer Explosionsaufnahme im Modus Aufhellen mit angehobenem Kontrast, sodass nur die hellen Partikel stehen bleiben. Zwei Entscheidungen prägen das Ergebnis. Den Astronauten habe ich gegenüber dem ersten Entwurf verkleinert und aus der Mitte gerückt, weil eine große, mittige Figur handlungsfähig wirkt und eben nicht verloren. Und nach der CMYK-Konvertierung mussten das tiefe Blau der Erde und die Schattenbereiche von Hand nachkorrigiert werden.",
       brief:
         "Über ein visuelles Medium eine festgelegte Emotion auslösen und das Ergebnis im Bericht begründen — Konzeption, Umsetzung, Reflexion. Druckreif in CMYK.",
       compareNote:
@@ -652,7 +652,7 @@ export const projectsData: Project[] = [
       description:
         "Eine Plakatkampagne für einen Smart-Waschsalon — Schaufenster, A2-Aushänge und eine Infoserie im Laden.",
       longDescription:
-        "Ein Plakatsystem für Bloomest, einen Selbstbedienungs-Waschsalon, entstanden in meiner Werkstudententätigkeit. Die Arbeit läuft über drei Formate: große A1-Motive im Schaufenster, die vom Gehweg aus wirken müssen, A2-Aushänge zum Näherlesen und eine querformatige A5-Serie im Laden für die praktischen Angaben. Zusammengehalten wird es von einer strengen typografischen Hierarchie, einem sparsamen Rot als einzigem Akzent über helle und dunkle Varianten hinweg und einer Icon-Sprache aus Konturlinien, die freundlich bleibt, ohne dekorativ zu werden. Jedes Motiv trägt eine große Zahl als Anker — 48 Minuten, 4,9 von 5 — weil ein Plakat im Vorbeigehen genau eine Information durchbringt. Die Fließtexte stehen auf Deutsch, Englisch und Türkisch, weil die Kundschaft es tut.",
+        "Ein Plakatsystem für Bloomest, einen Selbstbedienungs-Waschsalon, entstanden in meiner Werkstudententätigkeit. Die Arbeit läuft über drei Formate: große A1-Motive im Schaufenster, die vom Gehweg aus wirken müssen, A2-Aushänge zum Näherlesen und eine querformatige A5-Serie im Laden für die praktischen Angaben. Zusammengehalten wird es von einer strengen typografischen Hierarchie, einem sparsamen Rot als einzigem Akzent über helle und dunkle Varianten hinweg und einer Icon-Sprache aus Konturlinien, die freundlich bleibt, ohne dekorativ zu werden. Jedes Motiv trägt eine große Zahl als Anker, 48 Minuten oder 4,9 von 5, denn im Vorbeigehen bringt ein Plakat genau eine Information durch. Die Fließtexte stehen auf Deutsch, Englisch und Türkisch, weil die Kundschaft es tut.",
       brief:
         "Ein Plakatsystem für die Filiale, das im Schaufenster, an der Wand und an den Maschinen funktioniert — auf Deutsch, Englisch und Türkisch, weil die Kundschaft es ist.",
     },
@@ -675,8 +675,8 @@ export const projectsData: Project[] = [
 
   {
     id: "motion-design",
+    de: { category: "Motion Design / Schnitt", description: "Animationen und Schnittarbeiten aus After Effects.", longDescription: "Animationen und Schnittarbeiten aus After Effects: Titel, Übergänge und kurze Formate." },
     group: "design",
-    de: { category: "Motion Design / Schnitt" },
     comingSoon: true,
     title: "Motion Design",
     category: "Motion Design / Editing",
@@ -717,13 +717,13 @@ export const projectsData: Project[] = [
       steps: [
         { src: "/images/projects/ki-lesebuch/01.jpg", w: 918, h: 857,
           caption: "The entry point. One decision per screen — nothing to configure before the first story.",
-          captionDe: "Der Einstieg. Eine Entscheidung pro Bildschirm — vor der ersten Geschichte ist nichts einzustellen." },
+          captionDe: "Der Einstieg. Eine Entscheidung pro Bildschirm, und vor der ersten Geschichte ist nichts einzustellen." },
         { src: "/images/projects/ki-lesebuch/03.jpg", w: 603, h: 645,
           caption: "Language and CEFR level. The level steers the generated vocabulary and sentence length, not just a label.",
-          captionDe: "Sprache und GER-Stufe. Die Stufe steuert Wortschatz und Satzlänge der erzeugten Geschichte, sie ist keine Beschriftung." },
+          captionDe: "Sprache und GER-Stufe. Die Stufe ist keine Beschriftung, sie steuert Wortschatz und Satzlänge der erzeugten Geschichte." },
         { src: "/images/projects/ki-lesebuch/04.jpg", w: 808, h: 864,
           caption: "Reading. Every sentence opens its translation in place — no switching back and forth between two texts.",
-          captionDe: "Lesen. Jeder Satz öffnet seine Übersetzung an Ort und Stelle — kein Hin und Her zwischen zwei Texten." },
+          captionDe: "Lesen. Jeder Satz öffnet seine Übersetzung an Ort und Stelle, man springt nicht zwischen zwei Texten hin und her." },
         { src: "/images/projects/ki-lesebuch/06.jpg", w: 929, h: 855,
           caption: "The grammar panel breaks the sentence into word class and tense. This is where reading turns into learning.",
           captionDe: "Die Grammatiktafel zerlegt den Satz in Wortart und Zeitform. Hier wird aus Lesen Lernen." },
@@ -748,7 +748,7 @@ export const projectsData: Project[] = [
       description:
         "Eine Sicherheits-App für Treffen und für die Familie — begleiten, melden, im Ernstfall Alarm.",
       longDescription:
-        "Eine App für Situationen, in denen jemand wissen soll, wo man ist: ein Treffen mit einer fremden Person, der Heimweg, ein Kind oder ein Angehöriger unterwegs. Die Bedienung läuft über einen einzigen Kreis — tippen startet eine Sitzung, halten löst den Notruf aus. Um den Kreis liegen die Angehörigen als Knoten in einem Netz; wer gerade zusieht, leuchtet. Läuft eine Sitzung, fragt die App in Abständen nach; bleibt die Antwort aus, geht die Meldung raus. Alles Zeitkritische funktioniert auch bei gesperrtem Bildschirm über einen Vordergrunddienst, und die Alarmierung läuft serverseitig weiter, selbst wenn das Handy ausfällt. Eine Zwangs-PIN sieht aus wie ein Abbruch, sendet aber stillen Alarm und teilt den Standort verdeckt weiter. Gebaut mit Flutter, Firebase für Anmeldung und Datenhaltung, Twilio für die Notfall-SMS.",
+        "Eine App für Situationen, in denen jemand wissen soll, wo man ist: ein Treffen mit einer fremden Person, der Heimweg, ein Kind oder ein Angehöriger unterwegs. Die Bedienung läuft über einen einzigen Kreis: Tippen startet eine Sitzung, Halten löst den Notruf aus. Um den Kreis liegen die Angehörigen als Knoten in einem Netz; wer gerade zusieht, leuchtet. Läuft eine Sitzung, fragt die App in Abständen nach; bleibt die Antwort aus, geht die Meldung raus. Alles Zeitkritische funktioniert auch bei gesperrtem Bildschirm über einen Vordergrunddienst, und die Alarmierung läuft serverseitig weiter, selbst wenn das Handy ausfällt. Eine Zwangs-PIN sieht aus wie ein Abbruch, sendet aber stillen Alarm und teilt den Standort verdeckt weiter. Gebaut mit Flutter, Firebase für Anmeldung und Datenhaltung, Twilio für die Notfall-SMS.",
     },
     title: "SafeMeet",
     category: "Mobile App / Personal Safety",
@@ -769,22 +769,22 @@ export const projectsData: Project[] = [
           captionDe: "Ein Bedienelement statt eines Menüs. Tippen startet eine Sitzung, Halten löst den Alarm aus. Die Punkte um den Ring sind die Kontakte, die benachrichtigt würden." },
         { src: "/images/projects/safemeet/05_bereitschafts_check.jpg", w: 540, h: 1140,
           caption: "Protection is only as good as the setup. The check scores it out of seven and names what is still missing — nobody reads a settings screen before an emergency.",
-          captionDe: "Schutz ist nur so gut wie die Einrichtung. Der Check bewertet sie aus sieben Punkten und benennt, was noch fehlt — vor dem Ernstfall liest niemand eine Einstellungsseite." },
+          captionDe: "Schutz ist nur so gut wie die Einrichtung. Der Check bewertet sie aus sieben Punkten und sagt, was noch fehlt. Vor dem Ernstfall liest niemand freiwillig eine Einstellungsseite." },
         { src: "/images/projects/safemeet/02_treffen_laeuft.jpg", w: 540, h: 1140,
           caption: "A running session: time left, who is watching, and the next check-in. The app asks at intervals — silence is what triggers the alarm, not a missing button press.",
-          captionDe: "Laufende Sitzung: Restzeit, wer zusieht, nächste Abfrage. Die App fragt in Abständen nach — ausgelöst wird durch Schweigen, nicht durch einen vergessenen Knopfdruck." },
+          captionDe: "Laufende Sitzung: Restzeit, wer zusieht, nächste Abfrage. Die App fragt in Abständen nach. Ausgelöst wird durch Schweigen, nicht durch einen vergessenen Knopfdruck." },
         { src: "/images/projects/safemeet/03_alarm.jpg", w: 540, h: 1140,
           caption: "Alarm. Location and live link go out to the contacts over the server, so the alert survives the phone dying.",
-          captionDe: "Alarm. Standort und Live-Link gehen über den Server an die Kontakte — die Meldung überlebt damit auch ein ausfallendes Handy." },
+          captionDe: "Alarm. Standort und Live-Link gehen über den Server an die Kontakte, damit die Meldung auch ein ausfallendes Handy überlebt." },
         { src: "/images/projects/safemeet/07_live_seite_angehoerige.jpg", w: 540, h: 1140,
           caption: "What the other side sees: route trail, last confirmation, battery and network. Two buttons — ask whether she is okay, or call the emergency number.",
-          captionDe: "Was die Gegenseite sieht: Wegspur, letzte Bestätigung, Akku und Netz. Zwei Knöpfe — nachfragen oder den Notruf wählen." },
+          captionDe: "Was die Gegenseite sieht: Wegspur, letzte Bestätigung, Akku und Netz. Dazu zwei Knöpfe: nachfragen oder den Notruf wählen." },
         { src: "/images/projects/safemeet/08_notfall_sms.jpg", w: 540, h: 1140,
           caption: "The SMS a contact receives. It has to work for someone who has never opened the app — time, meeting, location link, battery, and what to do.",
-          captionDe: "Die SMS, die ein Kontakt bekommt. Sie muss für jemanden funktionieren, der die App nie geöffnet hat — Uhrzeit, Treffen, Standortlink, Akku und was zu tun ist." },
+          captionDe: "Die SMS, die ein Kontakt bekommt. Sie muss für jemanden funktionieren, der die App nie geöffnet hat: Uhrzeit, Treffen, Standortlink, Akku und was zu tun ist." },
         { src: "/images/projects/safemeet/04_familienmodus.jpg", w: 540, h: 1140,
           caption: "Family mode shares the location continuously and drops the check-ins — meant for a child or a relative, not for one meeting.",
-          captionDe: "Der Familienmodus teilt den Standort durchgehend und lässt die Abfragen weg — gedacht für ein Kind oder einen Angehörigen, nicht für ein einzelnes Treffen." },
+          captionDe: "Der Familienmodus teilt den Standort durchgehend und lässt die Abfragen weg. Gedacht ist er für ein Kind oder einen Angehörigen, nicht für ein einzelnes Treffen." },
         { src: "/images/projects/safemeet/06_probealarm.jpg", w: 540, h: 1140,
           caption: "A test alarm sends the contacts one clearly marked message. Nobody should be seeing their first alarm during a real one.",
           captionDe: "Ein Probealarm schickt den Kontakten eine deutlich markierte Nachricht. Niemand soll im Ernstfall zum ersten Mal sehen, wie ein Alarm aussieht." },
@@ -802,7 +802,7 @@ export const projectsData: Project[] = [
       description:
         "Eine tunesische Plattform für Dienstleistungen — App und öffentlicher Auftritt.",
       longDescription:
-        "Eine Plattform, die Handwerker und Dienstleister mit Kunden zusammenbringt. Zwei Teile: die App in Flutter mit Firebase im Rücken, und der öffentliche Auftritt mit neunzehn Seiten in reinem HTML, CSS und JavaScript ohne Framework. Beides auf Französisch, Englisch und Arabisch — Arabisch heißt rechtsläufiges Layout, nicht nur übersetzter Text. Inhaltlich trägt alles dasselbe Thema: Vertrauen. Das Profil ist das Produkt, der Qrib Score macht Reputation sichtbar und lässt sich nicht kaufen, die Verifizierung läuft in Stufen statt als Ja-Nein.",
+        "Eine Plattform, die Handwerker und Dienstleister mit Kunden zusammenbringt. Zwei Teile: die App in Flutter mit Firebase im Rücken, und der öffentliche Auftritt mit neunzehn Seiten in reinem HTML, CSS und JavaScript ohne Framework. Beides auf Französisch, Englisch und Arabisch, wobei Arabisch ein gespiegeltes Layout bedeutet und nicht nur übersetzten Text. Inhaltlich trägt alles dasselbe Thema: Vertrauen. Das Profil ist das Produkt, der Qrib Score macht Reputation sichtbar und lässt sich nicht kaufen, die Verifizierung läuft in Stufen statt als Ja-Nein.",
     },
     title: "Qrib",
     category: "Mobile App & Website",
@@ -823,19 +823,19 @@ export const projectsData: Project[] = [
       steps: [
         { src: "/images/projects/qrib-app/01_start.jpg", w: 540, h: 1199,
           caption: "The customer side starts with a question, not a list of providers. Describe the problem and the providers come to you with their prices.",
-          captionDe: "Die Kundenseite beginnt mit einer Frage, nicht mit einer Anbieterliste. Problem beschreiben — die Anbieter kommen mit ihren Preisen auf dich zu." },
+          captionDe: "Die Kundenseite beginnt mit einer Frage, nicht mit einer Anbieterliste. Du beschreibst dein Problem, und die Anbieter kommen mit ihren Preisen auf dich zu." },
         { src: "/images/projects/qrib-app/02_anfrage.jpg", w: 540, h: 1199,
           caption: "The request form asks the questions a tradesperson would ask anyway. One line settles it: no provider sees you before you send.",
           captionDe: "Das Anfrageformular stellt die Fragen, die ein Handwerker ohnehin stellen würde. Eine Zeile klärt den Rest: kein Anbieter sieht dich, bevor du abschickst." },
         { src: "/images/projects/qrib-app/03_anbieter.jpg", w: 540, h: 1199,
           caption: "The other side. Requests nearby, each one costing credits to answer — which is what keeps the platform free for customers.",
-          captionDe: "Die Gegenseite. Anfragen in der Nähe, jede Antwort kostet Guthaben — das hält die Plattform für Kunden kostenlos." },
+          captionDe: "Die Gegenseite. Anfragen in der Nähe, und jede Antwort kostet Guthaben. Genau das hält die Plattform für Kunden kostenlos." },
         { src: "/images/projects/qrib-app/04_profil.jpg", w: 540, h: 1199,
           caption: "A provider profile. The score sits above the price, and the price range comes from completed jobs rather than from a claim.",
           captionDe: "Ein Anbieterprofil. Der Score steht über dem Preis, und die Preisspanne stammt aus abgeschlossenen Aufträgen, nicht aus einer Behauptung." },
         { src: "/images/projects/qrib-app/05_bewertung.jpg", w: 540, h: 1199,
           caption: "Rating in six dimensions instead of stars. The six feed one calculated number — a single star rating is too easy to game.",
-          captionDe: "Bewertung in sechs Dimensionen statt in Sternen. Die sechs ergeben eine berechnete Zahl — eine einzelne Sternewertung lässt sich zu leicht manipulieren." },
+          captionDe: "Bewertung in sechs Dimensionen statt in Sternen. Daraus wird eine berechnete Zahl, denn eine einzelne Sternewertung lässt sich zu leicht manipulieren." },
         { src: "/images/projects/qrib-app/06_credits.jpg", w: 540, h: 1199,
           caption: "The business model, stated plainly in the app: free for customers, credits only when a provider answers. Including a kiosk card for people without a bank card.",
           captionDe: "Das Geschäftsmodell, offen in der App benannt: kostenlos für Kunden, Guthaben nur beim Antworten. Inklusive Kiosk-Karte für alle ohne Bankkarte." },
@@ -853,13 +853,13 @@ export const projectsData: Project[] = [
       steps: [
         { src: "/images/projects/qrib-web/01.jpg", w: 1800, h: 1125,
           caption: "The landing page says what the platform sells: your work, your reputation. Two routes — browse, or install the app.",
-          captionDe: "Die Startseite sagt, was die Plattform verkauft: deine Arbeit, deine Reputation. Zwei Wege — ansehen oder die App laden." },
+          captionDe: "Die Startseite sagt, was die Plattform verkauft: deine Arbeit, deine Reputation. Von hier gibt es zwei Wege: ansehen oder die App laden." },
         { src: "/images/projects/qrib-web/02.jpg", w: 1800, h: 1125,
           caption: "The Qrib Score. The page spends its space on what the score cannot do — it is not for sale, a paid subscription does not raise it.",
-          captionDe: "Der Qrib Score. Die Seite verwendet ihren Platz darauf, was der Score nicht kann — er ist nicht käuflich, ein Abo hebt ihn nicht." },
+          captionDe: "Der Qrib Score. Die Seite redet vor allem darüber, was der Score nicht kann: Er ist nicht käuflich, und ein Abo hebt ihn nicht." },
         { src: "/images/projects/qrib-web/03.jpg", w: 1800, h: 1125,
           caption: "Verification in levels instead of a badge. Each level states exactly what was checked and what it does not prove.",
-          captionDe: "Verifizierung in Stufen statt als Abzeichen. Jede Stufe sagt, was geprüft wurde — und was sie nicht belegt." },
+          captionDe: "Verifizierung in Stufen statt als Abzeichen. Jede Stufe sagt, was geprüft wurde und was sie gerade nicht belegt." },
         { src: "/images/projects/qrib-web/04.jpg", w: 1800, h: 1125,
           caption: "Community rules. On a trust platform these are not legal boilerplate but part of the product.",
           captionDe: "Die Gemeinschaftsregeln. Auf einer Vertrauensplattform sind sie kein Kleingedrucktes, sondern Teil des Produkts." },

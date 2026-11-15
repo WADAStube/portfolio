@@ -30,10 +30,10 @@ const CHAPTERS = [
     id: "origin",
     icon: Boxes,
     kicker: "2007",
-    title: "Where it started",
-    titleDe: "Wo es anfing",
-    body: "My cousin, a mechanical engineer, installed SolidWorks on my computer and showed me how to build an object from nothing. I was ten. I've been making things in 3D since.",
-    bodyDe: "Mein Cousin, Maschinenbauingenieur, installierte SolidWorks auf meinem Rechner und zeigte mir, wie man aus nichts ein Objekt baut. Ich war zehn. Seitdem baue ich Dinge in 3D.",
+    title: "First contact with 3D",
+    titleDe: "Der erste Kontakt mit 3D",
+    body: "My cousin is a mechanical engineer. When I was ten he installed SolidWorks on my computer and showed me how a part comes out of nothing. It held me, I worked with it a lot and got good at it. Then other things took over for years, and 3D was out of the picture.",
+    bodyDe: "Mein Cousin ist Maschinenbauingenieur. Als ich zehn war, hat er mir SolidWorks installiert und gezeigt, wie aus nichts ein Bauteil entsteht. Das hat mich gefesselt, ich habe viel damit gearbeitet und wurde gut darin. Danach kam jahrelang anderes, und mit 3D hatte ich nichts mehr zu tun.",
   },
   {
     id: "photoshop",
@@ -42,7 +42,16 @@ const CHAPTERS = [
     title: "First competition",
     titleDe: "Erster Wettbewerb",
     body: "A design competition in Photoshop CS5. Fourteen entries, second place, and a Sony Alpha NEX-3 as the prize. The camera is still in use.",
-    bodyDe: "Ein Design-Wettbewerb in Photoshop CS5. Vierzehn Einreichungen, zweiter Platz, als Preis eine Sony Alpha NEX-3. Die Kamera ist bis heute im Einsatz.",
+    bodyDe: "Ein Design-Wettbewerb in Photoshop CS5. Vierzehn Einsendungen, zweiter Platz, als Preis eine Sony Alpha NEX-3. Die Kamera ist bis heute im Einsatz.",
+  },
+  {
+    id: "volunteer",
+    icon: Plane,
+    kicker: "2015 – 2019",
+    title: "Volunteering",
+    titleDe: "Ehrenamt",
+    body: "AIESEC in Tunis from 2015 to 2018, in the outgoing exchange programme Global Volunteer. UNICEF in Berlin from 2018 to 2019, events and fundraising.",
+    bodyDe: "Bei AIESEC in Tunis von 2015 bis 2018, im Austauschprogramm Global Volunteer. Bei UNICEF in Berlin von 2018 bis 2019, Veranstaltungen und Fundraising.",
   },
   {
     id: "study",
@@ -52,17 +61,18 @@ const CHAPTERS = [
     kicker: "Bachelor",
     title: "Media Technology, Hochschule Emden/Leer",
     titleDe: "Medientechnik, Hochschule Emden/Leer",
-    body: "A bachelor's programme covering 3D design, modelling and animation alongside camera, audio and post-production. I've taken the elective modules toward 3D and real-time wherever they were offered, and I'm three of four modules into the Computer-Aided Media Production certificate.",
-    bodyDe: "Ein Bachelorstudium, das 3D-Design, Modellierung und Animation ebenso umfasst wie Kamera, Audio und Postproduktion. Die Wahlpflichtmodule habe ich, wo möglich, Richtung 3D und Echtzeit gelegt; dazu der Zertifikatskurs Computer-Aided Media Production, davon drei von vier Modulen abgeschlossen.",
+    body: "Years later I found out this was a subject you could study — and not as building objects, but as art, as games, as design. That is the reason I started Media Technology at all. It is an engineering degree: computer science, communications engineering, studio and production. For the electives I took whatever went toward 3D and real time. Of the Computer-Aided Media Production certificate I have three of four modules.",
+    bodyDe: "Jahre später habe ich erfahren, dass genau das ein Studienfach ist. Und zwar nicht als Objektebauen, sondern als Kunst, als Spiel, als Gestaltung. Das ist der Grund, warum ich Medientechnik überhaupt angefangen habe. Es ist ein Ingenieurstudium: Informatik, Nachrichtentechnik, Studio und Produktion. Bei den Wahlpflichtfächern habe ich genommen, was Richtung 3D und Echtzeit ging. Vom Zertifikatskurs Computer-Aided Media Production habe ich drei von vier Modulen.",
   },
   {
     id: "uni",
     icon: Boxes,
     kicker: "University work",
+    kickerDe: "Studium",
     title: "Projects on the course",
     titleDe: "Projekte im Studium",
     body: "Future!comeback — a cinematic scene with two characters in a lab environment, currently in progress; I handle modelling, rigging, UV mapping, texturing, lighting and rendering. Alongside that: stream overlays and 3D animations for a student e-sports event, a media installation project for a school in Sukuta, Gambia, and the audiovisual production of a graduation ceremony in a team of eight.",
-    bodyDe: "Future!comeback — eine cinematische Szene mit zwei Charakteren in einer Laborumgebung, zurzeit in Arbeit; verantwortlich für Modellierung, Rigging, UV-Mapping, Texturierung, Lighting und Rendering. Daneben: Stream-Overlays und 3D-Animationen für ein studentisches E-Sports-Event, ein Medienprojekt zur Begleitung einer Installation an einer Schule in Sukuta, Gambia, sowie die audiovisuelle Produktion einer Abschlussfeier im Team von acht.",
+    bodyDe: "Future!comeback ist eine cinematische Szene mit zwei Charakteren in einer Laborumgebung, zurzeit in Arbeit. Modellierung, Rigging, UV-Mapping, Texturierung, Licht und Rendering liegen bei mir. Dazu kamen Stream-Overlays und 3D-Animationen für ein studentisches E-Sports-Event, ein Medienprojekt zu einer Installation an einer Schule in Sukuta in Gambia und die audiovisuelle Produktion einer Abschlussfeier, zu acht.",
   },
   {
     id: "work",
@@ -71,16 +81,17 @@ const CHAPTERS = [
     title: "Alongside the degree",
     titleDe: "Neben dem Studium",
     body: "Werkstudent in media technology at a company in Harburg: planning and producing photo, video and audio content, keeping the technical side running, and supporting marketing campaigns. Freelance since 2024 — 3D assets, interactive websites and apps, posters and flyers for local events.",
-    bodyDe: "Werkstudent im Bereich Medientechnik bei einem Unternehmen in Harburg: Planung, Erstellung und Bearbeitung von Foto-, Video- und Audioinhalten, technische Betreuung der Geräte und Unterstützung bei Marketingkampagnen. Freiberuflich seit 2024 — 3D-Assets, interaktive Websites und Apps, Poster und Flyer für lokale Veranstaltungen.",
+    bodyDe: "Als Werkstudent in der Medientechnik bei einem Unternehmen in Harburg plane und produziere ich Foto-, Video- und Audioinhalte, halte die Technik am Laufen und arbeite bei Marketingkampagnen mit. Seit 2024 außerdem freiberuflich: 3D-Assets, interaktive Websites und Apps, Plakate und Flyer für Veranstaltungen in der Stadt.",
   },
   {
     id: "outside",
     icon: Activity,
     kicker: "Outside the screen",
+    kickerDe: "Privat",
     title: "The rest",
     titleDe: "Abseits vom Bildschirm",
     body: "Ten years of Taekwondo, four years as captain of my school's basketball team, three half marathons. I hike and camp when the weather allows, travel when I can, and produce and play techno — a hobby since Berlin, kept deliberately separate from the work.",
-    bodyDe: "Zehn Jahre Taekwondo, vier Jahre Kapitän der Basketballmannschaft meiner Schule, drei Halbmarathons. Ich wandere und campe, wenn das Wetter es zulässt, reise wann immer es geht und produziere und lege Techno auf — ein Hobby seit Berlin, bewusst getrennt von der Arbeit.",
+    bodyDe: "Zehn Jahre Taekwondo, vier Jahre Kapitän der Schulmannschaft im Basketball, drei Halbmarathons. Wenn das Wetter mitspielt, bin ich wandern oder campen, und ich reise, so oft es geht. Techno lege ich auf und produziere ihn auch — seit Berlin, und es bleibt bewusst ein Hobby.",
   },
 ];
 
@@ -164,7 +175,7 @@ function ChapterBlock({
         className="md:col-span-5"
       >
         <p className="text-[8px] uppercase tracking-[0.24em] text-white/30 mb-2">
-          {chapter.kicker}
+          {lang === "de" && "kickerDe" in chapter ? chapter.kickerDe : chapter.kicker}
         </p>
         <h3
           className="font-display font-medium text-white leading-snug"
@@ -230,9 +241,9 @@ export function AboutSection() {
     >
       <div className="max-w-[1600px] mx-auto px-6 md:px-10 lg:px-16">
         <Reveal direction="up">
-          <p className="text-[8px] text-white/22 uppercase tracking-[0.28em] mb-10 md:mb-16">
+          <h1 className="text-[9px] text-white/30 uppercase tracking-[0.28em] mb-10 md:mb-16">
             {t("about", lang)}
-          </p>
+          </h1>
         </Reveal>
 
         {/* ── Kopfzeile: Portrait + Statement ── */}
@@ -266,7 +277,7 @@ export function AboutSection() {
                       Issam Selmi
                     </p>
                     <p className="text-[9px] uppercase tracking-[0.2em] text-white/50 mt-1">
-                      3D &amp; Game Art · Real-Time · Unity
+                      {lang === "de" ? "Medientechnik · Hamburg" : "Media Technology · Hamburg"}
                     </p>
                   </div>
                 </div>
@@ -287,8 +298,8 @@ export function AboutSection() {
                 key={lang + "a"}
                 text={
                   lang === "de"
-                    ? "Ich baue Umgebungen und Charaktere für Spiele."
-                    : "I build environments and characters for games."
+                    ? "Medientechnik-Student in Hamburg."
+                    : "Media Technology student in Hamburg."
                 }
               />
               <br />
@@ -297,8 +308,8 @@ export function AboutSection() {
                   key={lang + "b"}
                   text={
                     lang === "de"
-                      ? "Und die Systeme, die sie bewegen."
-                      : "And the systems that move them."
+                      ? "Software, Echtzeit, 3D und Gestaltung."
+                      : "Software, real time, 3D and design."
                   }
                   delay={0.22}
                 />
@@ -308,8 +319,8 @@ export function AboutSection() {
             <Reveal direction="up" delay={0.1}>
               <p className="text-sm font-light leading-[1.95] text-white/45 max-w-xl">
                 {lang === "de"
-                  ? "Student der Medientechnik an der Hochschule Emden/Leer, ansässig in Hamburg, dort auch Werkstudent in der Medientechnik. Schwerpunkt: 3D für Spiele — Umgebungen, Charaktere, Game Assets, Texturierung und Licht. Die Arbeit endet nicht beim Rendering. Szenen gehen nach Unity, werden auf Echtzeit optimiert und bekommen Rig, Animation und die Skripte, die daraus etwas Spielbares machen. Daneben Grafikdesign und Anwendungen, die ich selbst gestalte und entwickle. Arabisch, Deutsch, Englisch, Französisch."
-                  : "Media Technology student at Hochschule Emden/Leer, based in Hamburg, also working there as a Werkstudent in media technology. Focus: 3D for games — environments, characters, game assets, texturing and lighting. The work does not end at the render. Scenes go into Unity, get optimised for real time, and get the rig, the animation and the scripting that turns them into something playable. Alongside that, graphic design and applications I design and build myself. Arabic, German, English, French."}
+                  ? "Ich studiere Medientechnik an der Hochschule Emden/Leer mit dem Ziel Bachelor of Engineering, lebe in Hamburg und arbeite dort als Werkstudent im selben Fach. Mit 3D hat es angefangen. Dazugekommen sind Spiele in Unity, Apps und Web-Anwendungen, die ich selbst entwerfe und baue, und Gestaltung für Druck und Bildschirm. Ich arbeite auf Arabisch, Deutsch, Englisch und Französisch."
+                  : "I study Media Technology at Hochschule Emden/Leer, working towards a Bachelor of Engineering. I live in Hamburg and work there as a working student in the same field. It started with 3D. Since then came games in Unity, apps and web applications I design and build myself, and design for print and screen. I work in Arabic, German, English and French."}
               </p>
             </Reveal>
 
@@ -337,9 +348,9 @@ export function AboutSection() {
 
         {/* ── Zeitstrahl ── beim Scrollen, ohne Klick ── */}
         <Reveal direction="up">
-          <p className="text-[8px] text-white/22 uppercase tracking-[0.28em] mb-12">
+          <h2 className="text-[9px] text-white/30 uppercase tracking-[0.28em] mb-12">
             {t("background", lang)}
-          </p>
+          </h2>
         </Reveal>
 
         <div ref={timelineRef} className="relative">

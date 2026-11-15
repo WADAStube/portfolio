@@ -1,3 +1,128 @@
+Portfolio — Version 60  (15.11.2026)
+
+RELAUNCH: NEUE POSITIONIERUNG UND NEUE STRUKTUR
+Vorher: 3D & Game Art, drei Seiten (3D / Apps / Design).
+Jetzt:  Media Technology Engineering — Softwareentwicklung,
+        interaktive Systeme, 3D-Visualisierung, digitale Medien.
+
+SEITEN
+  /                  Start: Hero-Video bleibt, neuer Text. Darunter
+                     vier Fakten (Studium, Arbeitsfelder, zurzeit,
+                     gesucht), vier ausgewaehlte Projekte, die vier
+                     Fachrichtungen, Verweise auf Engineering und
+                     Ueber mich, Kontakt.
+  /projects          Alle Projekte als Karten mit Stand. Filter:
+                     Alle, Software & Anwendungen, Engineering &
+                     Echtzeit, 3D & Visualisierung, Gestaltung &
+                     Medien. Der Filter steht in der Adresse:
+                     /projects?focus=software|engineering|3d|design
+  /projects/<slug>   Detailseite je Projekt mit Fallstudie.
+  /engineering       Studieninhalte, Module mit Arbeit, Angewandtes
+                     mit Projektbeleg, Werkzeuge, Sprachen.
+  /about             Beginnt mit heute, dann der Zeitstrahl.
+                     Neu: Kapitel Ehrenamt (AIESEC, UNICEF).
+  /apps, /design     leiten auf die passende Filtersicht um.
+
+PROJEKTE
+  Nichts ist entfallen. Mit Detailseite und Fallstudie:
+  Lantern Island, SafeMeet, Qrib, KI Lesebuch, I Need Space.
+  Mit Detailseite: Bloomest.
+  Wieder sichtbar mit ihrem Bildmaterial, Stand "Folgt":
+  Futuristic Bunker, Robot Study, Apocalypse, Character Studies,
+  Isometric Room, Security Camera. Motion Design ohne Material,
+  nur als Karte.
+  Neu als Zeilen unter "Weitere Arbeiten": Future!comeback
+  (in Arbeit), E-Sports Event Planner, E-Sports Event (Overlays),
+  Abschlussfeier, Gambia Insight, Grundbegriffe Licht (H5P).
+
+FALLSTUDIE
+  Aufgabe, Ansatz, technische Umsetzung, Entscheidungen, Ergebnis,
+  Anteil. "Stand" und "Gelernt" nur, wo es dazu eine Quelle gibt.
+  SafeMeet steht ausdruecklich als Entwicklungsversion da: nicht
+  veroeffentlicht, Sicherheitsfunktionen nicht unabhaengig geprueft.
+
+SONST
+  - Deutsche Texte fuer die sechs Projekte, die bisher nur
+    englisch vorlagen.
+  - Lantern Island: die deutschen Texte der Ebenen-Aufschluesselung
+    waren in den Daten, wurden aber nie angezeigt. Jetzt verdrahtet.
+  - Theorie-Einleitung: "aus den Modulen Lichttechnik ..." geaendert
+    in "aus Lichttechnik ...", weil Lichttechnik noch nicht belegt ist.
+  - Seitentitel und Beschreibung je Seite, neue Meta-Angaben in
+    index.html, sitemap.xml mit allen Adressen.
+  - Sprachumschalter jetzt auch im Handy-Menue.
+  - Zoom auf dem Handy nicht mehr gesperrt (maximum-scale entfernt).
+  - Kontakt: ein Satz zu Pflichtpraktikum und Werkstudentenstelle.
+  - Kein Abschlussdatum, kein Studienbeginn, weiterhin nirgends.
+
+NEUE DATEIEN
+  src/data/portfolio.ts         Fachrichtungen, Stand, Adressen,
+                                Fallstudien, weitere Arbeiten
+  src/components/case-study.tsx
+  src/components/project-card.tsx
+  src/pages/Projects.tsx, ProjectDetail.tsx, Engineering.tsx
+  OFFENE-PUNKTE.md              was fuer die Veroeffentlichung fehlt
+ENTFERNT
+  src/pages/Apps.tsx, Design.tsx
+
+──────────────────────────────────────────────────────────────
+
+Portfolio — Version 59  (06.11.2026)
+
+HERKUNFTSGESCHICHTE RICHTIGGESTELLT
+Der Text las sich so, als haette 2007 die 3D-Arbeit begonnen
+und seitdem durchgelaufen. Das stimmt nicht.
+
+  Kapitel 1, neuer Titel "Der erste Kontakt mit 3D"
+    "Mein Cousin ist Maschinenbauingenieur. Als ich zehn war,
+     hat er mir SolidWorks installiert und gezeigt, wie aus
+     nichts ein Bauteil entsteht. Das hat mich gefesselt, ich
+     habe viel damit gearbeitet und wurde gut darin. Danach kam
+     jahrelang anderes, und mit 3D hatte ich nichts mehr zu tun."
+
+  Kapitel 3, Medientechnik — hier steht jetzt der Grund
+    "Jahre spaeter habe ich erfahren, dass genau das ein
+     Studienfach ist. Und zwar nicht als Objektebauen, sondern
+     als Kunst, als Spiel, als Gestaltung. Das ist der Grund,
+     warum ich Medientechnik ueberhaupt angefangen habe."
+
+Englische Fassung entsprechend. Der Bruch dazwischen steht jetzt
+ausdruecklich da, und die Entscheidung fuers Studium haengt an
+Kunst, Spiel und Gestaltung — nicht an der Software von frueher.
+
+DEUTSCH KLINGT NICHT MEHR NACH UEBERSETZUNG
+Die langen Projekttexte waren schon in Ordnung. Nach Englisch
+klangen die Bildunterschriften: ueberall derselbe Rhythmus
+"Aussage — Nachsatz", der im Englischen sitzt und im Deutschen
+steif wirkt. 24 Stellen neu gesetzt, in projects.ts und in der
+Unity-Sektion.
+
+  vorher  "Die Seite verwendet ihren Platz darauf, was der
+           Score nicht kann — er ist nicht kaeuflich, ein Abo
+           hebt ihn nicht."
+  jetzt   "Die Seite redet vor allem darueber, was der Score
+           nicht kann: Er ist nicht kaeuflich, und ein Abo hebt
+           ihn nicht."
+
+  vorher  "Problem beschreiben — die Anbieter kommen mit ihren
+           Preisen auf dich zu."
+  jetzt   "Du beschreibst dein Problem, und die Anbieter kommen
+           mit ihren Preisen auf dich zu."
+
+  vorher  "Faktor 42,5 — abgelesen, nicht geschaetzt."
+  jetzt   "Faktor 42,5, abgelesen und nicht geschaetzt."
+
+Dazu der Einleitungstext in Ueber mich und die uebrigen Kapitel
+geglaettet: "Mit dem Rendering ist es nicht getan" statt der
+woertlichen Entsprechung von "The work does not end at the
+render".
+
+GEPRUEFT
+- Build und TypeScript sauber
+- Ueber mich auf Deutsch durchgelesen, alle sechs Kapitel
+
+────────────────────────────────────────────
+
 Portfolio — Version 58  (05.11.2026)
 
 CAMP-ZERTIFIKAT: STAND STATT ABSCHLUSS

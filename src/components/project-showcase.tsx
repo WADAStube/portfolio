@@ -72,11 +72,15 @@ export function ProjectShowcase({
   index,
   total,
   onOpenShot,
+  afterIntro,
 }: {
   project: Project;
   index: number;
   total: number;
   onOpenShot: (project: Project, shotIndex: number) => void;
+  /** Steht zwischen Einleitung und Aufschluesselung, z. B. die
+      Fallstudie auf der Detailseite. */
+  afterIntro?: React.ReactNode;
 }) {
   const sectionRef = useRef<HTMLElement>(null);
   const shotsRef = useRef<HTMLDivElement>(null);
@@ -655,10 +659,29 @@ export function ProjectShowcase({
         </div>
       </div>
 
+      {afterIntro}
+
       {project.layers?.length ? (
         <>
           <BreakdownIntro className="mt-24 md:mt-36 mb-6 md:mb-10" />
-          <LayerBreakdown layers={project.layers} />
+          <LayerBreakdown
+            layers={
+              lang === "de" && de?.layers
+                ? project.layers.map((l, i) => {
+                    const d = de.layers?.[i];
+                    const last = i === project.layers!.length - 1;
+                    return {
+                      ...l,
+                      ...(d ?? {}),
+                      toggle:
+                        l.toggle && last && de.toggle
+                          ? { ...l.toggle, ...de.toggle }
+                          : l.toggle,
+                    };
+                  })
+                : project.layers
+            }
+          />
         </>
       ) : null}
 

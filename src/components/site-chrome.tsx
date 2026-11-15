@@ -14,19 +14,63 @@ import {
   Magnetic,
   EASE,
 } from "@/components/motion-primitives";
-import { ProjectShowcase } from "@/components/project-showcase";
-import { Lightbox } from "@/components/lightbox";
-import type { Project } from "@/data/projects";
+import type { Status } from "@/data/portfolio";
 import { cn } from "@/lib/utils";
 import { useLang, t } from "@/lib/lang";
 
 /* ────────────────────────────────────────────────────────────
    Gemeinsame Bausteine aller Seiten.
 
-   Seit die Arbeiten auf drei Seiten liegen — 3D, Apps, Design —
-   brauchen alle drei denselben Unterbau: Kontaktblock, Fussleiste,
-   Rauschen, Mauszeiger. Der lag vorher nur in Home.tsx.
+   Kontaktblock, Fussleiste, Rauschen, Mauszeiger, Seitenkopf,
+   Seitentitel und die Markierung fuer den Stand eines Projekts.
    ──────────────────────────────────────────────────────────── */
+
+/* Setzt Titel und Beschreibung der Seite. Die Seite ist eine
+   Single-Page-App; ohne das stuende auf jeder Adresse derselbe
+   Titel im Tab und im Verlauf. */
+export function usePageMeta(title: string, description?: string) {
+  useEffect(() => {
+    document.title = `${title} · Issam Selmi`;
+    if (description) {
+      document
+        .querySelector('meta[name="description"]')
+        ?.setAttribute("content", description);
+    }
+  }, [title, description]);
+}
+
+/* Stand eines Projekts. Farbe allein traegt die Aussage nicht,
+   der Text steht immer dabei. */
+export function StatusBadge({
+  status,
+  className,
+}: {
+  status: Status;
+  className?: string;
+}) {
+  const { lang } = useLang();
+  const key = status === "complete" ? "stComplete" : status === "wip" ? "stWip" : "stSoon";
+  return (
+    <span
+      className={cn(
+        "inline-flex items-center gap-2 text-[9px] uppercase tracking-[0.2em] text-white/45",
+        className,
+      )}
+    >
+      <span
+        className={cn(
+          "h-1.5 w-1.5 rounded-full",
+          status === "complete"
+            ? "bg-white/70"
+            : status === "wip"
+              ? "bg-amber-400/80"
+              : "border border-white/40",
+        )}
+      />
+      {t(key, lang)}
+    </span>
+  );
+}
 
 export const CV_FILE: string | null = "/Issam-Selmi-CV.pdf";
 
@@ -55,72 +99,18 @@ export function StretchOnScroll({ children }: { children: React.ReactNode }) {
   );
 }
 
-/* ────────────────── Bereichswechsel auf dem Handy ──────────────────
-   Am Telefon liegt die Navigation hinter dem Menuesymbol. Wer nicht
-   darauf tippt, erfaehrt nie, dass es ausser 3D noch zwei weitere
-   Bereiche gibt. Diese Leiste zeigt sie direkt — nur unterhalb von
-   md, darueber steht die Navigation ohnehin oben.
-   ──────────────────────────────────────────────────────────── */
-
-export function AreaSwitch({
-  current,
-  className,
-}: {
-  current: "3d" | "apps" | "design";
-  className?: string;
-}) {
-  const { lang } = useLang();
-  const areas = [
-    { id: "3d" as const, to: "/", key: "navWork" as const },
-    { id: "apps" as const, to: "/apps", key: "navApps" as const },
-    { id: "design" as const, to: "/design", key: "navDesign" as const },
-  ];
-
-  return (
-    <nav
-      aria-label={t("selectedWork", lang)}
-      className={cn(
-        "md:hidden -mx-6 px-6 overflow-x-auto no-scroll",
-        className,
-      )}
-    >
-      <div className="flex items-center gap-2 w-max">
-        {areas.map((a) => {
-          const active = a.id === current;
-          return (
-            <Link key={a.id} href={a.to}>
-              <a
-                onClick={() => window.scrollTo({ top: 0 })}
-                aria-current={active ? "page" : undefined}
-                className={cn(
-                  "whitespace-nowrap border px-3.5 py-2 text-[10px] uppercase tracking-[0.18em] transition-colors duration-300",
-                  active
-                    ? "border-white/45 text-white"
-                    : "border-white/[0.09] text-white/35",
-                )}
-              >
-                {t(a.key, lang)}
-              </a>
-            </Link>
-          );
-        })}
-      </div>
-    </nav>
-  );
-}
-
 /* ────────────────── Kopf einer Unterseite ────────────────── */
 
 export function PageHeader({
   kicker,
   title,
   intro,
-  area,
+  children,
 }: {
   kicker: string;
   title: string;
   intro: string;
-  area?: "3d" | "apps" | "design";
+  children?: React.ReactNode;
 }) {
   return (
     <section className="relative pt-36 md:pt-48 pb-16 md:pb-24 border-b border-white/[0.05]">
@@ -158,85 +148,7 @@ export function PageHeader({
           </p>
         </Reveal>
 
-        {area && <AreaSwitch current={area} className="mt-10" />}
-      </div>
-    </section>
-  );
-}
-
-/* ────────────────── Projektfolge einer Seite ──────────────────
-   Projekte ohne Inhalt stehen nur in der Liste auf der
-   Startseite; hier tauchen sie nicht auf.
-   ──────────────────────────────────────────────────────────── */
-
-export function ProjectFlow({ projects }: { projects: Project[] }) {
-  const [lightbox, setLightbox] = useState<{
-    project: Project;
-    index: number;
-  } | null>(null);
-
-  const shown = projects.filter((p) => !p.comingSoon);
-
-  return (
-    <>
-      {shown.map((project, i) => (
-        <ProjectShowcase
-          key={project.id}
-          project={project}
-          index={i}
-          total={shown.length}
-          onOpenShot={(p, idx) => setLightbox({ project: p, index: idx })}
-        />
-      ))}
-
-      <Lightbox
-        project={lightbox?.project ?? null}
-        startIndex={lightbox?.index ?? 0}
-        onClose={() => setLightbox(null)}
-      />
-    </>
-  );
-}
-
-/* ────────────────── Hinweis auf die anderen Seiten ────────────────── */
-
-export function OtherPages({ exclude }: { exclude: "3d" | "apps" | "design" }) {
-  const { lang } = useLang();
-  const all = [
-    { id: "3d" as const, to: "/", key: "group3d" as const },
-    { id: "apps" as const, to: "/apps", key: "groupApps" as const },
-    { id: "design" as const, to: "/design", key: "groupDesign" as const },
-  ].filter((p) => p.id !== exclude);
-
-  return (
-    <section className="border-t border-white/[0.05] py-20 md:py-28">
-      <div className="max-w-[1600px] mx-auto px-6 md:px-10 lg:px-16">
-        <p className="text-[8px] uppercase tracking-[0.28em] text-white/22 mb-10">
-          {t("moreWork", lang)}
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-white/[0.07]">
-          {all.map((p) => (
-            <Link key={p.id} href={p.to}>
-              <a className="group bg-background hover:bg-white/[0.02] transition-colors duration-300 p-8 md:p-12 flex items-baseline justify-between gap-6">
-                <span
-                  className="font-display font-medium text-white/70 group-hover:text-white transition-colors duration-300 leading-tight"
-                  style={{ fontSize: "clamp(1.2rem, 2.4vw, 1.8rem)" }}
-                >
-                  {t(p.key, lang)}
-                </span>
-                <span className="text-white/25 group-hover:text-white/70 transition-colors duration-300 shrink-0">
-                  <svg width="13" height="13" viewBox="0 0 10 10" fill="none">
-                    <path
-                      d="M1 9L9 1M9 1H3M9 1V7"
-                      stroke="currentColor"
-                      strokeWidth="1.2"
-                    />
-                  </svg>
-                </span>
-              </a>
-            </Link>
-          ))}
-        </div>
+        {children}
       </div>
     </section>
   );
@@ -273,6 +185,12 @@ export function ContactSection() {
             </span>
           </h2>
         </StretchOnScroll>
+
+        <Reveal direction="up">
+          <p className="max-w-xl text-sm md:text-base font-light leading-[1.85] text-white/50 mb-10">
+            {t("seeking", lang)}
+          </p>
+        </Reveal>
 
         <Reveal direction="up" delay={0.1}>
           <a
@@ -384,7 +302,7 @@ export function SiteFooter() {
           © {new Date().getFullYear()} Issam Selmi · WADAS
         </p>
         <p className="text-[9px] text-white/14 uppercase tracking-wider">
-          3D &amp; Game Art · Media Technology
+          Media Technology Engineering · Hamburg
         </p>
       </div>
     </footer>

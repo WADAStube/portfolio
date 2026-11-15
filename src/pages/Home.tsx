@@ -4,38 +4,21 @@ import {
   motion,
   useScroll,
   useTransform,
-  useMotionValue,
-  useSpring,
   useReducedMotion,
 } from "framer-motion";
 import { Volume2, VolumeX, ArrowDown } from "lucide-react";
-import { Link, useLocation } from "wouter";
+import { Link } from "wouter";
 import { Navbar } from "@/components/navbar";
 import {
-  CV_FILE,
   Grain,
   Cursor,
-  StretchOnScroll,
-  AreaSwitch,
-  OtherPages,
   ContactSection,
   SiteFooter,
+  usePageMeta,
 } from "@/components/site-chrome";
-import { Lightbox } from "@/components/lightbox";
-import { ProjectShowcase } from "@/components/project-showcase";
-import { AboutSection } from "@/components/about-section";
-import {
-  Reveal,
-  Stagger,
-  StaggerItem,
-  SplitText,
-  Parallax,
-  EASE,
-  useIsSmallScreen,
-  Magnetic,
-} from "@/components/motion-primitives";
-import { projectsData } from "@/data/projects";
-import type { Project } from "@/data/projects";
+import { ProjectCard } from "@/components/project-card";
+import { Reveal, EASE, useIsSmallScreen } from "@/components/motion-primitives";
+import { ENTRIES, FIELDS, MINOR, type Bi } from "@/data/portfolio";
 import { useAmbientSound } from "@/hooks/useAmbientSound";
 import { cn } from "@/lib/utils";
 import { useLang, t } from "@/lib/lang";
@@ -62,7 +45,38 @@ const MARQUEE = [
   "TypeScript",
 ];
 
-/* ──────── Ueberschrift zieht sich beim Scrollen in Form ────── */
+/* In zehn Sekunden: was er studiert, woran er arbeitet, wo, und
+   was er sucht. */
+const FACTS: { k: Bi; v: Bi }[] = [
+  {
+    k: { en: "Degree", de: "Studium" },
+    v: {
+      en: "Media Technology, Bachelor of Engineering (in progress), Hochschule Emden/Leer",
+      de: "Medientechnik, Bachelor of Engineering (angestrebt), Hochschule Emden/Leer",
+    },
+  },
+  {
+    k: { en: "Fields", de: "Arbeitsfelder" },
+    v: {
+      en: "App and web development, real-time scenes in Unity, 3D modelling and rendering, media production",
+      de: "App- und Web-Entwicklung, Echtzeit-Szenen in Unity, 3D-Modellierung und Rendering, Medienproduktion",
+    },
+  },
+  {
+    k: { en: "Currently", de: "Zurzeit" },
+    v: {
+      en: "Working student in media technology in Hamburg-Harburg, freelance since 2024",
+      de: "Werkstudent in der Medientechnik in Hamburg-Harburg, seit 2024 außerdem freiberuflich",
+    },
+  },
+  {
+    k: { en: "Looking for", de: "Gesucht" },
+    v: {
+      en: "A mandatory internship (Pflichtpraktikum). Open to a working-student position.",
+      de: "Ein Pflichtpraktikum. Offen für eine Werkstudentenstelle.",
+    },
+  },
+];
 /* ─────────────────────── Loader ─────────────────────────────── */
 function Loader({ onDone }: { onDone: () => void }) {
   const [pct, setPct] = useState(0);
@@ -128,7 +142,6 @@ function Loader({ onDone }: { onDone: () => void }) {
 }
 
 
-/* ─────────────────────── Custom cursor ─────────────────────── */
 /* ──────────────────────── Marquee strip ────────────────────── */
 function Marquee() {
   const items = [...MARQUEE, ...MARQUEE];
@@ -167,159 +180,36 @@ function MuteBtn({ muted, onToggle }: { muted: boolean; onToggle: () => void }) 
   );
 }
 
-/* ─────────────── Projekt-Index ────────────────────────────── */
-/* Die Werkuebersicht laeuft in zwei Bereichen: zuerst 3D und
-   Game Art, danach alles andere. Beide Bereiche zaehlen eigen —
-   eine durchlaufende Nummer wuerde die Trennung wieder aufheben. */
-function ProjectIndex({ projects }: { projects: Project[] }) {
-  const { lang } = useLang();
-  const three = projects.filter((p) => (p.group ?? "3d") === "3d");
-  const apps = projects.filter((p) => p.group === "apps");
-  const design = projects.filter((p) => p.group === "design");
-
+/* ─────────────── Abschnittskopf ─────────────── */
+function SectionHead({ kicker, title, to, more }: { kicker: string; title: string; to?: string; more?: string }) {
   return (
-    <div className="space-y-16 md:space-y-24">
-      <IndexGroup
-        projects={three}
-        title={t("group3d", lang)}
-        sub={t("group3dSub", lang)}
-      />
-      {apps.length > 0 && (
-        <IndexGroup
-          projects={apps}
-          title={t("groupApps", lang)}
-          sub={t("groupAppsSub", lang)}
-          to="/apps"
-        />
-      )}
-      {design.length > 0 && (
-        <IndexGroup
-          projects={design}
-          title={t("groupDesign", lang)}
-          sub={t("groupDesignSub", lang)}
-          to="/design"
-        />
-      )}
-    </div>
-  );
-}
-
-function IndexGroup({
-  projects,
-  title,
-  sub,
-  to,
-}: {
-  projects: Project[];
-  title: string;
-  sub: string;
-  /* Liegt die Gruppe auf einer eigenen Seite, fuehren
-     Ueberschrift und Zeilen dorthin statt zu einem Anker. */
-  to?: string;
-}) {
-  const { lang } = useLang();
-  const [, navigate] = useLocation();
-  const jump = (id: string) => {
-    if (to) {
-      navigate(to);
-      window.scrollTo({ top: 0 });
-      return;
-    }
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-  };
-
-  return (
-    <div>
-      <Reveal direction="up" duration={0.85}>
-        <div className="flex items-baseline gap-5 mb-5">
-          {to ? (
-            <Link href={to}>
-              <a className="font-display font-medium text-white/85 hover:text-white text-base md:text-lg tracking-tight shrink-0 transition-colors duration-300">
-                {title}
-              </a>
-            </Link>
-          ) : (
-          <h3 className="font-display font-medium text-white/85 text-base md:text-lg tracking-tight shrink-0">
-            {title}
-          </h3>
-          )}
-          <span className="h-px flex-1 bg-white/[0.09]" />
-          <span className="font-mono text-[10px] text-white/22 tabular-nums shrink-0">
-            {String(projects.length).padStart(2, "0")}
-          </span>
-        </div>
-        <p className="text-[11px] font-light leading-relaxed text-white/28 mb-7 max-w-xl">
-          {sub}
-        </p>
-      </Reveal>
-
-      <Stagger className="border-t border-white/[0.06]" gap={0.05}>
-      {projects.map((p, i) => (
-        <StaggerItem key={p.id} distance={16}>
-          {/* Projekte ohne Inhalt stehen nur in der Liste. Sie
-              bekommen weiter unten keine Section, also auch kein
-              Sprungziel — ein Klick ins Leere waere schlechter
-              als gar kein Klick. */}
-          {(() => {
-            const empty = !!p.comingSoon;
-            const Tag = empty ? "div" : "button";
-            return (
-          <Tag
-            onClick={empty ? undefined : () => jump(p.id)}
-            className={cn(
-              "group w-full flex items-baseline gap-5 md:gap-8 py-5 border-b border-white/[0.06] text-left transition-colors duration-300",
-              empty ? "cursor-default" : "hover:bg-white/[0.015]",
-            )}
+    <div className="flex items-end justify-between gap-8 mb-10 md:mb-14">
+      <div>
+        <Reveal direction="up" duration={0.8}>
+          <p className="text-[9px] text-white/30 uppercase tracking-[0.28em] mb-4">{kicker}</p>
+        </Reveal>
+        <Reveal direction="up" duration={0.9}>
+          <h2
+            className="font-display font-bold leading-[1.02]"
+            style={{ fontSize: "clamp(1.9rem, 4.6vw, 3.8rem)", letterSpacing: "-0.02em" }}
           >
-            <span className="font-mono text-[10px] text-white/25 tabular-nums shrink-0">
-              {String(i + 1).padStart(2, "0")}
-            </span>
-            <span className={cn(
-              "font-display font-medium text-lg md:text-2xl transition-colors duration-300 flex-1 min-w-0 truncate",
-              p.comingSoon ? "text-white/35" : "text-white/65 group-hover:text-white",
-            )}>
-              {p.title}
-            </span>
-            <span className="hidden md:block text-[9px] uppercase tracking-[0.2em] text-white/25 shrink-0">
-              {p.comingSoon ? t("comingSoon", lang) : p.tools.slice(0, 2).join(" · ")}
-            </span>
-            <span
-              className={cn(
-                "shrink-0 transition-colors duration-300",
-                empty
-                  ? "text-white/10"
-                  : "text-white/25 group-hover:text-white/70",
-              )}
-            >
-              {empty ? (
-                <span className="block h-px w-[11px] bg-current" />
-              ) : (
-                <svg width="11" height="11" viewBox="0 0 10 10" fill="none">
-                  <path
-                    d="M1 9L9 1M9 1H3M9 1V7"
-                    stroke="currentColor"
-                    strokeWidth="1.2"
-                  />
-                </svg>
-              )}
-            </span>
-          </Tag>
-            );
-          })()}
-        </StaggerItem>
-      ))}
-      </Stagger>
+            {title}
+          </h2>
+        </Reveal>
+      </div>
+      {to && more && (
+        <Link href={to}>
+          <a className="hidden md:inline-flex items-center gap-3 text-[10px] uppercase tracking-[0.22em] text-white/45 hover:text-white transition-colors duration-300 pb-2">
+            {more} <span aria-hidden="true">→</span>
+          </a>
+        </Link>
+      )}
     </div>
   );
 }
 
 /* ─────────────────────────── Home ──────────────────────────── */
 export default function Home() {
-  const [lightbox, setLightbox] = useState<{
-    project: Project;
-    index: number;
-  } | null>(null);
-
   const videoRef = useRef<HTMLVideoElement>(null);
   const heroRef = useRef<HTMLElement>(null);
   const reduced = useReducedMotion();
@@ -344,7 +234,13 @@ export default function Home() {
   );
 
   const { lang } = useLang();
-  const projects = projectsData;
+  const featured = ENTRIES.filter((e) => e.home).sort((a, b) => a.home! - b.home!);
+  usePageMeta(
+    "Media Technology Engineering",
+    lang === "de"
+      ? "Issam Selmi, Medientechnik-Student (B.Eng.) in Hamburg: Softwareentwicklung, interaktive Systeme, 3D-Visualisierung und digitale Medien."
+      : "Issam Selmi, Media Technology student (B.Eng.) in Hamburg: software development, interactive systems, 3D visualization and digital media.",
+  );
   const [loaded, setLoaded] = useState(false);
 
   return (
@@ -430,6 +326,14 @@ export default function Home() {
                   </motion.span>
                 </span>
               </h1>
+              <motion.p
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, ease: EASE, delay: loaded ? 0.5 : 1.6 }}
+                className="mt-5 md:mt-7 max-w-xl text-sm md:text-base font-light leading-[1.7] text-white/60"
+              >
+                {t("heroLine", lang)}
+              </motion.p>
             </div>
 
             <motion.div
@@ -438,10 +342,10 @@ export default function Home() {
               transition={{ duration: 1, ease: EASE, delay: loaded ? 0.45 : 1.55 }}
               className="flex flex-col items-start md:items-end gap-4 md:pb-2"
             >
-              <p className="text-sm md:text-base font-light text-white/50 uppercase tracking-[0.22em]">
+              <p className="text-sm md:text-lg font-normal text-white/90 uppercase tracking-[0.2em] md:text-right">
                 {t("role", lang)}
               </p>
-              <p className="text-[9px] font-light text-white/30 uppercase tracking-[0.2em] -mt-2">
+              <p className="text-[10px] md:text-[11px] font-light leading-[1.9] text-white/60 uppercase tracking-[0.16em] -mt-1 max-w-[22rem] md:text-right">
                 {t("roleSub", lang)}
               </p>
               <div className="flex items-center gap-2">
@@ -498,84 +402,130 @@ export default function Home() {
       {/* ══════════════════ MARQUEE ══════════════════ */}
       <Marquee />
 
-      {/* ══════════════════ WORK ══════════════════ */}
-      <section id="work" className="pt-20 md:pt-28">
+      {/* ══════════════════ AUF EINEN BLICK ══════════════════ */}
+      <section id="work" className="border-b border-white/[0.05]">
+        <dl className="max-w-[1600px] mx-auto px-6 md:px-10 lg:px-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+          {FACTS.map((f, i) => (
+            <div
+              key={f.k.en}
+              className={cn(
+                "py-8 md:py-10 lg:pr-10 border-white/[0.06]",
+                i > 0 && "border-t sm:border-t-0",
+                i > 1 && "sm:border-t lg:border-t-0",
+                i % 2 === 1 && "sm:pl-10 lg:pl-0",
+                i > 0 && "lg:pl-10 lg:border-l",
+              )}
+            >
+              <dt className="text-[9px] uppercase tracking-[0.26em] text-white/30 mb-3">{f.k[lang]}</dt>
+              <dd className="text-sm font-light leading-[1.75] text-white/75">{f.v[lang]}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      {/* ══════════════════ AUSGEWAEHLTE PROJEKTE ══════════════════ */}
+      <section className="pt-20 md:pt-28 pb-20 md:pb-28">
         <div className="max-w-[1600px] mx-auto px-6 md:px-10 lg:px-16">
-          <div className="flex items-end justify-between mb-10 md:mb-14">
-            <div>
-              <Reveal direction="up" duration={0.8}>
-                <p className="text-[8px] text-white/22 uppercase tracking-[0.28em] mb-4">
-                  {t("selectedWork", lang)}
-                </p>
-              </Reveal>
-              <StretchOnScroll>
-                <h2
-                  className="font-display font-bold leading-none"
-                  style={{
-                    fontSize: "clamp(2rem, 6vw, 5rem)",
-                    letterSpacing: "-0.02em",
-                  }}
-                >
-                  <SplitText key={lang} text={t("portfolio", lang)} />
-                </h2>
-              </StretchOnScroll>
-            </div>
-            <Reveal direction="up" delay={0.15}>
-              <p className="text-[9px] text-white/22 uppercase tracking-[0.22em] hidden md:block text-right">
-                {projects.length}{" "}
-                {t("projects", lang)}
-              </p>
-            </Reveal>
+          <SectionHead
+            kicker={t("portfolio", lang)}
+            title={lang === "de" ? "Ausgewählte Projekte" : "Selected projects"}
+            to="/projects"
+            more={t("allProjects", lang)}
+          />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-16 md:gap-y-24">
+            {featured.map((e, i) => (
+              <ProjectCard key={e.project.id} entry={e} large eager={i < 2} />
+            ))}
           </div>
-
-          <AreaSwitch current="3d" className="mb-12" />
-
-          {projects.length > 0 && <ProjectIndex projects={projects} />}
-
-          {projects.length === 0 && (
-            <div className="py-24 border border-dashed border-white/[0.07] flex flex-col items-center justify-center gap-3">
-              <p className="text-[9px] text-white/25 uppercase tracking-[0.26em]">
-                Awaiting upload
-              </p>
-              <p className="text-sm text-white/35 font-light">
-                Projects are being added.
-              </p>
-            </div>
-          )}
         </div>
       </section>
 
-      {/* Einzelne Projekt-Sections. Projekte ohne Inhalt stehen
-          nur in der Liste oben und tauchen hier nicht mehr auf —
-          sonst scrollt man durch eine Reihe leerer Ueberschriften.
-          Vor dem ersten Projekt des zweiten Bereichs steht ein
-          Trennband. */}
-      {projects
-        .filter((p) => (p.group ?? "3d") === "3d" && !p.comingSoon)
-        .map((project, i, shown) => (
-          <ProjectShowcase
-            key={project.id}
-            project={project}
-            index={i}
-            total={shown.length}
-            onOpenShot={(p, idx) => setLightbox({ project: p, index: idx })}
+      {/* ══════════════════ FACHRICHTUNGEN ══════════════════ */}
+      <section className="border-t border-white/[0.05] py-20 md:py-28">
+        <div className="max-w-[1600px] mx-auto px-6 md:px-10 lg:px-16">
+          <SectionHead
+            kicker={t("projects", lang)}
+            title={lang === "de" ? "Nach Fachrichtung" : "By field"}
           />
-        ))}
+          <ul className="border-t border-white/[0.07]">
+            {FIELDS.map((f) => {
+              const n =
+                ENTRIES.filter((e) => e.fields.includes(f.id)).length +
+                MINOR.filter((m) => m.fields.includes(f.id)).length;
+              return (
+                <li key={f.id} className="border-b border-white/[0.07]">
+                  <Link href={`/projects?focus=${f.id}`}>
+                    <a className="group grid grid-cols-12 items-baseline gap-x-6 gap-y-2 py-7 md:py-9 hover:bg-white/[0.015] transition-colors duration-300">
+                      <span
+                        className="col-span-10 md:col-span-5 font-display font-medium text-white/80 group-hover:text-white transition-colors duration-300 leading-tight"
+                        style={{ fontSize: "clamp(1.25rem, 2.4vw, 2rem)" }}
+                      >
+                        {f.label[lang]}
+                      </span>
+                      <span className="col-span-2 md:col-span-1 md:order-last text-right font-mono text-[11px] text-white/30 tabular-nums">
+                        {String(n).padStart(2, "0")}
+                      </span>
+                      <span className="col-span-12 md:col-span-6 text-sm font-light leading-[1.75] text-white/45">
+                        {f.sub[lang]}
+                      </span>
+                    </a>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      </section>
 
-      {/* Weiter zu den anderen Bereichen */}
-      <OtherPages exclude="3d" />
-
-      {/* ══════════════════ ABOUT ══════════════════ */}
-      <AboutSection />
+      {/* ══════════════════ STUDIUM + PERSON ══════════════════ */}
+      <section className="border-t border-white/[0.05] bg-[#050505]">
+        <div className="max-w-[1600px] mx-auto px-6 md:px-10 lg:px-16 grid grid-cols-1 md:grid-cols-2">
+          {[
+            {
+              to: "/engineering",
+              k: "Engineering & Expertise",
+              h: lang === "de" ? "Was das Studium abdeckt und was ich davon angewendet habe" : "What the degree covers and what I have applied",
+              p:
+                lang === "de"
+                  ? "Informatik, Nachrichtentechnik, Studio und Produktion. Getrennt nach Lehrinhalt, Projekten und Werkzeugen."
+                  : "Computer science, communications engineering, studio and production. Split into taught content, projects and tools.",
+            },
+            {
+              to: "/about",
+              k: t("about", lang),
+              h: lang === "de" ? "Wer hinter den Projekten steht" : "Who is behind the projects",
+              p:
+                lang === "de"
+                  ? "Werdegang, Arbeit neben dem Studium, Ehrenamt, Sprachen und was außerhalb des Bildschirms passiert."
+                  : "Background, work alongside the degree, volunteering, languages and what happens away from the screen.",
+            },
+          ].map((c, i) => (
+            <Link key={c.to} href={c.to}>
+              <a
+                className={cn(
+                  "group block py-14 md:py-24 border-white/[0.06]",
+                  i === 0 ? "md:pr-14 border-b md:border-b-0 md:border-r" : "md:pl-14",
+                )}
+              >
+                <p className="text-[9px] uppercase tracking-[0.28em] text-white/30 mb-5">{c.k}</p>
+                <h2
+                  className="font-display font-bold text-white/85 group-hover:text-white transition-colors duration-300 leading-[1.1] max-w-lg"
+                  style={{ fontSize: "clamp(1.4rem, 2.6vw, 2.2rem)", letterSpacing: "-0.02em" }}
+                >
+                  {c.h}
+                </h2>
+                <p className="mt-5 text-sm font-light leading-[1.8] text-white/45 max-w-md">{c.p}</p>
+                <span className="mt-8 inline-block text-white/35 group-hover:text-white transition-colors duration-300" aria-hidden="true">
+                  →
+                </span>
+              </a>
+            </Link>
+          ))}
+        </div>
+      </section>
 
       <ContactSection />
       <SiteFooter />
-
-      <Lightbox
-        project={lightbox?.project ?? null}
-        startIndex={lightbox?.index ?? 0}
-        onClose={() => setLightbox(null)}
-      />
     </div>
   );
 }

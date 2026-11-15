@@ -38,7 +38,7 @@ export default function Design() {
         title={t("groupDesign", lang)}
         intro={
           lang === "de"
-            ? "Gestaltung außerhalb von 3D: Plakat und Print, Motion und Arbeiten aus den Modulen des Studiums. Jedes Projekt nennt entweder das Modul und die Aufgabenstellung oder den Auftraggeber."
+            ? "Gestaltung außerhalb von 3D: Plakat und Druck, Motion Design und Arbeiten aus den Modulen des Studiums. Bei jedem Projekt steht dabei, aus welchem Modul und welcher Aufgabe es kam — oder für wen es entstanden ist."
             : "Design outside 3D: poster and print, motion, and work out of the modules of the degree. Each project names either the module and its brief, or the client."
         }
         area="design"

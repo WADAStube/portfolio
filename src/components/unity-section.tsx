@@ -79,7 +79,7 @@ const FRAMES: FrameStep[] = [
     label: "Depth and normals",
     labelDe: "Tiefe und Normalen",
     body: "Per pixel: distance to the surface and the direction it faces. The colours are the normal vector itself. Nothing here reaches the screen — it is input for the passes that follow.",
-    bodyDe: "Pro Pixel: Entfernung zur Oberfläche und ihre Ausrichtung. Die Farben sind der Normalenvektor selbst. Nichts davon landet auf dem Bildschirm — es ist Eingabe für die folgenden Durchgänge.",
+    bodyDe: "Pro Pixel: Entfernung zur Oberfläche und ihre Ausrichtung. Die Farben sind der Normalenvektor selbst. Nichts davon landet auf dem Bildschirm, es ist Eingabe für die folgenden Durchgänge.",
   },
   {
     src: `${BASE}/frame-03-ssao.jpg`,
@@ -87,7 +87,7 @@ const FRAMES: FrameStep[] = [
     label: "Where surfaces meet",
     labelDe: "Wo Flächen zusammenstoßen",
     body: "SSAO reads depth and normals back and computes, per pixel, how much of the surroundings is blocked. Corners, gaps and contact points come out darker. Derived entirely from the two buffers above — no geometry is drawn again.",
-    bodyDe: "SSAO liest Tiefe und Normalen zurück und berechnet pro Pixel, wie stark die Umgebung verdeckt ist. Ecken, Spalten und Auflagepunkte werden dunkler. Entsteht vollständig aus den beiden Puffern darüber — Geometrie wird nicht erneut gezeichnet.",
+    bodyDe: "SSAO liest Tiefe und Normalen zurück und berechnet pro Pixel, wie stark die Umgebung verdeckt ist. Ecken, Spalten und Auflagepunkte werden dunkler. Das entsteht vollständig aus den beiden Puffern darüber, ohne dass Geometrie erneut gezeichnet wird.",
   },
   {
     src: `${BASE}/frame-04-ssao-filtered.jpg`,
@@ -95,7 +95,7 @@ const FRAMES: FrameStep[] = [
     label: "Filtered",
     labelDe: "Gefiltert",
     body: "The raw occlusion is noisy and gets filtered. What remains is a near-white mask with thin dark lines along the contact edges — under the rocks, inside the fence, where the bridge meets the ground.",
-    bodyDe: "Die rohe Verdeckung ist verrauscht und wird gefiltert. Übrig bleibt eine fast weiße Maske mit dünnen dunklen Linien an den Berührungskanten — unter den Felsen, im Zaun, wo die Brücke den Boden trifft.",
+    bodyDe: "Die rohe Verdeckung ist verrauscht und wird gefiltert. Übrig bleibt eine fast weiße Maske mit dünnen dunklen Linien an den Berührungskanten: unter den Felsen, im Zaun, dort wo die Brücke den Boden trifft.",
   },
   {
     src: `${BASE}/frame-05-final.jpg`,
@@ -103,7 +103,7 @@ const FRAMES: FrameStep[] = [
     label: "The frame",
     labelDe: "Das Bild",
     body: "The visible image is composited and written to the back buffer. Everything before this was preparation. Four passes of setup for one frame — which is why the look is a budget decision as much as a style one.",
-    bodyDe: "Das sichtbare Bild wird zusammengesetzt und in den Back Buffer geschrieben. Alles davor war Vorbereitung. Vier Durchgänge für ein Bild — deshalb ist der Look genauso eine Budget- wie eine Stilentscheidung.",
+    bodyDe: "Das sichtbare Bild wird zusammengesetzt und in den Back Buffer geschrieben. Alles davor war Vorbereitung. Vier Durchgänge für ein Bild. Deshalb ist der Look genauso eine Budget- wie eine Stilentscheidung.",
   },
 ];
 
@@ -390,7 +390,7 @@ const CASES: Case[] = [
     cause:
       "CharacterController height reads 0.04 against an expected 1.7. Factor 42.5 — read off, not estimated.",
     causeDe:
-      "CharacterController-Height liegt bei 0,04 statt bei erwarteten 1,7. Faktor 42,5 — abgelesen, nicht geschätzt.",
+      "CharacterController-Height liegt bei 0,04 statt bei erwarteten 1,7. Faktor 42,5, abgelesen und nicht geschätzt.",
     fix: [
       "Scale Factor raised by 42.5",
       "Character and scene scaled together",
@@ -411,7 +411,7 @@ const CASES: Case[] = [
     cause:
       "Gravity hard-coded at −20. Per physics step the controller travels further than the collider is thick, so the collision is never evaluated.",
     causeDe:
-      "Gravitation fest auf −20. Pro Physikschritt legt der Controller mehr Weg zurück, als der Collider dick ist — die Kollision wird nie ausgewertet.",
+      "Gravitation fest auf −20. Pro Physikschritt legt der Controller mehr Weg zurück, als der Collider dick ist, also wird die Kollision nie ausgewertet.",
     fix: [
       "Gravity −20 → −9.81",
       "Skin Width 0.08 → 0.04",
@@ -440,7 +440,7 @@ const CASES: Case[] = [
     ],
     fixDe: [
       "Raycast entfernt",
-      "Physics.OverlapSphere um den Character — richtungsunabhängig",
+      "Physics.OverlapSphere um den Character, richtungsunabhängig",
     ],
   },
   {
@@ -603,7 +603,7 @@ export function UnitySection() {
             <Reveal direction="up" delay={0.2} duration={0.95}>
               <p className="mt-6 text-[11px] leading-relaxed text-white/28">
                 {lang === "de"
-                  ? "Character: Chiara — Humanoid-Rig, Blend Tree aus Idle, Gehen und Laufen, Sprung und Interaktion über das neue Input System."
+                  ? "Character: Chiara. Humanoid-Rig, Blend Tree aus Idle, Gehen und Laufen, Sprung und Interaktion über das neue Input System."
                   : "Character: Chiara — humanoid rig, a blend tree over idle, walk and run, jump and interaction through the new Input System."}
               </p>
             </Reveal>
@@ -795,7 +795,7 @@ export function UnitySection() {
           </h3>
           <p className="text-sm md:text-base font-light leading-[1.9] text-white/45 max-w-2xl mb-4">
             {lang === "de"
-              ? "Jeweils über einen eindeutigen Test eingegrenzt — Log, Zahlenvergleich, Ausschluss — und erst danach geändert."
+              ? "Jedes davon habe ich über einen eindeutigen Test eingegrenzt: ein Log, einen Zahlenvergleich, einen Ausschluss. Geändert habe ich erst danach."
               : "Each one narrowed down by an unambiguous test — a log line, a comparison of values, an exclusion — and only then changed."}
           </p>
         </Reveal>

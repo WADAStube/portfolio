@@ -39,7 +39,7 @@ export default function Apps() {
         title={t("groupApps", lang)}
         intro={
           lang === "de"
-            ? "Produkte, die ich allein entworfen und gebaut habe — Gestaltung, Front-End und Back-End. Von der Lern-Anwendung mit eigener Datenbank bis zur mehrsprachigen Website mit rechtsläufigem Layout."
+            ? "Produkte, die ich allein entworfen und gebaut habe: Gestaltung, Front-End und Back-End. Von der Lern-Anwendung mit eigener Datenbank bis zur dreisprachigen Website, bei der Arabisch das ganze Layout spiegelt."
             : "Products I designed and built on my own — design, front end and back end. From a learning app with its own database to a multilingual site with a right-to-left layout."
         }
         area="apps"
