@@ -50,7 +50,7 @@ function Item({
       <h4 className="font-display font-medium text-white/85 text-[0.95rem] leading-snug mb-2.5">
         {lang === "de" && item.titleDe ? item.titleDe : item.title}
       </h4>
-      <p className="text-[13px] font-light leading-[1.85] text-white/45">
+      <p className="text-[13px] font-light leading-[1.85] text-white/62">
         {lang === "de" && item.bodyDe ? item.bodyDe : item.body}
       </p>
     </motion.div>
@@ -70,7 +70,7 @@ export function TheorySection({ modules }: { modules: TheoryModule[] }) {
         transition={{ duration: reduced ? 0.2 : 0.9, ease: EASE }}
         className="mb-14 md:mb-20 max-w-2xl"
       >
-        <p className="text-[8px] uppercase tracking-[0.28em] text-white/22 mb-4">
+        <p className="text-[8px] uppercase tracking-[0.28em] text-white/45 mb-4">
           {t("theory", lang)}
         </p>
         <h3
@@ -79,7 +79,7 @@ export function TheorySection({ modules }: { modules: TheoryModule[] }) {
         >
           {t("theoryTitle", lang)}
         </h3>
-        <p className="text-sm md:text-base font-light leading-[1.9] text-white/45">
+        <p className="text-sm md:text-base font-light leading-[1.9] text-white/62">
           {t("theoryIntro", lang)}
         </p>
       </motion.div>
@@ -88,7 +88,7 @@ export function TheorySection({ modules }: { modules: TheoryModule[] }) {
         {modules.map((m) => (
           <div key={m.module}>
             <div className="flex items-center gap-5 mb-8">
-              <span className="text-[9px] uppercase tracking-[0.28em] text-white/40 shrink-0">
+              <span className="text-[9px] uppercase tracking-[0.28em] text-white/55 shrink-0">
                 {lang === "de" && m.moduleDe ? m.moduleDe : m.module}
               </span>
               <span className="h-px flex-1 bg-white/[0.07]" />

@@ -270,7 +270,7 @@ export function Panorama({
                 "focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-white/60",
                 active === s.id
                   ? "border-white/60 bg-white text-black"
-                  : "border-white/[0.12] text-white/50 hover:text-white hover:border-white/35",
+                  : "border-white/[0.12] text-white/65 hover:text-white hover:border-white/35",
               )}
             >
               {s.label[lang]}
@@ -278,7 +278,7 @@ export function Panorama({
           ))}
         </div>
         {note && (
-          <p className="font-mono text-[9px] tracking-[0.14em] text-white/25">
+          <p className="font-mono text-[9px] tracking-[0.14em] text-white/45">
             {state === "failed"
               ? lang === "de"
                 ? "360°-Ansicht nicht verfügbar — Standbild"

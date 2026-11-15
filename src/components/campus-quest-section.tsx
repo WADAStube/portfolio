@@ -4,8 +4,9 @@ import {
   StaggerItem,
 } from "@/components/motion-primitives";
 import type { PanoScene } from "@/components/panorama";
+import { Disclosure } from "@/components/site-chrome";
 import { cn } from "@/lib/utils";
-import { useLang } from "@/lib/lang";
+import { useLang, t } from "@/lib/lang";
 
 /* ────────────────────────────────────────────────────────────
    CAMPUS QUEST — Aufbau des Spiels
@@ -188,7 +189,7 @@ function Head({
 }) {
   return (
     <Reveal direction="up" duration={0.9}>
-      <p className="text-[8px] uppercase tracking-[0.28em] text-white/22 mb-4">{kicker}</p>
+      <p className="text-[8px] uppercase tracking-[0.28em] text-white/45 mb-4">{kicker}</p>
       <h3
         className="font-display font-bold text-white leading-none mb-6"
         style={{ fontSize: "clamp(1.6rem, 4vw, 3rem)", letterSpacing: "-0.02em" }}
@@ -196,7 +197,7 @@ function Head({
         {title}
       </h3>
       {intro && (
-        <p className="text-sm md:text-base font-light leading-[1.9] text-white/45 max-w-2xl">
+        <p className="text-sm md:text-base font-light leading-[1.9] text-white/62 max-w-2xl">
           {intro}
         </p>
       )}
@@ -208,7 +209,7 @@ function Board({ children }: { children: React.ReactNode }) {
   return (
     <div
       lang="de"
-      className="flex-1 border border-white/[0.1] bg-white/[0.02] p-5 text-[12.5px] font-light leading-[1.8] text-white/60"
+      className="flex-1 border border-white/[0.1] bg-white/[0.02] p-5 text-[12.5px] font-light leading-[1.8] text-white/70"
     >
       {children}
     </div>
@@ -237,7 +238,7 @@ export function CampusQuestSection() {
         <div className="mt-12 md:mt-16 grid grid-cols-1 lg:grid-cols-12 gap-x-16 gap-y-12">
           <div className="lg:col-span-5">
             <Reveal direction="up" duration={0.9}>
-              <p className="text-[8px] uppercase tracking-[0.28em] text-white/22 mb-6">
+              <p className="text-[8px] uppercase tracking-[0.28em] text-white/45 mb-6">
                 {de ? "Team zu viert" : "Team of four"}
               </p>
               <ul className="space-y-3">
@@ -248,7 +249,7 @@ export function CampusQuestSection() {
                 ].map((i) => (
                   <li
                     key={i.en}
-                    className="border-t border-white/[0.07] pt-3 text-[13px] font-light leading-[1.7] text-white/42"
+                    className="border-t border-white/[0.07] pt-3 text-[13px] font-light leading-[1.7] text-white/60"
                   >
                     {tx(i)}
                   </li>
@@ -259,7 +260,7 @@ export function CampusQuestSection() {
 
           <div className="lg:col-span-6 lg:col-start-7">
             <Reveal direction="up" delay={0.1} duration={0.9}>
-              <p className="text-[8px] uppercase tracking-[0.28em] text-white/40 mb-6">
+              <p className="text-[8px] uppercase tracking-[0.28em] text-white/55 mb-6">
                 {de ? "Mein Anteil" : "My part"}
               </p>
               <ul className="space-y-3">
@@ -316,7 +317,7 @@ export function CampusQuestSection() {
               <p className="font-display font-medium text-white/85">
                 {de ? "Start" : "Start"}
               </p>
-              <p className="mt-1 text-[12px] font-light text-white/40">
+              <p className="mt-1 text-[12px] font-light text-white/55">
                 {de
                   ? "Die Aufgabe: Abgabe bis 16 Uhr, Video und Tonaufnahme"
                   : "The brief: submission at 4 pm, a video and an audio recording"}
@@ -332,7 +333,7 @@ export function CampusQuestSection() {
                     <p className="text-[10px] uppercase tracking-[0.2em] text-white/70">
                       {tx(track.label)}
                     </p>
-                    <p className="font-mono text-[10px] text-white/30">{tx(track.where)}</p>
+                    <p className="font-mono text-[10px] text-white/48">{tx(track.where)}</p>
                   </div>
                   <ol className="space-y-0">
                     {track.steps.map((s, i) => (
@@ -340,13 +341,13 @@ export function CampusQuestSection() {
                         key={s.title.en}
                         className="flex items-baseline gap-5 border-b border-white/[0.07] py-4"
                       >
-                        <span className="font-mono text-[10px] text-white/30 tabular-nums shrink-0">
+                        <span className="font-mono text-[10px] text-white/48 tabular-nums shrink-0">
                           {String(i + 1).padStart(2, "0")}
                         </span>
                         <span className="text-[13px] font-light text-white/75">
                           {tx(s.title)}
                         </span>
-                        <span className="ml-auto text-right text-[11px] font-light text-white/35">
+                        <span className="ml-auto text-right text-[11px] font-light text-white/52">
                           {tx(s.sub)}
                         </span>
                       </li>
@@ -362,11 +363,11 @@ export function CampusQuestSection() {
               <p className="font-display font-medium text-white/85">
                 {de ? "Abgabe" : "Submit"}
               </p>
-              <p className="mt-1 text-[12px] font-light text-white/40">
+              <p className="mt-1 text-[12px] font-light text-white/55">
                 {de ? "Moodle, Raum E114" : "Moodle, room E114"}
               </p>
             </div>
-            <p className="mt-6 font-mono text-[9px] tracking-[0.14em] text-white/25 max-w-xl">
+            <p className="mt-6 font-mono text-[9px] tracking-[0.14em] text-white/45 max-w-xl">
               {de
                 ? "Beide Stränge in beliebiger Reihenfolge. Fehlende Gegenstände lassen sich jederzeit nachholen, ohne dass Fortschritt verloren geht."
                 : "Either track can come first. Missing items can be fetched at any point without losing progress."}
@@ -375,6 +376,17 @@ export function CampusQuestSection() {
         </div>
       </div>
 
+      {/* Graph, Zahlen, die drei Probleme und die Textsorten:
+          vollstaendig erhalten, aber aufklappbar. */}
+      <div className="mt-24 md:mt-32 max-w-[1760px] mx-auto px-6 md:px-10 lg:px-12">
+        <Disclosure
+          label={t("techDocs", lang)}
+          hint={
+            de
+              ? "PaneoVR-Graph · Zahlen · drei Probleme · Textsorten"
+              : "PaneoVR graph · numbers · three problems · kinds of text"
+          }
+        >
       {/* ── Unter der Haube ── */}
       <div className="mt-28 md:mt-40 max-w-[1760px] mx-auto px-6 md:px-10 lg:px-12">
         <Head
@@ -404,7 +416,7 @@ export function CampusQuestSection() {
                 className="w-full h-auto"
               />
             </div>
-            <figcaption className="mt-4 font-mono text-[9px] tracking-[0.14em] text-white/25">
+            <figcaption className="mt-4 font-mono text-[9px] tracking-[0.14em] text-white/45">
               {de
                 ? "Ein Ausschnitt des Graphen um Kameraaufbau und Aufnahme"
                 : "A slice of the graph around the camera setup and recording"}
@@ -422,7 +434,7 @@ export function CampusQuestSection() {
                 >
                   {n.n}
                 </p>
-                <p className="mt-3 text-[10px] uppercase tracking-[0.18em] text-white/35">
+                <p className="mt-3 text-[10px] uppercase tracking-[0.18em] text-white/52">
                   {tx(n.label)}
                 </p>
               </div>
@@ -448,7 +460,7 @@ export function CampusQuestSection() {
             <Reveal key={p.title.en} direction="up" delay={0.05 * i} duration={0.9}>
               <article className="grid grid-cols-1 md:grid-cols-12 gap-x-10 gap-y-4 py-8 md:py-10 border-b border-white/[0.07]">
                 <div className="md:col-span-4">
-                  <span className="font-mono text-[10px] text-white/25 tabular-nums">
+                  <span className="font-mono text-[10px] text-white/45 tabular-nums">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <h4 className="mt-3 font-display font-medium text-white/85 text-lg leading-tight max-w-xs">
@@ -456,11 +468,11 @@ export function CampusQuestSection() {
                   </h4>
                 </div>
                 <div className="md:col-span-8 max-w-3xl">
-                  <p className="text-[13.5px] font-light leading-[1.85] text-white/45">
+                  <p className="text-[13.5px] font-light leading-[1.85] text-white/62">
                     {tx(p.body)}
                   </p>
                   <p className="mt-4 text-[13.5px] font-light leading-[1.85] text-white/70">
-                    <span className="text-white/35 uppercase tracking-[0.18em] text-[10px] mr-3">
+                    <span className="text-white/52 uppercase tracking-[0.18em] text-[10px] mr-3">
                       {de ? "Lösung" : "Fix"}
                     </span>
                     {tx(p.fix)}
@@ -472,7 +484,7 @@ export function CampusQuestSection() {
         </div>
 
         <Reveal direction="up" duration={0.9}>
-          <p className="mt-8 text-sm font-light leading-[1.85] text-white/45 max-w-2xl">
+          <p className="mt-8 text-sm font-light leading-[1.85] text-white/62 max-w-2xl">
             {de
               ? "Vor jedem Build wurde der Graph gegen alle erreichbaren Spielstände geprüft, rund 2 500, auf Sackgassen, verlorenen Fortschritt und überspringbare Schritte."
               : "Before each build, the scene graph was checked against all reachable game states, around 2,500, for dead ends, lost progress and steps that could be skipped."}
@@ -505,7 +517,7 @@ export function CampusQuestSection() {
                 {i === 0 && (
                   <>
                     <p className="text-white/85">
-                      <span className="font-mono text-[10px] tracking-[0.16em] text-white/45 mr-2">
+                      <span className="font-mono text-[10px] tracking-[0.16em] text-white/62 mr-2">
                         AUFTRAG
                       </span>
                       Kamera startklar machen
@@ -514,7 +526,7 @@ export function CampusQuestSection() {
                       {["SD-Karte einlegen", "Bildregie einschalten", "Aufnahme starten", "SD-Karte entnehmen"].map(
                         (s, n) => (
                           <li key={s} className="flex gap-3">
-                            <span className="font-mono text-[10px] text-white/30 tabular-nums">
+                            <span className="font-mono text-[10px] text-white/48 tabular-nums">
                               {n + 1}
                             </span>
                             {s}
@@ -527,7 +539,7 @@ export function CampusQuestSection() {
                 {i === 1 && (
                   <>
                     <p className="text-white/85">
-                      <span className="font-mono text-[10px] tracking-[0.16em] text-white/45 mr-2">
+                      <span className="font-mono text-[10px] tracking-[0.16em] text-white/62 mr-2">
                         WISSEN
                       </span>
                       Blende
@@ -551,12 +563,12 @@ export function CampusQuestSection() {
                         <span
                           className={cn(
                             "font-mono text-[11px]",
-                            done ? "text-white/70" : "text-white/25",
+                            done ? "text-white/70" : "text-white/45",
                           )}
                         >
                           {mark as string}
                         </span>
-                        <span className={done ? "text-white/70" : "text-white/40"}>
+                        <span className={done ? "text-white/70" : "text-white/55"}>
                           {text as string}
                         </span>
                       </li>
@@ -565,16 +577,18 @@ export function CampusQuestSection() {
                 )}
               </Board>
               <p className="mt-4">
-                <span className="text-[10px] uppercase tracking-[0.2em] text-white/55">
+                <span className="text-[10px] uppercase tracking-[0.2em] text-white/68">
                   {tx(k.kind)}
                 </span>
-                <span className="block mt-2 text-[12px] font-light leading-[1.75] text-white/35">
+                <span className="block mt-2 text-[12px] font-light leading-[1.75] text-white/52">
                   {tx(k.note)}
                 </span>
               </p>
             </Reveal>
           ))}
         </div>
+      </div>
+        </Disclosure>
       </div>
 
       {/* ── Die Räume ── */}
@@ -601,7 +615,7 @@ export function CampusQuestSection() {
                     className="absolute inset-0 h-full w-full object-cover"
                   />
                 </div>
-                <figcaption className="mt-3 font-mono text-[9px] tracking-[0.14em] text-white/25">
+                <figcaption className="mt-3 font-mono text-[9px] tracking-[0.14em] text-white/45">
                   {tx(r.cap)}
                 </figcaption>
               </figure>
@@ -619,12 +633,12 @@ export function CampusQuestSection() {
               title={de ? "Was ich als Nächstes bauen würde" : "What I would build next"}
             />
             <Reveal direction="up" delay={0.1} duration={0.9}>
-              <p className="text-sm md:text-base font-light leading-[1.9] text-white/50 max-w-xl">
+              <p className="text-sm md:text-base font-light leading-[1.9] text-white/65 max-w-xl">
                 {de
                   ? "Ein Panorama ist ein einziger Standpunkt: Man kann sich umsehen, aber nicht gehen. Die nächste Fassung würde die fotografierten Räume behalten und die Hotspots durch echte 3D-Objekte aus Maya in Unity ersetzen, damit die Kamera wirklich auf das Stativ kommt und das Kabel wirklich eingesteckt wird."
                   : "A panorama is a single point of view: you can look around, but not walk. The next version would keep the photographed rooms and replace the hotspots with real 3D props built in Maya and brought into Unity, so the camera actually goes on the tripod and the cable actually gets plugged in."}
               </p>
-              <p className="mt-5 text-sm md:text-base font-light leading-[1.9] text-white/50 max-w-xl">
+              <p className="mt-5 text-sm md:text-base font-light leading-[1.9] text-white/65 max-w-xl">
                 {de
                   ? "Die Logik ginge fast unverändert mit. Die eigentliche Arbeit steckte darin, Zustände zu entwerfen, die jede Reihenfolge überstehen, und das hängt nicht an der Engine."
                   : "The logic would carry over almost unchanged. Most of the hard work here was designing states that survive any order of play, and that is independent of the engine."}
@@ -634,15 +648,15 @@ export function CampusQuestSection() {
 
           <div className="lg:col-span-4 lg:col-start-9">
             <Reveal direction="up" delay={0.15} duration={0.9}>
-              <p className="text-[8px] uppercase tracking-[0.28em] text-white/22 mb-6">
+              <p className="text-[8px] uppercase tracking-[0.28em] text-white/45 mb-6">
                 {de ? "Nachweis" : "Credits"}
               </p>
-              <p className="text-[12.5px] font-light leading-[1.85] text-white/40">
+              <p className="text-[12.5px] font-light leading-[1.85] text-white/55">
                 {de
                   ? "Konzept, Storyboard und Panoramen: Gruppe B, Interaktive Medien 2, Hochschule Emden/Leer. Umsetzung in PaneoVR: Issam Selmi."
                   : "Concept, storyboard and panoramas: Group B, Interactive Media 2, Hochschule Emden/Leer. PaneoVR implementation: Issam Selmi."}
               </p>
-              <p className="mt-4 text-[12.5px] font-light leading-[1.85] text-white/40">
+              <p className="mt-4 text-[12.5px] font-light leading-[1.85] text-white/55">
                 {de
                   ? "Die Panoramen zeigen Studio, Regie- und Aufnahmeräume der Medientechnik."
                   : "The panoramas show the studio, control rooms and audio rooms of the Media Technology department."}

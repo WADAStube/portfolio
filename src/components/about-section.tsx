@@ -174,7 +174,7 @@ function ChapterBlock({
         transition={{ duration: reduced ? 0.2 : 0.9, ease: EASE }}
         className="md:col-span-5"
       >
-        <p className="text-[8px] uppercase tracking-[0.24em] text-white/30 mb-2">
+        <p className="text-[8px] uppercase tracking-[0.24em] text-white/48 mb-2">
           {lang === "de" && "kickerDe" in chapter ? chapter.kickerDe : chapter.kicker}
         </p>
         <h3
@@ -191,7 +191,7 @@ function ChapterBlock({
         transition={{ duration: reduced ? 0.2 : 0.9, ease: EASE, delay: reduced ? 0 : 0.12 }}
         className="md:col-span-7"
       >
-        <p className="text-sm md:text-[0.95rem] font-light leading-[1.95] text-white/50">
+        <p className="text-sm md:text-[0.95rem] font-light leading-[1.95] text-white/65">
           {lang === "de" && chapter.bodyDe ? chapter.bodyDe : chapter.body}
         </p>
         <motion.span
@@ -241,7 +241,7 @@ export function AboutSection() {
     >
       <div className="max-w-[1600px] mx-auto px-6 md:px-10 lg:px-16">
         <Reveal direction="up">
-          <h1 className="text-[9px] text-white/30 uppercase tracking-[0.28em] mb-10 md:mb-16">
+          <h1 className="text-[9px] text-white/48 uppercase tracking-[0.28em] mb-10 md:mb-16">
             {t("about", lang)}
           </h1>
         </Reveal>
@@ -276,7 +276,7 @@ export function AboutSection() {
                     <p className="font-display font-bold text-white text-lg leading-tight">
                       Issam Selmi
                     </p>
-                    <p className="text-[9px] uppercase tracking-[0.2em] text-white/50 mt-1">
+                    <p className="text-[9px] uppercase tracking-[0.2em] text-white/65 mt-1">
                       {lang === "de" ? "Medientechnik · Hamburg" : "Media Technology · Hamburg"}
                     </p>
                   </div>
@@ -303,7 +303,7 @@ export function AboutSection() {
                 }
               />
               <br />
-              <span className="text-white/35">
+              <span className="text-white/52">
                 <SplitText
                   key={lang + "b"}
                   text={
@@ -317,7 +317,7 @@ export function AboutSection() {
             </blockquote>
 
             <Reveal direction="up" delay={0.1}>
-              <p className="text-sm font-light leading-[1.95] text-white/45 max-w-xl">
+              <p className="text-sm font-light leading-[1.95] text-white/62 max-w-xl">
                 {lang === "de"
                   ? "Ich studiere Medientechnik an der Hochschule Emden/Leer mit dem Ziel Bachelor of Engineering, lebe in Hamburg und arbeite dort als Werkstudent im selben Fach. Mit 3D hat es angefangen. Dazugekommen sind Spiele in Unity, Apps und Web-Anwendungen, die ich selbst entwerfe und baue, und Gestaltung für Druck und Bildschirm. Ich arbeite auf Arabisch, Deutsch, Englisch und Französisch."
                   : "I study Media Technology at Hochschule Emden/Leer, working towards a Bachelor of Engineering. I live in Hamburg and work there as a working student in the same field. It started with 3D. Since then came games in Unity, apps and web applications I design and build myself, and design for print and screen. I work in Arabic, German, English and French."}
@@ -337,7 +337,7 @@ export function AboutSection() {
                   >
                     <CountUp value={s.value} />
                   </p>
-                  <p className="mt-2 text-[8px] uppercase tracking-[0.2em] text-white/28">
+                  <p className="mt-2 text-[8px] uppercase tracking-[0.2em] text-white/48">
                     {lang === "de" && s.labelDe ? s.labelDe : s.label}
                   </p>
                 </StaggerItem>
@@ -348,7 +348,7 @@ export function AboutSection() {
 
         {/* ── Zeitstrahl ── beim Scrollen, ohne Klick ── */}
         <Reveal direction="up">
-          <h2 className="text-[9px] text-white/30 uppercase tracking-[0.28em] mb-12">
+          <h2 className="text-[9px] text-white/48 uppercase tracking-[0.28em] mb-12">
             {t("background", lang)}
           </h2>
         </Reveal>

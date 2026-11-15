@@ -58,9 +58,17 @@ export default function Projects() {
   const setFocus = (f: FieldId | null) =>
     navigate(f ? `/projects?focus=${f}` : "/projects", { replace: true });
 
+  /* Erst die ausgewaehlten Arbeiten in ihrer Reihenfolge, dann
+     der Rest nach Stand. Sonst stehen die Software-Projekte
+     hinter einer Reihe aelterer 3D-Studien. */
   const entries = ENTRIES.filter((e) => !focus || e.fields.includes(focus))
     .map((e, i) => ({ e, i }))
-    .sort((a, b) => ORDER[a.e.status] - ORDER[b.e.status] || a.i - b.i)
+    .sort(
+      (a, b) =>
+        (a.e.home ?? 99) - (b.e.home ?? 99) ||
+        ORDER[a.e.status] - ORDER[b.e.status] ||
+        a.i - b.i,
+    )
     .map((x) => x.e);
   const minor = MINOR.filter((m) => !focus || m.fields.includes(focus));
 
@@ -110,11 +118,11 @@ export default function Projects() {
                   "focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-white/60",
                   active
                     ? "border-white/60 bg-white text-black"
-                    : "border-white/[0.12] text-white/50 hover:text-white hover:border-white/35",
+                    : "border-white/[0.12] text-white/65 hover:text-white hover:border-white/35",
                 )}
               >
                 {c.label}
-                <span className={cn("ml-2 font-mono tabular-nums", active ? "text-black/50" : "text-white/25")}>
+                <span className={cn("ml-2 font-mono tabular-nums", active ? "text-black/50" : "text-white/45")}>
                   {c.n}
                 </span>
               </button>
@@ -140,7 +148,7 @@ export default function Projects() {
               <h2 className="font-display font-medium text-white/85 text-lg md:text-xl mb-2">
                 {t("furtherWork", lang)}
               </h2>
-              <p className="text-[11px] font-light text-white/35 mb-8 max-w-xl">
+              <p className="text-[11px] font-light text-white/52 mb-8 max-w-xl">
                 {t("furtherWorkNote", lang)}
               </p>
             </Reveal>
@@ -154,20 +162,20 @@ export default function Projects() {
                     <h3 className="font-display font-medium text-white/85 text-lg md:text-xl leading-tight">
                       {m.title}
                     </h3>
-                    <p className="mt-1.5 text-[10px] uppercase tracking-[0.2em] text-white/35">
+                    <p className="mt-1.5 text-[10px] uppercase tracking-[0.2em] text-white/52">
                       {m.kind[lang]}
                     </p>
                     {m.status === "wip" && <StatusBadge status="wip" className="mt-4" />}
                   </div>
                   <div className="md:col-span-8">
-                    <p className="text-sm font-light leading-[1.85] text-white/50 max-w-2xl">
+                    <p className="text-sm font-light leading-[1.85] text-white/65 max-w-2xl">
                       {m.body[lang]}
                     </p>
-                    <p className="mt-3 text-[10px] tracking-[0.06em] text-white/30">
+                    <p className="mt-3 text-[10px] tracking-[0.06em] text-white/48">
                       {m.fields.map((f) => fieldLabel(f)[lang]).join("  ·  ")}
                     </p>
                     {m.tools.length > 0 && (
-                      <p className="mt-1.5 font-mono text-[10px] text-white/25">
+                      <p className="mt-1.5 font-mono text-[10px] text-white/45">
                         {m.tools.join(" / ")}
                       </p>
                     )}

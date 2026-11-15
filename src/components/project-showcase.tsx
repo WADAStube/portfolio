@@ -211,11 +211,11 @@ export function ProjectShowcase({
           <Reveal direction="up" duration={0.9}>
             <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
               <div>
-                <p className="text-[8px] uppercase tracking-[0.28em] text-white/22 mb-3">
+                <p className="text-[8px] uppercase tracking-[0.28em] text-white/45 mb-3">
                   {pick(project.category, de?.category, lang)}
                 </p>
                 <h2
-                  className="font-display font-bold text-white/35 leading-none"
+                  className="font-display font-bold text-white/52 leading-none"
                   style={{
                     fontSize: "clamp(1.7rem, 4vw, 3.2rem)",
                     letterSpacing: "-0.02em",
@@ -224,7 +224,7 @@ export function ProjectShowcase({
                   {project.title}
                 </h2>
               </div>
-              <span className="inline-flex items-center gap-2.5 text-[9px] uppercase tracking-[0.24em] text-white/30 border border-white/[0.09] px-3 py-2 self-start md:self-auto">
+              <span className="inline-flex items-center gap-2.5 text-[9px] uppercase tracking-[0.24em] text-white/48 border border-white/[0.09] px-3 py-2 self-start md:self-auto">
                 <span className="h-1.5 w-1.5 rounded-full bg-white/30" />
                 {t("comingSoon", lang)}
               </span>
@@ -256,7 +256,7 @@ export function ProjectShowcase({
         <div className="mb-16 md:mb-24 max-w-[1760px] mx-auto px-6 md:px-10 lg:px-12">
           <div className="flex items-center gap-5 mb-8">
             <span className="h-px w-10 bg-white/20 shrink-0" />
-            <span className="text-[9px] uppercase tracking-[0.3em] text-white/35">
+            <span className="text-[9px] uppercase tracking-[0.3em] text-white/52">
               {t("project", lang)}
             </span>
             <span className="h-px flex-1 bg-white/[0.07]" />
@@ -277,7 +277,7 @@ export function ProjectShowcase({
           <div className="max-w-[1760px] mx-auto px-6 md:px-10 lg:px-12 pt-16 md:pt-24 pb-10 md:pb-14">
             <div className="flex items-center gap-5">
               <span className="h-px w-10 bg-white/20 shrink-0" />
-              <span className="text-[9px] uppercase tracking-[0.3em] text-white/35">
+              <span className="text-[9px] uppercase tracking-[0.3em] text-white/52">
                 {t("project", lang)}
               </span>
               <span className="h-px flex-1 bg-white/[0.07]" />
@@ -342,7 +342,7 @@ export function ProjectShowcase({
               </h2>
 
               <Reveal direction="up" delay={0.1} duration={0.9}>
-                <p className={cn("text-[10px] uppercase tracking-[0.24em] mb-6", invert ? "text-black/45" : "text-white/35")}>
+                <p className={cn("text-[10px] uppercase tracking-[0.24em] mb-6", invert ? "text-black/62" : "text-white/52")}>
                   {pick(project.category, de?.category, lang)}
                 </p>
               </Reveal>
@@ -351,7 +351,7 @@ export function ProjectShowcase({
                   auch auf niedrigen Bildschirmen immer sichtbar ist. */}
               {shots.length > 1 && small && !isGrid && (
                 <div className="flex items-center gap-3 mb-7">
-                  <span className="text-[8px] uppercase tracking-[0.2em] text-white/30 shrink-0">
+                  <span className="text-[8px] uppercase tracking-[0.2em] text-white/48 shrink-0">
                     Swipe
                   </span>
                   <div className="flex items-center gap-1.5">
@@ -367,7 +367,7 @@ export function ProjectShowcase({
                       />
                     ))}
                   </div>
-                  <span className="ml-auto font-mono text-[10px] text-white/45 tabular-nums">
+                  <span className="ml-auto font-mono text-[10px] text-white/62 tabular-nums">
                     {String(activeShot + 1).padStart(2, "0")}
                     <span className="text-white/20">
                       /{String(shots.length).padStart(2, "0")}
@@ -406,7 +406,7 @@ export function ProjectShowcase({
 
               {/* Software — ebenfalls oberhalb des Beschreibungstexts */}
               <div className="mb-7">
-                <p className={cn("text-[8px] uppercase tracking-[0.24em] mb-3", invert ? "text-black/40" : "text-white/22")}>
+                <p className={cn("text-[8px] uppercase tracking-[0.24em] mb-3", invert ? "text-black/40" : "text-white/45")}>
                   {t("software", lang)}
                 </p>
                 <Stagger className="flex flex-wrap gap-2" gap={0.05}>
@@ -418,8 +418,8 @@ export function ProjectShowcase({
                         className={cn(
                           "inline-block px-3 py-1.5 text-[10px] tracking-wide border transition-colors duration-300",
                           invert
-                            ? "text-black/65 bg-black/[0.03] border-black/10 hover:border-black/35 hover:text-black"
-                            : "text-white/55 bg-white/[0.03] border-white/[0.07] hover:border-white/20 hover:text-white/80",
+                            ? "text-black/75 bg-black/[0.03] border-black/10 hover:border-black/35 hover:text-black"
+                            : "text-white/68 bg-white/[0.03] border-white/[0.07] hover:border-white/20 hover:text-white/80",
                         )}
                       >
                         {tool}
@@ -441,7 +441,7 @@ export function ProjectShowcase({
                     <p
                       className={cn(
                         "text-[8px] uppercase tracking-[0.24em] mb-1.5",
-                        invert ? "text-black/40" : "text-white/22",
+                        invert ? "text-black/40" : "text-white/45",
                       )}
                     >
                       Vertices
@@ -460,7 +460,7 @@ export function ProjectShowcase({
                     <p
                       className={cn(
                         "text-[8px] uppercase tracking-[0.24em] mb-1.5",
-                        invert ? "text-black/40" : "text-white/22",
+                        invert ? "text-black/40" : "text-white/45",
                       )}
                     >
                       Triangles
@@ -486,10 +486,10 @@ export function ProjectShowcase({
                 >
                   {project.year && (
                     <StaggerItem>
-                      <p className={cn("text-[8px] uppercase tracking-[0.24em] mb-1.5", invert ? "text-black/40" : "text-white/22")}>
+                      <p className={cn("text-[8px] uppercase tracking-[0.24em] mb-1.5", invert ? "text-black/40" : "text-white/45")}>
                         {t("year", lang)}
                       </p>
-                      <p className={cn("text-sm font-light tabular-nums", invert ? "text-black/70" : "text-white/65")}>
+                      <p className={cn("text-sm font-light tabular-nums", invert ? "text-black/70" : "text-white/75")}>
                         {project.year}
                       </p>
                     </StaggerItem>
@@ -500,14 +500,14 @@ export function ProjectShowcase({
                       Arbeit, keine Erzaehlung ueber sie. */}
                   {(project.module || project.client) && (
                     <StaggerItem>
-                      <p className={cn("text-[8px] uppercase tracking-[0.24em] mb-1.5", invert ? "text-black/40" : "text-white/22")}>
+                      <p className={cn("text-[8px] uppercase tracking-[0.24em] mb-1.5", invert ? "text-black/40" : "text-white/45")}>
                         {project.module ? t("module", lang) : t("client", lang)}
                       </p>
-                      <p className={cn("text-sm font-light leading-snug", invert ? "text-black/70" : "text-white/65")}>
+                      <p className={cn("text-sm font-light leading-snug", invert ? "text-black/70" : "text-white/75")}>
                         {project.module ?? project.client}
                       </p>
                       {(project.brief || de?.brief) && (
-                        <p className={cn("mt-2 text-[11px] font-light leading-[1.7] max-w-xs", invert ? "text-black/45" : "text-white/32")}>
+                        <p className={cn("mt-2 text-[11px] font-light leading-[1.7] max-w-xs", invert ? "text-black/62" : "text-white/50")}>
                           <span className={cn(invert ? "text-black/30" : "text-white/20")}>
                             {t("brief", lang)}:{" "}
                           </span>
@@ -526,7 +526,7 @@ export function ProjectShowcase({
                 <p
                   className={cn(
                     "font-light",
-                    invert ? "text-black/60" : "text-white/50",
+                    invert ? "text-black/72" : "text-white/65",
                     wide
                       ? "text-base md:text-lg leading-[1.85] max-w-3xl"
                       : [
@@ -558,17 +558,17 @@ export function ProjectShowcase({
           >
             {project.walkthrough?.map((wt, wi) => (
               <div key={wi}>
-                <p className={cn("text-[8px] uppercase tracking-[0.28em] mb-4", invert ? "text-black/40" : "text-white/22")}>
+                <p className={cn("text-[8px] uppercase tracking-[0.28em] mb-4", invert ? "text-black/40" : "text-white/45")}>
                   {t("walkthrough", lang)}
                   {(wt.label || wt.labelDe) && (
-                    <span className={invert ? "text-black/65" : "text-white/55"}>
+                    <span className={invert ? "text-black/75" : "text-white/68"}>
                       {" — "}
                       {pick(wt.label, wt.labelDe, lang)}
                     </span>
                   )}
                 </p>
                 <Walkthrough steps={wt.steps} phone={wt.phone} />
-                <p className={cn("mt-4 text-[10px] leading-relaxed", invert ? "text-black/35" : "text-white/25")}>
+                <p className={cn("mt-4 text-[10px] leading-relaxed", invert ? "text-black/55" : "text-white/45")}>
                   {t("walkthroughNote", lang)}
                 </p>
                 {project.liveUrl && wi === (project.walkthrough?.length ?? 1) - 1 && (
@@ -579,8 +579,8 @@ export function ProjectShowcase({
                     className={cn(
                       "mt-6 inline-flex items-center gap-3 border px-5 py-3 text-[10px] uppercase tracking-[0.22em] transition-colors duration-300",
                       invert
-                        ? "border-black/15 text-black/60 hover:border-black/45 hover:text-black"
-                        : "border-white/15 text-white/55 hover:border-white/45 hover:text-white",
+                        ? "border-black/15 text-black/72 hover:border-black/45 hover:text-black"
+                        : "border-white/15 text-white/68 hover:border-white/45 hover:text-white",
                     )}
                   >
                     {t("liveSite", lang)}

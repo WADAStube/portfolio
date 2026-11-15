@@ -253,3 +253,22 @@
 @media (prefers-reduced-motion: reduce) {
   .cq-pin, .cq-tip { transition: none; }
 }
+
+/* ── Aufklappbare Abschnitte ───────────────────────────────── */
+.disc > summary::-webkit-details-marker { display: none; }
+.disc > summary::marker { content: ""; }
+.disc[open] > summary .disc-mark { transform: rotate(45deg); }
+.disc > summary .disc-close { display: none; }
+.disc[open] > summary .disc-open { display: none; }
+.disc[open] > summary .disc-close { display: inline; }
+
+/* Beim Aufklappen leicht einblenden — gleiche Kurve wie der Rest */
+.disc[open] > .disc-body { animation: disc-in .5s cubic-bezier(0.16, 1, 0.3, 1) both; }
+@keyframes disc-in {
+  from { opacity: 0; transform: translate3d(0, 8px, 0); }
+  to   { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .disc[open] > .disc-body { animation: none; }
+  .disc[open] > summary .disc-mark { transition: none; }
+}

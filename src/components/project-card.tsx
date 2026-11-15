@@ -71,7 +71,7 @@ export function ProjectCard({
             className={cn(
               "font-display font-medium leading-tight transition-colors duration-300",
               large ? "text-2xl md:text-3xl" : "text-xl md:text-2xl",
-              linked ? "text-white/90 group-hover:text-white" : "text-white/45",
+              linked ? "text-white/90 group-hover:text-white" : "text-white/62",
             )}
           >
             {p.title}
@@ -83,23 +83,23 @@ export function ProjectCard({
               viewBox="0 0 10 10"
               fill="none"
               aria-hidden="true"
-              className="shrink-0 text-white/25 group-hover:text-white/75 transition-colors duration-300"
+              className="shrink-0 text-white/45 group-hover:text-white/75 transition-colors duration-300"
             >
               <path d="M1 9L9 1M9 1H3M9 1V7" stroke="currentColor" strokeWidth="1.2" />
             </svg>
           )}
         </div>
-        <p className="mt-2 text-[10px] uppercase tracking-[0.2em] text-white/35">
+        <p className="mt-2 text-[10px] uppercase tracking-[0.2em] text-white/52">
           {pick(p.category, p.de?.category, lang)}
         </p>
-        <p className="mt-4 text-sm font-light leading-[1.8] text-white/50 max-w-xl">
+        <p className="mt-4 text-sm font-light leading-[1.8] text-white/65 max-w-xl">
           {pick(p.description, p.de?.description, lang)}
         </p>
-        <p className="mt-4 text-[10px] tracking-[0.06em] text-white/30">
+        <p className="mt-4 text-[10px] tracking-[0.06em] text-white/48">
           {entry.fields.map((f) => fieldLabel(f)[lang]).join("  ·  ")}
         </p>
         {p.tools.length > 0 && (
-          <p className="mt-1.5 font-mono text-[10px] text-white/25">
+          <p className="mt-1.5 font-mono text-[10px] text-white/45">
             {p.tools.slice(0, large ? 6 : 4).join(" / ")}
           </p>
         )}

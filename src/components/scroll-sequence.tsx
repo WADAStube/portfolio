@@ -120,7 +120,7 @@ export function ScrollSequence({
                 transition={{ duration: 0.1 }}
               />
             </div>
-            <span className="font-mono text-[9px] tabular-nums text-white/50 shrink-0">
+            <span className="font-mono text-[9px] tabular-nums text-white/65 shrink-0">
               {String(index + 1).padStart(2, "0")}/{frames.length}
             </span>
           </div>
@@ -158,7 +158,7 @@ export function ScrollSequence({
       {caption && (
         <figcaption className="mt-3 flex items-baseline gap-3">
           <span className="h-px w-5 bg-white/15 shrink-0 translate-y-[-3px]" />
-          <span className="text-[10px] text-white/32 uppercase tracking-[0.18em]">
+          <span className="text-[10px] text-white/50 uppercase tracking-[0.18em]">
             {caption}
           </span>
         </figcaption>

@@ -39,6 +39,83 @@ export function usePageMeta(title: string, description?: string) {
   }, [title, description]);
 }
 
+/* ────────────────── Aufklappbarer Abschnitt ──────────────────
+   Lange technische Abschnitte bleiben vollstaendig erhalten,
+   stehen aber hinter einem Griff. Wer sie sucht, klappt sie auf;
+   wer in dreissig Sekunden ueberfliegt, scrollt daran vorbei.
+
+   Gebaut auf <details>: funktioniert mit Tastatur, mit
+   Vorlesesoftware und auch ohne JavaScript.
+   ──────────────────────────────────────────────────────────── */
+export function Disclosure({
+  label,
+  hint,
+  invert,
+  children,
+  className,
+}: {
+  label: string;
+  /** Was drinsteckt, in wenigen Worten */
+  hint?: string;
+  invert?: boolean;
+  children: React.ReactNode;
+  className?: string;
+}) {
+  const { lang } = useLang();
+
+  return (
+    <details className={cn("disc group", className)}>
+      <summary
+        className={cn(
+          "flex cursor-pointer list-none items-center gap-5 border-y py-5 transition-colors duration-300",
+          "focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-white/60",
+          invert
+            ? "border-black/10 hover:border-black/30"
+            : "border-white/[0.09] hover:border-white/30",
+        )}
+      >
+        <span
+          aria-hidden="true"
+          className={cn(
+            "disc-mark flex h-7 w-7 shrink-0 items-center justify-center border text-[13px] leading-none transition-transform duration-300",
+            invert ? "border-black/25 text-black/70" : "border-white/30 text-white/80",
+          )}
+        >
+          +
+        </span>
+        <span
+          className={cn(
+            "text-[10px] uppercase tracking-[0.2em]",
+            invert ? "text-black/75" : "text-white/80",
+          )}
+        >
+          {label}
+        </span>
+        {hint && (
+          <span
+            className={cn(
+              "ml-auto hidden text-[10px] tracking-[0.06em] md:block",
+              invert ? "text-black/55" : "text-white/50",
+            )}
+          >
+            {hint}
+          </span>
+        )}
+        <span
+          className={cn(
+            "ml-auto text-[9px] uppercase tracking-[0.18em] md:ml-6",
+            invert ? "text-black/50" : "text-white/45",
+          )}
+        >
+          <span className="disc-open">{lang === "de" ? "Aufklappen" : "Open"}</span>
+          <span className="disc-close">{lang === "de" ? "Zuklappen" : "Close"}</span>
+        </span>
+      </summary>
+      <div className="disc-body pt-10 md:pt-14">{children}</div>
+    </details>
+  );
+}
+
 /* Knopf zur spielbaren Fassung. Oeffnet in einem neuen Tab, weil
    die Seite daneben stehen bleiben soll. */
 export function PlayButton({
@@ -87,7 +164,7 @@ export function StatusBadge({
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-2 text-[9px] uppercase tracking-[0.2em] text-white/45",
+        "inline-flex items-center gap-2 text-[9px] uppercase tracking-[0.2em] text-white/62",
         className,
       )}
     >
@@ -152,7 +229,7 @@ export function PageHeader({
         <Reveal direction="up" duration={0.85}>
           <div className="flex items-center gap-5 mb-10">
             <span className="h-px w-10 bg-white/20 shrink-0" />
-            <span className="text-[9px] uppercase tracking-[0.3em] text-white/35">
+            <span className="text-[9px] uppercase tracking-[0.3em] text-white/52">
               {kicker}
             </span>
             <span className="h-px flex-1 bg-white/[0.07]" />
@@ -177,7 +254,7 @@ export function PageHeader({
         </Reveal>
 
         <Reveal direction="up" delay={0.12} duration={0.9}>
-          <p className="mt-8 text-base md:text-lg font-light leading-[1.85] text-white/45 max-w-2xl">
+          <p className="mt-8 text-base md:text-lg font-light leading-[1.85] text-white/62 max-w-2xl">
             {intro}
           </p>
         </Reveal>
@@ -202,7 +279,7 @@ export function ContactSection() {
 
       <div className="relative max-w-[1600px] mx-auto px-6 md:px-10 lg:px-16">
         <Reveal direction="up">
-          <p className="text-[8px] text-white/22 uppercase tracking-[0.28em] mb-14">
+          <p className="text-[8px] text-white/45 uppercase tracking-[0.28em] mb-14">
             {t("contact", lang)}
           </p>
         </Reveal>
@@ -214,14 +291,14 @@ export function ContactSection() {
           >
             <SplitText key={lang + "c"} text={t("letsWork", lang)} />
             <br />
-            <span className="text-white/22">
+            <span className="text-white/45">
               <SplitText key={lang + "d"} text={t("together", lang)} delay={0.15} />
             </span>
           </h2>
         </StretchOnScroll>
 
         <Reveal direction="up">
-          <p className="max-w-xl text-sm md:text-base font-light leading-[1.85] text-white/50 mb-10">
+          <p className="max-w-xl text-sm md:text-base font-light leading-[1.85] text-white/65 mb-10">
             {t("seeking", lang)}
           </p>
         </Reveal>
@@ -238,7 +315,7 @@ export function ContactSection() {
               issam-selmi@outlook.com
             </span>
             <motion.svg
-              className="text-white/30 group-hover:text-white/65 transition-colors"
+              className="text-white/48 group-hover:text-white/75 transition-colors"
               width="16"
               height="16"
               viewBox="0 0 10 10"
@@ -272,7 +349,7 @@ export function ContactSection() {
                     height="17"
                     viewBox="0 0 14 14"
                     fill="none"
-                    className="relative text-white/60 group-hover:text-black transition-colors duration-500"
+                    className="relative text-white/70 group-hover:text-black transition-colors duration-500"
                   >
                     <path
                       d="M7 1v8m0 0L4 6m3 3l3-3M1 11v1a1 1 0 001 1h10a1 1 0 001-1v-1"
@@ -311,7 +388,7 @@ export function ContactSection() {
                 rel="noopener noreferrer"
                 whileHover={{ y: -2 }}
                 transition={{ duration: 0.25, ease: EASE }}
-                className="text-[11px] text-white/28 hover:text-white/70 uppercase tracking-[0.2em] transition-colors duration-200"
+                className="text-[11px] text-white/48 hover:text-white/70 uppercase tracking-[0.2em] transition-colors duration-200"
               >
                 {label}
               </motion.a>
@@ -330,7 +407,7 @@ export function SiteFooter() {
     <footer className="border-t border-white/[0.05] py-6">
       <div className="max-w-[1600px] mx-auto px-6 md:px-10 lg:px-16 flex items-center justify-between">
         <p className="flex items-center gap-2.5 text-[9px] text-white/18 uppercase tracking-widest">
-          <span className="inline-flex items-center justify-center h-4 w-4 border border-white/20 text-[7px] font-display font-bold text-white/40">
+          <span className="inline-flex items-center justify-center h-4 w-4 border border-white/20 text-[7px] font-display font-bold text-white/55">
             W
           </span>
           © {new Date().getFullYear()} Issam Selmi · WADAS

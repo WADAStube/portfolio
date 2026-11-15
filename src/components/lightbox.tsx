@@ -83,19 +83,19 @@ export function Lightbox({ project, startIndex, onClose }: LightboxProps) {
               <p className="text-sm font-display font-medium text-white/85 truncate">
                 {project.title}
               </p>
-              <p className="text-[9px] uppercase tracking-[0.22em] text-white/30 mt-1 truncate">
+              <p className="text-[9px] uppercase tracking-[0.22em] text-white/48 mt-1 truncate">
                 {shots[idx]?.caption ?? project.category}
               </p>
             </div>
             <div className="flex items-center gap-6 shrink-0 pl-4">
-              <span className="font-mono text-[10px] text-white/30 tabular-nums">
+              <span className="font-mono text-[10px] text-white/48 tabular-nums">
                 {String(idx + 1).padStart(2, "0")} /{" "}
                 {String(count).padStart(2, "0")}
               </span>
               <button
                 onClick={onClose}
                 aria-label="Close"
-                className="text-white/45 hover:text-white transition-colors duration-200"
+                className="text-white/62 hover:text-white transition-colors duration-200"
               >
                 <X size={20} />
               </button>
@@ -155,14 +155,14 @@ export function Lightbox({ project, startIndex, onClose }: LightboxProps) {
                 <button
                   onClick={() => go(-1)}
                   aria-label="Previous image"
-                  className="absolute left-2 md:left-5 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center bg-white/[0.06] hover:bg-white/[0.14] text-white/60 hover:text-white transition-all duration-200"
+                  className="absolute left-2 md:left-5 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center bg-white/[0.06] hover:bg-white/[0.14] text-white/70 hover:text-white transition-all duration-200"
                 >
                   <ChevronLeft size={18} />
                 </button>
                 <button
                   onClick={() => go(1)}
                   aria-label="Next image"
-                  className="absolute right-2 md:right-5 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center bg-white/[0.06] hover:bg-white/[0.14] text-white/60 hover:text-white transition-all duration-200"
+                  className="absolute right-2 md:right-5 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center bg-white/[0.06] hover:bg-white/[0.14] text-white/70 hover:text-white transition-all duration-200"
                 >
                   <ChevronRight size={18} />
                 </button>

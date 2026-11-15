@@ -67,13 +67,13 @@ export default function ProjectDetail() {
         <div className="pt-28 md:pt-32 pb-8 md:pb-10">
           <div className="max-w-[1600px] mx-auto px-6 md:px-10 lg:px-16 flex flex-wrap items-center gap-x-8 gap-y-4">
             <Link href="/projects">
-              <a className="inline-flex items-center gap-3 text-[10px] uppercase tracking-[0.22em] text-white/45 hover:text-white transition-colors duration-300">
+              <a className="inline-flex items-center gap-3 text-[10px] uppercase tracking-[0.22em] text-white/62 hover:text-white transition-colors duration-300">
                 <span aria-hidden="true">←</span>
                 {t("back", lang)}
               </a>
             </Link>
             <h1 className="sr-only">{p.title}</h1>
-            <p className="text-[10px] tracking-[0.06em] text-white/35">
+            <p className="text-[10px] tracking-[0.06em] text-white/52">
               {entry.fields.map((f) => fieldLabel(f)[lang]).join("  ·  ")}
             </p>
             <StatusBadge status={entry.status} className="md:ml-auto" />
@@ -87,13 +87,17 @@ export default function ProjectDetail() {
           index={0}
           total={1}
           onOpenShot={(_, i) => setShot(i)}
-          afterIntro={study ? <CaseStudy data={study} invert={!!p.invert} /> : undefined}
+          afterIntro={
+            study ? (
+              <CaseStudy data={study} tools={p.tools} invert={!!p.invert} />
+            ) : undefined
+          }
         />
 
         <section className="border-t border-white/[0.05]">
           <Link href={pathOf(next)}>
             <a className="group block max-w-[1600px] mx-auto px-6 md:px-10 lg:px-16 py-14 md:py-20">
-              <p className="text-[9px] uppercase tracking-[0.28em] text-white/30 mb-4">
+              <p className="text-[9px] uppercase tracking-[0.28em] text-white/48 mb-4">
                 {t("next", lang)}
               </p>
               <p

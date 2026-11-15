@@ -159,7 +159,7 @@ export function HeroCharacter({
           className="absolute inset-x-0 bottom-0 z-10 px-6 md:px-14 pb-10 md:pb-14"
         >
           {kicker && (
-            <p className="text-[9px] uppercase tracking-[0.28em] text-white/55 mb-3">
+            <p className="text-[9px] uppercase tracking-[0.28em] text-white/68 mb-3">
               {kicker}
             </p>
           )}

@@ -18,7 +18,7 @@ import {
 } from "@/components/site-chrome";
 import { ProjectCard } from "@/components/project-card";
 import { Reveal, EASE, useIsSmallScreen } from "@/components/motion-primitives";
-import { ENTRIES, FIELDS, MINOR, type Bi } from "@/data/portfolio";
+import { ENTRIES, FIELDS, MINOR, STACK, type Bi } from "@/data/portfolio";
 import { useAmbientSound } from "@/hooks/useAmbientSound";
 import { cn } from "@/lib/utils";
 import { useLang, t } from "@/lib/lang";
@@ -132,7 +132,7 @@ function Loader({ onDone }: { onDone: () => void }) {
               style={{ width: `${pct}%` }}
             />
           </div>
-          <p className="mt-4 font-mono text-[10px] tabular-nums text-white/35">
+          <p className="mt-4 font-mono text-[10px] tabular-nums text-white/52">
             {String(pct).padStart(3, "0")}
           </p>
         </motion.div>
@@ -151,7 +151,7 @@ function Marquee() {
         {items.map((t, i) => (
           <span
             key={i}
-            className="mq-item inline-flex items-center gap-6 md:gap-9 px-6 md:px-9 text-[13px] md:text-[15px] font-light tracking-[0.02em] text-white/35 whitespace-nowrap"
+            className="mq-item inline-flex items-center gap-6 md:gap-9 px-6 md:px-9 text-[13px] md:text-[15px] font-light tracking-[0.02em] text-white/52 whitespace-nowrap"
           >
             {t}
             <span className="h-1 w-1 rounded-full bg-white/15 shrink-0" />
@@ -173,7 +173,7 @@ function MuteBtn({ muted, onToggle }: { muted: boolean; onToggle: () => void }) 
       whileTap={{ scale: 0.94 }}
       transition={{ delay: 2.5, duration: 0.8, ease: EASE }}
       aria-label={muted ? "Unmute" : "Mute"}
-      className="fixed bottom-6 right-6 z-[9995] w-9 h-9 flex items-center justify-center bg-white/[0.07] hover:bg-white/[0.14] text-white/40 hover:text-white/75 transition-colors duration-200"
+      className="fixed bottom-6 right-6 z-[9995] w-9 h-9 flex items-center justify-center bg-white/[0.07] hover:bg-white/[0.14] text-white/55 hover:text-white/75 transition-colors duration-200"
     >
       {muted ? <VolumeX size={13} /> : <Volume2 size={13} />}
     </motion.button>
@@ -186,7 +186,7 @@ function SectionHead({ kicker, title, to, more }: { kicker: string; title: strin
     <div className="flex items-end justify-between gap-8 mb-10 md:mb-14">
       <div>
         <Reveal direction="up" duration={0.8}>
-          <p className="text-[9px] text-white/30 uppercase tracking-[0.28em] mb-4">{kicker}</p>
+          <p className="text-[9px] text-white/48 uppercase tracking-[0.28em] mb-4">{kicker}</p>
         </Reveal>
         <Reveal direction="up" duration={0.9}>
           <h2
@@ -199,7 +199,7 @@ function SectionHead({ kicker, title, to, more }: { kicker: string; title: strin
       </div>
       {to && more && (
         <Link href={to}>
-          <a className="hidden md:inline-flex items-center gap-3 text-[10px] uppercase tracking-[0.22em] text-white/45 hover:text-white transition-colors duration-300 pb-2">
+          <a className="hidden md:inline-flex items-center gap-3 text-[10px] uppercase tracking-[0.22em] text-white/62 hover:text-white transition-colors duration-300 pb-2">
             {more} <span aria-hidden="true">→</span>
           </a>
         </Link>
@@ -294,7 +294,7 @@ export default function Home() {
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, ease: EASE, delay: loaded ? 0.1 : 1.2 }}
-                className="text-[9px] text-white/35 uppercase tracking-[0.28em] mb-4"
+                className="text-[9px] text-white/52 uppercase tracking-[0.28em] mb-4"
               >
                 {t("portfolioYear", lang)}
               </motion.p>
@@ -330,7 +330,7 @@ export default function Home() {
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, ease: EASE, delay: loaded ? 0.5 : 1.6 }}
-                className="mt-5 md:mt-7 max-w-xl text-sm md:text-base font-light leading-[1.7] text-white/60"
+                className="mt-5 md:mt-7 max-w-xl text-sm md:text-base font-light leading-[1.7] text-white/70"
               >
                 {t("heroLine", lang)}
               </motion.p>
@@ -345,12 +345,12 @@ export default function Home() {
               <p className="text-sm md:text-lg font-normal text-white/90 uppercase tracking-[0.2em] md:text-right">
                 {t("role", lang)}
               </p>
-              <p className="text-[10px] md:text-[11px] font-light leading-[1.9] text-white/60 uppercase tracking-[0.16em] -mt-1 max-w-[22rem] md:text-right">
+              <p className="text-[10px] md:text-[11px] font-light leading-[1.9] text-white/70 uppercase tracking-[0.16em] -mt-1 max-w-[22rem] md:text-right">
                 {t("roleSub", lang)}
               </p>
               <div className="flex items-center gap-2">
                 <span className="h-[5px] w-[5px] rounded-full bg-green-500 animate-pulse" />
-                <span className="text-[9px] text-white/35 uppercase tracking-[0.18em]">
+                <span className="text-[9px] text-white/52 uppercase tracking-[0.18em]">
                   {t("based", lang)}
                 </span>
               </div>
@@ -362,7 +362,7 @@ export default function Home() {
                 }
                 whileHover={{ x: 4 }}
                 transition={{ duration: 0.3, ease: EASE }}
-                className="text-[9px] text-white/28 uppercase tracking-[0.22em] hover:text-white/70 transition-colors duration-300 flex items-center gap-2 mt-2"
+                className="text-[9px] text-white/48 uppercase tracking-[0.22em] hover:text-white/70 transition-colors duration-300 flex items-center gap-2 mt-2"
               >
                 <span className="w-5 h-px bg-current" />
                 {t("viewWork", lang)}
@@ -379,7 +379,7 @@ export default function Home() {
           className="absolute left-6 top-1/2 -translate-y-1/2 z-10 hidden lg:flex"
           style={{ writingMode: "vertical-rl", textOrientation: "mixed" }}
         >
-          <span className="text-[8px] text-white/22 uppercase tracking-[0.34em] rotate-180">
+          <span className="text-[8px] text-white/45 uppercase tracking-[0.34em] rotate-180">
             WADAS · Est. 2016
           </span>
         </motion.div>
@@ -392,7 +392,7 @@ export default function Home() {
           <motion.div
             animate={reduced ? undefined : { y: [0, 7, 0] }}
             transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
-            className="text-white/25"
+            className="text-white/45"
           >
             <ArrowDown size={14} />
           </motion.div>
@@ -416,11 +416,36 @@ export default function Home() {
                 i > 0 && "lg:pl-10 lg:border-l",
               )}
             >
-              <dt className="text-[9px] uppercase tracking-[0.26em] text-white/30 mb-3">{f.k[lang]}</dt>
+              <dt className="text-[9px] uppercase tracking-[0.26em] text-white/48 mb-3">{f.k[lang]}</dt>
               <dd className="text-sm font-light leading-[1.75] text-white/75">{f.v[lang]}</dd>
             </div>
           ))}
         </dl>
+
+        {/* Der Stapel in Kurzform. Ein Recruiter sucht genau das
+            zuerst, und soll ihn nicht auf einer Unterseite suchen
+            müssen. Vollständig steht er unter /engineering. */}
+        <div className="max-w-[1600px] mx-auto px-6 md:px-10 lg:px-16 border-t border-white/[0.06]">
+          <dl className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 py-8 md:py-10 gap-y-8">
+            {STACK.map((g, i) => (
+              <div key={g.group.en} className={cn(i > 0 && "lg:pl-10")}>
+                <dt className="text-[9px] uppercase tracking-[0.26em] text-white/48 mb-3">
+                  {g.group[lang]}
+                </dt>
+                <dd className="flex flex-wrap gap-1.5">
+                  {g.items.map((it) => (
+                    <span
+                      key={it}
+                      className="border border-white/[0.14] px-2.5 py-1.5 font-mono text-[10px] tracking-[0.04em] text-white/70"
+                    >
+                      {it}
+                    </span>
+                  ))}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </div>
       </section>
 
       {/* ══════════════════ AUSGEWAEHLTE PROJEKTE ══════════════════ */}
@@ -462,10 +487,10 @@ export default function Home() {
                       >
                         {f.label[lang]}
                       </span>
-                      <span className="col-span-2 md:col-span-1 md:order-last text-right font-mono text-[11px] text-white/30 tabular-nums">
+                      <span className="col-span-2 md:col-span-1 md:order-last text-right font-mono text-[11px] text-white/48 tabular-nums">
                         {String(n).padStart(2, "0")}
                       </span>
-                      <span className="col-span-12 md:col-span-6 text-sm font-light leading-[1.75] text-white/45">
+                      <span className="col-span-12 md:col-span-6 text-sm font-light leading-[1.75] text-white/62">
                         {f.sub[lang]}
                       </span>
                     </a>
@@ -507,15 +532,15 @@ export default function Home() {
                   i === 0 ? "md:pr-14 border-b md:border-b-0 md:border-r" : "md:pl-14",
                 )}
               >
-                <p className="text-[9px] uppercase tracking-[0.28em] text-white/30 mb-5">{c.k}</p>
+                <p className="text-[9px] uppercase tracking-[0.28em] text-white/48 mb-5">{c.k}</p>
                 <h2
                   className="font-display font-bold text-white/85 group-hover:text-white transition-colors duration-300 leading-[1.1] max-w-lg"
                   style={{ fontSize: "clamp(1.4rem, 2.6vw, 2.2rem)", letterSpacing: "-0.02em" }}
                 >
                   {c.h}
                 </h2>
-                <p className="mt-5 text-sm font-light leading-[1.8] text-white/45 max-w-md">{c.p}</p>
-                <span className="mt-8 inline-block text-white/35 group-hover:text-white transition-colors duration-300" aria-hidden="true">
+                <p className="mt-5 text-sm font-light leading-[1.8] text-white/62 max-w-md">{c.p}</p>
+                <span className="mt-8 inline-block text-white/52 group-hover:text-white transition-colors duration-300" aria-hidden="true">
                   →
                 </span>
               </a>

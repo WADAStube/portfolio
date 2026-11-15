@@ -191,13 +191,13 @@ export function CompareSlider({
       <figcaption className="mt-3">
         <span className="flex items-baseline gap-3">
           <span className={cn("h-px w-5 shrink-0 translate-y-[-3px]", invert ? "bg-black/20" : "bg-white/15")} />
-          <span className={cn("text-[10px] uppercase tracking-[0.18em]", invert ? "text-black/45" : "text-white/32")}>
+          <span className={cn("text-[10px] uppercase tracking-[0.18em]", invert ? "text-black/62" : "text-white/50")}>
             {beforeLabel} / {afterLabel}
             <span className="hidden md:inline"> — drag or use arrow keys</span>
           </span>
         </span>
         {note && (
-          <span className={cn("block mt-3 pl-8 text-xs font-light leading-relaxed max-w-xl", invert ? "text-black/55" : "text-white/40")}>
+          <span className={cn("block mt-3 pl-8 text-xs font-light leading-relaxed max-w-xl", invert ? "text-black/68" : "text-white/55")}>
             {note}
           </span>
         )}

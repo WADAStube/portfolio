@@ -15,7 +15,7 @@ import {
   useIsSmallScreen,
   CountUpNumber,
 } from "@/components/motion-primitives";
-import { PlayButton } from "@/components/site-chrome";
+import { Disclosure, PlayButton } from "@/components/site-chrome";
 import { cn } from "@/lib/utils";
 import { useLang, pick, t } from "@/lib/lang";
 
@@ -232,7 +232,7 @@ function FrameText({
       style={{ opacity, x, y, willChange: "transform, opacity" }}
       className="absolute inset-x-0 top-0 lg:top-1/2 lg:-translate-y-1/2"
     >
-      <p className="font-mono text-[9px] tracking-[0.12em] text-white/25 mb-4">
+      <p className="font-mono text-[9px] tracking-[0.12em] text-white/45 mb-4">
         {step.pass}
       </p>
       <h4
@@ -244,7 +244,7 @@ function FrameText({
       >
         {pick(step.label, step.labelDe, lang)}
       </h4>
-      <p className="text-sm font-light leading-[1.95] text-white/50 max-w-sm">
+      <p className="text-sm font-light leading-[1.95] text-white/65 max-w-sm">
         {pick(step.body, step.bodyDe, lang)}
       </p>
     </motion.div>
@@ -338,7 +338,7 @@ function FrameAnatomy() {
                     end={(i + 1) * stepSize}
                   />
                 ))}
-                <span className="ml-3 font-mono text-[9px] tracking-[0.12em] text-white/22 shrink-0">
+                <span className="ml-3 font-mono text-[9px] tracking-[0.12em] text-white/45 shrink-0">
                   1 / 60 s
                 </span>
               </div>
@@ -507,7 +507,7 @@ function CaseRow({ c, i }: { c: Case; i: number }) {
     <Reveal direction="up" delay={Math.min(i, 3) * 0.05} duration={0.9}>
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-6 gap-x-10 py-10 md:py-14 border-t border-white/[0.07]">
         <div className="lg:col-span-3">
-          <p className="font-mono text-[10px] tracking-[0.18em] text-white/22 mb-4">
+          <p className="font-mono text-[10px] tracking-[0.18em] text-white/45 mb-4">
             {c.n}
           </p>
           <h4
@@ -522,10 +522,10 @@ function CaseRow({ c, i }: { c: Case; i: number }) {
         </div>
 
         <div className="lg:col-span-4">
-          <p className="text-[8px] uppercase tracking-[0.28em] text-white/22 mb-3">
+          <p className="text-[8px] uppercase tracking-[0.28em] text-white/45 mb-3">
             {lang === "de" ? "Symptom" : "Symptom"}
           </p>
-          <p className="text-sm font-light leading-[1.9] text-white/45">
+          <p className="text-sm font-light leading-[1.9] text-white/62">
             {pick(c.symptom, c.symptomDe, lang)}
           </p>
           {c.log && (
@@ -536,17 +536,17 @@ function CaseRow({ c, i }: { c: Case; i: number }) {
         </div>
 
         <div className="lg:col-span-5">
-          <p className="text-[8px] uppercase tracking-[0.28em] text-white/22 mb-3">
+          <p className="text-[8px] uppercase tracking-[0.28em] text-white/45 mb-3">
             {lang === "de" ? "Ursache" : "Cause"}
           </p>
-          <p className="text-sm font-light leading-[1.9] text-white/55">
+          <p className="text-sm font-light leading-[1.9] text-white/68">
             {pick(c.cause, c.causeDe, lang)}
           </p>
           <ul className="mt-5 pt-5 border-t border-white/[0.07] space-y-1.5">
             {pick(c.fix, c.fixDe, lang).map((f) => (
               <li
                 key={f}
-                className="text-[11px] leading-relaxed text-white/30 flex gap-3"
+                className="text-[11px] leading-relaxed text-white/48 flex gap-3"
               >
                 <span className="text-white/15 shrink-0">—</span>
                 <span>{f}</span>
@@ -598,7 +598,7 @@ export function UnitySection({
       <div className="max-w-[1760px] mx-auto px-6 md:px-10 lg:px-12">
         <div className="flex items-center gap-5 mb-10 md:mb-14">
           <span className="h-px w-10 bg-white/20 shrink-0" />
-          <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-white/35">
+          <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-white/52">
             Unity 6 · URP
           </span>
           <span className="h-px flex-1 bg-white/[0.07]" />
@@ -633,14 +633,14 @@ export function UnitySection({
 
           <div className="lg:col-span-5 lg:pt-4">
             <Reveal direction="up" delay={0.12} duration={0.95}>
-              <p className="text-base md:text-lg font-light leading-[1.85] text-white/50 max-w-xl">
+              <p className="text-base md:text-lg font-light leading-[1.85] text-white/65 max-w-xl">
                 {lang === "de"
                   ? "Das Diorama war auf ein Standbild hin gebaut. Für die Engine muss es aus jedem Winkel und sechzigmal pro Sekunde funktionieren. Umgesetzt: Geometrie halbiert, Materialien auf batchbare Instanzen umgestellt, Character gerigged und animiert, Interaktionssystem in C# für Aufnehmen, Zielen und Werfen."
                   : "The diorama was built towards a still. For the engine it has to hold up from any angle, sixty times a second. Done: geometry halved, materials moved onto batchable instances, character rigged and animated, interaction system written in C# for picking up, aiming and throwing."}
               </p>
             </Reveal>
             <Reveal direction="up" delay={0.2} duration={0.95}>
-              <p className="mt-6 text-[11px] leading-relaxed text-white/28">
+              <p className="mt-6 text-[11px] leading-relaxed text-white/48">
                 {lang === "de"
                   ? "Character: Chiara. Humanoid-Rig, Blend Tree aus Idle, Gehen und Laufen, Sprung und Interaktion über das neue Input System."
                   : "Character: Chiara — humanoid rig, a blend tree over idle, walk and run, jump and interaction through the new Input System."}
@@ -666,7 +666,7 @@ export function UnitySection({
               className="absolute inset-0 w-full h-full object-cover"
             />
           </div>
-          <figcaption className="mt-4 font-mono text-[9px] tracking-[0.14em] text-white/25">
+          <figcaption className="mt-4 font-mono text-[9px] tracking-[0.14em] text-white/45">
             {lang === "de"
               ? "Dieselbe Szene, in Echtzeit — Unity 6.5, URP"
               : "The same scene, in real time — Unity 6.5, URP"}
@@ -674,10 +674,22 @@ export function UnitySection({
         </figure>
       </Reveal>
 
+      {/* Alles Tiefe hinter einem Griff: Frame-Analyse, Messwerte,
+          die fuenf Probleme, Systeme und Stand. Vollstaendig
+          erhalten, nur nicht mehr im Weg. */}
+      <div className="mt-24 md:mt-32 max-w-[1760px] mx-auto px-6 md:px-10 lg:px-12">
+        <Disclosure
+          label={t("techDocs", lang)}
+          hint={
+            lang === "de"
+              ? "Frame-Analyse · Messwerte · fünf Probleme · Systeme"
+              : "Frame analysis · measurements · five problems · systems"
+          }
+        >
       {/* ── Anatomie eines Frames ── */}
       <div className="mt-28 md:mt-40 max-w-[1760px] mx-auto px-6 md:px-10 lg:px-12">
         <Reveal direction="up" duration={0.9}>
-          <p className="text-[8px] uppercase tracking-[0.28em] text-white/22 mb-4">
+          <p className="text-[8px] uppercase tracking-[0.28em] text-white/45 mb-4">
             {lang === "de" ? "Frame Debugger" : "Frame Debugger"}
           </p>
           <h3
@@ -691,7 +703,7 @@ export function UnitySection({
               ? "Anatomie eines Frames"
               : "Anatomy of a single frame"}
           </h3>
-          <p className="text-sm md:text-base font-light leading-[1.9] text-white/45 max-w-2xl">
+          <p className="text-sm md:text-base font-light leading-[1.9] text-white/62 max-w-2xl">
             {lang === "de"
               ? "Die Szene wird mehrfach gerendert, bevor das erste sichtbare Pixel geschrieben wird. Fünf Schritte aus einem einzigen Frame, abgegriffen im Frame Debugger, in der Reihenfolge der Ausführung."
               : "The scene is rendered several times before the first visible pixel is written. Five steps out of one frame, captured in the Frame Debugger, in execution order."}
@@ -708,7 +720,7 @@ export function UnitySection({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-10 gap-x-10 xl:gap-x-16 items-start">
           <div className="lg:col-span-5">
             <Reveal direction="up" duration={0.9}>
-              <p className="text-[8px] uppercase tracking-[0.28em] text-white/22 mb-4">
+              <p className="text-[8px] uppercase tracking-[0.28em] text-white/45 mb-4">
                 {lang === "de" ? "Messung" : "Measured"}
               </p>
               <h3
@@ -722,12 +734,12 @@ export function UnitySection({
                   ? "Was die Szene kostet"
                   : "What the scene costs"}
               </h3>
-              <p className="text-sm font-light leading-[1.9] text-white/45 max-w-md">
+              <p className="text-sm font-light leading-[1.9] text-white/62 max-w-md">
                 {lang === "de"
                   ? "In der Maya-Fassung war die Vegetation echte Geometrie, jede Instanz ein eigenes Objekt. Für die Engine neu aufgebaut: Dreieckszahl mehr als halbiert, Materialien so gesetzt, dass der SRP Batcher greift. Von 1 327 Draw Calls sind 1 309 instanziert."
                   : "In the Maya version vegetation was real geometry, every instance its own object. Rebuilt for the engine: triangle count more than halved, materials set up so the SRP Batcher takes over. Of 1,327 draw calls, 1,309 are instanced."}
               </p>
-              <p className="mt-5 text-[11px] leading-relaxed text-white/28 max-w-md">
+              <p className="mt-5 text-[11px] leading-relaxed text-white/48 max-w-md">
                 {lang === "de"
                   ? "30,4 MB Texturspeicher bei dieser Szenengröße: Cel-Shading arbeitet mit Farbstufen statt mit Texturkarten. Im Maya-Projekt eine Stilentscheidung, in der Engine ein Budgetvorteil."
                   : "30.4 MB of texture memory at this scene size: cel shading works with colour steps instead of texture maps. A style decision in the Maya project, a budget advantage in the engine."}
@@ -804,7 +816,7 @@ export function UnitySection({
                     className="absolute inset-0 w-full h-full object-cover"
                   />
                 </div>
-                <figcaption className="mt-4 font-mono text-[9px] tracking-[0.14em] text-white/25">
+                <figcaption className="mt-4 font-mono text-[9px] tracking-[0.14em] text-white/45">
                   {lang === "de"
                     ? "Statistics-Fenster im Play Mode — die Zahlen links sind aus diesem Bild abgelesen"
                     : "Statistics window in play mode — the numbers on the left are read off this frame"}
@@ -818,7 +830,7 @@ export function UnitySection({
       {/* ── Fuenf Probleme ── */}
       <div className="max-w-[1760px] mx-auto px-6 md:px-10 lg:px-12 mt-28 md:mt-40">
         <Reveal direction="up" duration={0.9}>
-          <p className="text-[8px] uppercase tracking-[0.28em] text-white/22 mb-4">
+          <p className="text-[8px] uppercase tracking-[0.28em] text-white/45 mb-4">
             {lang === "de" ? "Fehlersuche" : "Debugging"}
           </p>
           <h3
@@ -832,7 +844,7 @@ export function UnitySection({
               ? "Fünf Probleme, fünf Ursachen"
               : "Five problems, five causes"}
           </h3>
-          <p className="text-sm md:text-base font-light leading-[1.9] text-white/45 max-w-2xl mb-4">
+          <p className="text-sm md:text-base font-light leading-[1.9] text-white/62 max-w-2xl mb-4">
             {lang === "de"
               ? "Jedes davon habe ich über einen eindeutigen Test eingegrenzt: ein Log, einen Zahlenvergleich, einen Ausschluss. Geändert habe ich erst danach."
               : "Each one narrowed down by an unambiguous test — a log line, a comparison of values, an exclusion — and only then changed."}
@@ -860,7 +872,7 @@ export function UnitySection({
                 ? "„Nicht raten, sondern anhand der vorliegenden Daten — Logs, Screenshots, Werte­vergleiche — die Ursache eindeutig eingrenzen, bevor man einen Fix versucht.“"
                 : "“Don't guess. Narrow the cause down unambiguously from the data you already have — logs, screenshots, comparisons of values — before attempting a fix.”"}
             </p>
-            <footer className="mt-6 text-[10px] uppercase tracking-[0.24em] text-white/25">
+            <footer className="mt-6 text-[10px] uppercase tracking-[0.24em] text-white/45">
               {lang === "de"
                 ? "Arbeitsweise aus dem Projekt"
                 : "Working method from the project"}
@@ -874,7 +886,7 @@ export function UnitySection({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-14 gap-x-10 xl:gap-x-16">
           <div className="lg:col-span-5">
             <Reveal direction="up" duration={0.9}>
-              <p className="text-[8px] uppercase tracking-[0.28em] text-white/22 mb-4">
+              <p className="text-[8px] uppercase tracking-[0.28em] text-white/45 mb-4">
                 {lang === "de" ? "Systeme" : "Systems"}
               </p>
               <h3
@@ -916,7 +928,7 @@ export function UnitySection({
                     <p className="font-mono text-[11px] tracking-[0.06em] text-white/70 mb-2.5">
                       {s.file}
                     </p>
-                    <p className="text-[13px] font-light leading-[1.85] text-white/42 max-w-md">
+                    <p className="text-[13px] font-light leading-[1.85] text-white/60 max-w-md">
                       {pick(s.en, s.de, lang)}
                     </p>
                   </div>
@@ -927,7 +939,7 @@ export function UnitySection({
 
           <div className="lg:col-span-4 lg:col-start-7">
             <Reveal direction="up" delay={0.1} duration={0.9}>
-              <p className="text-[8px] uppercase tracking-[0.28em] text-white/22 mb-8">
+              <p className="text-[8px] uppercase tracking-[0.28em] text-white/45 mb-8">
                 {lang === "de" ? "Steuerung" : "Controls"}
               </p>
             </Reveal>
@@ -938,7 +950,7 @@ export function UnitySection({
                     <span className="font-mono text-[10px] tracking-[0.1em] text-white/70 w-14 shrink-0 tabular-nums">
                       {c.key}
                     </span>
-                    <span className="text-[13px] font-light leading-[1.7] text-white/42">
+                    <span className="text-[13px] font-light leading-[1.7] text-white/60">
                       {pick(c.en, c.de, lang)}
                     </span>
                   </div>
@@ -949,7 +961,7 @@ export function UnitySection({
             {/* Stand */}
             <Reveal direction="up" delay={0.15} duration={0.9}>
               <div className="mt-14">
-                <p className="text-[8px] uppercase tracking-[0.28em] text-white/22 mb-6">
+                <p className="text-[8px] uppercase tracking-[0.28em] text-white/45 mb-6">
                   {lang === "de" ? "Stand" : "Status"}
                 </p>
                 <ul className="space-y-3">
@@ -987,13 +999,13 @@ export function UnitySection({
                       <span
                         className={cn(
                           "shrink-0 font-mono text-[10px]",
-                          s.done ? "text-white/55" : "text-white/20",
+                          s.done ? "text-white/68" : "text-white/20",
                         )}
                       >
                         {s.done ? "✓" : "—"}
                       </span>
                       <span
-                        className={cn(s.done ? "text-white/45" : "text-white/25")}
+                        className={cn(s.done ? "text-white/62" : "text-white/45")}
                       >
                         {pick(s.en, s.de, lang)}
                       </span>
@@ -1005,12 +1017,14 @@ export function UnitySection({
           </div>
         </div>
       </div>
+        </Disclosure>
+      </div>
 
       {/* ── Die fertige Fassung ── */}
       <div className="mt-28 md:mt-40 border-t border-white/[0.05] pt-20 md:pt-28">
         <div className="max-w-[1760px] mx-auto px-6 md:px-10 lg:px-12">
           <Reveal direction="up" duration={0.9}>
-            <p className="text-[8px] uppercase tracking-[0.28em] text-white/22 mb-4">
+            <p className="text-[8px] uppercase tracking-[0.28em] text-white/45 mb-4">
               {lang === "de" ? "Veröffentlicht" : "Released"}
             </p>
             <h3
@@ -1051,13 +1065,13 @@ export function UnitySection({
                   <br />
                   Light every lantern to bring it back.“
                 </blockquote>
-                <p className="mt-4 font-mono text-[9px] tracking-[0.14em] text-white/25">
+                <p className="mt-4 font-mono text-[9px] tracking-[0.14em] text-white/45">
                   {lang === "de" ? "Vorspann des Spiels" : "The game's own opening line"}
                 </p>
               </Reveal>
 
               <Reveal direction="up" delay={0.1} duration={0.9}>
-                <p className="mt-8 text-sm md:text-base font-light leading-[1.9] text-white/50 max-w-xl">
+                <p className="mt-8 text-sm md:text-base font-light leading-[1.9] text-white/65 max-w-xl">
                   {lang === "de"
                     ? "Aus der portierten Szene ist ein Spiel geworden. Elf Laternen stehen auf der Insel, der Zähler oben läuft mit. Die Glimmer lassen sich rufen und losschicken, Gegenstände wandern in die Tasche, die Figur hat Lebenspunkte. Die Fassung läuft als Download auf itch.io."
                     : "The ported scene has become a game. Eleven lanterns stand on the island and the counter at the top keeps track. Glimmers can be called and sent out, objects go into the satchel, the character has health. The build runs as a download on itch.io."}
@@ -1073,7 +1087,7 @@ export function UnitySection({
 
             <div className="lg:col-span-4 lg:col-start-9">
               <Reveal direction="up" delay={0.1} duration={0.9}>
-                <p className="text-[8px] uppercase tracking-[0.28em] text-white/22 mb-8">
+                <p className="text-[8px] uppercase tracking-[0.28em] text-white/45 mb-8">
                   {lang === "de" ? "Steuerung im Spiel" : "In-game controls"}
                 </p>
               </Reveal>
@@ -1084,7 +1098,7 @@ export function UnitySection({
                       <span className="font-mono text-[10px] tracking-[0.1em] text-white/70 w-14 shrink-0">
                         {c.key}
                       </span>
-                      <span className="text-[13px] font-light leading-[1.7] text-white/42">
+                      <span className="text-[13px] font-light leading-[1.7] text-white/60">
                         {pick(c.en, c.de, lang)}
                       </span>
                     </div>
@@ -1113,7 +1127,7 @@ export function UnitySection({
                       className="absolute inset-0 w-full h-full object-cover"
                     />
                   </div>
-                  <figcaption className="mt-3 font-mono text-[9px] tracking-[0.14em] text-white/25">
+                  <figcaption className="mt-3 font-mono text-[9px] tracking-[0.14em] text-white/45">
                     {pick(shot.en, shot.de, lang)}
                   </figcaption>
                 </figure>
@@ -1146,7 +1160,7 @@ function Metric({
 
   return (
     <div>
-      <p className="text-[8px] uppercase tracking-[0.24em] text-white/22 mb-2">
+      <p className="text-[8px] uppercase tracking-[0.24em] text-white/45 mb-2">
         {label}
       </p>
       <p
@@ -1162,7 +1176,7 @@ function Metric({
               minimumFractionDigits: 1,
               maximumFractionDigits: 1,
             })}
-            <span className="text-white/35 text-[0.62em] ml-0.5">k</span>
+            <span className="text-white/52 text-[0.62em] ml-0.5">k</span>
           </>
         ) : decimals ? (
           <>
@@ -1170,13 +1184,13 @@ function Metric({
               minimumFractionDigits: decimals,
               maximumFractionDigits: decimals,
             })}
-            <span className="text-white/35 text-[0.62em]">{suffix}</span>
+            <span className="text-white/52 text-[0.62em]">{suffix}</span>
           </>
         ) : (
           <>
             <CountUpNumber value={value} duration={1.6} />
             {suffix && (
-              <span className="text-white/35 text-[0.62em]">{suffix}</span>
+              <span className="text-white/52 text-[0.62em]">{suffix}</span>
             )}
           </>
         )}

@@ -137,7 +137,7 @@ export function ShotFrame({
               className="inline-block bg-black/55 backdrop-blur-sm px-2 py-1 font-mono text-[9px] tabular-nums text-white/70"
             >
               {String(index + 1).padStart(2, "0")}
-              <span className="text-white/30"> / {String(total).padStart(2, "0")}</span>
+              <span className="text-white/48"> / {String(total).padStart(2, "0")}</span>
             </motion.span>
           </div>
 
@@ -162,7 +162,7 @@ export function ShotFrame({
         {shot.caption && (
           <figcaption className="mt-3 flex items-baseline gap-3">
             <span className={cn("h-px w-5 shrink-0 translate-y-[-3px]", invert ? "bg-black/20" : "bg-white/15")} />
-            <span className={cn("text-[10px] uppercase tracking-[0.18em]", invert ? "text-black/45" : "text-white/32")}>
+            <span className={cn("text-[10px] uppercase tracking-[0.18em]", invert ? "text-black/62" : "text-white/50")}>
               {shot.caption}
             </span>
           </figcaption>

@@ -1,3 +1,70 @@
+Portfolio — Version 63  (15.11.2026)
+
+DURCHGANG AUS SICHT EINES RECRUITERS MIT 30 SEKUNDEN
+Gestaltung, Animationen und Aufbau bleiben. Geändert wurde nur,
+was den schnellen Blick behindert hat.
+
+1 · LESBARKEIT
+  Der wichtigste Satz auf der Startseite war der am schwersten
+  lesbare Text: 10 bis 11 px bei 25 bis 35 Prozent Weiß, also
+  ein Kontrast um 2,5:1. Die Norm verlangt 4,5:1.
+  Alle Textfarben wurden systematisch angehoben, in 25 Dateien:
+    22/25 % -> 45 %      35 % -> 52 %      50 % -> 65 %
+    28/30 % -> 48 %      40 % -> 55 %      55 % -> 68 %
+    32 %    -> 50 %      42 % -> 60 %      60 % -> 70 %
+                         45 % -> 62 %      62/65 % -> 72/75 %
+  Dasselbe für die schwarzen Texte im hellen Abschnitt.
+  Schriftgrößen, Schnitte und Abstände sind unverändert.
+
+2 · KURZFASSUNG JEDER FALLSTUDIE
+  Jede Fallstudie beginnt mit "Auf einen Blick":
+    Problem · Meine Rolle · Technologien · Ergebnis
+  Vier Spalten, auf dem Handy untereinander. Die Technologien
+  kommen als Marken aus den Projektdaten, nicht doppelt gepflegt.
+  Geschrieben für: Lantern Island, SafeMeet, Qrib, Campus Quest,
+  KI Lesebuch, I Need Space.
+
+3 · AUSFÜHRLICHES BLEIBT, STEHT ABER NICHT MEHR IM WEG
+  Neuer Baustein Disclosure (site-chrome.tsx), gebaut auf
+  <details>: Tastatur, Vorlesesoftware, auch ohne JavaScript.
+  Aufklappbar sind jetzt:
+    - "Ausführliche Fallstudie" (Ansatz, Umsetzung,
+      Entscheidungen, Ergebnis, Stand, Anteil, Gelerntes)
+    - "Technische Dokumentation" bei Lantern Island
+      (Frame-Analyse, Messwerte, fünf Probleme, Systeme)
+    - "Technische Dokumentation" bei Campus Quest
+      (PaneoVR-Graph, Zahlen, drei Probleme, Textsorten)
+  Kein Text wurde entfernt. Lantern Island: 26 828 px offen,
+  18 507 px zugeklappt.
+  Sichtbar bleiben: Projektbild, Beschreibung, Kurzfassung,
+  der 360°-Betrachter und der Abschnitt "Das Spiel" mit dem
+  itch.io-Knopf.
+
+4 · ENGINEERING AUF EINEN BLICK
+  Der Technologie-Stapel stand nur auf /engineering. Er steht
+  jetzt zusätzlich auf der Startseite, direkt unter den
+  Eckdaten: Sprachen und Frameworks, Engines, 3D, Bild/Satz/
+  Video. Die Liste liegt in data/portfolio.ts (STACK) und wird
+  von beiden Seiten gelesen — eine Quelle.
+
+5 · SOFTWARE-PROJEKTE SICHTBARER
+  Auf /projects standen die Software-Arbeiten hinter drei
+  älteren 3D- und Design-Studien. Jetzt kommen die
+  ausgewählten Projekte zuerst:
+  Lantern Island, SafeMeet, Campus Quest, Qrib, KI Lesebuch,
+  I Need Space, dann der Rest nach Stand.
+
+6 · ABSTÄNDE UND UMBRÜCHE
+  Geprüft bei 1920, 1440, 1280, 834 und 390 px, in beiden
+  Sprachen: kein seitliches Scrollen, keine defekten Bilder.
+  Behoben: "Über mich" brach in der Navigation auf Tablet um.
+
+NICHT ANGEFASST
+  Farbwelt, Typografie, Hero mit Video, Animationen, Marquee,
+  Mauszeiger, Seitenaufbau, Texte.
+
+──────────────────────────────────────────────────────────────
+
 Portfolio — Version 62  (15.11.2026)
 
 NEUES PROJEKT: CAMPUS QUEST

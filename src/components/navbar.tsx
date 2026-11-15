@@ -86,7 +86,7 @@ export function Navbar() {
               <span className="text-xl font-display font-bold tracking-tight text-foreground">
                 ISSAM<span className="text-muted-foreground group-hover:text-primary transition-colors duration-300"> SELMI</span>
               </span>
-              <span className="text-[7px] uppercase tracking-[0.32em] text-white/25 group-hover:text-white/45 transition-colors duration-300 mt-1">
+              <span className="text-[7px] uppercase tracking-[0.32em] text-white/45 group-hover:text-white/62 transition-colors duration-300 mt-1">
                 WADAS
               </span>
             </span>
@@ -100,7 +100,7 @@ export function Navbar() {
                 key={t(link.key, lang)}
                 href={link.to ?? link.anchor}
                 className={cn(
-                  "text-sm font-medium transition-colors duration-200 relative group",
+                  "text-sm font-medium transition-colors duration-200 relative group whitespace-nowrap",
                   isActive(link.to) ? "text-foreground" : "text-muted-foreground hover:text-foreground"
                 )}
                 onClick={(e) => { e.preventDefault(); go(link); }}
@@ -120,7 +120,7 @@ export function Navbar() {
               type="button"
               onClick={() => setLang(lang === "de" ? "en" : "de")}
               aria-label={lang === "de" ? "Switch to English" : "Auf Deutsch umschalten"}
-              className="hidden md:flex items-center gap-1 mr-5 text-[10px] uppercase tracking-[0.16em] text-white/30 hover:text-white/70 transition-colors duration-300"
+              className="hidden md:flex items-center gap-1 mr-5 text-[10px] uppercase tracking-[0.16em] text-white/48 hover:text-white/70 transition-colors duration-300"
             >
               <span className={lang === "en" ? "text-white/85" : undefined}>EN</span>
               <span className="text-white/20">/</span>
@@ -179,7 +179,7 @@ export function Navbar() {
                 <button
                   type="button"
                   onClick={() => setLang(lang === "de" ? "en" : "de")}
-                  className="self-start flex items-center gap-1 text-xs uppercase tracking-[0.16em] text-white/40"
+                  className="self-start flex items-center gap-1 text-xs uppercase tracking-[0.16em] text-white/55"
                 >
                   <span className={lang === "en" ? "text-white" : undefined}>EN</span>
                   <span className="text-white/20">/</span>

@@ -85,7 +85,7 @@ function LayerText({
       style={{ opacity, x, y, willChange: "transform, opacity" }}
       className="absolute inset-x-0 top-0 lg:top-1/2 lg:-translate-y-1/2"
     >
-      <p className="text-[8px] uppercase tracking-[0.3em] text-white/28 mb-4">
+      <p className="text-[8px] uppercase tracking-[0.3em] text-white/48 mb-4">
         {layer.label}
       </p>
       <h3
@@ -94,10 +94,10 @@ function LayerText({
       >
         {layer.title}
       </h3>
-      <p className="text-sm font-light leading-[1.95] text-white/50 max-w-sm">
+      <p className="text-sm font-light leading-[1.95] text-white/65 max-w-sm">
         {layer.body}
       </p>
-      <p className="mt-6 pt-5 border-t border-white/[0.07] text-[10px] leading-relaxed text-white/25 max-w-sm">
+      <p className="mt-6 pt-5 border-t border-white/[0.07] text-[10px] leading-relaxed text-white/45 max-w-sm">
         {layer.tech.join("  ·  ")}
       </p>
     </motion.div>
@@ -135,7 +135,7 @@ function LightSwitch({
         <p
           className={cn(
             "text-[11px] mt-0.5 transition-colors duration-500",
-            on ? "text-amber-100/50" : "text-white/35",
+            on ? "text-amber-100/50" : "text-white/52",
           )}
         >
           {on ? "On" : "Off"}
@@ -384,7 +384,7 @@ export function BreakdownIntro({ className }: { className?: string }) {
   return (
     <div className={className}>
       <div className="max-w-[1760px] mx-auto px-6 md:px-10 lg:px-12">
-        <p className="text-[8px] uppercase tracking-[0.28em] text-white/22 mb-4">
+        <p className="text-[8px] uppercase tracking-[0.28em] text-white/45 mb-4">
           {t("breakdown", lang)}
         </p>
         <h3

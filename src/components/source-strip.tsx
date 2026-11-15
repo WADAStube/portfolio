@@ -37,14 +37,14 @@ export function SourceStrip({
         <motion.span
           animate={{ rotate: open ? 90 : 0 }}
           transition={{ duration: 0.4, ease: EASE }}
-          className={cn("transition-colors duration-300", invert ? "text-black/45 group-hover:text-black" : "text-white/35 group-hover:text-white/70")}
+          className={cn("transition-colors duration-300", invert ? "text-black/62 group-hover:text-black" : "text-white/52 group-hover:text-white/70")}
         >
           {open ? <Minus size={13} /> : <Plus size={13} />}
         </motion.span>
-        <span className={cn("text-[10px] uppercase tracking-[0.22em] transition-colors duration-300", invert ? "text-black/50 group-hover:text-black" : "text-white/40 group-hover:text-white/75")}>
+        <span className={cn("text-[10px] uppercase tracking-[0.22em] transition-colors duration-300", invert ? "text-black/50 group-hover:text-black" : "text-white/55 group-hover:text-white/75")}>
           {label}
         </span>
-        <span className={cn("ml-auto font-mono text-[9px] tabular-nums", invert ? "text-black/35" : "text-white/25")}>
+        <span className={cn("ml-auto font-mono text-[9px] tabular-nums", invert ? "text-black/55" : "text-white/45")}>
           {String(sources.length).padStart(2, "0")}
         </span>
       </button>
@@ -58,7 +58,7 @@ export function SourceStrip({
             transition={{ duration: reduced ? 0.15 : 0.6, ease: EASE }}
             className="overflow-hidden"
           >
-            <p className={cn("pt-6 pb-5 text-xs font-light leading-relaxed max-w-xl", invert ? "text-black/55" : "text-white/40")}>
+            <p className={cn("pt-6 pb-5 text-xs font-light leading-relaxed max-w-xl", invert ? "text-black/68" : "text-white/55")}>
               The finished poster is a composite. These are the individual
               plates it was built from — each masked, graded and blended
               separately before being combined.
@@ -85,11 +85,11 @@ export function SourceStrip({
                       loading="lazy"
                       className="w-full h-full object-cover opacity-70 group-hover/src:opacity-100 transition-opacity duration-500"
                     />
-                    <span className="absolute top-1.5 left-1.5 font-mono text-[8px] text-white/50 bg-black/60 px-1.5 py-0.5">
+                    <span className="absolute top-1.5 left-1.5 font-mono text-[8px] text-white/65 bg-black/60 px-1.5 py-0.5">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                   </div>
-                  <figcaption className={cn("mt-2 text-[9px] uppercase tracking-[0.14em]", invert ? "text-black/45" : "text-white/28")}>
+                  <figcaption className={cn("mt-2 text-[9px] uppercase tracking-[0.14em]", invert ? "text-black/62" : "text-white/48")}>
                     {s.caption}
                   </figcaption>
                 </motion.figure>

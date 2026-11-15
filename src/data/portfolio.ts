@@ -63,6 +63,27 @@ export const FIELDS: { id: FieldId; label: Bi; sub: Bi }[] = [
 export const fieldLabel = (id: FieldId) =>
   FIELDS.find((f) => f.id === id)!.label;
 
+/* Womit gearbeitet wird. Steht auf der Startseite als Kurzform
+   und auf der Engineering-Seite vollstaendig — eine Quelle. */
+export const STACK: { group: Bi; items: string[] }[] = [
+  {
+    group: { en: "Languages and frameworks", de: "Sprachen und Frameworks" },
+    items: ["C#", "Dart · Flutter", "TypeScript · React", "HTML · CSS · JavaScript", "Express.js", "PostgreSQL · Drizzle ORM", "Firebase · Firestore"],
+  },
+  {
+    group: { en: "Engines", de: "Engines" },
+    items: ["Unity 6 · URP", "Unreal Engine", "PaneoVR"],
+  },
+  {
+    group: { en: "3D", de: "3D" },
+    items: ["Autodesk Maya", "Arnold", "Substance Painter", "XGen", "MASH"],
+  },
+  {
+    group: { en: "Image, layout, video", de: "Bild, Satz, Video" },
+    items: ["Photoshop", "Illustrator", "InDesign", "After Effects", "Premiere Pro"],
+  },
+];
+
 /* ────────────────── Einordnung der Projekte ────────────────── */
 
 interface Meta {
@@ -271,6 +292,10 @@ export const MINOR: MinorWork[] = [
    ──────────────────────────────────────────────────────────── */
 
 export interface CaseStudy {
+  /** Vier Zeilen fuer den schnellen Blick. Stehen ueber der
+      ausfuehrlichen Fallstudie; die Technologien kommen aus
+      den Projektdaten. */
+  summary: { problem: Bi; role: Bi; result: Bi };
   challenge: Bi;
   approach: Bi;
   implementation: Bi;
@@ -285,6 +310,11 @@ export interface CaseStudy {
 
 export const CASES: Record<string, CaseStudy> = {
   "poor-house": {
+    summary: {
+      problem: { en: "A rendered scene had to hold up in real time as well — and be playable.", de: "Eine gerenderte Szene sollte auch in Echtzeit bestehen — und spielbar sein." },
+      role: { en: "My own project, start to finish: modelling, shading, the engine port and the game logic.", de: "Eigenes Projekt, von vorn bis hinten: Modellierung, Shading, Portierung und Spiellogik." },
+      result: { en: "Arnold stills and a game on itch.io. 6,063k triangles at 54 set-pass calls.", de: "Arnold-Standbilder und ein Spiel auf itch.io. 6 063k Dreiecke bei 54 Set-Pass-Calls." },
+    },
     challenge: {
       en: "A stylised environment that works twice: as a rendered still, and as the same scene running in real time in a game engine.",
       de: "Eine stilisierte Umgebung, die zweimal funktioniert: als gerendertes Standbild und als dieselbe Szene in Echtzeit in einer Game Engine.",
@@ -330,6 +360,11 @@ export const CASES: Record<string, CaseStudy> = {
   },
 
   safemeet: {
+    summary: {
+      problem: { en: "An alarm has to reach the contacts even when the phone can no longer send it.", de: "Ein Alarm muss die Kontakte auch dann erreichen, wenn das Handy ihn nicht mehr senden kann." },
+      role: { en: "My own product: concept, interface and development.", de: "Eigenprodukt: Konzept, Oberfläche und Entwicklung." },
+      result: { en: "A working Android development version: staged alarm, server watchdog, eight languages. Not released.", de: "Lauffähige Android-Entwicklungsversion: gestufter Alarm, Server-Watchdog, acht Sprachen. Nicht veröffentlicht." },
+    },
     challenge: {
       en: "Someone meeting a stranger, walking home or looking after a relative wants another person to know where they are, without permanent tracking. And an alarm has to reach the contacts even when the phone can no longer send it.",
       de: "Wer eine fremde Person trifft, nachts nach Hause geht oder auf Angehörige achtet, möchte, dass jemand weiß, wo er ist, ohne dauerhaft geortet zu werden. Und ein Alarm muss die Kontakte auch dann erreichen, wenn das Handy ihn nicht mehr senden kann.",
@@ -379,6 +414,11 @@ export const CASES: Record<string, CaseStudy> = {
   },
 
   "qrib-web": {
+    summary: {
+      problem: { en: "A services marketplace runs on trust between strangers — in three languages, one written right to left.", de: "Ein Marktplatz für Dienstleistungen hängt am Vertrauen zwischen Fremden — in drei Sprachen, eine davon rechtsläufig." },
+      role: { en: "Design and development of both the app and the public website.", de: "Gestaltung und Entwicklung von App und Website." },
+      result: { en: "An app with a customer and a provider side, and a website of nineteen pages in three languages.", de: "Eine App mit Kunden- und Anbieterseite und eine Website mit neunzehn Seiten in drei Sprachen." },
+    },
     challenge: {
       en: "A marketplace for services depends on trust between strangers. This one also has to work in three languages, one of them written right to left.",
       de: "Ein Marktplatz für Dienstleistungen hängt am Vertrauen zwischen Fremden. Dieser muss außerdem in drei Sprachen funktionieren, eine davon rechtsläufig.",
@@ -424,6 +464,11 @@ export const CASES: Record<string, CaseStudy> = {
   },
 
   "campus-quest": {
+    summary: {
+      problem: { en: "Students should practise running a TV studio before they touch the equipment.", de: "Studierende sollen den Studiobetrieb üben, bevor sie an die Technik gehen." },
+      role: { en: "Group project. The playable version and all of its game logic are my work.", de: "Gruppenarbeit. Die spielbare Fassung und ihre gesamte Spiellogik sind meine Arbeit." },
+      result: { en: "59 scenes in PaneoVR with free task order, checked against around 2,500 reachable game states.", de: "59 Szenen in PaneoVR mit freier Reihenfolge, geprüft gegen rund 2 500 erreichbare Spielstände." },
+    },
     challenge: {
       en: "New media students meet the TV studio, the control room and the audio rooms all at once, with expensive equipment and little time to practise on it.",
       de: "Studierende treffen am Anfang auf Fernsehstudio, Bildregie und Aufnahmeräume gleichzeitig, auf teure Technik und wenig Zeit, sie zu üben.",
@@ -469,6 +514,11 @@ export const CASES: Record<string, CaseStudy> = {
   },
 
   "ki-lesebuch": {
+    summary: {
+      problem: { en: "Learn a language by reading instead of by vocabulary lists — as a complete digital product.", de: "Eine Sprache über Lesen lernen statt über Vokabellisten — als vollständiges digitales Produkt." },
+      role: { en: "Individual work in the module: design, front end and back end.", de: "Einzelarbeit im Modul: Gestaltung, Front-End und Back-End." },
+      result: { en: "A working web application with accounts, generated stories, a grammar panel and a quiz mode.", de: "Eine lauffähige Webanwendung mit Konten, erzeugten Geschichten, Grammatiktafel und Quizmodus." },
+    },
     challenge: {
       en: "The module brief: design and build a complete digital product. The product chosen: learning a language by reading instead of by vocabulary lists.",
       de: "Die Aufgabe des Moduls: ein vollständiges digitales Produkt entwerfen und umsetzen. Das gewählte Produkt: eine Sprache über Lesen lernen statt über Vokabellisten.",
@@ -506,6 +556,11 @@ export const CASES: Record<string, CaseStudy> = {
   },
 
   "i-need-space": {
+    summary: {
+      problem: { en: "Trigger one defined emotion with a visual medium, print-ready in CMYK.", de: "Mit einem visuellen Medium eine festgelegte Emotion auslösen, druckreif in CMYK." },
+      role: { en: "Individual work in the modules Mediendesign and Computergrafik.", de: "Einzelarbeit in den Modulen Mediendesign und Computergrafik." },
+      result: { en: "A cinema poster in RGB and CMYK, with a project report on concept and execution.", de: "Ein Kinoplakat in RGB und CMYK, dazu ein Projektbericht zu Konzeption und Umsetzung." },
+    },
     challenge: {
       en: "The assignment: trigger a defined emotion with a visual medium and justify the result in a report. Output print-ready in CMYK.",
       de: "Die Aufgabe: mit einem visuellen Medium eine festgelegte Emotion auslösen und das Ergebnis in einem Bericht begründen. Ausgabe druckreif in CMYK.",

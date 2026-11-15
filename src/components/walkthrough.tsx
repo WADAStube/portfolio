@@ -161,7 +161,7 @@ export function Walkthrough({
             />
           </button>
         ))}
-        <span className="ml-3 font-mono text-[10px] tabular-nums text-white/35 shrink-0">
+        <span className="ml-3 font-mono text-[10px] tabular-nums text-white/52 shrink-0">
           {String(i + 1).padStart(2, "0")}
           <span className="text-white/15">/{String(n).padStart(2, "0")}</span>
         </span>
@@ -177,7 +177,7 @@ export function Walkthrough({
             exit={{ opacity: 0, y: reduced ? 0 : -6 }}
             transition={{ duration: 0.3, ease: EASE }}
             className={cn(
-              "text-[13px] font-light leading-[1.7] text-white/45",
+              "text-[13px] font-light leading-[1.7] text-white/62",
               phone ? "text-center" : "max-w-xl",
             )}
           >

@@ -10,7 +10,7 @@ import {
   usePageMeta,
 } from "@/components/site-chrome";
 import { Reveal } from "@/components/motion-primitives";
-import { FIELDS, type Bi, type FieldId } from "@/data/portfolio";
+import { FIELDS, STACK, type Bi, type FieldId } from "@/data/portfolio";
 import { useLang } from "@/lib/lang";
 
 /* ────────────────────────────────────────────────────────────
@@ -225,24 +225,6 @@ const APPLIED: Record<FieldId, Applied[]> = {
   ],
 };
 
-const TOOLS: { group: Bi; items: string[] }[] = [
-  {
-    group: { en: "Languages and frameworks", de: "Sprachen und Frameworks" },
-    items: ["C#", "Dart · Flutter", "TypeScript · React", "HTML · CSS · JavaScript", "Express.js", "PostgreSQL · Drizzle ORM", "Firebase · Firestore"],
-  },
-  {
-    group: { en: "Engines", de: "Engines" },
-    items: ["Unity 6 · URP", "Unreal Engine", "PaneoVR"],
-  },
-  {
-    group: { en: "3D", de: "3D" },
-    items: ["Autodesk Maya", "Arnold", "Substance Painter", "XGen", "MASH"],
-  },
-  {
-    group: { en: "Image, layout, video", de: "Bild, Satz, Video" },
-    items: ["Photoshop", "Illustrator", "InDesign", "After Effects", "Premiere Pro"],
-  },
-];
 
 function Block({
   n,
@@ -259,7 +241,7 @@ function Block({
     <section className="border-t border-white/[0.05] py-16 md:py-24">
       <div className="max-w-[1600px] mx-auto px-6 md:px-10 lg:px-16 grid grid-cols-1 lg:grid-cols-12 gap-x-16 gap-y-8">
         <Reveal direction="up" className="lg:col-span-4">
-          <p className="font-mono text-[10px] text-white/25 tabular-nums mb-4">{n}</p>
+          <p className="font-mono text-[10px] text-white/45 tabular-nums mb-4">{n}</p>
           <h2
             className="font-display font-bold text-white leading-[1.08]"
             style={{ fontSize: "clamp(1.5rem, 2.6vw, 2.2rem)", letterSpacing: "-0.02em" }}
@@ -267,7 +249,7 @@ function Block({
             {title}
           </h2>
           {note && (
-            <p className="mt-4 text-[12px] font-light leading-[1.8] text-white/40 max-w-sm">
+            <p className="mt-4 text-[12px] font-light leading-[1.8] text-white/55 max-w-sm">
               {note}
             </p>
           )}
@@ -325,14 +307,14 @@ export default function Engineering() {
               className="grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-1 py-5 border-b border-white/[0.07]"
             >
               <dt className="md:col-span-5 font-display font-medium text-white/85">{p.title[lang]}</dt>
-              <dd className="md:col-span-7 text-sm font-light leading-[1.8] text-white/50">{p.items[lang]}</dd>
+              <dd className="md:col-span-7 text-sm font-light leading-[1.8] text-white/65">{p.items[lang]}</dd>
             </div>
           ))}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-1 py-5 border-b border-white/[0.07]">
             <dt className="md:col-span-5 font-display font-medium text-white/85">
               {de ? "Vertiefung" : "Specialisation"}
             </dt>
-            <dd className="md:col-span-7 text-sm font-light leading-[1.8] text-white/50">
+            <dd className="md:col-span-7 text-sm font-light leading-[1.8] text-white/65">
               {de
                 ? "Zertifikat Computer-Aided Media Production. Drei von vier Modulen abgeschlossen."
                 : "Certificate in Computer-Aided Media Production. Three of four modules completed."}
@@ -362,7 +344,7 @@ export default function Engineering() {
               <span className="md:col-span-7 flex flex-wrap gap-x-6 gap-y-1">
                 {m.work.map((w) => (
                   <Link key={w.to} href={w.to}>
-                    <a className="text-sm font-light text-white/60 hover:text-white underline decoration-white/20 underline-offset-4 transition-colors duration-300">
+                    <a className="text-sm font-light text-white/70 hover:text-white underline decoration-white/20 underline-offset-4 transition-colors duration-300">
                       {w.title}
                     </a>
                   </Link>
@@ -385,7 +367,7 @@ export default function Engineering() {
         <div className="space-y-12">
           {FIELDS.map((f) => (
             <div key={f.id}>
-              <h3 className="text-[10px] uppercase tracking-[0.24em] text-white/40 mb-4">
+              <h3 className="text-[10px] uppercase tracking-[0.24em] text-white/55 mb-4">
                 {f.label[lang]}
               </h3>
               <ul className="border-t border-white/[0.07]">
@@ -401,12 +383,12 @@ export default function Engineering() {
                       {a.where.map((w) =>
                         w.to ? (
                           <Link key={w.title} href={w.to}>
-                            <a className="text-[11px] text-white/50 hover:text-white underline decoration-white/20 underline-offset-4 transition-colors duration-300">
+                            <a className="text-[11px] text-white/65 hover:text-white underline decoration-white/20 underline-offset-4 transition-colors duration-300">
                               {w.title}
                             </a>
                           </Link>
                         ) : (
-                          <span key={w.title} className="text-[11px] text-white/35">
+                          <span key={w.title} className="text-[11px] text-white/52">
                             {w.title}
                           </span>
                         ),
@@ -430,9 +412,9 @@ export default function Engineering() {
         }
       >
         <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-10">
-          {TOOLS.map((g) => (
+          {STACK.map((g) => (
             <div key={g.group.en}>
-              <dt className="text-[10px] uppercase tracking-[0.24em] text-white/40 mb-4">{g.group[lang]}</dt>
+              <dt className="text-[10px] uppercase tracking-[0.24em] text-white/55 mb-4">{g.group[lang]}</dt>
               <dd>
                 <ul className="space-y-2">
                   {g.items.map((i) => (
@@ -457,7 +439,7 @@ export default function Engineering() {
           ].map(([d, e, ld, le]) => (
             <div key={e} className="flex items-baseline justify-between gap-8 py-4 border-b border-white/[0.07]">
               <dt className="font-display font-medium text-white/85">{de ? d : e}</dt>
-              <dd className="text-sm font-light text-white/50">{de ? ld : le}</dd>
+              <dd className="text-sm font-light text-white/65">{de ? ld : le}</dd>
             </div>
           ))}
         </dl>

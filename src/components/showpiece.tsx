@@ -168,7 +168,7 @@ export function ShowpieceHero({
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.4 }}
                 transition={{ duration: 0.8, ease: EASE }}
-                className="text-[9px] uppercase tracking-[0.28em] text-white/45 mb-3"
+                className="text-[9px] uppercase tracking-[0.28em] text-white/62 mb-3"
               >
                 {kicker}
               </motion.p>
@@ -288,7 +288,7 @@ export function ShowpieceTurntable({
             </div>
 
             {caption && (
-              <p className="mx-auto w-full max-w-[1500px] mt-4 text-[9px] uppercase tracking-[0.22em] text-white/28">
+              <p className="mx-auto w-full max-w-[1500px] mt-4 text-[9px] uppercase tracking-[0.22em] text-white/48">
                 {caption}
               </p>
             )}
