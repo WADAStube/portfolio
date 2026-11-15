@@ -6,7 +6,7 @@ import {
   useTransform,
   useReducedMotion,
 } from "framer-motion";
-import { Volume2, VolumeX, ArrowDown } from "lucide-react";
+import { ArrowDown } from "lucide-react";
 import { Link } from "wouter";
 import { Navbar } from "@/components/navbar";
 import {
@@ -19,7 +19,6 @@ import {
 import { ProjectCard } from "@/components/project-card";
 import { Reveal, EASE, useIsSmallScreen } from "@/components/motion-primitives";
 import { ENTRIES, FIELDS, MINOR, STACK, type Bi } from "@/data/portfolio";
-import { useAmbientSound } from "@/hooks/useAmbientSound";
 import { cn } from "@/lib/utils";
 import { useLang, t } from "@/lib/lang";
 
@@ -176,23 +175,6 @@ function Marquee() {
 }
 
 /* ─────────────────────── Mute button ───────────────────────── */
-function MuteBtn({ muted, onToggle }: { muted: boolean; onToggle: () => void }) {
-  return (
-    <motion.button
-      onClick={onToggle}
-      initial={{ opacity: 0, scale: 0.85 }}
-      animate={{ opacity: 1, scale: 1 }}
-      whileHover={{ scale: 1.08 }}
-      whileTap={{ scale: 0.94 }}
-      transition={{ delay: 2.5, duration: 0.8, ease: EASE }}
-      aria-label={muted ? "Unmute" : "Mute"}
-      className="fixed bottom-6 right-6 z-[9995] w-9 h-9 flex items-center justify-center bg-white/[0.07] hover:bg-white/[0.14] text-white/55 hover:text-white/75 transition-colors duration-200"
-    >
-      {muted ? <VolumeX size={13} /> : <Volume2 size={13} />}
-    </motion.button>
-  );
-}
-
 /* ─────────────── Abschnittskopf ─────────────── */
 function SectionHead({ kicker, title, to, more }: { kicker: string; title: string; to?: string; more?: string }) {
   return (
@@ -223,7 +205,6 @@ function SectionHead({ kicker, title, to, more }: { kicker: string; title: strin
 
 /* ─────────────────────────── Home ──────────────────────────── */
 export default function Home() {
-  const videoRef = useRef<HTMLVideoElement>(null);
   const heroRef = useRef<HTMLElement>(null);
   const reduced = useReducedMotion();
 
@@ -242,9 +223,6 @@ export default function Home() {
   const heroY = useTransform(scrollYProgress, [0, 1], [0, -110]);
   const overlayOpacity = useTransform(scrollYProgress, [0, 1], [0.4, 0.85]);
 
-  const { isMuted, toggle } = useAmbientSound(
-    videoRef as React.RefObject<HTMLVideoElement>,
-  );
 
   const { lang } = useLang();
   const featured = ENTRIES.filter((e) => e.home).sort((a, b) => a.home! - b.home!);
@@ -262,29 +240,31 @@ export default function Home() {
       <Grain />
       <Cursor />
       <Navbar />
-      <MuteBtn muted={isMuted} onToggle={toggle} />
 
       {/* ══════════════════ HERO ══════════════════ */}
       <section ref={heroRef} id="top" className="relative h-svh overflow-hidden">
         <div className="absolute inset-0">
-          {/* Der Clip ist 1920x812 — sehr breit (2,36:1).
-              Formatfuellend auf einem Hochformat-Handy wuerde rund
-              80 % der Breite wegfallen und der Rest stark
-              hochskaliert: unscharf und schlecht ausgeschnitten.
-              Mobil laeuft er daher als 4:3-Band mit massvollem
-              Beschnitt — praktisch ohne Hochskalierung und damit
-              scharf. Ab md dann wie gehabt formatfuellend. */}
+          {/* Das Bild ist 16:9. Formatfuellend auf einem
+              Hochformat-Handy fiele der halbe Bildausschnitt weg,
+              darunter die Huette. Mobil laeuft es daher als
+              4:3-Band mit massvollem Beschnitt, ab md
+              formatfuellend. Bildausschnitt rechtsbetont, damit
+              die Huette nicht unter dem Namen verschwindet. */}
           <div className="absolute inset-x-0 top-[17%] aspect-[4/3] overflow-hidden md:inset-0 md:top-0 md:aspect-auto">
-            <motion.video
-              ref={videoRef}
-              style={{ scale: reduced ? 1 : videoScale, y: reduced ? 0 : videoY }}
-              src="/videos/hero.mp4"
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="auto"
-              className="w-full h-full object-cover origin-center will-change-transform"
+            <motion.img
+              src="/images/hero.jpg"
+              alt=""
+              aria-hidden="true"
+              fetchPriority="high"
+              decoding="async"
+              style={{
+                scale: reduced ? 1 : videoScale,
+                y: reduced ? 0 : videoY,
+                backgroundImage: "url(/images/hero-small.jpg)",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }}
+              className="w-full h-full object-cover object-[70%_center] md:object-center origin-center will-change-transform"
             />
           </div>
 
@@ -292,7 +272,8 @@ export default function Home() {
             className="absolute inset-0 bg-black"
             style={{ opacity: overlayOpacity }}
           />
-          <div className="absolute bottom-0 left-0 right-0 h-[55%] bg-gradient-to-t from-black via-black/50 to-transparent" />
+          <div className="absolute bottom-0 left-0 right-0 h-[42%] bg-gradient-to-t from-black via-black/55 to-transparent" />
+          <div className="absolute inset-y-0 left-0 w-[55%] bg-gradient-to-r from-black/70 via-black/20 to-transparent md:w-[45%]" />
           <div className="absolute top-0 left-0 right-0 h-[30%] bg-gradient-to-b from-black/60 to-transparent" />
         </div>
 
@@ -456,7 +437,7 @@ export default function Home() {
           <p className="text-[9px] uppercase tracking-[0.26em] text-white/48 mb-8">
             {t("stackTitle", lang)}
           </p>
-          <dl className="grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-10">
+          <dl className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-10">
             {STACK.map((g) => (
               <div key={g.group.en}>
                 <dt className="text-[10px] uppercase tracking-[0.2em] text-white/70 mb-3">

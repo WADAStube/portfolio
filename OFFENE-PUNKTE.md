@@ -41,11 +41,13 @@ Nichts davon ist auf der Seite erfunden worden. Wo eine Angabe fehlt, steht sie 
 ## Aus der Richtigstellung (v64)
 
 27. **Abschlussdatum.** Oktober 2027 steht jetzt auf der Startseite und der Engineering-Seite. Im Oktober hattest du gesagt, niemand solle wissen, wann du fertig bist. Diesmal hast du es ausdrücklich verlangt, deshalb steht es drin. Ein Wort von dir, und es ist wieder raus.
-28. **Bifrost.** Neu in der Gruppe „3D & Echtzeit“, also als Können ausgewiesen, nicht unter „Erste Erfahrungen“. In welchem Projekt hast du damit gearbeitet? Dann kann ich es dort auch zeigen.
-29. **Unreal Engine** steht unter „Erste Erfahrungen“, weil bisher nur Tests in Future!comeback belegt sind. Falls du mehr damit gemacht hast, sag es, dann rückt es hoch.
+28. **Bifrost, ZBrush, DaVinci Resolve** stehen jetzt bei den Werkzeugen, aber in keinem Projekt auf der Seite. In welchen Arbeiten kommen sie vor? Dann kann ich sie dort zeigen statt nur zu listen.
+29. ~~Unreal Engine unter „Erste Erfahrungen“~~ — erledigt mit dem neuen Lebenslauf: steht jetzt gleichberechtigt bei Echtzeit & VR.
 30. **Die sechs 3D-Studien** (Futuristic Bunker, Robot Study, Apocalypse, Character Studies, Isometric Room, Security Camera) stehen weiter auf „Folgt“. Jetzt, wo 3D vorn steht, wirkt das schwach. Sollen sie auf „vollständig gezeigt“ wechseln? Dann brauche ich je zwei, drei Sätze zur Einordnung.
-31. **Lebenslauf (PDF).** Steht noch als „Medientechniker“ mit reinem 3D-Design-Schwerpunkt da und passt weder zur alten noch zur neuen Positionierung. Soll ich ihn auf „3D Artist · Creative Developer“ umstellen, und soll der Abschlusstermin dort hinein?
+31. ~~Lebenslauf (PDF) veraltet~~ — erledigt: neue einseitige Fassung eingebaut, ohne Adresse und Telefonnummer.
 32. **Film, Animation und VFX** nennst du als Zielbereich. Belegt sind Motion Design, die E-Sports-Overlays und die Abschlussfeier, alle ohne Bildmaterial. Mit Material dazu wird dieser Bereich sichtbar.
+
+33. **Hero-Video.** `public/videos/hero.mp4` liegt weiter im Ordner, wird aber nicht mehr geladen. Soll es raus (5,5 MB)?
 
 ## Technisch
 

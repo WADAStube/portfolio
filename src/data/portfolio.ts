@@ -64,7 +64,7 @@ export const fieldLabel = (id: FieldId) =>
   FIELDS.find((f) => f.id === id)!.label;
 
 /* Womit gearbeitet wird. Eine Quelle fuer Startseite und
-   Engineering-Seite.
+   Engineering-Seite, gegliedert wie im Lebenslauf.
 
    Jede Gruppe sagt in einem Satz, wofuer sie steht — eine Liste
    aus zwanzig Namen ohne Zusammenhang sagt nichts aus. "early"
@@ -78,22 +78,28 @@ export const STACK: {
   early?: string[];
 }[] = [
   {
-    group: { en: "3D & real time", de: "3D & Echtzeit" },
+    group: { en: "3D & VFX", de: "3D & VFX" },
     note: {
-      en: "Modelling, UVs, rigging, animation, shading, lighting and rendering, and the same assets rebuilt to run in an engine.",
-      de: "Modellierung, UVs, Rigging, Animation, Shading, Licht und Rendering, und dieselben Assets so neu aufgebaut, dass sie in einer Engine laufen.",
+      en: "Modelling, UVs, rigging, animation, shading, lighting and rendering — the chain a scene runs through before it is an image.",
+      de: "Modellierung, UVs, Rigging, Animation, Shading, Licht und Rendering: die Kette, die eine Szene durchläuft, bevor sie ein Bild ist.",
     },
     items: [
       "Autodesk Maya",
       "Bifrost",
-      "Arnold",
+      "ZBrush",
       "Substance 3D Painter",
+      "Arnold",
       "XGen",
       "MASH",
-      "Unity 6 · URP",
-      "C#",
     ],
-    early: ["Unreal Engine"],
+  },
+  {
+    group: { en: "Real-time & VR", de: "Echtzeit & VR" },
+    note: {
+      en: "Level and environment art, game-ready assets, and the logic that makes a scene playable.",
+      de: "Level- und Environment-Art, Game-Ready-Assets und die Logik, die aus einer Szene etwas Spielbares macht.",
+    },
+    items: ["Unity 6 · URP", "Unreal Engine", "C#", "PaneoVR"],
   },
   {
     group: { en: "Development", de: "Entwicklung" },
@@ -102,19 +108,19 @@ export const STACK: {
       de: "Apps und Web-Anwendungen von Anfang bis Ende: Datenmodell, Server und Oberfläche.",
     },
     items: [
-      "Dart · Flutter",
       "TypeScript · React",
-      "HTML · CSS · JavaScript",
+      "Dart · Flutter",
+      "Firebase · Firestore",
       "Express.js",
       "PostgreSQL · Drizzle ORM",
-      "Firebase · Firestore",
+      "HTML · CSS · JavaScript",
     ],
   },
   {
-    group: { en: "Media & interaction", de: "Medien & Interaktion" },
+    group: { en: "Film & design", de: "Film & Gestaltung" },
     note: {
-      en: "Image and layout for print and screen, camera and post-production, and interactive 360° work.",
-      de: "Bild und Satz für Druck und Bildschirm, Kamera und Postproduktion, dazu interaktive 360°-Anwendungen.",
+      en: "Image and layout for print and screen, camera and audio on set, editing and post-production.",
+      de: "Bild und Satz für Druck und Bildschirm, Kamera und Ton am Set, Schnitt und Postproduktion.",
     },
     items: [
       "Photoshop",
@@ -122,7 +128,7 @@ export const STACK: {
       "InDesign",
       "After Effects",
       "Premiere Pro",
-      "PaneoVR",
+      "DaVinci Resolve",
     ],
   },
 ];

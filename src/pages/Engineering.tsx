@@ -407,8 +407,8 @@ export default function Engineering() {
         title={de ? "Werkzeuge" : "Tools"}
         note={
           de
-            ? "Womit die Projekte auf dieser Seite gebaut wurden. Was unter „Erste Erfahrungen“ steht, habe ich ausprobiert, aber noch kein Projekt damit abgeschlossen."
-            : "What the projects on this site were built with. Anything under “First experience” I have tried, without finishing a project in it."
+            ? "Gegliedert wie im Lebenslauf. Unreal Engine kommt bisher in Future!comeback zum Einsatz, Bifrost und ZBrush in der Modellierung."
+            : "Grouped as in the CV. Unreal Engine is so far in use on Future!comeback; Bifrost and ZBrush in modelling."
         }
       >
         <dl className="space-y-12">

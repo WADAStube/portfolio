@@ -1,3 +1,49 @@
+Portfolio — Version 65  (15.11.2026)
+
+NEUER LEBENSLAUF
+  public/Issam-Selmi-CV.pdf ausgetauscht. Eine Seite, keine
+  Adresse, keine Telefonnummer, nur E-Mail und Links. Der Knopf
+  "Lebenslauf laden" im Kontaktblock zeigt unverändert darauf
+  und liefert jetzt die neue Fassung.
+
+HERO: STANDBILD STATT VIDEO
+  public/images/hero.jpg (1920 x 1080) — Lantern Island,
+  cinematisches Colorgrading. Dazu hero-small.jpg als
+  Platzhalter, der zuerst lädt.
+  - Das Video ist raus, der Ton-Schalter unten rechts damit auch.
+  - Mobil läuft das Bild wie vorher der Clip als 4:3-Band mit
+    maßvollem Beschnitt, ab md formatfüllend.
+  - Die Verläufe sind angepasst: unten von 55 % auf 42 % gekürzt
+    und abgeschwächt, dafür ein weicher Verlauf von links. Der
+    Steinweg und der Garten bleiben sichtbar, der Name steht
+    trotzdem auf dunklem Grund.
+  - public/videos/hero.mp4 bleibt im Ordner liegen, falls du
+    zurück willst. Es wird nicht mehr geladen.
+
+WERKZEUGE NACH DEM NEUEN LEBENSLAUF
+  Die Gruppen folgen jetzt deiner eigenen Gliederung:
+    3D & VFX           Maya, Bifrost, ZBrush, Substance 3D
+                       Painter, Arnold, XGen, MASH
+    Echtzeit & VR      Unity 6 · URP, Unreal Engine, C#, PaneoVR
+    Entwicklung        TypeScript/React, Flutter/Dart, Firebase,
+                       Express, PostgreSQL mit Drizzle, HTML/CSS/JS
+    Film & Gestaltung  Photoshop, Illustrator, InDesign,
+                       After Effects, Premiere Pro, DaVinci Resolve
+  Neu dazu: ZBrush und DaVinci Resolve.
+  Unreal Engine steht nicht mehr unter "Erste Erfahrungen",
+  sondern gleichberechtigt bei Echtzeit & VR — so wie in deinem
+  Lebenslauf. Die Unterscheidung bleibt im Code erhalten und
+  lässt sich jederzeit wieder setzen.
+  Startseite und Engineering-Seite lesen weiterhin dieselbe
+  Quelle (data/portfolio.ts, STACK), jetzt vierspaltig.
+
+GEPRÜFT
+  1920, 1440, 834 und 390 px, Deutsch und Englisch: Bild lädt,
+  kein Video mehr im Markup, Lebenslauf-Link zeigt auf die PDF,
+  kein seitliches Scrollen, keine Fehler.
+
+──────────────────────────────────────────────────────────────
+
 Portfolio — Version 64  (15.11.2026)
 
 POSITIONIERUNG: BEIDE SEITEN GLEICHBERECHTIGT
