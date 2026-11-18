@@ -97,8 +97,8 @@ function LayerText({
       <p className="text-sm font-light leading-[1.95] text-white/65 max-w-sm">
         {layer.body}
       </p>
-      <p className="mt-6 pt-5 border-t border-white/[0.07] text-[10px] leading-relaxed text-white/45 max-w-sm">
-        {layer.tech.join("  ·  ")}
+      <p className="mt-6 max-w-sm border-t border-white/[0.07] pt-5 text-[11px] leading-relaxed text-white/45 md:text-[10px]">
+        {layer.tech[0]}
       </p>
     </motion.div>
   );
@@ -150,7 +150,7 @@ function LightSwitch({
         aria-label={name}
         onClick={() => onChange(!on)}
         className={cn(
-          "relative shrink-0 h-[34px] w-[58px] rounded-full",
+          "relative shrink-0 h-[40px] w-[66px] rounded-full md:h-[34px] md:w-[58px]",
           "transition-colors duration-500 outline-none",
           "focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-black",
           on ? "bg-[#f0b64a]" : "bg-white/15",

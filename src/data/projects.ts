@@ -163,16 +163,16 @@ export const projectsData: Project[] = [
       longDescription:
         "Eine stilisierte Umgebung als geschlossenes Diorama: eine schiefe Holzhütte auf einer Felseninsel, ein Steinweg hinauf, vorn eine rote Brücke und ein Baum, der die Silhouette bricht. Die gesamte Szene ist cel-shadet: flache Farbflächen mit harten Konturen statt fotorealistischer Schattierung. Damit tragen Form, Kontrast und Licht die ganze Wirkung allein. Zwei Laternen bestimmen die Stimmung; alles außerhalb ihrer Reichweite fällt bewusst ins Dunkle. Anschließend wurde die Szene als Game-Ready-Asset neu aufgebaut und nach Unity 6 portiert, wo sie mit spielbarem Character in Echtzeit läuft. Daraus ist ein Spiel geworden: elf Laternen, die auf der Insel angezündet werden wollen, Glimmer zum Rufen und Losschicken, eine Tasche. Die Fassung liegt auf itch.io.",
       layers: [
-        { label: "Boden", title: "Die Basis", body: "Eine Fläche, mit Soft Select geformt und bewusst uneben gehalten. Die Silhouette entscheidet bereits, wo später der Weg verläuft und wo Bewuchs entsteht.", tech: ["Polygonfläche, unterteilt und per Soft Select modelliert", "Asymmetrischer Umriss — kein flacher Boden", "aiToon mit zwei Tonstufen, Konturen zurückgenommen"] },
-        { label: "Steine", title: "Der Rand", body: "Drei Grundfelsen, über MASH verteilt. Die Dichte steigt dort, wo das Auge eine Grenze lesen soll, statt gleichmäßig zu streuen.", tech: ["MASH-Verteilung im Mesh-Modus auf dem Terrain", "Random-Node für Rotation und Skalierung, ID-Node für Varianten", "Repro-Node für renderbare Geometrie"] },
-        { label: "Haus", title: "Die Mitte", body: "Vollständig von Hand modelliert und bewusst schief. Gerade Winkel würden gegen den gezeichneten Look arbeiten, auf dem die Szene aufbaut.", tech: ["Box-Modeling, von der Grundform zum Detail", "Stützkanten an jeder Kante, die scharf bleibt", "Niedriger Angle Threshold, damit Innenkanten Konturen bekommen"] },
-        { label: "Brücke", title: "Der Zugang", body: "Modularer Aufbau — ein Element mit erhaltener Transformation vervielfältigt. Sie sagt, dass der Ort erreichbar und bewohnt ist, und führt den Blick ins Bild.", tech: ["Wiederholte Elemente, dupliziert mit erhaltener Transformation", "Eigene Gruppe, unabhängig positioniert", "Kräftiges Rot als bewusster Akzent gegen das Grün"] },
-        { label: "Bäume", title: "Höhe und Rahmen", body: "Lizenzierte Basismodelle, vollständig neu geshadet — die fotorealistischen Materialien haben den Cel-Look gebrochen. Blätter sind Opacity-Masken statt Geometrie.", tech: ["Komplettes Neu-Shading für einheitlichen Stil", "Two-Sided-Material, damit Blattseiten unterschiedlich lesen", "Höherer Angle Threshold, damit das Laub nicht in Linien ertrinkt"] },
-        { label: "Gras", title: "Der Boden wird lebendig", body: "Mehrere hunderttausend Instanzen, die Dichte von Hand gemalt. Bewuchs sammelt sich an Kanten und in Mulden — gleichmäßige Streuung liest sich immer künstlich.", tech: ["MASH-Verteilung auf dem Terrain-Mesh", "Placer-Tool und Influence-Locator für lokale Dichte", "Konturen stark reduziert, sonst wird das Bild unruhig"] },
-        { label: "Details", title: "Bodendetails", body: "Die Trittsteine folgen der Laufrichtung von der Brücke zur Tür. Laub liegt auch auf den Felsen, nicht nur am Boden.", tech: ["Getrennte MASH-Netzwerke für Weg, Pflanzen und Laub", "Steine nach Absicht gesetzt, nicht zufällig", "Farbvariation von Grün bis Braun"] },
-        { label: "Props", title: "Spuren von Leben", body: "Feuerstelle, Kessel, Werkzeug, Leiter, Briefkasten — einzeln modelliert und von Hand gesetzt. Der Kessel steht dort, wo jemand gekocht hat.", tech: ["Einzeln modellierte Objekte mit eigenen Pivots", "Manuelle Platzierung statt Streuung", "Leichte Schieflagen gegen den aufgeräumten Eindruck"] }
+        { label: "Boden", title: "Die Basis", body: "Eine Fläche, mit Soft Select geformt und bewusst uneben gehalten.", tech: ["Polygonfläche, unterteilt und per Soft Select modelliert", "Asymmetrischer Umriss — kein flacher Boden", "aiToon mit zwei Tonstufen, Konturen zurückgenommen"] },
+        { label: "Steine", title: "Der Rand", body: "Drei Grundfelsen, über MASH verteilt.", tech: ["MASH-Verteilung im Mesh-Modus auf dem Terrain", "Random-Node für Rotation und Skalierung, ID-Node für Varianten", "Repro-Node für renderbare Geometrie"] },
+        { label: "Haus", title: "Die Mitte", body: "Vollständig von Hand modelliert und bewusst schief.", tech: ["Box-Modeling, von der Grundform zum Detail", "Stützkanten an jeder Kante, die scharf bleibt", "Niedriger Angle Threshold, damit Innenkanten Konturen bekommen"] },
+        { label: "Brücke", title: "Der Zugang", body: "Modularer Aufbau — ein Element mit erhaltener Transformation vervielfältigt.", tech: ["Wiederholte Elemente, dupliziert mit erhaltener Transformation", "Eigene Gruppe, unabhängig positioniert", "Kräftiges Rot als bewusster Akzent gegen das Grün"] },
+        { label: "Bäume", title: "Höhe und Rahmen", body: "Lizenzierte Basismodelle, vollständig neu geshadet — die fotorealistischen Materialien haben den Cel-Look gebrochen.", tech: ["Komplettes Neu-Shading für einheitlichen Stil", "Two-Sided-Material, damit Blattseiten unterschiedlich lesen", "Höherer Angle Threshold, damit das Laub nicht in Linien ertrinkt"] },
+        { label: "Gras", title: "Der Boden wird lebendig", body: "Mehrere hunderttausend Instanzen, die Dichte von Hand gemalt.", tech: ["MASH-Verteilung auf dem Terrain-Mesh", "Placer-Tool und Influence-Locator für lokale Dichte", "Konturen stark reduziert, sonst wird das Bild unruhig"] },
+        { label: "Details", title: "Bodendetails", body: "Die Trittsteine folgen der Laufrichtung von der Brücke zur Tür.", tech: ["Getrennte MASH-Netzwerke für Weg, Pflanzen und Laub", "Steine nach Absicht gesetzt, nicht zufällig", "Farbvariation von Grün bis Braun"] },
+        { label: "Props", title: "Spuren von Leben", body: "Feuerstelle, Kessel, Werkzeug, Leiter, Briefkasten — einzeln modelliert und von Hand gesetzt.", tech: ["Einzeln modellierte Objekte mit eigenen Pivots", "Manuelle Platzierung statt Streuung", "Leichte Schieflagen gegen den aufgeräumten Eindruck"] }
       ],
-      toggle: { name: "Licht", label: "Licht", title: "Der Umschlag", body: "Bis hierhin war die Szene neutral beleuchtet. Das finale Setup kippt sie in die Nacht — und der ganze Look hängt an einer Entscheidung: einem gerichteten Key-Light. Reines Umgebungslicht würde die Tonwertstufen weichzeichnen und das Cel-Shading zusammenbrechen lassen.", tech: ["Key / Fill / Rim mit gerichtetem Key für harte Schattenkanten", "Laternen und Feuer als Practicals — emissive Geometrie plus echtes Licht", "Warme 2200 K gegen ein kühles Ambient, Schatten leicht ins Blaue"] }
+      toggle: { name: "Licht", label: "Licht", title: "Der Umschlag", body: "Bis hierhin war die Szene neutral beleuchtet.", tech: ["Key / Fill / Rim mit gerichtetem Key für harte Schattenkanten", "Laternen und Feuer als Practicals — emissive Geometrie plus echtes Licht", "Warme 2200 K gegen ein kühles Ambient, Schatten leicht ins Blaue"] }
     },
     title: "Lantern Island",
     category: "Stylised Environment",
@@ -193,20 +193,20 @@ export const projectsData: Project[] = [
           {
             title: "Three-point setup",
             titleDe: "Drei-Punkt-Beleuchtung",
-            body: "Key from the side and above, fill opposite and much weaker, rim from behind. Without the rim the dark rocks would disappear against the dark background. In 3D an extra light costs only render time — the count was still kept low, because every additional source makes the image harder to read, not better.",
-            bodyDe: "Führungslicht seitlich erhöht, Aufhelllicht gegenüber und deutlich schwächer, Kantenlicht von hinten. Ohne das Kantenlicht würden die dunklen Felsen vor dem dunklen Hintergrund verschwinden. In 3D kostet ein zusätzliches Licht nur Rechenzeit — die Anzahl blieb trotzdem niedrig, weil jede weitere Quelle das Bild unlesbarer macht, nicht besser.",
+            body: "Key from the side and above, fill opposite and much weaker, rim from behind.",
+            bodyDe: "Führungslicht seitlich erhöht, Aufhelllicht gegenüber und deutlich schwächer, Kantenlicht von hinten.",
           },
           {
             title: "Hard against soft",
             titleDe: "Hartes gegen weiches Licht",
-            body: "The shadow edge follows from source size against distance. Here that was not a style choice but a technical requirement: cel shading depends on hard tone steps, and a soft ambient would have produced gradients and killed the look. Hence a directional key — parallel rays from far away, like sun or moon.",
-            bodyDe: "Die Schattenkante ergibt sich aus Lichtquellengröße im Verhältnis zum Abstand. Das war hier keine Stilfrage, sondern technische Notwendigkeit: Cel-Shading lebt von harten Tonwertstufen, ein weiches Umgebungslicht hätte weiche Verläufe erzeugt und den Look zerstört. Deshalb ein gerichtetes Licht — parallele Strahlen aus großer Entfernung, wie Sonne oder Mond.",
+            body: "The shadow edge follows from source size against distance.",
+            bodyDe: "Die Schattenkante ergibt sich aus Lichtquellengröße im Verhältnis zum Abstand.",
           },
           {
             title: "Practicals",
             titleDe: "Practicals",
-            body: "Lanterns and fire are visible in frame and light their surroundings. On a set that is one object; in 3D it is two. An emissive material looks bright but lights nothing, so each practical is emissive geometry plus a real light in the same place.",
-            bodyDe: "Laternen und Feuerstelle sind im Bild sichtbar und beleuchten ihre Umgebung. Am Set ist das ein Objekt, in 3D sind es zwei. Ein selbstleuchtendes Material erscheint hell, beleuchtet aber nichts — jedes Practical besteht deshalb aus leuchtender Geometrie plus echter Lichtquelle an derselben Stelle.",
+            body: "Lanterns and fire are visible in frame and light their surroundings.",
+            bodyDe: "Laternen und Feuerstelle sind im Bild sichtbar und beleuchten ihre Umgebung.",
           },
         ],
       },
@@ -217,20 +217,20 @@ export const projectsData: Project[] = [
           {
             title: "Warm against cool",
             titleDe: "Kalt-Warm-Kontrast",
-            body: "Lanterns and fire sit at roughly 2200 K, deep orange; the ambient is kept cool. The contrast turns the warm zones into islands, with everything around them colder — which matches what the scene is about.",
-            bodyDe: "Laternen und Feuer liegen bei etwa 2200 Kelvin, tief orange; das Umgebungslicht bleibt kühl. Der Kontrast macht die warmen Zonen zu Inseln, um die herum es kälter wird — was zum Motiv passt.",
+            body: "Lanterns and fire sit at roughly 2200 K, deep orange; the ambient is kept cool.",
+            bodyDe: "Laternen und Feuer liegen bei etwa 2200 Kelvin, tief orange; das Umgebungslicht bleibt kühl.",
           },
           {
             title: "Shadows are not grey",
             titleDe: "Farbige Schatten",
-            body: "Shadows are lit by whatever else emits light, usually the sky, and the sky is blue. The shadow steps in the toon ramps are therefore tinted slightly blue rather than neutral grey. The same base colour reads dull with a grey shadow and alive with a blue one.",
-            bodyDe: "Schatten werden von dem beleuchtet, was sonst noch Licht abgibt — meist der Himmel, und der ist blau. Die Schattenstufen in den Toon-Ramps sind deshalb leicht bläulich getönt statt neutralgrau. Dieselbe Grundfarbe wirkt mit grauem Schatten stumpf und mit blaustichigem lebendig.",
+            body: "Shadows are lit by whatever else emits light, usually the sky, and the sky is blue.",
+            bodyDe: "Schatten werden von dem beleuchtet, was sonst noch Licht abgibt — meist der Himmel, und der ist blau.",
           },
           {
             title: "A limited palette",
             titleDe: "Begrenzte Palette",
-            body: "The whole scene runs on around twelve base colours. With a stylised look and no textures that is not an option but a requirement — on flat colour surfaces any unmatched colour shows immediately. Saturation carries the eye: strong colour only on the lantern glow, the red bridge and the flames.",
-            bodyDe: "Die gesamte Szene arbeitet mit rund zwölf Grundfarben. Bei einem stilisierten Look ohne Texturen ist das keine Option, sondern Voraussetzung — auf flachen Farbflächen fällt jede unabgestimmte Farbe sofort auf. Die Sättigung führt den Blick: kräftige Farbe nur am Laternenlicht, an der roten Brücke und an den Flammen.",
+            body: "The whole scene runs on around twelve base colours.",
+            bodyDe: "Die gesamte Szene arbeitet mit rund zwölf Grundfarben.",
           },
         ],
       },
@@ -241,14 +241,14 @@ export const projectsData: Project[] = [
           {
             title: "ACES colour management",
             titleDe: "Farbmanagement mit ACES",
-            body: "The scene works in an ACES workflow — material colours, light values, viewport and output. It also produced the one problem that was hardest to identify: renderers work linearly, screens display gamma-corrected. Without the output transform on export the files looked almost black outside the software, although the data was correct.",
-            bodyDe: "Die Szene arbeitet durchgehend im ACES-Workflow — Materialfarben, Lichtwerte, Viewport und Ausgabe. Daraus entstand auch das Problem, das am schwersten zu erkennen war: Renderer rechnen linear, Bildschirme zeigen gammakorrigiert. Ohne Ausgangstransformation beim Export erschienen die Dateien außerhalb der Software fast schwarz, obwohl die Daten korrekt waren.",
+            body: "The scene works in an ACES workflow — material colours, light values, viewport and output.",
+            bodyDe: "Die Szene arbeitet durchgehend im ACES-Workflow — Materialfarben, Lichtwerte, Viewport und Ausgabe.",
           },
           {
             title: "Exposure in stops",
             titleDe: "Belichtung in Blendenstufen",
-            body: "Brightness in Arnold is set through exposure in stops rather than linear intensity values — the same logic as on a camera, where one step doubles the light. It makes the values comparable instead of arbitrary.",
-            bodyDe: "Die Helligkeit wird in Arnold über Exposure in Blendenstufen gesteuert, nicht über lineare Intensitätswerte — dieselbe Logik wie an der Kamera, wo ein Schritt einer Verdopplung entspricht. Das macht die Werte vergleichbar statt beliebig.",
+            body: "Brightness in Arnold is set through exposure in stops rather than linear intensity values — the same logic as on a camera, where one step doubles the light.",
+            bodyDe: "Die Helligkeit wird in Arnold über Exposure in Blendenstufen gesteuert, nicht über lineare Intensitätswerte — dieselbe Logik wie an der Kamera, wo ein Schritt einer Verdopplung entspricht.",
           },
           {
             title: "Linear output",

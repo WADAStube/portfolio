@@ -1,11 +1,6 @@
 import { Link } from "wouter";
 import { StatusBadge } from "@/components/site-chrome";
-import {
-  fieldLabel,
-  hasMedia,
-  pathOf,
-  type Entry,
-} from "@/data/portfolio";
+import { hasMedia, pathOf, type Entry } from "@/data/portfolio";
 import { cn } from "@/lib/utils";
 import { useLang, pick } from "@/lib/lang";
 
@@ -89,18 +84,17 @@ export function ProjectCard({
             </svg>
           )}
         </div>
-        <p className="mt-2 text-[10px] uppercase tracking-[0.2em] text-white/52">
+        <p className="mt-2 text-[11px] uppercase tracking-[0.18em] text-white/52 md:text-[10px] md:tracking-[0.2em]">
           {pick(p.category, p.de?.category, lang)}
         </p>
-        <p className="mt-4 text-sm font-light leading-[1.8] text-white/65 max-w-xl">
-          {pick(p.description, p.de?.description, lang)}
-        </p>
-        <p className="mt-4 text-[10px] tracking-[0.06em] text-white/48">
-          {entry.fields.map((f) => fieldLabel(f)[lang]).join("  ·  ")}
-        </p>
+        {/* Beschreibung, Fachrichtungen und Werkzeuge standen hier
+            alle drei untereinander. Bei vierzehn Karten ergab das
+            vierzehn Absätze, die niemand liest. Es bleibt eine
+            Zeile: die Werkzeuge, weil danach beim Überfliegen
+            tatsächlich gesucht wird. */}
         {p.tools.length > 0 && (
-          <p className="mt-1.5 font-mono text-[10px] text-white/45">
-            {p.tools.slice(0, large ? 6 : 4).join(" / ")}
+          <p className="mt-3 font-mono text-[11px] text-white/45 md:text-[10px]">
+            {p.tools.slice(0, large ? 5 : 3).join("  ·  ")}
           </p>
         )}
       </div>

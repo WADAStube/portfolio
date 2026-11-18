@@ -306,7 +306,7 @@ export function ContactSection() {
         <Reveal direction="up" delay={0.1}>
           <a
             href="mailto:issam-selmi@outlook.com"
-            className="group inline-flex items-baseline gap-4 mb-16 md:mb-24"
+            className="group inline-flex items-baseline gap-4 mb-16 py-2 md:mb-24 md:py-0"
           >
             <span
               className="font-display font-medium text-white/75 group-hover:text-white transition-colors duration-300"
@@ -369,7 +369,7 @@ export function ContactSection() {
 
           <div className="w-full h-px bg-white/[0.07] mb-16" />
 
-          <div className="flex flex-wrap items-center gap-10">
+          <div className="flex flex-wrap items-center gap-x-10 gap-y-2">
             {[
               {
                 label: "Instagram",
@@ -388,7 +388,7 @@ export function ContactSection() {
                 rel="noopener noreferrer"
                 whileHover={{ y: -2 }}
                 transition={{ duration: 0.25, ease: EASE }}
-                className="text-[11px] text-white/48 hover:text-white/70 uppercase tracking-[0.2em] transition-colors duration-200"
+                className="-my-3 py-3 text-[11px] text-white/48 hover:text-white/70 uppercase tracking-[0.2em] transition-colors duration-200"
               >
                 {label}
               </motion.a>
@@ -412,7 +412,7 @@ export function SiteFooter() {
           </span>
           © {new Date().getFullYear()} Issam Selmi · WADAS
         </p>
-        <p className="text-[9px] text-white/14 uppercase tracking-wider">
+        <p className="text-[10px] text-white/40 uppercase tracking-wider md:text-[9px]">
           3D &amp; Game Art · Development · Hamburg
         </p>
       </div>

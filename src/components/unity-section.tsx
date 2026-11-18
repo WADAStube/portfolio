@@ -736,7 +736,7 @@ export function UnitySection({
               </h3>
               <p className="text-sm font-light leading-[1.9] text-white/62 max-w-md">
                 {lang === "de"
-                  ? "In der Maya-Fassung war die Vegetation echte Geometrie, jede Instanz ein eigenes Objekt. Für die Engine neu aufgebaut: Dreieckszahl mehr als halbiert, Materialien so gesetzt, dass der SRP Batcher greift. Von 1 327 Draw Calls sind 1 309 instanziert."
+                  ? "In der Maya-Fassung war die Vegetation echte Geometrie, jede Instanz ein eigenes Objekt. Für die Engine neu aufgebaut: Dreieckszahl mehr als halbiert, Materialien so gesetzt, dass der SRP Batcher greift. Von 1 327 Draw Calls sind 1 309 instanziert."
                   : "In the Maya version vegetation was real geometry, every instance its own object. Rebuilt for the engine: triangle count more than halved, materials set up so the SRP Batcher takes over. Of 1,327 draw calls, 1,309 are instanced."}
               </p>
               <p className="mt-5 text-[11px] leading-relaxed text-white/48 max-w-md">

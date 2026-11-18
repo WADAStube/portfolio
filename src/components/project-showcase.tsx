@@ -73,6 +73,14 @@ const columnWidthFor = (ratio: number) => {
   return "w-full"; // Querformat
 };
 
+/* Vorspann: die ersten zwei Saetze. Der ganze Absatz stand frueher
+   im Fliesstext und war der Hauptgrund, warum die Seiten zugetextet
+   wirkten. Was darueber hinausgeht, steht in der Fallstudie. */
+function lead(text: string, sentences = 2) {
+  const parts = text.split(/(?<=[.!?])\s+/);
+  return parts.slice(0, sentences).join(" ");
+}
+
 export function ProjectShowcase({
   project,
   index,
@@ -211,7 +219,7 @@ export function ProjectShowcase({
           <Reveal direction="up" duration={0.9}>
             <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
               <div>
-                <p className="text-[8px] uppercase tracking-[0.28em] text-white/45 mb-3">
+                <p className="mb-3 text-[10px] uppercase tracking-[0.2em] text-white/45 md:text-[8px] md:tracking-[0.28em]">
                   {pick(project.category, de?.category, lang)}
                 </p>
                 <h2
@@ -536,7 +544,13 @@ export function ProjectShowcase({
                         ],
                   )}
                 >
-                  {pick(project.longDescription || project.description, de?.longDescription || de?.description, lang)}
+                  {lead(
+                    pick(
+                      project.longDescription || project.description,
+                      de?.longDescription || de?.description,
+                      lang,
+                    ),
+                  )}
                 </p>
               </Reveal>
               </motion.div>

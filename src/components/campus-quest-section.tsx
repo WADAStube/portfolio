@@ -486,7 +486,7 @@ export function CampusQuestSection() {
         <Reveal direction="up" duration={0.9}>
           <p className="mt-8 text-sm font-light leading-[1.85] text-white/62 max-w-2xl">
             {de
-              ? "Vor jedem Build wurde der Graph gegen alle erreichbaren Spielstände geprüft, rund 2 500, auf Sackgassen, verlorenen Fortschritt und überspringbare Schritte."
+              ? "Vor jedem Build wurde der Graph gegen alle erreichbaren Spielstände geprüft, rund 2 500, auf Sackgassen, verlorenen Fortschritt und überspringbare Schritte."
               : "Before each build, the scene graph was checked against all reachable game states, around 2,500, for dead ends, lost progress and steps that could be skipped."}
           </p>
         </Reveal>

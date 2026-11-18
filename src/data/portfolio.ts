@@ -362,7 +362,7 @@ export const CASES: Record<string, CaseStudy> = {
     summary: {
       problem: { en: "A rendered scene had to hold up in real time as well — and be playable.", de: "Eine gerenderte Szene sollte auch in Echtzeit bestehen — und spielbar sein." },
       role: { en: "My own project, start to finish: modelling, shading, the engine port and the game logic.", de: "Eigenes Projekt, von vorn bis hinten: Modellierung, Shading, Portierung und Spiellogik." },
-      result: { en: "Arnold stills and a game on itch.io. 6,063k triangles at 54 set-pass calls.", de: "Arnold-Standbilder und ein Spiel auf itch.io. 6 063k Dreiecke bei 54 Set-Pass-Calls." },
+      result: { en: "Arnold stills and a game on itch.io. 6,063k triangles at 54 set-pass calls.", de: "Arnold-Standbilder und ein Spiel auf itch.io. 6 063k Dreiecke bei 54 Set-Pass-Calls." },
     },
     challenge: {
       en: "A stylised environment that works twice: as a rendered still, and as the same scene running in real time in a game engine.",
@@ -396,7 +396,7 @@ export const CASES: Record<string, CaseStudy> = {
     ],
     outcome: {
       en: "Arnold stills and a turntable, and a playable game published on itch.io: eleven lanterns to light, glimmers to call and send out, a satchel and health. Read off the editor statistics: 6,063k triangles, 54 set-pass calls, 1,327 draw calls, 1,309 of them instanced. Crouch and slide are deferred.",
-      de: "Arnold-Standbilder und ein Turntable, dazu ein spielbares Spiel auf itch.io: elf Laternen zum Anzünden, Glimmer zum Rufen und Losschicken, eine Tasche und Lebenspunkte. Aus der Editor-Statistik abgelesen: 6 063k Dreiecke, 54 Set-Pass-Calls, 1 327 Draw Calls, davon 1 309 instanziert. Ducken und Rutschen sind zurückgestellt.",
+      de: "Arnold-Standbilder und ein Turntable, dazu ein spielbares Spiel auf itch.io: elf Laternen zum Anzünden, Glimmer zum Rufen und Losschicken, eine Tasche und Lebenspunkte. Aus der Editor-Statistik abgelesen: 6 063k Dreiecke, 54 Set-Pass-Calls, 1 327 Draw Calls, davon 1 309 instanziert. Ducken und Rutschen sind zurückgestellt.",
     },
     share: {
       en: "My own project, from modelling to the Unity port. The base tree models are licensed and were re-shaded.",
@@ -516,7 +516,7 @@ export const CASES: Record<string, CaseStudy> = {
     summary: {
       problem: { en: "Students should practise running a TV studio before they touch the equipment.", de: "Studierende sollen den Studiobetrieb üben, bevor sie an die Technik gehen." },
       role: { en: "Group project. The playable version and all of its game logic are my work.", de: "Gruppenarbeit. Die spielbare Fassung und ihre gesamte Spiellogik sind meine Arbeit." },
-      result: { en: "59 scenes in PaneoVR with free task order, checked against around 2,500 reachable game states.", de: "59 Szenen in PaneoVR mit freier Reihenfolge, geprüft gegen rund 2 500 erreichbare Spielstände." },
+      result: { en: "59 scenes in PaneoVR with free task order, checked against around 2,500 reachable game states.", de: "59 Szenen in PaneoVR mit freier Reihenfolge, geprüft gegen rund 2 500 erreichbare Spielstände." },
     },
     challenge: {
       en: "New media students meet the TV studio, the control room and the audio rooms all at once, with expensive equipment and little time to practise on it.",
@@ -550,7 +550,7 @@ export const CASES: Record<string, CaseStudy> = {
     ],
     outcome: {
       en: "A playable game covering the camera setup, the vision mixer, the recording, the audio recording in the other building and the submission. Before each build the graph was checked against all reachable game states, around 2,500, for dead ends, lost progress and steps that could be skipped.",
-      de: "Ein spielbares Spiel über Kameraaufbau, Bildregie, Aufnahme, Tonaufnahme im anderen Gebäude und Abgabe. Vor jedem Build wurde der Graph gegen alle erreichbaren Spielstände geprüft, rund 2 500, auf Sackgassen, verlorenen Fortschritt und überspringbare Schritte.",
+      de: "Ein spielbares Spiel über Kameraaufbau, Bildregie, Aufnahme, Tonaufnahme im anderen Gebäude und Abgabe. Vor jedem Build wurde der Graph gegen alle erreichbaren Spielstände geprüft, rund 2 500, auf Sackgassen, verlorenen Fortschritt und überspringbare Schritte.",
     },
     share: {
       en: "Group project in the module Interaktive Medien 2. The team did concept, storyboard and the panorama shoots; the PaneoVR implementation and the game logic are mine.",
@@ -643,6 +643,348 @@ export const CASES: Record<string, CaseStudy> = {
     learned: {
       en: "After the CMYK conversion the deep blue of Earth and the shadows shifted and had to be corrected by hand. The print colour space belongs at the start of the work, not the end.",
       de: "Nach der CMYK-Konvertierung hatten sich das tiefe Blau der Erde und die Schatten verschoben und mussten von Hand korrigiert werden. Der Druckfarbraum gehört an den Anfang der Arbeit, nicht ans Ende.",
+    },
+  },
+};
+
+/* ────────────────────────────────────────────────────────────
+   GESTALTUNGSANGABEN JE PROJEKT
+
+   Je Projekt: die Palette, die Schriften und, wo vorhanden, der
+   Lichtaufbau. Alles fest hinterlegt, damit es korrigierbar
+   bleibt.
+
+   Die Begruendungen stammen aus den Projektunterlagen und aus
+   dem, was im Lauf der Arbeit entschieden wurde.
+   ──────────────────────────────────────────────────────────── */
+
+import type { Hue, Light } from "@/components/design-spec";
+
+export const PALETTES: Record<string, { colors: Hue[]; why?: Bi }> = {
+  "poor-house": {
+    colors: [
+      {
+        hex: "#07070B",
+        role: { en: "Night", de: "Nacht" },
+        use: { en: "Everything not lit by something", de: "Alles, was nichts anzündet" },
+      },
+      {
+        hex: "#141D2B",
+        role: { en: "Cool ambient", de: "Kühles Ambient" },
+        use: {
+          en: "Shadow steps tinted blue, not neutral grey",
+          de: "Schattenstufen blau getönt, nicht neutralgrau",
+        },
+      },
+      {
+        hex: "#CF9355",
+        role: { en: "Lantern light", de: "Laternenlicht" },
+        use: { en: "2200 K, the warmest point in frame", de: "2200 K, der wärmste Punkt im Bild" },
+      },
+      {
+        hex: "#59290C",
+        role: { en: "Timber", de: "Holz" },
+        use: { en: "The cottage, under warm light", de: "Die Hütte, unter warmem Licht" },
+      },
+      {
+        hex: "#628E4D",
+        role: { en: "Foliage", de: "Laub" },
+        use: { en: "Held down in saturation", de: "In der Sättigung zurückgenommen" },
+      },
+      {
+        hex: "#3B150F",
+        role: { en: "Bridge", de: "Brücke" },
+        use: { en: "One of three saturation anchors", de: "Einer von drei Sättigungsankern" },
+      },
+    ],
+    why: {
+      en: "The whole scene runs on about twelve base colours. With a stylised look and no textures that is a requirement, not an option — on flat colour fields any unmatched colour shows up immediately. Saturation steers the eye: strong colour only on the lantern light, the red bridge and the flames.",
+      de: "Die ganze Szene arbeitet mit rund zwölf Grundfarben. Bei einem stilisierten Look ohne Texturen ist das keine Option, sondern Voraussetzung: Auf flachen Farbflächen fällt jede unabgestimmte Farbe sofort auf. Die Sättigung führt den Blick, kräftige Farbe gibt es nur am Laternenlicht, an der roten Brücke und an den Flammen.",
+    },
+  },
+  bloomest: {
+    colors: [
+      {
+        hex: "#F3F2EE",
+        role: { en: "Paper", de: "Papier" },
+        use: { en: "Window posters", de: "Schaufenster-Motive" },
+      },
+      {
+        hex: "#D4D3D1",
+        role: { en: "Tint", de: "Raster" },
+        use: { en: "The large number behind the line", de: "Die große Zahl hinter der Aussage" },
+      },
+      {
+        hex: "#A01D2B",
+        role: { en: "Accent", de: "Akzent" },
+        use: { en: "Kicker and logo, nothing else", de: "Kicker und Logo, sonst nichts" },
+      },
+      {
+        hex: "#434548",
+        role: { en: "Body text", de: "Fließtext" },
+        use: { en: "Never full black on paper", de: "Nie volles Schwarz auf Papier" },
+      },
+      {
+        hex: "#17181C",
+        role: { en: "Dark variant", de: "Dunkle Variante" },
+        use: { en: "Same layout, inverted", de: "Dasselbe Layout, umgedreht" },
+      },
+    ],
+    why: {
+      en: "One red, and that is all. Holding it across the light and the dark variants is what makes six posters read as one campaign instead of six separate sheets. Everything else is paper, ink and one grey.",
+      de: "Ein Rot, und sonst nichts. Dass es über die helle und die dunkle Variante hinweg dasselbe bleibt, macht aus sechs Plakaten eine Kampagne statt sechs Einzelblättern. Der Rest ist Papier, Druckfarbe und ein Grau.",
+    },
+  },
+  "i-need-space": {
+    colors: [
+      {
+        hex: "#0A0C14",
+        role: { en: "Space", de: "Weltraum" },
+        use: { en: "Most of the sheet", de: "Der größte Teil des Blattes" },
+      },
+      {
+        hex: "#0B2035",
+        role: { en: "Deep blue", de: "Tiefblau" },
+        use: { en: "Milky Way, pulled down and shifted blue", de: "Milchstraße, abgedunkelt und blau getönt" },
+      },
+      {
+        hex: "#454541",
+        role: { en: "Slate", de: "Schiefer" },
+        use: { en: "Debris and the suit", de: "Trümmer und der Anzug" },
+      },
+      {
+        hex: "#916930",
+        role: { en: "Warm edge", de: "Warme Kante" },
+        use: { en: "The only warm in the image", de: "Das einzige Warm im Bild" },
+      },
+      {
+        hex: "#E3E3C5",
+        role: { en: "Type", de: "Schrift" },
+        use: { en: "Title and billing block", de: "Titel und Billing Block" },
+      },
+    ],
+    why: {
+      en: "The brief was one emotion: lostness. A cold palette does that on its own — a warm image would read as an adventure. The single warm edge on Earth is there so the cold has something to be measured against.",
+      de: "Die Aufgabe war eine einzige Emotion: Verlorenheit. Eine kalte Palette macht das von allein, ein warmes Bild läse sich als Abenteuer. Die eine warme Kante an der Erde ist da, damit das Kalte etwas hat, woran es gemessen wird.",
+    },
+  },
+  safemeet: {
+    colors: [
+      {
+        hex: "#17141F",
+        role: { en: "Ground", de: "Grund" },
+        use: { en: "Dark: the app runs at night", de: "Dunkel, weil die App nachts läuft" },
+      },
+      {
+        hex: "#2B233B",
+        role: { en: "Surface", de: "Fläche" },
+        use: { en: "Everything at rest", de: "Alles im Ruhezustand" },
+      },
+      {
+        hex: "#ECA782",
+        role: { en: "Session running", de: "Sitzung läuft" },
+        use: { en: "Warm, not alarming", de: "Warm, noch kein Alarm" },
+      },
+      {
+        hex: "#C06770",
+        role: { en: "Alarm", de: "Alarm" },
+        use: { en: "Only ever this one state", de: "Nur für diesen einen Zustand" },
+      },
+    ],
+    why: {
+      en: "Four states, one layout. The colour carries the difference, not the arrangement — so the screen looks the same in an emergency as it does at rest, and still says at a glance which of the two it is.",
+      de: "Vier Zustände, ein Layout. Den Unterschied trägt die Farbe, nicht die Anordnung. So sieht der Bildschirm im Notfall aus wie im Ruhezustand und sagt trotzdem auf einen Blick, welcher von beiden gerade gilt.",
+    },
+  },
+  "qrib-web": {
+    colors: [
+      {
+        hex: "#F9F9F7",
+        role: { en: "Ground", de: "Grund" },
+        use: { en: "Light, for use in daylight", de: "Hell, für den Gebrauch bei Tag" },
+      },
+      {
+        hex: "#0F5375",
+        role: { en: "Accent", de: "Akzent" },
+        use: { en: "Anything that can be tapped", de: "Alles, was bedienbar ist" },
+      },
+      {
+        hex: "#17181C",
+        role: { en: "Type", de: "Schrift" },
+        use: { en: "Prices, scores, names", de: "Preise, Score, Namen" },
+      },
+    ],
+    why: {
+      en: "A marketplace lives on trust, and trust reads as plain. One blue marks what can be tapped; everything carrying a number stays black on white, so no colour can make an offer look better than it is.",
+      de: "Ein Marktplatz lebt vom Vertrauen, und Vertrauen liest sich nüchtern. Ein Blau markiert, was bedienbar ist; alles, was eine Zahl trägt, bleibt schwarz auf weiß, damit keine Farbe ein Angebot besser aussehen lässt, als es ist.",
+    },
+  },
+  "ki-lesebuch": {
+    colors: [
+      {
+        hex: "#6023BC",
+        role: { en: "Accent", de: "Akzent" },
+        use: { en: "Selection and progress", de: "Auswahl und Fortschritt" },
+      },
+      {
+        hex: "#28175D",
+        role: { en: "Depth", de: "Tiefe" },
+        use: { en: "Panels over the reading view", de: "Tafeln über der Lesefläche" },
+      },
+      {
+        hex: "#F9F9F7",
+        role: { en: "Reading surface", de: "Lesefläche" },
+        use: { en: "The story itself, undisturbed", de: "Die Geschichte selbst, ungestört" },
+      },
+    ],
+    why: {
+      en: "The colour sits on everything around the text and never on the text itself. Reading is the one thing the app is for, so the reading surface stays quiet while the interface may be loud.",
+      de: "Die Farbe liegt auf allem rundherum und nie auf dem Text selbst. Lesen ist das Einzige, wofür die App da ist, also bleibt die Lesefläche ruhig, während die Bedienung laut sein darf.",
+    },
+  },
+};
+
+/* Lichtaufbau. Bisher nur dort, wo er dokumentiert ist. */
+export const LIGHTS: Record<string, { lights: Light[]; why?: Bi }> = {
+  "poor-house": {
+    lights: [
+      {
+        name: "Key",
+        hex: "#9FB6D8",
+        kelvin: "kühl",
+        x: 22,
+        y: 20,
+        does: {
+          en: "Directional, from the side and above. Parallel rays give the hard shadow edge that cel shading needs.",
+          de: "Gerichtet, seitlich erhöht. Parallele Strahlen geben die harte Schattenkante, die Cel-Shading braucht.",
+        },
+      },
+      {
+        name: "Fill",
+        hex: "#3C4A63",
+        x: 80,
+        y: 34,
+        does: {
+          en: "Opposite the key and much weaker. Opens the shadows without flattening them.",
+          de: "Gegenüber dem Key und deutlich schwächer. Öffnet die Schatten, ohne sie flach zu machen.",
+        },
+      },
+      {
+        name: "Rim",
+        hex: "#8FA8C4",
+        x: 62,
+        y: 7,
+        does: {
+          en: "From behind. Without it the dark rocks disappear against the dark background.",
+          de: "Von hinten. Ohne das Kantenlicht verschwinden die dunklen Felsen vor dem dunklen Hintergrund.",
+        },
+      },
+      {
+        name: "Practicals",
+        hex: "#CF9355",
+        kelvin: "2200 K",
+        x: 26,
+        y: 62,
+        does: {
+          en: "Lanterns and fire: emissive geometry plus a real light, visible in frame.",
+          de: "Laternen und Feuer: emissive Geometrie plus echtes Licht, im Bild sichtbar.",
+        },
+      },
+    ],
+    why: {
+      en: "Warm at 2200 K against a cool ambient, with the shadows pushed slightly blue. The contrast does the work: everything warm is a place someone lit, everything cool is night.",
+      de: "Warme 2200 K gegen ein kühles Ambient, die Schatten leicht ins Blaue gezogen. Den Rest macht der Kontrast: Alles Warme ist ein Ort, den jemand angezündet hat, alles Kühle ist Nacht.",
+    },
+  },
+};
+
+/* ────────────────── Schriften je Projekt ──────────────────
+   Zwei Arten von Eintrag:
+
+   Belegt   Qrib und KI Lesebuch laufen im Browser, die Schrift
+            steht dort im Quelltext. Name wird genannt.
+   Gezeigt  Bei den Druckarbeiten liegen die Dateien nicht mehr
+            vor. Statt einen Namen zu raten, steht die Schrift
+            als Ausschnitt da und daneben, was sie ausmacht.
+   ──────────────────────────────────────────────────────────── */
+
+import type { TypeFace } from "@/components/design-spec";
+
+const T = "/images/projects/type";
+
+export const TYPEFACES: Record<string, { faces: TypeFace[]; why?: Bi }> = {
+  bloomest: {
+    faces: [
+      {
+        src: `${T}/bloomest-head.jpg`,
+        role: { en: "Headline and kicker", de: "Aussage und Kicker" },
+        detail: "Grotesk · 2 Schnitte",
+      },
+    ],
+    why: {
+      en: "A neutral grotesque, two weights, nothing else. The kicker sits in caps with wide tracking in the accent red, the line below it in bold and set tight. On a poster read from the pavement, the hierarchy has to work before the words do, and a typeface with character of its own would compete with that.",
+      de: "Eine neutrale Grotesk, zwei Schnitte, mehr nicht. Der Kicker steht in Versalien weit gesperrt im Akzentrot, die Aussage darunter fett und eng gesetzt. Bei einem Plakat, das vom Gehweg aus gelesen wird, muss die Hierarchie wirken, bevor die Wörter es tun, und eine Schrift mit eigenem Charakter würde dagegen arbeiten.",
+    },
+  },
+
+  "i-need-space": {
+    faces: [
+      {
+        src: `${T}/ins-title.jpg`,
+        role: { en: "Title", de: "Titel" },
+        detail: "Display · quadratisch, monolinear",
+      },
+      {
+        src: `${T}/ins-credits.jpg`,
+        role: { en: "Billing block", de: "Billing Block" },
+        detail: "Schmale Grotesk · Versalien",
+      },
+    ],
+    why: {
+      en: "The title is squared and monoline, with closed counters — the shape language science fiction has used on posters for decades, so the genre is clear before the title is read. The credits at the foot follow the film convention exactly: condensed caps, alternating weights, one block. Breaking that would look like a mistake, not like a decision.",
+      de: "Der Titel ist quadratisch und monolinear, mit geschlossenen Punzen: die Formensprache, mit der Science-Fiction-Plakate seit Jahrzehnten arbeiten. Das Genre steht fest, bevor der Titel gelesen ist. Der Fuß folgt genau der Filmkonvention, schmale Versalien, wechselnde Schnitte, ein Block. Davon abzuweichen sähe nach Fehler aus, nicht nach Entscheidung.",
+    },
+  },
+
+  "qrib-web": {
+    faces: [
+      {
+        src: `${T}/qrib-logo.jpg`,
+        name: "Outfit · Cairo",
+        role: { en: "Both scripts", de: "Beide Schriften" },
+        detail: "Latein und Arabisch",
+      },
+      {
+        src: `${T}/qrib-arabic.jpg`,
+        name: "Cairo",
+        role: { en: "Arabic running text", de: "Arabischer Fließtext" },
+        detail: "rechtsläufig",
+      },
+    ],
+    why: {
+      en: "Arabic gets a typeface drawn for Arabic, not a Latin one stretched to fit. Cairo and Outfit share a weight and a proportion, so the Arabic and the French pages look like one product rather than a translation bolted on.",
+      de: "Arabisch bekommt eine Schrift, die für Arabisch gezeichnet ist, und keine lateinische, die passend gemacht wurde. Cairo und Outfit haben vergleichbare Strichstärke und Proportion, dadurch wirken die arabischen und die französischen Seiten wie ein Produkt und nicht wie eine nachträglich angeklebte Übersetzung.",
+    },
+  },
+
+  "ki-lesebuch": {
+    faces: [
+      {
+        src: `${T}/kile-serif.jpg`,
+        name: "Merriweather",
+        role: { en: "The story", de: "Die Geschichte" },
+        detail: "Serif · für längeres Lesen",
+      },
+      {
+        src: `${T}/kile-sans.jpg`,
+        name: "Inter",
+        role: { en: "Interface", de: "Bedienung" },
+        detail: "Sans · Schaltflächen, Tafeln",
+      },
+    ],
+    why: {
+      en: "Two typefaces for two jobs. The story is set in a serif because that is what people read paragraphs in; everything you click is a sans. The split means the reader can tell at a glance what is text to read and what is machinery, without a single label saying so.",
+      de: "Zwei Schriften für zwei Aufgaben. Die Geschichte steht in einer Serifenschrift, weil Absätze so gelesen werden; alles Anklickbare ist eine Grotesk. Dadurch ist auf einen Blick klar, was Text zum Lesen ist und was Bedienung, ohne dass es irgendwo dabeistehen muss.",
     },
   },
 };

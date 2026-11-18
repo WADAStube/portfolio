@@ -1,3 +1,128 @@
+Portfolio — Version 67  (18.11.2026)
+
+SCHRIFTEN, BEGRÜNDUNGEN, MOBILVERSION
+
+1 · TYPOGRAFIE IST DRIN
+  Der Baustein zeigt die Schrift als Ausschnitt aus der Arbeit
+  selbst, nicht als Namen im Fließtext.
+
+  Mit Namen, weil belegbar:
+    Qrib          Outfit (lateinisch) und Cairo (arabisch) —
+                  stehen so im Quelltext der Website
+    KI Lesebuch   Merriweather für die Geschichte, Inter für die
+                  Bedienung — stehen so im Quelltext
+  Ohne Namen, weil nicht belegbar:
+    Bloomest      Die Schriftdateien sind weg. Statt einen Namen
+                  zu raten steht da, was die Schrift ausmacht:
+                  neutrale Grotesk, zwei Schnitte, Kicker in
+                  gesperrten Versalien im Akzentrot.
+    I Need Space  Titel als quadratische, monolineare Display-
+                  Schrift, Fuß als klassischer Billing Block.
+
+2 · BEGRÜNDUNGEN BEI ALLEN PALETTEN
+  Jede Farbe hat jetzt Rolle und Verwendung, jede Palette einen
+  Absatz warum. Aus den Projektunterlagen und aus dem, was im
+  Lauf der Arbeit entschieden wurde.
+    Lantern Island  zwölf Grundfarben, Sättigung führt den Blick
+    Bloomest        ein Rot über helle und dunkle Variante hinweg
+    I Need Space    kalte Palette für Verlorenheit, eine warme Kante
+    SafeMeet        vier Zustände, ein Layout, die Farbe trägt es
+    Qrib            ein Blau für Bedienbares, Zahlen schwarz auf weiß
+    KI Lesebuch     Farbe rundherum, nie auf dem Text
+
+3 · HERKUNFTSVERMERK RAUS
+  "aus dem Bild gemessen" steht nicht mehr an der Palette.
+
+4 · MOBILVERSION
+  Geprüft mit Messung, nicht nach Gefühl:
+  - Tippziele waren 14 bis 24 px hoch (E-Mail, Instagram,
+    LinkedIn, GitHub, "Projekte ansehen", "Alle Projekte").
+    Jetzt alle bei 38 bis 40 px.
+  - Lesetext bei 9 und 10 px auf dem Handy eine Stufe größer:
+    Werkzeugzeile, Kategorie, Fachrichtung, technische Zeile der
+    Ebenen, Fußzeile, Verwendungszeile der Palette.
+    Auf dem Desktop bleibt alles wie es war.
+  - Der Lichtschalter in der Ebenen-Aufschlüsselung war 58 x 34,
+    auf dem Handy jetzt 66 x 40.
+
+NEUE DATEIEN
+  public/images/projects/type/   sieben Schriftproben
+
+NOCH OFFEN
+  - Raster-Baustein für die Plakatarbeiten
+  - Lichtaufbau für Future!comeback, sobald dokumentiert
+  - SafeMeet-Schrift: kein Quelltext vorhanden
+
+──────────────────────────────────────────────────────────────
+
+Portfolio — Version 66  (18.11.2026)
+
+WENIGER TEXT, MEHR ZEIGEN — ETAPPE 1 UND 2
+
+Gemessen vorher und nachher (sichtbare Wörter je Seite):
+  Projektübersicht   756 -> 505
+  Startseite         642 -> 522
+  Lantern Island    1285 -> 971
+  SafeMeet           320 -> 252
+  Campus Quest       632 -> 548
+
+1 · TEXT RAUS
+  - Projektkarten: Beschreibung und Fachrichtungszeile sind weg.
+    Es bleiben Bild, Titel, Kategorie, Stand und eine Zeile
+    Werkzeuge. Bei vierzehn Karten waren das vorher vierzehn
+    Absätze, die niemand liest.
+  - Projektseiten: der Einleitungsabsatz zeigt die ersten zwei
+    Sätze statt aller fünf bis acht. Der Rest steht ohnehin
+    geordnet in der Fallstudie.
+  - Lantern Island, Ebenen-Aufschlüsselung: ein Satz statt zwei,
+    eine technische Zeile statt drei. 1544 -> 1162 Wörter.
+  - Lantern Island, Theorie: ein Satz je Punkt. 637 -> 407 Wörter.
+
+2 · NEUE VISUELLE BAUSTEINE
+  src/components/design-spec.tsx
+
+  Farbpalette
+    Durchgehendes Farbband, darunter je Fläche der Hex-Wert, die
+    Rolle und ein Halbsatz wozu. Fläche und Beschriftung stehen
+    in derselben Spalte, damit nichts verrutscht. Ab 1024 px so
+    viele Spalten wie Farben, darunter zwei bis drei.
+    Die Werte sind aus den Bildern gemessen, nicht geschätzt:
+    k-Means über die Grundtöne, Median der gesättigtsten Pixel
+    je Farbton. Steht als Vermerk an der Palette.
+
+    Eingetragen für: Lantern Island, Bloomest, I Need Space,
+    SafeMeet, Qrib, KI Lesebuch.
+
+  Lichtaufbau
+    Draufsicht als Zeichnung: wo Key, Fill, Rim und Practicals
+    stehen, mit ihrer Lichtfarbe, Farbtemperatur und einem Satz,
+    was sie im Bild tun. Daneben die Legende.
+    Bisher nur für Lantern Island, weil nur dort dokumentiert.
+
+  Typografie
+    Baustein ist gebaut, aber noch nicht eingesetzt. Er zeigt die
+    Schrift als Ausschnitt aus der Arbeit selbst statt sie zu
+    beschreiben. Fehlen noch die Schriftnamen.
+
+3 · FARBTHEORIE AUS DER PROSA IN DIE PALETTE
+  Was vorher als Fließtext unter "Theorie in der Anwendung"
+  stand — Kalt-Warm-Kontrast, farbige Schatten, begrenzte
+  Palette — steht jetzt an den Farbflächen selbst. Deine eigenen
+  Formulierungen, nur gekürzt.
+
+4 · KLEINIGKEITEN
+  - Zahlen brechen nicht mehr mitten im Tausendertrenner um
+    (schmales geschütztes Leerzeichen).
+  - Beschriftungen im Lichtdiagramm überlagern sich nicht mehr.
+
+NOCH OFFEN (Etappe 3)
+  - Schriftnamen für Bloomest, I Need Space, SafeMeet, Qrib
+  - Begründungen ("warum diese Farbe, warum diese Schrift")
+  - Raster-Baustein für die Plakatarbeiten
+  - Lichtaufbau für Future!comeback, sobald dokumentiert
+
+──────────────────────────────────────────────────────────────
+
 Portfolio — Version 65  (15.11.2026)
 
 NEUER LEBENSLAUF

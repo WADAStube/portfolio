@@ -369,7 +369,7 @@ export default function Home() {
                 }
                 whileHover={{ x: 4 }}
                 transition={{ duration: 0.3, ease: EASE }}
-                className="text-[9px] text-white/48 uppercase tracking-[0.22em] hover:text-white/70 transition-colors duration-300 flex items-center gap-2 mt-2"
+                className="text-[10px] text-white/48 uppercase tracking-[0.22em] hover:text-white/70 transition-colors duration-300 flex items-center gap-2 mt-2 -mx-2 px-2 py-3 md:py-2"
               >
                 <span className="w-5 h-px bg-current" />
                 {t("viewWork", lang)}
